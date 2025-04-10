@@ -11,85 +11,6 @@
             padding: 2rem 0;
         }
         
-        .content-section {
-            padding: 3rem 0;
-            background-color: white;
-        }
-        
-        .content-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .section-title h1 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        
-        .section-title p {
-            font-size: 1.2rem;
-            color: var(--gray);
-        }
-        
-        .content-box {
-            background-color: white;
-            border-radius: 8px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-        
-        .content-box h2 {
-            color: var(--primary);
-            border-bottom: 2px solid var(--light-gray);
-            padding-bottom: 0.5rem;
-            margin-top: 0;
-        }
-        
-        .content-box h3 {
-            color: var(--primary-dark);
-            margin-top: 1.5rem;
-        }
-        
-        .content-box p {
-            color: var(--dark);
-        }
-        
-        .content-box ul, .content-box ol {
-            padding-left: 1.5rem;
-        }
-        
-        .content-box li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .example-box {
-            background-color: var(--light);
-            border-left: 4px solid var(--secondary);
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 0 4px 4px 0;
-        }
-        
-        .example-box h4 {
-            margin-top: 0;
-            color: var(--secondary);
-        }
-        
-        .example-box pre {
-            background-color: var(--dark);
-            color: white;
-            padding: 1rem;
-            border-radius: 4px;
-            overflow-x: auto;
-        }
-        
         .tab-container {
             margin: 1.5rem 0;
         }
@@ -726,4 +647,122 @@ touch tests/__init__.py tests/test_agents.py
                     <code>
 import os
 from dotenv import load_dotenv
-from lang
+from langchain_openai import ChatOpenAI
+from langchain.agents import AgentExecutor, create_react_agent
+from langchain.prompts import ChatPromptTemplate
+from langchain.tools import tool
+
+# Load environment variables
+load_dotenv()
+
+# Initialize LLM
+llm = ChatOpenAI(
+    api_key=os.getenv("OPENAI_API_KEY"),
+    model="gpt-4-turbo"
+)
+
+# Define a simple tool
+@tool
+def calculator(expression: str) -> str:
+    """Evaluate a mathematical expression"""
+    try:
+        return str(eval(expression))
+    except Exception as e:
+        return f"Error: {str(e)}"
+
+# Define tools list
+tools = [calculator]
+
+# Create prompt template
+prompt = ChatPromptTemplate.from_template(
+    """You are a helpful AI assistant that can use tools to answer questions.
+    
+    {chat_history}
+    Human: {input}
+    {agent_scratchpad}
+    """
+)
+
+# Create agent
+agent = create_react_agent(llm, tools, prompt)
+
+# Create agent executor
+agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+
+def main():
+    print("AI Agent initialized! Type 'exit' to quit.")
+    
+    while True:
+        user_input = input("\nYou: ")
+        
+        if user_input.lower() == 'exit':
+            print("Goodbye!")
+            break
+        
+        try:
+            response = agent_executor.invoke({"input": user_input})
+            print(f"\nAI: {response['output']}")
+        except Exception as e:
+            print(f"\nError: {str(e)}")
+
+if __name__ == "__main__":
+    main()
+                    </code>
+                </div>
+                
+                <h3>Testing Your Setup</h3>
+                <p>Run your agent to verify everything is working correctly:</p>
+                
+                <div class="command">python main.py</div>
+                
+                <p>Try asking a question that uses the calculator tool, such as:</p>
+                <div class="command">You: What is 42 * 3.14?</div>
+                
+                <div class="callout">
+                    <h4>Troubleshooting Common Issues</h4>
+                    <ul>
+                        <li><strong>API key errors:</strong> Double-check your .env file and ensure it's being loaded correctly</li>
+                        <li><strong>Import errors:</strong> Verify that all dependencies are installed in your virtual environment</li>
+                        <li><strong>Module not found:</strong> You may need to install additional packages based on your import statements</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="content-box">
+                <h2>Step 8: Version Control Setup</h2>
+                <p>Setting up version control is recommended for tracking changes and collaborating with others:</p>
+                
+                <h3>Initialize Git Repository</h3>
+                <div class="command">git init</div>
+                
+                <h3>Make Initial Commit</h3>
+                <div class="command">git add .gitignore README.md requirements.txt main.py agents/ tools/ prompts/ memory/ tests/
+git commit -m "Initial project setup"</div>
+                
+                <div class="callout">
+                    <h4>Reminder</h4>
+                    <p>Make sure your .env file is listed in .gitignore to prevent accidentally committing your API keys.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="next-steps">
+        <div class="container">
+            <h2>Ready to Build Your First AI Agent?</h2>
+            <p>Now that your environment is set up, you're ready to start building more complex AI agents!</p>
+            
+            <div class="button-container">
+                <a href="first-agent.html" class="button">Build Your First Agent</a>
+                <a href="frameworks.html" class="button secondary">Compare Frameworks</a>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>AI Agent Development Guide | Created to help developers build powerful AI solutions</p>
+        </div>
+    </footer>
+</body>
+</html>

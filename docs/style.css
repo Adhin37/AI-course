@@ -101,6 +101,224 @@ footer p {
     margin: 0;
 }
 
+/* custom css by html file */
+.hero {
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    color: var(--gray);
+    max-width: 800px;
+    margin: 0 auto 2rem;
+}
+
+.content-section {
+    padding: 3rem 0;
+    background-color: white;
+}
+
+.content-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.section-title h1 {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.section-title p {
+    font-size: 1.2rem;
+    color: var(--gray);
+}
+
+.content-box {
+    background-color: white;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.content-box h2 {
+    color: var(--primary);
+    border-bottom: 2px solid var(--light-gray);
+    padding-bottom: 0.5rem;
+    margin-top: 0;
+}
+
+.content-box h3 {
+    color: var(--primary-dark);
+    margin-top: 1.5rem;
+}
+
+.content-box p {
+    color: var(--dark);
+}
+
+.content-box ul, .content-box ol {
+    padding-left: 1.5rem;
+}
+
+.content-box li {
+    margin-bottom: 0.5rem;
+}
+
+.resources-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.resources-list li {
+    margin-bottom: 0.5rem;
+}
+
+.resources-list a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.resources-list a:hover {
+    text-decoration: underline;
+}
+.resources {
+    padding: 4rem 0;
+    background-color: white;
+}
+
+.resource-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.resource-card {
+    border: 1px solid var(--light-gray);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: border-color 0.3s;
+}
+
+.resource-card:hover {
+    border-color: var(--primary);
+}
+
+.resource-card h3 {
+    color: var(--primary);
+    margin-top: 0;
+}
+
+.resource-card ul {
+    padding-left: 1.5rem;
+    margin-bottom: 0;
+}
+
+.resource-card a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.resource-card a:hover {
+    text-decoration: underline;
+}
+
+.example-box {
+    background-color: var(--light);
+    border-left: 4px solid var(--secondary);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 4px 4px 0;
+}
+
+.example-box h4 {
+    margin-top: 0;
+    color: var(--secondary);
+}
+
+.example-box pre {
+    background-color: var(--dark);
+    color: white;
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.example-header {
+    background-color: var(--primary);
+    color: white;
+    padding: 1rem;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.example-header h3 {
+    margin: 0;
+}
+
+.example-content {
+    padding: 1.5rem;
+}
+
+.example-description {
+    margin-bottom: 1.5rem;
+    color: var(--gray);
+}
+
+.example-notes {
+    background-color: #FEF3C7;
+    border-left: 4px solid #F59E0B;
+    padding: 1rem;
+    margin-top: 1.5rem;
+    border-radius: 0 4px 4px 0;
+}
+
+.example-notes h4 {
+    margin-top: 0;
+    color: #B45309;
+}
+
+.example-notes p:last-child {
+    margin-bottom: 0;
+}
+
+.example-footer {
+    background-color: #F3F4F6;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #E5E7EB;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--secondary);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #0EA271;
+}
+
 @media (max-width: 768px) {
     .pros-cons {
         flex-direction: column;
