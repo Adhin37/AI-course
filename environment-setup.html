@@ -6,6 +6,251 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='20' y='20' width='24' height='24' rx='4' fill='%234F46E5'/%3E%3Ccircle cx='12' cy='12' r='4' fill='%2310B981'/%3E%3Ccircle cx='52' cy='12' r='4' fill='%2310B981'/%3E%3Ccircle cx='12' cy='52' r='4' fill='%2310B981'/%3E%3Ccircle cx='52' cy='52' r='4' fill='%2310B981'/%3E%3Cline x1='16' y1='16' x2='20' y2='20' stroke='%2310B981' stroke-width='2'/%3E%3Cline x1='48' y1='16' x2='44' y2='20' stroke='%2310B981' stroke-width='2'/%3E%3Cline x1='16' y1='48' x2='20' y2='44' stroke='%2310B981' stroke-width='2'/%3E%3Cline x1='48' y1='48' x2='44' y2='44' stroke='%2310B981' stroke-width='2'/%3E%3Ccircle cx='32' cy='32' r='2' fill='%23F9FAFB'/%3E%3Ccircle cx='28' cy='28' r='1.5' fill='%23F9FAFB'/%3E%3Ccircle cx='36' cy='36' r='1.5' fill='%23F9FAFB'/%3E%3Ccircle cx='28' cy='36' r='1.5' fill='%23F9FAFB'/%3E%3Ccircle cx='36' cy='28' r='1.5' fill='%23F9FAFB'/%3E%3C/svg%3E">
     <title>Set Up Your Development Environment | AI Agent Development Guide</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        header {
+            padding: 2rem 0;
+        }
+        
+        .content-section {
+            padding: 3rem 0;
+            background-color: white;
+        }
+        
+        .content-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            font-size: 1.2rem;
+            color: var(--gray);
+        }
+        
+        .content-box {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .content-box h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--light-gray);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+        
+        .content-box h3 {
+            color: var(--primary-dark);
+            margin-top: 1.5rem;
+        }
+        
+        .content-box p {
+            color: var(--dark);
+        }
+        
+        .content-box ul, .content-box ol {
+            padding-left: 1.5rem;
+        }
+        
+        .content-box li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .example-box {
+            background-color: var(--light);
+            border-left: 4px solid var(--secondary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .example-box h4 {
+            margin-top: 0;
+            color: var(--secondary);
+        }
+        
+        .example-box pre {
+            background-color: var(--dark);
+            color: white;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        
+        .tab-container {
+            margin: 1.5rem 0;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            border-bottom: 2px solid var(--light-gray);
+            margin-bottom: 1rem;
+        }
+        
+        .tab-button {
+            padding: 0.5rem 1rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--gray);
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+        }
+        
+        .tab-button.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 1rem;
+            background-color: var(--light);
+            border-radius: 4px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .code-block {
+            background-color: var(--dark);
+            color: white;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        .code-block code {
+            display: block;
+            font-family: monospace;
+            white-space: pre;
+        }
+        
+        .command {
+            background-color: var(--dark);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-family: monospace;
+            margin: 0.5rem 0;
+            display: inline-block;
+        }
+        
+        .image-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .caption {
+            margin-top: 0.5rem;
+            color: var(--gray);
+            font-style: italic;
+        }
+        
+        .callout {
+            background-color: rgba(79, 70, 229, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .callout h4 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+        
+        .callout.warning {
+            background-color: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid #F59E0B;
+        }
+        
+        .callout.warning h4 {
+            color: #D97706;
+        }
+        
+        .checklist {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .checklist li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .checklist li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+        
+        .next-steps {
+            background-color: var(--light);
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .next-steps h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .button {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .button:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .button.secondary {
+            background-color: var(--secondary);
+        }
+        
+        .button.secondary:hover {
+            background-color: #0EA271;
+        }
+    </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Tab functionality
