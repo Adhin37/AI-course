@@ -19,6 +19,10 @@ The project is organized as a set of HTML pages with a shared CSS stylesheet:
 - **Responsive Design**: Mobile-friendly layout that works on all devices
 - **Modern UI**: Clean, intuitive interface with consistent styling
 
+## Webpage
+
+[AI course](https://adhin37.github.io/AI-course/)
+
 ## CSS Structure
 
 The project uses a single consolidated CSS file (`style.css`) with the following key components:
