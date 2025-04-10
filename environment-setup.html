@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='white'/%3E%3Cpath d='M32 8 C20 8,12 20,12 32 C12 44,20 56,32 56 C44 56,52 44,52 32 C52 20,44 8,32 8 Z' fill='%234F46E5'/%3E%3Cpath d='M32 16 L32 48' stroke='%2310B981' stroke-width='4'/%3E%3Cpath d='M24 24 L40 24' stroke='%2310B981' stroke-width='4'/%3E%3Cpath d='M24 40 L40 40' stroke='%2310B981' stroke-width='4'/%3E%3C/svg%3E">
+    <title>Set Up Your Development Environment | AI Agent Development Guide</title>
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-dark: #4338CA;
+            --secondary: #10B981;
+            --dark: #1F2937;
+            --light: #F9FAFB;
+            --gray: #6B7280;
+            --light-gray: #E5E7EB;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        nav {
+            background-color: var(--primary-dark);
+            padding: 1rem 0;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        nav li {
+            margin: 0 1rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .breadcrumbs {
+            padding: 1rem 0;
+            background-color: var(--light);
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .breadcrumbs ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .breadcrumbs li {
+            margin-right: 0.5rem;
+        }
+        
+        .breadcrumbs li:after {
+            content: "/";
+            margin-left: 0.5rem;
+            color: var(--gray);
+        }
+        
+        .breadcrumbs li:last-child:after {
+            content: "";
+        }
+        
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumbs .current {
+            color: var(--gray);
+        }
+        
+        .content-section {
+            padding: 3rem 0;
+            background-color: white;
+        }
+        
+        .content-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            font-size: 1.2rem;
+            color: var(--gray);
+        }
+        
+        .content-box {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .content-box h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--light-gray);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+        
+        .content-box h3 {
+            color: var(--primary-dark);
+            margin-top: 1.5rem;
+        }
+        
+        .content-box p {
+            color: var(--dark);
+        }
+        
+        .content-box ul, .content-box ol {
+            padding-left: 1.5rem;
+        }
+        
+        .content-box li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .example-box {
+            background-color: var(--light);
+            border-left: 4px solid var(--secondary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .example-box h4 {
+            margin-top: 0;
+            color: var(--secondary);
+        }
+        
+        .example-box pre {
+            background-color: var(--dark);
+            color: white;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        
+        .tab-container {
+            margin: 1.5rem 0;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            border-bottom: 2px solid var(--light-gray);
+            margin-bottom: 1rem;
+        }
+        
+        .tab-button {
+            padding: 0.5rem 1rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--gray);
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+        }
+        
+        .tab-button.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 1rem;
+            background-color: var(--light);
+            border-radius: 4px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .code-block {
+            background-color: var(--dark);
+            color: white;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        .code-block code {
+            display: block;
+            font-family: monospace;
+            white-space: pre;
+        }
+        
+        .command {
+            background-color: var(--dark);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-family: monospace;
+            margin: 0.5rem 0;
+            display: inline-block;
+        }
+        
+        .image-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .caption {
+            margin-top: 0.5rem;
+            color: var(--gray);
+            font-style: italic;
+        }
+        
+        .callout {
+            background-color: rgba(79, 70, 229, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .callout h4 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+        
+        .callout.warning {
+            background-color: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid #F59E0B;
+        }
+        
+        .callout.warning h4 {
+            color: #D97706;
+        }
+        
+        .checklist {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .checklist li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .checklist li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+        
+        .next-steps {
+            background-color: var(--light);
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .next-steps h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .button {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .button:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .button.secondary {
+            background-color: var(--secondary);
+        }
+        
+        .button.secondary:hover {
+            background-color: #0EA271;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        footer p {
+            margin: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .section-title h1 {
+                font-size: 2rem;
+            }
+            
+            .content-box {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab functionality
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons and contents
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked button and corresponding content
+                    button.classList.add('active');
+                    const tabId = button.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Activate first tab by default
+            if(tabButtons.length > 0) {
+                tabButtons[0].click();
+            }
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>AI Agent Development Guide</h1>
+            <p>Learn to build powerful AI agents for specific tasks</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="introduction.html">Introduction</a></li>
+                <li><a href="frameworks.html">Frameworks</a></li>
+                <li><a href="code-examples.html">Code Examples</a></li>
+                <li><a href="tutorials.html">Tutorials</a></li>
+                <li><a href="resources.html">Resources</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="breadcrumbs">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#learning-path">Learning Path</a></li>
+                <li class="current">Set Up Your Development Environment</li>
+            </ul>
+        </div>
+    </div>
+    
+    <section class="content-section">
+        <div class="content-container">
+            <div class="section-title">
+                <h1>Set Up Your Development Environment</h1>
+                <p>A step-by-step guide to preparing your development environment for AI agent creation</p>
+            </div>
+            
+            <div class="content-box">
+                <h2>Overview</h2>
+                <p>Setting up a proper development environment is crucial for efficient AI agent development. This guide will walk you through installing the necessary tools, setting up API access, and configuring your workspace for building AI agents with popular frameworks.</p>
+                
+                <div class="callout">
+                    <h4>Before You Begin</h4>
+                    <p>This guide assumes you have basic familiarity with:</p>
+                    <ul>
+                        <li>Command line interfaces (Terminal, Command Prompt, or PowerShell)</li>
+                        <li>Python programming fundamentals</li>
+                        <li>Package management with pip</li>
+                    </ul>
+                </div>
+                
+                <h3>Development Environment Checklist</h3>
+                <ul class="checklist">
+                    <li>Python environment setup (Python 3.9+ recommended)</li>
+                    <li>Virtual environment for dependency management</li>
+                    <li>Required libraries and frameworks installation</li>
+                    <li>API keys and authentication setup</li>
+                    <li>Basic project structure</li>
+                    <li>Environment variable configuration</li>
+                </ul>
+            </div>
+            
+            <div class="content-box">
+                <h2>Step 1: Install Python</h2>
+                <p>Most AI agent frameworks require Python 3.9 or newer. Here's how to install Python on different operating systems:</p>
+                
+                <div class="tab-container">
+                    <div class="tab-buttons">
+                        <button class="tab-button" data-tab="python-windows">Windows</button>
+                        <button class="tab-button" data-tab="python-macos">macOS</button>
+                        <button class="tab-button" data-tab="python-linux">Linux</button>
+                    </div>
+                    
+                    <div id="python-windows" class="tab-content">
+                        <h4>Installing Python on Windows</h4>
+                        <ol>
+                            <li>Visit the <a href="https://www.python.org/downloads/" target="_blank">official Python website</a></li>
+                            <li>Download the latest Python installer for Windows</li>
+                            <li>Run the installer and check "Add Python to PATH"</li>
+                            <li>Click "Install Now"</li>
+                            <li>Verify installation by opening Command Prompt and typing:</li>
+                        </ol>
+                        <div class="command">python --version</div>
+                        <p>Alternatively, you can install Python using Windows Package Manager:</p>
+                        <div class="command">winget install Python.Python.3.11</div>
+                    </div>
+                    
+                    <div id="python-macos" class="tab-content">
+                        <h4>Installing Python on macOS</h4>
+                        <p>Option 1: Using Homebrew (recommended):</p>
+                        <ol>
+                            <li>Install Homebrew if you don't have it already:</li>
+                            <div class="command">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</div>
+                            <li>Install Python using Homebrew:</li>
+                            <div class="command">brew install python</div>
+                        </ol>
+                        <p>Option 2: Using the installer:</p>
+                        <ol>
+                            <li>Visit the <a href="https://www.python.org/downloads/" target="_blank">official Python website</a></li>
+                            <li>Download the latest macOS installer</li>
+                            <li>Run the installer and follow the instructions</li>
+                        </ol>
+                        <p>Verify installation by opening Terminal and typing:</p>
+                        <div class="command">python3 --version</div>
+                    </div>
+                    
+                    <div id="python-linux" class="tab-content">
+                        <h4>Installing Python on Linux</h4>
+                        <p>For Ubuntu/Debian:</p>
+                        <div class="command">sudo apt update<br>sudo apt install python3 python3-pip python3-venv</div>
+                        
+                        <p>For Fedora:</p>
+                        <div class="command">sudo dnf install python3 python3-pip</div>
+                        
+                        <p>For Arch Linux:</p>
+                        <div class="command">sudo pacman -S python python-pip</div>
+                        
+                        <p>Verify installation:</p>
+                        <div class="command">python3 --version</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-box">
+                <h2>Step 2: Set Up a Virtual Environment</h2>
+                <p>Virtual environments keep your project dependencies isolated, preventing conflicts with other Python projects.</p>
+                
+                <div class="tab-container">
+                    <div class="tab-buttons">
+                        <button class="tab-button" data-tab="venv-windows">Windows</button>
+                        <button class="tab-button" data-tab="venv-macos-linux">macOS/Linux</button>
+                    </div>
+                    
+                    <div id="venv-windows" class="tab-content">
+                        <h4>Setting Up a Virtual Environment on Windows</h4>
+                        <ol>
+                            <li>Create a project directory:</li>
+                            <div class="command">mkdir ai-agent-project<br>cd ai-agent-project</div>
+                            <li>Create a virtual environment:</li>
+                            <div class="command">python -m venv venv</div>
+                            <li>Activate the virtual environment:</li>
+                            <div class="command">venv\Scripts\activate</div>
+                            <p>You should see <code>(venv)</code> at the beginning of your command prompt, indicating that the virtual environment is active.</p>
+                        </ol>
+                    </div>
+                    
+                    <div id="venv-macos-linux" class="tab-content">
+                        <h4>Setting Up a Virtual Environment on macOS/Linux</h4>
+                        <ol>
+                            <li>Create a project directory:</li>
+                            <div class="command">mkdir ai-agent-project<br>cd ai-agent-project</div>
+                            <li>Create a virtual environment:</li>
+                            <div class="command">python3 -m venv venv</div>
+                            <li>Activate the virtual environment:</li>
+                            <div class="command">source venv/bin/activate</div>
+                            <p>You should see <code>(venv)</code> at the beginning of your command prompt, indicating that the virtual environment is active.</p>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="callout">
+                    <h4>Tip</h4>
+                    <p>To deactivate the virtual environment when you're done working on your project, simply run the <code>deactivate</code> command.</p>
+                </div>
+            </div>
+            
+            <div class="content-box">
+                <h2>Step 3: Install Framework Dependencies</h2>
+                <p>Different AI agent frameworks have their own dependencies. Here's how to install the most popular ones:</p>
+                
+                <div class="callout warning">
+                    <h4>Important</h4>
+                    <p>Make sure your virtual environment is activated before installing packages.</p>
+                </div>
+                
+                <h3>Option A: Framework-Specific Installation</h3>
+                
+                <div class="tab-container">
+                    <div class="tab-buttons">
+                        <button class="tab-button" data-tab="install-langchain">LangChain</button>
+                        <button class="tab-button" data-tab="install-autogen">AutoGen</button>
+                        <button class="tab-button" data-tab="install-llamaindex">LlamaIndex</button>
+                        <button class="tab-button" data-tab="install-crewai">CrewAI</button>
+                    </div>
+                    
+                    <div id="install-langchain" class="tab-content">
+                        <h4>Installing LangChain</h4>
+                        <div class="command">pip install langchain langchain-openai</div>
+                        
+                        <p>For additional functionality:</p>
+                        <div class="command">pip install langchain[all]</div>
+                        
+                        <p>Common integrations:</p>
+                        <div class="command">pip install langchain-anthropic langchain-community langchain-experimental chroma chromadb</div>
+                    </div>
+                    
+                    <div id="install-autogen" class="tab-content">
+                        <h4>Installing AutoGen</h4>
+                        <div class="command">pip install pyautogen</div>
+                        
+                        <p>For enhanced functionality:</p>
+                        <div class="command">pip install pyautogen[retrievers,blendsearch]</div>
+                        
+                        <p>For OpenAI integrations:</p>
+                        <div class="command">pip install openai</div>
+                    </div>
+                    
+                    <div id="install-llamaindex" class="tab-content">
+                        <h4>Installing LlamaIndex</h4>
+                        <div class="command">pip install llama-index llama-index-llms-openai</div>
+                        
+                        <p>For additional integrations:</p>
+                        <div class="command">pip install llama-index-llms-anthropic llama-index-embeddings-openai llama-index-vector-stores-chroma</div>
+                    </div>
+                    
+                    <div id="install-crewai" class="tab-content">
+                        <h4>Installing CrewAI</h4>
+                        <div class="command">pip install crewai crewai_tools</div>
+                        
+                        <p>For LLM providers:</p>
+                        <div class="command">pip install openai anthropic</div>
+                    </div>
+                </div>
+                
+                <h3>Option B: All-in-One Installation</h3>
+                <p>If you want to experiment with multiple frameworks, you can create a <code>requirements.txt</code> file with the following content:</p>
+                
+                <div class="code-block">
+                    <code>
+# Core frameworks
+langchain>=0.1.0
+langchain-openai>=0.0.2
+langchain-anthropic>=0.1.1
+langchain-community>=0.0.16
+pyautogen>=0.2.0
+llama-index>=0.9.0
+crewai>=0.28.0
+
+# LLM providers
+openai>=1.0.0
+anthropic>=0.8.0
+
+# Vector stores and embeddings
+chromadb>=0.4.18
+sentence-transformers>=2.2.2
+
+# Utilities
+python-dotenv>=1.0.0
+pydantic>=2.5.0
+tiktoken>=0.5.0
+    </code>
+                </div>
+                
+                <p>Then install all dependencies at once:</p>
+                <div class="command">pip install -r requirements.txt</div>
+                
+                <div class="callout">
+                    <h4>Tip</h4>
+                    <p>Keep your dependencies up-to-date, especially for rapidly evolving frameworks:</p>
+                    <div class="command">pip install --upgrade -r requirements.txt</div>
+                </div>
+            </div>
+            
+            <div class="content-box">
+                <h2>Step 4: Set Up API Access</h2>
+                <p>Most AI agent frameworks require access to LLM APIs. Here's how to set up the most common ones:</p>
+                
+                <h3>OpenAI API Setup</h3>
+                <ol>
+                    <li>Create an account on <a href="https://platform.openai.com/signup" target="_blank">OpenAI's platform</a></li>
+                    <li>Navigate to the API section</li>
+                    <li>Create an API key</li>
+                    <li>Store your API key securely (see Environment Variables section below)</li>
+                </ol>
+                
+                <h3>Anthropic API Setup</h3>
+                <ol>
+                    <li>Sign up for <a href="https://console.anthropic.com/" target="_blank">Anthropic's API access</a></li>
+                    <li>Once approved, generate an API key from the console</li>
+                    <li>Store your API key securely</li>
+                </ol>
+                
+                <h3>Other Providers</h3>
+                <p>Similar processes apply for other providers like:</p>
+                <ul>
+                    <li>Mistral AI</li>
+                    <li>Cohere</li>
+                    <li>Google Vertex AI</li>
+                </ul>
+                
+                <div class="callout warning">
+                    <h4>Security Warning</h4>
+                    <p>Never hardcode API keys in your source code or commit them to version control. Always use environment variables or secure key management solutions.</p>
+                </div>
+            </div>
+            
+            <div class="content-box">
+                <h2>Step 5: Configure Environment Variables</h2>
+                <p>Using environment variables is a secure way to manage API keys and configuration.</p>
+                
+                <h3>Create a .env File</h3>
+                <p>In your project root, create a file named <code>.env</code> with your API keys:</p>
+                
+                <div class="code-block">
+                    <code>
+# API Keys
+OPENAI_API_KEY=sk-your-openai-key-here
+ANTHROPIC_API_KEY=sk-ant-your-anthropic-key-here
+
+# Configuration
+DEFAULT_LLM_MODEL=gpt-4-turbo
+VECTOR_DB_PATH=./data/vectorstore
+    </code>
+                </div>
+                
+                <h3>Loading Environment Variables in Your Code</h3>
+                <p>Use the <code>python-dotenv</code> package to load environment variables:</p>
+                
+                <div class="code-block">
+                    <code>
+# Import at the top of your main script
+from dotenv import load_dotenv
+import os
+
+# Load environment variables
+load_dotenv()
+
+# Access variables in your code
+openai_api_key = os.getenv("OPENAI_API_KEY")
+anthropic_api_key = os.getenv("ANTHROPIC_API_KEY")
+    </code>
+                </div>
+                
+                <h3>Add .env to .gitignore</h3>
+                <p>Create a <code>.gitignore</code> file in your project root to prevent committing sensitive information:</p>
+                
+                <div class="code-block">
+                    <code>
+# Environment variables
+.env
+
+# Virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Vector stores and local data
+data/
+    </code>
+                </div>
+            </div>
+            
+            <div class="content-box">
+                <h2>Step 6: Set Up Project Structure</h2>
+                <p>A well-organized project structure makes development easier. Here's a recommended structure for AI agent projects:</p>
+                
+                <div class="code-block">
+                    <code>
+ai-agent-project/
+├── .env                  # Environment variables
+├── .gitignore            # Git ignore file
+├── README.md             # Project documentation
+├── requirements.txt      # Dependencies
+├── main.py               # Entry point
+├── agents/               # Agent definitions
+│   ├── __init__.py
+│   ├── base_agent.py
+│   └── specialized_agents.py
+├── tools/                # Custom tools
+│   ├── __init__.py
+│   └── tool_definitions.py
+├── prompts/              # Prompt templates
+│   ├── __init__.py
+│   └── templates.py
+├── memory/               # Agent memory components
+│   ├── __init__.py
+│   └── memory_handlers.py
+├── data/                 # Data files and vector stores
+│   ├── raw/
+│   ├── processed/
+│   └── vectorstore/
+└── tests/                # Test files
+    ├── __init__.py
+    └── test_agents.py
+    </code>
+                </div>
+                
+                <p>Create this structure using the following commands:</p>
+                
+                <div class="tab-container">
+                    <div class="tab-buttons">
+                        <button class="tab-button" data-tab="structure-windows">Windows</button>
+                        <button class="tab-button" data-tab="structure-macos-linux">macOS/Linux</button>
+                    </div>
+                    
+                    <div id="structure-windows" class="tab-content">
+                        <div class="command">
+mkdir agents tools prompts memory data data\raw data\processed data\vectorstore tests
+type nul > .env
+type nul > .gitignore
+type nul > README.md
+type nul > requirements.txt
+type nul > main.py
+type nul > agents\__init__.py
+type nul > agents\base_agent.py
+type nul > agents\specialized_agents.py
+type nul > tools\__init__.py
+type nul > tools\tool_definitions.py
+type nul > prompts\__init__.py
+type nul > prompts\templates.py
+type nul > memory\__init__.py
+type nul > memory\memory_handlers.py
+type nul > tests\__init__.py
+type nul > tests\test_agents.py
+                        </div>
+                    </div>
+                    
+                    <div id="structure-macos-linux" class="tab-content">
+                        <div class="command">
+mkdir -p agents tools prompts memory data/raw data/processed data/vectorstore tests
+touch .env .gitignore README.md requirements.txt main.py
+touch agents/__init__.py agents/base_agent.py agents/specialized_agents.py
+touch tools/__init__.py tools/tool_definitions.py
+touch prompts/__init__.py prompts/templates.py
+touch memory/__init__.py memory/memory_handlers.py
+touch tests/__init__.py tests/test_agents.py
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-box">
+                <h2>Step 7: Create a Basic Agent Template</h2>
+                <p>To verify your setup, create a simple agent template. Here's an example using LangChain:</p>
+                
+                <h3>main.py</h3>
+                <div class="code-block">
+                    <code>
+import os
+from dotenv import load_dotenv
+from lang

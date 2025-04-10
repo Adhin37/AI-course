@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='white'/%3E%3Cpath d='M32 8 C20 8,12 20,12 32 C12 44,20 56,32 56 C44 56,52 44,52 32 C52 20,44 8,32 8 Z' fill='%234F46E5'/%3E%3Cpath d='M32 16 L32 48' stroke='%2310B981' stroke-width='4'/%3E%3Cpath d='M24 24 L40 24' stroke='%2310B981' stroke-width='4'/%3E%3Cpath d='M24 40 L40 40' stroke='%2310B981' stroke-width='4'/%3E%3C/svg%3E">
+    <title>AI Agent Code Examples</title>
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-dark: #4338CA;
+            --secondary: #10B981;
+            --dark: #1F2937;
+            --light: #F9FAFB;
+            --gray: #6B7280;
+            --light-gray: #E5E7EB;
+            --code-bg: #2D3748;
+            --code-text: #E2E8F0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        nav {
+            background-color: var(--primary-dark);
+            padding: 1rem 0;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        nav li {
+            margin: 0 1rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .page-title {
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .page-title h1 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .page-title p {
+            color: var(--gray);
+            margin-top: 0;
+        }
+
+        .content-section {
+            padding: 2rem 0;
+        }
+        
+        .section-title {
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+        
+        .example-box {
+            background-color: white;
+            border-radius: 8px;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .example-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .example-header h3 {
+            margin: 0;
+        }
+        
+        .tag {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .example-content {
+            padding: 1.5rem;
+        }
+        
+        .example-description {
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+        }
+        
+        .code-block {
+            background-color: var(--code-bg);
+            border-radius: 8px;
+            overflow: auto;
+            margin-bottom: 1.5rem;
+        }
+        
+        .code-block pre {
+            margin: 0;
+            padding: 1.5rem;
+            color: var(--code-text);
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .example-notes {
+            background-color: #FEF3C7;
+            border-left: 4px solid #F59E0B;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .example-notes h4 {
+            margin-top: 0;
+            color: #B45309;
+        }
+        
+        .example-notes p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .example-footer {
+            background-color: #F3F4F6;
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #E5E7EB;
+        }
+        
+        .resources-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .resources-list li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .resources-list a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .resources-list a:hover {
+            text-decoration: underline;
+        }
+        
+        .diagram {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .diagram img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .diagram-caption {
+            margin-top: 1rem;
+            color: var(--gray);
+            font-style: italic;
+        }
+        
+        .code-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--light-gray);
+            margin-bottom: 0;
+        }
+        
+        .code-tab {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            background-color: #F3F4F6;
+            border: 1px solid var(--light-gray);
+            border-bottom: none;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            margin-right: 0.5rem;
+        }
+        
+        .code-tab.active {
+            background-color: var(--code-bg);
+            color: white;
+            border-color: var(--code-bg);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        footer p {
+            margin: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .example-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .tag {
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>AI Agent Development Guide</h1>
+            <p>Learn to build powerful AI agents for specific tasks</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="introduction.html">Introduction</a></li>
+                <li><a href="frameworks.html">Frameworks</a></li>
+                <li><a href="code-examples.html">Code Examples</a></li>
+                <li><a href="tutorials.html">Tutorials</a></li>
+                <li><a href="advanced-features.html">Advanced Features</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="page-title">
+        <div class="container">
+            <h1>AI Agent Code Examples</h1>
+            <p>Practical code snippets to help you build task-specific AI agents</p>
+        </div>
+    </div>
+    
+    <section class="content-section" id="basic">
+        <div class="container">
+            <h2 class="section-title">Basic AI Agent Setup</h2>
+            
+            <div class="example-box">
+                <div class="example-header">
+                    <h3>Simple LangChain Agent</h3>
+                    <span class="tag">Beginner</span>
+                </div>
+                
+                <div class="example-content">
+                    <p class="example-description">
+                        This example demonstrates how to create a basic agent using LangChain that can respond to queries and use tools.
+                    </p>
+                    
+                    <div class="code-block">
+                        <pre>
+import os
+from langchain_openai import ChatOpenAI
+from langchain.agents import AgentType, initialize_agent, load_tools
+from langchain.callbacks import StreamingStdOutCallbackHandler
+
+# Set your API key
+os.environ["OPENAI_API_KEY"] = "your-api-key-here"
+
+# Initialize the LLM
+llm = ChatOpenAI(
+    temperature=0,
+    streaming=True,
+    callbacks=[StreamingStdOutCallbackHandler()],
+)
+
+# Load some basic tools
+tools = load_tools(["llm-math", "wikipedia"], llm=llm)
+
+# Initialize the agent
+agent = initialize_agent(
+    tools,
+    llm,
+    agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
+    verbose=True,
+    handle_parsing_errors=True,
+)
+
+# Run the agent
+agent.invoke({"input": "What is the square root of 256 plus the year Wikipedia was launched?"})
+</pre>
+                    </div>
+                    
+                    <div class="example-notes">
+                        <h4>Key Points</h4>
+                        <ul>
+                            <li>The agent uses the ZERO_SHOT_REACT_DESCRIPTION agent type, which doesn't require examples.</li>
+                            <li>We've loaded two tools: llm-math for calculations and wikipedia for retrieving information.</li>
+                            <li>The agent will reason through how to solve the query step by step, using the appropriate tools.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="example-footer">
+                    <h4>Related Resources</h4>
+                    <ul class="resources-list">
+                        <li><a href="https://python.langchain.com/docs/modules/agents/" target="_blank">LangChain Agents Documentation</a></li>
+                        <li><a href="frameworks.html#langchain">LangChain Framework Guide</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="example-box">
+                <div class="example-header">
+                    <h3>Anthropic Claude Agent</h3>
+                    <span class="tag">Beginner</span>
+                </div>
+                
+                <div class="example-content">
+                    <p class="example-description">
+                        This example shows how to create a simple agent using Anthropic's Claude model with direct API calls.
+                    </p>
+                    
+                    <div class="code-block">
+                        <pre>
+import os
+import anthropic
+from typing import List, Dict, Any
+
+class ClaudeAgent:
+    def __init__(self, api_key: str = None):
+        """Initialize the Claude agent."""
+        self.api_key = api_key or os.environ.get("ANTHROPIC_API_KEY")
+        if not self.api_key:
+            raise ValueError("Anthropic API key is required")
+        
+        self.client = anthropic.Anthropic(api_key=self.api_key)
+        self.system_prompt = """You are a helpful AI assistant that solves problems step-by-step.
+When you need information or need to perform actions, think about what tools would be useful.
+Always explain your reasoning."""
+        
+    def run(self, user_input: str, max_tokens: int = 1000) -> str:
+        """Run the agent on the given input."""
+        message = self.client.messages.create(
+            model="claude-3-opus-20240229",
+            max_tokens=max_tokens,
+            system=self.system_prompt,
+            messages=[
+                {"role": "user", "content": user_input}
+            ]
+        )
+        return message.content[0].text
+    
+# Example usage
+if __name__ == "__main__":
+    agent = ClaudeAgent()
+    response = agent.run("I need to analyze the sentiment of the following customer feedback: 'The product arrived damaged and customer service was unhelpful.'")
+    print(response)
+</pre>
+                    </div>
+                    
+                    <div class="example-notes">
+                        <h4>Key Points</h4>
+                        <ul>
+                            <li>This example uses Claude directly through the Anthropic API.</li>
+                            <li>The system prompt instructs Claude to solve problems methodically.</li>
+                            <li>For more complex agents, you would need to implement tool-calling capabilities.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="example-footer">
+                    <h4>Related Resources</h4>
+                    <ul class="resources-list">
+                        <li><a href="https://docs.anthropic.com/claude/reference/getting-started-with-the-api" target="_blank">Anthropic API Documentation</a></li>
+                        <li><a href="models.html#anthropic">Anthropic Claude Models Guide</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="content-section" id="tools">
+        <div class="container">
+            <h2 class="section-title">Tool-Using Agents</h2>
+            
+            <div class="example-box">
+                <div class="example-header">
+                    <h3>Agent with Custom Tools</h3>
+                    <span class="tag">Intermediate</span>
+                </div>
+                
+                <div class="example-content">
+                    <p class="example-description">
+                        This example demonstrates how to create an agent with custom tools using LangChain's tool definition pattern.
+                    </p>
+                    
+                    <div class="code-block">
+                        <pre>
+import os
+import requests
+import json
+from typing import List, Dict, Any, Optional
+from langchain_openai import ChatOpenAI
+from langchain.agents import AgentType, initialize_agent
+from langchain.tools import BaseTool
+from pydantic import BaseModel, Field
+
+# Set your API key
+os.environ["OPENAI_API_KEY"] = "your-api-key-here"
+WEATHER_API_KEY = "your-weather-api-key"
+
+# Define custom tool input schemas
+class WeatherInput(BaseModel):
+    location: str = Field(description="The city and state or country, e.g., 'San Francisco, CA'")
+
+class StockPriceInput(BaseModel):
+    symbol: str = Field(description="The stock ticker symbol, e.g., 'AAPL' for Apple")
+
+# Define custom tools
+class WeatherTool(BaseTool):
+    name = "get_weather"
+    description = "Get the current weather in a given location"
+    args_schema = WeatherInput
+    
+    def _run(self, location: str) -> str:
+        """Get the current weather in a location."""
+        url = f"https://api.weatherapi.com/v1/current.json?key={WEATHER_API_KEY}&q={location}"
+        response = requests.get(url)
+        if response.status_code == 200:
+            data = response.json()
+            weather = data["current"]["condition"]["text"]
+            temp_c = data["current"]["temp_c"]
+            temp_f = data["current"]["temp_f"]
+            return f"Weather in {location}: {weather}, {temp_c}°C / {temp_f}°F"
+        else:
+            return f"Error getting weather for {location}: {response.text}"
+    
+    def _arun(self, location: str) -> str:
+        """Async implementation would go here."""
+        raise NotImplementedError("WeatherTool does not support async")
+
+class StockPriceTool(BaseTool):
+    name = "get_stock_price"
+    description = "Get the current price of a stock by ticker symbol"
+    args_schema = StockPriceInput
+    
+    def _run(self, symbol: str) -> str:
+        """Get the current stock price."""
+        # This is a simplified example - you'd use a real API like Alpha Vantage
+        url = f"https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={symbol}&apikey=your-alphavantage-key"
+        response = requests.get(url)
+        if response.status_code == 200:
+            data = response.json()
+            price = data.get("Global Quote", {}).get("05. price", "N/A")
+            return f"Current price of {symbol}: ${price}"
+        else:
+            return f"Error getting stock price for {symbol}: {response.text}"
+    
+    def _arun(self, symbol: str) -> str:
+        """Async implementation would go here."""
+        raise NotImplementedError("StockPriceTool does not support async")
+
+# Initialize the LLM
+llm = ChatOpenAI(
+    temperature=0,
+    model="gpt-3.5-turbo-0125",
+)
+
+# Create tools list
+tools = [WeatherTool(), StockPriceTool()]
+
+# Initialize the agent
+agent = initialize_agent(
+    tools,
+    llm,
+    agent=AgentType.OPENAI_FUNCTIONS,
+    verbose=True,
+)
+
+# Example usage
+if __name__ == "__main__":
+    response = agent.invoke({"input": "What's the weather in New York City? Also, how is Apple's stock doing today?"})
+    print(response["output"])
+</pre>
+                    </div>
+                    
+                    <div class="example-notes">
+                        <h4>Key Points</h4>
+                        <ul>
+                            <li>Custom tools are defined by extending the BaseTool class and implementing _run methods.</li>
+                            <li>Using Pydantic models (WeatherInput, StockPriceInput) to validate and document tool inputs.</li>
+                            <li>The OPENAI_FUNCTIONS agent type is designed to work with OpenAI's function calling capabilities.</li>
+                            <li>Error handling in the tools helps the agent understand when something goes wrong.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="example-footer">
+                    <h4>Related Resources</h4>
+                    <ul class="resources-list">
+                        <li><a href="https://python.langchain.com/docs/modules/tools/" target="_blank">LangChain Tools Documentation</a></li>
+                        <li><a href="tool-development.html">Advanced Tool Development Guide</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="example-box">
+                <div class="example-header">
+                    <h3>Function Calling with Claude</h3>
+                    <span class="tag">Intermediate</span>
+                </div>
+                
+                <div class="example-content">
+                    <p class="example-description">
+                        This example shows how to implement tool use with Anthropic's Claude model using tool use (function calling) capabilities.
+                    </p>
+                    
+                    <div class="code-block">
+                        <pre>
+import os
+import json
+import anthropic
+import requests
+from typing import List, Dict, Any, Optional, Callable
+
+class ClaudeToolAgent:
+    def __init__(self, api_key: str = None):
+        """Initialize the Claude agent with tools."""
+        self.api_key = api_key or os.environ.get("ANTHROPIC_API_KEY")
+        if not self.api_key:
+            raise ValueError("Anthropic API key is required")
+        
+        self.client = anthropic.Anthropic(api_key=self.api_key)
+        self.system_prompt = """You are a helpful AI assistant that solves problems step-by-step.
+You have access to tools that can help you find information or perform actions.
+Think carefully about which tool to use based on the user's request."""
+        
+        # Define the available tools
+        self.tools = [
+            {
+                "name": "get_weather",
+                "description": "Get the current weather in a specific location",
+                "input_schema": {
+                    "type": "object",
+                    "properties": {
+                        "location": {
+                            "type": "string",
+                            "description": "The city and state or country, e.g., 'San Francisco, CA'"
+                        }
+                    },
+                    "required": ["location"]
+                }
+            },
+            {
+                "name": "search_web",
+                "description": "Search the web for information on a topic",
+                "input_schema": {
+                    "type": "object", 
+                    "properties": {
+                        "query": {
+                            "type": "string",
+                            "description": "The search query"
+                        }
+                    },
+                    "required": ["query"]
+                }
+            }
+        ]
+        
+        # Map tool names to their implementation functions
+        self.tool_implementations = {
+            "get_weather": self.get_weather,
+            "search_web": self.search_web
+        }
+    
+    def get_weather(self, params: Dict[str, Any]) -> str:
+        """Get the current weather in a location."""
+        location = params.get("location", "")
+        # In a real implementation, you would call a weather API
+        # This is a mock implementation
+        return f"It's currently 72°F and sunny in {location}."
+    
+    def search_web(self, params: Dict[str, Any]) -> str:
+        """Search the web for information."""
+        query = params.get("query", "")
+        # In a real implementation, you would use a search API
+        # This is a mock implementation
+        return f"Found results for '{query}': (1) First relevant result (2) Second relevant result"
+    
+    def run(self, user_input: str) -> str:
+        """Run the agent with tool use capabilities."""
+        messages = [{"role": "user", "content": user_input}]
+        
+        # Keep track of the conversation history
+        conversation_history = []
+        
+        while True:
+            # Get model response
+            response = self.client.messages.create(
+                model="claude-3-opus-20240229",
+                system=self.system_prompt,
+                messages=messages,
+                tools=self.tools,
+                max_tokens=1024
+            )
+            
+            # Extract the message content
+            message_content = response.content
+            
+            # Check if there are tool calls in the response
+            tool_calls = []
+            for content in message_content:
+                if content.type == "tool_use":
+                    tool_calls.append(content.tool_use)
+            
+            # If there are no tool calls, return the response
+            if not tool_calls:
+                # Get text response
+                text_response = "\n".join([
+                    content.text for content in message_content 
+                    if content.type == "text"
+                ])
+                
+                # Add final assistant response to history and return
+                conversation_history.append({"role": "assistant", "content": text_response})
+                return text_response
+            
+            # Process tool calls and add results
+            tool_results = []
+            for tool_call in tool_calls:
+                tool_name = tool_call.name
+                tool_params = json.loads(tool_call.input)
+                
+                # Execute the appropriate tool function
+                if tool_name in self.tool_implementations:
+                    result = self.tool_implementations[tool_name](tool_params)
+                    tool_results.append({
+                        "tool_call_id": tool_call.id,
+                        "role": "tool",
+                        "name": tool_name,
+                        "content": result
+                    })
+            
+            # Add assistant message with tool calls
+            messages.append({"role": "assistant", "content": message_content})
+            
+            # Add tool results to messages
+            for result in tool_results:
+                messages.append(result)
+
+# Example usage
+if __name__ == "__main__":
+    agent = ClaudeToolAgent()
+    response = agent.run("What's the weather in Seattle and find information about AI agents")
+    print(response)
+</pre>
+                    </div>
+                    
+                    <div class="example-notes">
+                        <h4>Key Points</h4>
+                        <ul>
+                            <li>This implementation uses Claude's native tool use capabilities.</li>
+                            <li>Tools are defined with JSON schema to specify their input parameters.</li>
+                            <li>The agent maintains conversation context, allowing for multi-turn interactions.</li>
+                            <li>Tool implementations are mapped to functions that execute the actual logic.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="example-footer">
+                    <h4>Related Resources</h4>
+                    <ul class="resources-list">
+                        <li><a href="https://docs.anthropic.com/claude/docs/tool-use" target="_blank">Claude Tool Use Documentation</a></li>
+                        <li><a href="advanced-features.html#tool-use">Advanced Tool Use Patterns</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="content-section" id="rag">
+        <div class="container">
+            <h2 class="section-title">Retrieval-Augmented Generation (RAG)</h2>
+            
+            <div class="diagram">
+                <img src="/api/placeholder/800/400" alt="RAG Architecture Diagram">
+                <p class="diagram-caption">Figure 1: Basic RAG Architecture showing document processing, embedding, vector storage, and retrieval flow</p>
+            </div>
+            
+            <div class="example-box">
+                <div class="example-header">
+                    <h3>Simple RAG Implementation</h3>
+                    <span class="tag">Intermediate</span>
+                </div>
+                
+                <div class="example-content">
+                    <p class="example-description">
+                        This example demonstrates how to create a basic RAG system that can answer questions based on custom documents.
+                    </p>
+                    
+                    <div class="code-block">
+                        <pre>
+import os
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+from langchain_community.vectorstores import Chroma
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.runnables import RunnablePassthrough
+from langchain.document_loaders import TextLoader
+
+# Set your API key
+os.environ["OPENAI_API_KEY"] = "your-api-key-here"
+
+# 1. Load documents
+loader = TextLoader("./data/company_handbook.txt")
+documents = loader.load()
+
+# 2. Split documents into chunks
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
+chunks = text_splitter.split_documents(documents)
+
+# 3. Create embeddings and store in vector database
+embeddings = OpenAIEmbeddings()
+vectorstore = Chroma.from_documents(documents=chunks, embedding=embeddings)
+retriever = vectorstore.as_retriever(search_kwargs={"k": 4})
+
+# 4. Create prompt template
+template = """You are an AI assistant helping with questions about the company handbook.
+Use the following context to answer the question. If you don't know the answer, 
+say you don't know and don't make up information.
+
+Context:
+{context}
+
+Question:
+{question}
+
+Answer:"""
+
+prompt = ChatPromptTemplate.from_template(template)
+
+# 5. Set up LLM
+llm = ChatOpenAI(temperature=0)
+
+# 6. Create the RAG pipeline
+rag_chain = (
+    {"context": retriever, "question": RunnablePassthrough()}
+    | prompt
+    | llm
+    | StrOutputParser()
+)
+
+# Example usage
+if __name__ == "__main__":
+    question = "What is the company policy on remote work?"
+    response = rag_chain.invoke(question)
+    print(response)
+</pre>
+                    </div>
+                    
+                    <div class="example-notes">
+                        <h4>Key Points</h4>
+                        <ul>
+                            <li>Documents are split into smaller chunks to fit into context windows and improve retrieval granularity.</li>
+                            <li>The vector store (Chroma) allows semantic search of document chunks based on their embeddings.</li>
+                            <li>The retriever finds relevant document chunks based on the question's semantic meaning.</li>
+                            <li>The prompt template combines the retrieved context with the user's question.</li>
+                            <li>The LLM generates an answer based on the retrieved context.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="example-footer">
+                    <h4>Related Resources</h4>
+                    <ul class="resources-list">
+                        <li><a href="https://python.langchain.com/docs/modules/data_connection/" target="_blank">LangChain Document Loading & Retrieval</a></li>
+                        <li><a href="advanced-features.html#advanced-rag">Advanced RAG Techniques</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="example-box">
+                <div class="example-header">
+                    <h3>Conversational RAG Agent</h3>
+                    <span class="tag">Advanced</span>
+                </div>
+                
+                <div class="example-content">
+                    <p class="example-description">
+                        This example shows how to build a conversational agent that combines RAG with tool use and conversation memory.
+                    </p>
+                    
+<div class="code-block">
+<pre>
+import os
+from typing import List, Dict, Any
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+from langchain_community.vectorstores import Chroma
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain.schema import Document
+from langchain.tools import BaseTool
+from langchain.agents import AgentType, initialize_agent
+from langchain.memory import ConversationBufferMemory
+from langchain.chains import ConversationalRetrievalChain
+from langchain.document_loaders import DirectoryLoader
+
+# Set API key
+os.environ["OPENAI_API_KEY"] = "your-api-key-here"
+
+class DocumentSearchTool(BaseTool):
+    name = "document_search"
+    description = "Search for information in the company documents"
+    
+    def __init__(self, retriever):
+        super().__init__()
+        self.retriever = retriever
+    
+    def _run(self, query: str) -> str:
+        """Search for information in documents."""
+        docs = self.retriever.get_relevant_documents(query)
+        if not docs:
+            return "No relevant information found in the documents."
+        
+        # Format the retrieved information
+        result = "Here's what I found in the documents:\n\n"
+        for i, doc in enumerate(docs, 1):
+            result += f"Document {i}:\n{doc.page_content}\n\n"
+        
+        return result
+    
+    def _arun(self, query: str) -> str:
+        """Async implementation would go here."""
+        raise NotImplementedError("DocumentSearchTool does not support async")
+
+def build_conversational_rag_agent():
+    # 1. Load documents from directory
+    loader = DirectoryLoader("./data/company_docs/", glob="**/*.txt")
+    documents = loader.load()
+    
+    # 2. Split documents into chunks
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
+    chunks = text_splitter.split_documents(documents)
+    
+    # 3. Create embeddings and vector store
+    embeddings = OpenAIEmbeddings()
+    vectorstore = Chroma.from_documents(documents=chunks, embedding=embeddings)
+    retriever = vectorstore.as_retriever(search_kwargs={"k": 4})
+    
+    # 4. Set up LLM
+    llm = ChatOpenAI(temperature=0, model="gpt-4-0125-preview")
+    
+    # 5. Set up conversation memory
+    memory = ConversationBufferMemory(
+        memory_key="chat_history",
+        return_messages=True
+    )
+    
+    # 6. Create tools
+    document_tool = DocumentSearchTool(retriever)
+    tools = [document_tool]
+    
+    # 7. Initialize agent with memory
+    agent = initialize_agent(
+        tools,
+        llm,
+        agent=AgentType.OPENAI_FUNCTIONS,
+        verbose=True,
+        memory=memory,
+        handle_parsing_errors=True,
+    )
+    
+    return agent
+
+# Example usage
+if __name__ == "__main__":
+    agent = build_conversational_rag_agent()
+    
+    # First query
+    response = agent.invoke({"input": "What is our company's parental leave policy?"})
+    print(f"Response: {response['output']}\n")
+    
+    # Follow-up query using memory
+    response = agent.invoke({"input": "How does that compare to the industry standard?"})
+    print(f"Response: {response['output']}")
+</pre>
+</div>
+
+<div class="example-notes">
+    <h4>Key Points</h4>
+    <ul>
+        <li>This implementation combines RAG with agent capabilities and conversation memory.</li>
+        <li>The DocumentSearchTool wraps the retriever to make it available as a tool for the agent.</li>
+        <li>ConversationBufferMemory allows the agent to reference previous exchanges in the conversation.</li>
+        <li>The agent can choose when to use the document search tool versus when to use its own knowledge.</li>
+        <li>Directory loading allows processing multiple documents at once from a folder.</li>
+    </ul>
+</div>
+</div>
+</div>
+</section>
+
+<section class="content-section" id="multi-agent">
+<div class="container">
+    <h2 class="section-title">Multi-Agent Systems</h2>
+    
+    <div class="diagram">
+        <img src="/api/placeholder/800/400" alt="Multi-Agent System Architecture">
+        <p class="diagram-caption">Figure 2: Multi-Agent Architecture showing agent communication and task delegation</p>
+    </div>
+    
+    <div class="example-box">
+        <div class="example-header">
+            <h3>CrewAI Multi-Agent System</h3>
+            <span class="tag">Advanced</span>
+        </div>
+        
+        <div class="example-content">
+            <p class="example-description">
+                This example demonstrates how to create a multi-agent system with different roles using CrewAI.
+            </p>
+            
+            <div class="code-block">
+                <pre>
+import os
+from crewai import Agent, Task, Crew, Process
+from langchain_openai import ChatOpenAI
+
+# Set API key
+os.environ["OPENAI_API_KEY"] = "your-api-key-here"
+
+# Initialize the language model
+llm = ChatOpenAI(model="gpt-4-0125-preview", temperature=0.2)
+
+# Create agents with different roles
+researcher = Agent(
+    role="Market Researcher",
+    goal="Discover actionable market insights",
+    backstory="""You are an expert market researcher with years of experience in 
+    analyzing market trends and identifying opportunities. Your analyses are known 
+    for being comprehensive and insightful.""",
+    verbose=True,
+    allow_delegation=True,
+    llm=llm
+)
+
+analyst = Agent(
+    role="Data Analyst",
+    goal="Transform raw data into meaningful patterns",
+    backstory="""You are a skilled data analyst who excels at interpreting complex datasets 
+    and extracting valuable insights. You have a talent for visualizing data patterns 
+    and explaining them clearly.""",
+    verbose=True,
+    allow_delegation=True,
+    llm=llm
+)
+
+strategist = Agent(
+    role="Business Strategist",
+    goal="Develop effective business strategies based on market insights",
+    backstory="""You are a business strategy expert with a track record of developing 
+    successful strategies for various companies. You excel at connecting market insights 
+    to actionable business plans.""",
+    verbose=True,
+    allow_delegation=False,
+    llm=llm
+)
+
+# Define tasks for each agent
+research_task = Task(
+    description="""Research the current state of the electric vehicle market. 
+    Identify key players, market trends, consumer preferences, and growth projections. 
+    Focus on the period from 2020 to present. Compile your findings in a comprehensive report.""",
+    agent=researcher,
+    expected_output="A detailed market research report on the electric vehicle industry"
+)
+
+analysis_task = Task(
+    description="""Analyze the market research data to identify patterns, opportunities, 
+    and challenges in the electric vehicle market. Identify segments showing the highest growth 
+    potential and factors driving adoption. Create a structured analysis with key metrics.""",
+    agent=analyst,
+    expected_output="Data analysis report with visualizations and key metrics",
+    context=[research_task]
+)
+
+strategy_task = Task(
+    description="""Develop a market entry strategy for a new company looking to enter the 
+    electric vehicle market. Based on the research and analysis, recommend product positioning, 
+    target customer segments, and competitive differentiation strategies. Create a 2-year 
+    strategic roadmap with key milestones.""",
+    agent=strategist,
+    expected_output="A comprehensive market entry strategy with 2-year roadmap",
+    context=[research_task, analysis_task]
+)
+
+# Create the crew with sequential process
+market_analysis_crew = Crew(
+    agents=[researcher, analyst, strategist],
+    tasks=[research_task, analysis_task, strategy_task],
+    process=Process.sequential,
+    verbose=2
+)
+
+# Execute the crew
+result = market_analysis_crew.kickoff()
+print(result)
+</pre>
+            </div>
+            
+            <div class="example-notes">
+                <h4>Key Points</h4>
+                <ul>
+                    <li>CrewAI allows you to create specialized agents with distinct roles, goals, and backstories.</li>
+                    <li>Tasks can be connected through context, allowing output from one task to flow to another.</li>
+                    <li>The sequential process ensures tasks are completed in order, with each agent building on previous work.</li>
+                    <li>Agent delegation allows certain agents to request help from others when needed.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="example-footer">
+            <h4>Related Resources</h4>
+            <ul class="resources-list">
+                <li><a href="https://docs.crewai.com/" target="_blank">CrewAI Documentation</a></li>
+                <li><a href="advanced-features.html#multi-agent-orchestration">Multi-Agent Orchestration Patterns</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="example-box">
+        <div class="example-header">
+            <h3>AutoGen Multi-Agent Conversation</h3>
+            <span class="tag">Advanced</span>
+        </div>
+        
+        <div class="example-content">
+            <p class="example-description">
+                This example shows how to create a conversational multi-agent system using Microsoft's AutoGen framework.
+            </p>
+            
+            <div class="code-block">
+                <pre>
+import os
+import autogen
+from autogen import Agent, AssistantAgent, UserProxyAgent, GroupChat, GroupChatManager
+
+# Set API configuration
+config_list = [
+    {
+        "model": "gpt-4",
+        "api_key": os.environ.get("OPENAI_API_KEY"),
+    }
+]
+
+# Create specialized agents
+planner = AssistantAgent(
+    name="Planner",
+    system_message="""You are a task planning expert. Your role is to:
+1. Break down complex tasks into manageable steps
+2. Create clear, actionable plans
+3. Identify dependencies between tasks
+4. Coordinate different activities to achieve goals efficiently""",
+    llm_config={"config_list": config_list}
+)
+
+researcher = AssistantAgent(
+    name="Researcher",
+    system_message="""You are a research specialist. Your role is to:
+1. Find relevant information on technical topics
+2. Summarize complex concepts in an accessible way
+3. Identify credible sources and methodologies
+4. Answer factual questions with precise information""",
+    llm_config={"config_list": config_list}
+)
+
+coder = AssistantAgent(
+    name="Coder",
+    system_message="""You are a programming expert. Your role is to:
+1. Write clean, efficient code based on requirements
+2. Debug issues and suggest improvements
+3. Explain complex technical concepts in simple terms
+4. Follow best practices for software development""",
+    llm_config={"config_list": config_list}
+)
+
+reviewer = AssistantAgent(
+    name="Reviewer",
+    system_message="""You are a code review and quality assurance specialist. Your role is to:
+1. Review code for bugs, inefficiencies, and edge cases
+2. Suggest improvements for readability and maintainability
+3. Ensure code meets best practices and requirements
+4. Test code functionality and identify potential issues""",
+    llm_config={"config_list": config_list}
+)
+
+# Create user proxy agent to interact with the group
+user_proxy = UserProxyAgent(
+    name="User",
+    system_message="A user who needs help building a Python web scraper for collecting product information.",
+    human_input_mode="ALWAYS"  # For simplicity in this example, change to "TERMINATE" for real applications
+)
+
+# Create a group chat with all agents
+groupchat = GroupChat(
+    agents=[user_proxy, planner, researcher, coder, reviewer],
+    messages=[],
+    max_round=20
+)
+
+# Create a group chat manager
+manager = GroupChatManager(
+    groupchat=groupchat,
+    llm_config={"config_list": config_list}
+)
+
+# Start the conversation
+user_proxy.initiate_chat(
+    manager,
+    message="""I need to build a web scraper in Python that collects product information from an e-commerce website.
+The scraper should:
+1. Extract product names, prices, ratings, and descriptions
+2. Store the data in a CSV file
+3. Be able to handle pagination
+4. Respect the website's robots.txt and rate limits
+Help me build this application step by step."""
+)
+</pre>
+            </div>
+            
+            <div class="example-notes">
+                <h4>Key Points</h4>
+                <ul>
+                    <li>AutoGen enables dynamic conversations between multiple agents with specialized roles.</li>
+                    <li>The GroupChat framework manages turn-taking and facilitates agent collaboration.</li>
+                    <li>Each agent has a distinct system message that guides its behavior and expertise.</li>
+                    <li>The UserProxyAgent acts as an interface between the human user and the agent group.</li>
+                    <li>The GroupChatManager orchestrates the conversation flow and ensures productive collaboration.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="example-footer">
+            <h4>Related Resources</h4>
+            <ul class="resources-list">
+                <li><a href="https://microsoft.github.io/autogen/" target="_blank">AutoGen Documentation</a></li>
+                <li><a href="frameworks.html#autogen">AutoGen Framework Guide</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</section>
+
+<footer>
+<div class="container">
+    <p>AI Agent Development Guide | Created to help developers build powerful AI solutions</p>
+</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='white'/%3E%3Cpath d='M32 8 C20 8,12 20,12 32 C12 44,20 56,32 56 C44 56,52 44,52 32 C52 20,44 8,32 8 Z' fill='%234F46E5'/%3E%3Cpath d='M32 16 L32 48' stroke='%2310B981' stroke-width='4'/%3E%3Cpath d='M24 24 L40 24' stroke='%2310B981' stroke-width='4'/%3E%3Cpath d='M24 40 L40 40' stroke='%2310B981' stroke-width='4'/%3E%3C/svg%3E">
+    <title>AI Agent Frameworks Comparison</title>
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-dark: #4338CA;
+            --secondary: #10B981;
+            --dark: #1F2937;
+            --light: #F9FAFB;
+            --gray: #6B7280;
+            --light-gray: #E5E7EB;
+            --code-bg: #2D3748;
+            --code-text: #E2E8F0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        nav {
+            background-color: var(--primary-dark);
+            padding: 1rem 0;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        nav li {
+            margin: 0 1rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .page-title {
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .page-title h1 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .page-title p {
+            color: var(--gray);
+            margin-top: 0;
+        }
+
+        .content-section {
+            padding: 2rem 0;
+        }
+        
+        .section-title {
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .comparison-table th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background-color: var(--light);
+        }
+        
+        .rating {
+            display: flex;
+        }
+        
+        .rating-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 4px;
+            background-color: var(--light-gray);
+        }
+        
+        .rating-dot.filled {
+            background-color: var(--secondary);
+        }
+        
+        .framework-card {
+            background-color: white;
+            border-radius: 8px;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .framework-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .framework-header h3 {
+            margin: 0;
+        }
+        
+        .tag {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .framework-content {
+            padding: 1.5rem;
+        }
+        
+        .pros-cons {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .pros, 
+        .cons {
+            flex: 1;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        
+        .pros {
+            background-color: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .cons {
+            background-color: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #EF4444;
+        }
+        
+        .pros h4, 
+        .cons h4 {
+            margin-top: 0;
+        }
+        
+        .pros h4 {
+            color: var(--secondary);
+        }
+        
+        .cons h4 {
+            color: #EF4444;
+        }
+        
+        .pros ul, 
+        .cons ul {
+            margin-bottom: 0;
+        }
+        
+        .use-cases-section {
+            margin-top: 1.5rem;
+        }
+        
+        .use-cases {
+            background-color: #F3F4F6;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        
+        .use-cases h4 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+        
+        .framework-footer {
+            background-color: #F3F4F6;
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #E5E7EB;
+        }
+        
+        .resources-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .resources-list li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .resources-list a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .resources-list a:hover {
+            text-decoration: underline;
+        }
+        
+        .decision-guide {
+            margin-top: 3rem;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .decision-flow {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: #F3F4F6;
+            border-radius: 8px;
+        }
+        
+        .decision-flow h4 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+        
+        .decision-step {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            border-left: 3px solid var(--primary);
+        }
+        
+        .decision-step:last-child {
+            margin-bottom: 0;
+        }
+        
+        .decision-step h5 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        footer p {
+            margin: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .pros-cons {
+                flex-direction: column;
+            }
+            
+            .comparison-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>AI Agent Development Guide</h1>
+            <p>Learn to build powerful AI agents for specific tasks</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="introduction.html">Introduction</a></li>
+                <li><a href="frameworks.html">Frameworks</a></li>
+                <li><a href="code-examples.html">Code Examples</a></li>
+                <li><a href="tutorials.html">Tutorials</a></li>
+                <li><a href="advanced-features.html">Advanced Features</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="page-title">
+        <div class="container">
+            <h1>AI Agent Frameworks Comparison</h1>
+            <p>Choose the right framework for your AI agent development needs</p>
+        </div>
+    </div>
+    
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Frameworks at a Glance</h2>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Framework</th>
+                        <th>Ease of Use</th>
+                        <th>Flexibility</th>
+                        <th>Community</th>
+                        <th>Documentation</th>
+                        <th>Multi-Agent Support</th>
+                        <th>Tool Integration</th>
+                        <th>Best For</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>LangChain</strong></td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot"></div>
+                                <div class="rating-dot"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot"></div>
+                                <div class="rating-dot"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                            </div>
+                        </td>
+                        <td>General-purpose applications, RAG, tool integration</td>
+                    </tr>
+                    <tr>
+                        <td><strong>AutoGen</strong></td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot"></div>
+                                <div class="rating-dot"></div>
+                                <div class="rating-dot"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot"></div>
+                                <div class="rating-dot"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot"></div>
+                                <div class="rating-dot"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot"></div>
+                                <div class="rating-dot"></div>
+                            </div>
+                        </td>
+                        <td>Multi-agent conversations, collaborative tasks</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LlamaIndex</strong></td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot"></div>
+                                <div class="rating-dot"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot"></div>
+                                <div class="rating-dot"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot"></div>
+                                <div class="rating-dot"></div>
+                                <div class="rating-dot"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot"></div>
+                                <div class="rating-dot"></div>
+                            </div>
+                        </td>
+                        <td>RAG applications, knowledge bases, document Q&A</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CrewAI</strong></td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot"></div>
+                                <div class="rating-dot"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot"></div>
+                                <div class="rating-dot"></div>
+                                <div class="rating-dot"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot"></div>
+                                <div class="rating-dot"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot"></div>
+                                <div class="rating-dot"></div>
+                            </div>
+                        </td>
+                        <td>Role-based multi-agent systems, collaborative task solving</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Direct API Use</strong></td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot"></div>
+                                <div class="rating-dot"></div>
+                                <div class="rating-dot"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot"></div>
+                                <div class="rating-dot"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot"></div>
+                                <div class="rating-dot"></div>
+                                <div class="rating-dot"></div>
+                                <div class="rating-dot"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot filled"></div>
+                                <div class="rating-dot"></div>
+                                <div class="rating-dot"></div>
+                                <div class="rating-dot"></div>
+                            </div>
+                        </td>
+                        <td>Simple applications, maximum control, specialized needs</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title" id="langchain">LangChain</h2>
+            
+            <div class="framework-card">
+                <div class="framework-header">
+                    <h3>LangChain Framework</h3>
+                    <span class="tag">Most Popular</span>
+                </div>
+                
+                <div class="framework-content">
+                    <p>
+                        LangChain is a comprehensive framework designed to build applications powered by language models. It provides an extensive collection of components for working with LLMs, including chains, agents, memory systems, and tool integration, making it one of the most flexible and widely-used frameworks for AI agent development.
+                    </p>
+                    
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <h4>Strengths</h4>
+                            <ul>
+                                <li>Extremely flexible with modular components</li>
+                                <li>Large, active community and ecosystem</li>
+                                <li>Extensive integration options (100+ tools and services)</li>
+                                <li>Support for multiple languages (Python, JavaScript/TypeScript)</li>
+                                <li>First-class support for most major LLM providers</li>
+                                <li>Advanced RAG capabilities</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="cons">
+                            <h4>Limitations</h4>
+                            <ul>
+                                <li>Steeper learning curve due to extensive API</li>
+                                <li>Documentation can be fragmented across versions</li>
+                                <li>Multi-agent orchestration not as streamlined as specialized frameworks</li>
+                                <li>API changes frequently, causing potential compatibility issues</li>
+                                <li>Can be overkill for simple applications</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="use-cases-section">
+                        <div class="use-cases">
+                            <h4>Ideal Use Cases</h4>
+                            <ul>
+                                <li>General-purpose AI applications requiring flexibility</li>
+                                <li>Retrieval-augmented generation (RAG) systems</li>
+                                <li>Projects needing extensive tool integrations</li>
+                                <li>Complex agents with custom reasoning steps</li>
+                                <li>Production-grade applications with evolving requirements</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="framework-footer">
+                    <h4>Resources</h4>
+                    <ul class="resources-list">
+                        <li><a href="code-examples.html#basic">Basic LangChain Agent Example</a></li>
+                        <li><a href="code-examples.html#tools">Tool-Using Agent with LangChain</a></li>
+                        <li><a href="code-examples.html#rag">RAG Implementation with LangChain</a></li>
+                        <li><a href="https://python.langchain.com/docs/get_started/introduction" target="_blank">Official LangChain Documentation</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title" id="autogen">AutoGen</h2>
+            
+            <div class="framework-card">
+                <div class="framework-header">
+                    <h3>AutoGen Framework</h3>
+                    <span class="tag">Multi-Agent Focused</span>
+                </div>
+                
+                <div class="framework-content">
+                    <p>
+                        AutoGen is a framework developed by Microsoft Research that specializes in building conversational multi-agent systems. It enables the creation of customizable, conversational agents that can work together to solve complex tasks through dynamic conversation flows and collaborative problem-solving.
+                    </p>
+                    
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <h4>Strengths</h4>
+                            <ul>
+                                <li>Exceptional multi-agent conversation capabilities</li>
+                                <li>Strong support for agent collaboration patterns</li>
+                                <li>Built-in mechanisms for agent conversations and feedback loops</li>
+                                <li>Good integration with code execution environments</li>
+                                <li>Flexible message handling and conversation control</li>
+                                <li>Backed by Microsoft Research</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="cons">
+                            <h4>Limitations</h4>
+                            <ul>
+                                <li>Steeper learning curve compared to simpler frameworks</li>
+                                <li>Less extensive documentation compared to LangChain</li>
+                                <li>Fewer built-in integrations with external services</li>
+                                <li>Relatively newer with smaller community</li>
+                                <li>RAG capabilities not as mature as other frameworks</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="use-cases-section">
+                        <div class="use-cases">
+                            <h4>Ideal Use Cases</h4>
+                            <ul>
+                                <li>Complex multi-agent systems with specialized roles</li>
+                                <li>Applications requiring conversational problem-solving</li>
+                                <li>Collaborative coding tasks with multiple experts</li>
+                                <li>Systems needing agent-to-agent communication</li>
+                                <li>Research projects exploring agent collaboration</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="framework-footer">
+                    <h4>Resources</h4>
+                    <ul class="resources-list">
+                        <li><a href="code-examples.html#multi-agent">AutoGen Multi-Agent Conversation Example</a></li>
+                        <li><a href="https://microsoft.github.io/autogen/" target="_blank">Official AutoGen Documentation</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title" id="llamaindex">LlamaIndex</h2>
+            
+            <div class="framework-card">
+                <div class="framework-header">
+                    <h3>LlamaIndex Framework</h3>
+                    <span class="tag">RAG Specialist</span>
+                </div>
+                
+                <div class="framework-content">
+                    <p>
+                        LlamaIndex (formerly GPT Index) is a data framework for LLM applications to ingest, structure, and access private or domain-specific data. It specializes in retrieval-augmented generation (RAG) use cases, making it an excellent choice for applications that need to ground LLM responses in specific data sources.
+                    </p>
+                    
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <h4>Strengths</h4>
+                            <ul>
+                                <li>First-class support for data ingestion and indexing</li>
+                                <li>Advanced RAG architectures and optimizations</li>
+                                <li>Easy-to-use data connectors for many data sources</li>
+                                <li>Low-level controls for retrieval customization</li>
+                                <li>Good documentation with tutorials and examples</li>
+                                <li>Relatively simple API for common RAG patterns</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="cons">
+                            <h4>Limitations</h4>
+                            <ul>
+                                <li>Less focused on general agent capabilities</li>
+                                <li>Limited multi-agent orchestration features</li>
+                                <li>Smaller community compared to LangChain</li>
+                                <li>Fewer tool integrations outside of data connectors</li>
+                                <li>Not as flexible for non-RAG use cases</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="use-cases-section">
+                        <div class="use-cases">
+                            <h4>Ideal Use Cases</h4>
+                            <ul>
+                                <li>Document-based question answering systems</li>
+                                <li>Knowledge bases and information retrieval</li>
+                                <li>Applications requiring complex document processing</li>
+                                <li>Semantic search implementations</li>
+								<li>Data-intensive applications needing advanced RAG capabilities</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="framework-footer">
+                    <h4>Resources</h4>
+                    <ul class="resources-list">
+                        <li><a href="code-examples.html#llamaindex-rag">LlamaIndex RAG Example</a></li>
+                        <li><a href="code-examples.html#advanced-rag">Advanced RAG with LlamaIndex</a></li>
+                        <li><a href="https://docs.llamaindex.ai/" target="_blank">Official LlamaIndex Documentation</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title" id="crewai">CrewAI</h2>
+            
+            <div class="framework-card">
+                <div class="framework-header">
+                    <h3>CrewAI Framework</h3>
+                    <span class="tag">Role-Based Collaboration</span>
+                </div>
+                
+                <div class="framework-content">
+                    <p>
+                        CrewAI is a framework specifically designed for orchestrating role-based autonomous AI agents. It provides a structured approach to creating multi-agent systems where each agent has a specific role, goal, and capabilities, allowing them to collaborate effectively on complex tasks.
+                    </p>
+                    
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <h4>Strengths</h4>
+                            <ul>
+                                <li>Intuitive role-based agent design philosophy</li>
+                                <li>Built-in patterns for collaborative workflows</li>
+                                <li>Good abstractions for complex multi-agent orchestration</li>
+                                <li>Simple API for defining agent roles and tasks</li>
+                                <li>Works well with various LLM providers</li>
+                                <li>Clean execution traces for debugging</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="cons">
+                            <h4>Limitations</h4>
+                            <ul>
+                                <li>Smaller community and ecosystem compared to established frameworks</li>
+                                <li>More limited tool integration capabilities out-of-the-box</li>
+                                <li>Less extensive documentation and examples</li>
+                                <li>Newer framework still evolving rapidly</li>
+                                <li>Not as focused on RAG or complex knowledge retrieval</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="use-cases-section">
+                        <div class="use-cases">
+                            <h4>Ideal Use Cases</h4>
+                            <ul>
+                                <li>Applications requiring specialized agent roles and expertise</li>
+                                <li>Business workflows with sequential or collaborative steps</li>
+                                <li>Systems that mimic human organizational structures</li>
+                                <li>Complex task decomposition and delegation</li>
+                                <li>Projects that benefit from role-based reasoning</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="framework-footer">
+                    <h4>Resources</h4>
+                    <ul class="resources-list">
+                        <li><a href="code-examples.html#crewai">CrewAI Collaborative Agents Example</a></li>
+                        <li><a href="code-examples.html#role-based">Role-Based Task Solving with CrewAI</a></li>
+                        <li><a href="https://github.com/joaomdmoura/crewAI" target="_blank">CrewAI GitHub Repository</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title" id="direct-api">Direct API Use</h2>
+            
+            <div class="framework-card">
+                <div class="framework-header">
+                    <h3>Direct LLM API Integration</h3>
+                    <span class="tag">Maximum Control</span>
+                </div>
+                
+                <div class="framework-content">
+                    <p>
+                        Building AI agents by directly integrating with LLM provider APIs (like OpenAI, Anthropic, or others) without using a specialized framework gives you maximum control and flexibility. This approach involves implementing your own agent architecture, tool integration, and reasoning patterns from scratch.
+                    </p>
+                    
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <h4>Strengths</h4>
+                            <ul>
+                                <li>Complete control over every aspect of the implementation</li>
+                                <li>No dependencies on third-party frameworks</li>
+                                <li>Potentially more efficient with less overhead</li>
+                                <li>Freedom to implement custom agent architectures</li>
+                                <li>Easier to understand the entire codebase</li>
+                                <li>Directly leverage LLM provider's latest features</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="cons">
+                            <h4>Limitations</h4>
+                            <ul>
+                                <li>Requires significantly more implementation effort</li>
+                                <li>Need to build your own abstractions and patterns</li>
+                                <li>Must implement tool integration from scratch</li>
+                                <li>No community-built components to leverage</li>
+                                <li>Higher maintenance burden for evolving requirements</li>
+                                <li>Risk of reinventing solutions to common problems</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="use-cases-section">
+                        <div class="use-cases">
+                            <h4>Ideal Use Cases</h4>
+                            <ul>
+                                <li>Simple, focused applications with specific requirements</li>
+                                <li>Projects requiring unique agent architectures</li>
+                                <li>Cases where framework overhead isn't justified</li>
+                                <li>Applications with unusual or specialized integration needs</li>
+                                <li>Learning projects to understand agent fundamentals</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="framework-footer">
+                    <h4>Resources</h4>
+                    <ul class="resources-list">
+                        <li><a href="code-examples.html#direct-api">Basic Agent with Direct API Integration</a></li>
+                        <li><a href="code-examples.html#custom-agent">Custom Agent Architecture Example</a></li>
+                        <li><a href="https://platform.openai.com/docs/api-reference" target="_blank">OpenAI API Documentation</a></li>
+                        <li><a href="https://docs.anthropic.com/claude/reference" target="_blank">Anthropic Claude API Documentation</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title" id="decision-guide">Framework Selection Guide</h2>
+            
+            <div class="decision-guide">
+                <p>Choosing the right framework for your AI agent project depends on several factors, including your specific requirements, use case, development experience, and project complexity. The guide below will help you navigate the decision process.</p>
+                
+                <div class="decision-flow">
+                    <h4>Decision Flow for Framework Selection</h4>
+                    
+                    <div class="decision-step">
+                        <h5>Step 1: Define Your Primary Use Case</h5>
+                        <p>Start by clearly defining what your AI agent needs to accomplish:</p>
+                        <ul>
+                            <li><strong>Document interaction and knowledge retrieval:</strong> LlamaIndex excels at RAG applications.</li>
+                            <li><strong>Complex multi-agent collaboration:</strong> AutoGen or CrewAI would be most suitable.</li>
+                            <li><strong>Role-based agent teams:</strong> CrewAI offers specialized support for this pattern.</li>
+                            <li><strong>General-purpose agent with tools:</strong> LangChain provides comprehensive capabilities.</li>
+                            <li><strong>Simple, focused application:</strong> Direct API integration might be sufficient.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="decision-step">
+                        <h5>Step 2: Consider Your Development Constraints</h5>
+                        <p>Evaluate your team's expertise and project timelines:</p>
+                        <ul>
+                            <li><strong>Need for rapid development:</strong> LangChain or LlamaIndex offer many pre-built components.</li>
+                            <li><strong>Learning curve tolerance:</strong> Direct API is simplest to understand but requires more code; AutoGen has a steeper initial learning curve.</li>
+                            <li><strong>Maintenance requirements:</strong> Frameworks provide long-term benefits for complex applications.</li>
+                            <li><strong>Team expertise:</strong> Match the framework to your team's existing knowledge.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="decision-step">
+                        <h5>Step 3: Evaluate Technical Requirements</h5>
+                        <p>Consider the technical aspects of your project:</p>
+                        <ul>
+                            <li><strong>Need for advanced RAG:</strong> LlamaIndex or LangChain provide sophisticated retrieval capabilities.</li>
+                            <li><strong>Complex tool integration:</strong> LangChain offers the most extensive tool ecosystem.</li>
+                            <li><strong>Multiple LLM providers:</strong> All frameworks support multiple providers, but with varying levels of integration.</li>
+                            <li><strong>Performance considerations:</strong> Direct API gives you maximum control over optimization.</li>
+                            <li><strong>Scalability needs:</strong> Consider how the framework handles increasing complexity and load.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="decision-step">
+                        <h5>Step 4: Consider Future Expansion</h5>
+                        <p>Think about how your application might evolve:</p>
+                        <ul>
+                            <li><strong>Expanding feature set:</strong> More comprehensive frameworks like LangChain may better support growth.</li>
+                            <li><strong>Changing requirements:</strong> Evaluate how flexible each framework is for pivoting.</li>
+                            <li><strong>Community support:</strong> Larger communities (LangChain, LlamaIndex) provide more resources as you scale.</li>
+                            <li><strong>Integration with existing systems:</strong> Consider which framework best aligns with your infrastructure.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3 style="margin-top: 2rem;">Framework Selection Recommendations</h3>
+                
+                <div style="margin-top: 1.5rem;">
+                    <h4>Choose LangChain if:</h4>
+                    <ul>
+                        <li>You need a flexible, general-purpose framework with extensive capabilities</li>
+                        <li>Your application requires integration with many external tools and services</li>
+                        <li>You value a large ecosystem and community support</li>
+                        <li>You're building a production application that will evolve over time</li>
+                    </ul>
+                </div>
+                
+                <div style="margin-top: 1.5rem;">
+                    <h4>Choose AutoGen if:</h4>
+                    <ul>
+                        <li>Your primary focus is on multi-agent conversation and collaboration</li>
+                        <li>You need sophisticated agent-to-agent communication patterns</li>
+                        <li>You're implementing systems where agents need to critique and improve each other's work</li>
+                        <li>Your application involves complex problem-solving through collaborative dialogue</li>
+                    </ul>
+                </div>
+                
+                <div style="margin-top: 1.5rem;">
+                    <h4>Choose LlamaIndex if:</h4>
+                    <ul>
+                        <li>Your application is primarily focused on data retrieval and RAG</li>
+                        <li>You need advanced document processing and indexing capabilities</li>
+                        <li>You're building a knowledge base or question-answering system over documents</li>
+                        <li>You require specialized retrieval optimizations for accuracy and relevance</li>
+                    </ul>
+                </div>
+                
+                <div style="margin-top: 1.5rem;">
+                    <h4>Choose CrewAI if:</h4>
+                    <ul>
+                        <li>You need a system with clearly defined agent roles and responsibilities</li>
+                        <li>Your use case maps well to human organizational structures</li>
+                        <li>You want an intuitive framework specifically designed for agent collaboration</li>
+                        <li>You prefer a higher-level abstraction for multi-agent orchestration</li>
+                    </ul>
+                </div>
+                
+                <div style="margin-top: 1.5rem;">
+                    <h4>Choose Direct API Integration if:</h4>
+                    <ul>
+                        <li>You need complete control over implementation details</li>
+                        <li>Your application is relatively simple or highly specialized</li>
+                        <li>You want to minimize dependencies on third-party libraries</li>
+                        <li>You're building a learning project to understand agent fundamentals</li>
+                        <li>You have unique requirements not well-supported by existing frameworks</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>AI Agent Development Guide © 2025 | <a href="#" style="color: white;">Privacy Policy</a> | <a href="#" style="color: white;">Contact Us</a></p>
+        </div>
+    </footer>
+</body>
+</html>
