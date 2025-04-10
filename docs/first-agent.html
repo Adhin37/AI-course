@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='20' y='20' width='24' height='24' rx='4' fill='%234F46E5'/%3E%3Ccircle cx='12' cy='12' r='4' fill='%2310B981'/%3E%3Ccircle cx='52' cy='12' r='4' fill='%2310B981'/%3E%3Ccircle cx='12' cy='52' r='4' fill='%2310B981'/%3E%3Ccircle cx='52' cy='52' r='4' fill='%2310B981'/%3E%3Cline x1='16' y1='16' x2='20' y2='20' stroke='%2310B981' stroke-width='2'/%3E%3Cline x1='48' y1='16' x2='44' y2='20' stroke='%2310B981' stroke-width='2'/%3E%3Cline x1='16' y1='48' x2='20' y2='44' stroke='%2310B981' stroke-width='2'/%3E%3Cline x1='48' y1='48' x2='44' y2='44' stroke='%2310B981' stroke-width='2'/%3E%3Ccircle cx='32' cy='32' r='2' fill='%23F9FAFB'/%3E%3Ccircle cx='28' cy='28' r='1.5' fill='%23F9FAFB'/%3E%3Ccircle cx='36' cy='36' r='1.5' fill='%23F9FAFB'/%3E%3Ccircle cx='28' cy='36' r='1.5' fill='%23F9FAFB'/%3E%3Ccircle cx='36' cy='28' r='1.5' fill='%23F9FAFB'/%3E%3C/svg%3E">
+    <title>Build Your First Agent | AI Agent Development Guide</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .workflow-diagram {
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .workflow-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .workflow-step {
+            display: flex;
+            align-items: flex-start;
+            padding: 1.5rem;
+            background-color: var(--light);
+            border-radius: 8px;
+            position: relative;
+        }
+        
+        .workflow-step:not(:last-child):after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 1rem;
+            background-color: var(--gray);
+        }
+        
+        .step-icon {
+            background-color: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex-grow: 1;
+        }
+        
+        .step-content h3 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+        
+        .code-block {
+            background-color: var(--dark);
+            color: white;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        .code-block code {
+            display: block;
+            font-family: monospace;
+            white-space: pre;
+        }
+        
+        .tab-container {
+            margin: 1.5rem 0;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            border-bottom: 2px solid var(--light-gray);
+            margin-bottom: 1rem;
+        }
+        
+        .tab-button {
+            padding: 0.5rem 1rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--gray);
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+        }
+        
+        .tab-button.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 1rem;
+            background-color: var(--light);
+            border-radius: 4px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .callout {
+            background-color: rgba(79, 70, 229, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .callout h4 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+        
+        .callout.warning {
+            background-color: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid #F59E0B;
+        }
+        
+        .callout.warning h4 {
+            color: #D97706;
+        }
+        
+        .callout.tip {
+            background-color: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .callout.tip h4 {
+            color: var(--secondary);
+        }
+        
+        .output-example {
+            background-color: #F3F4F6;
+            border: 1px solid var(--light-gray);
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        
+        .try-it-yourself {
+            background-color: #ECFDF5;
+            border: 1px solid var(--secondary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        
+        .try-it-yourself h3 {
+            color: var(--secondary);
+            margin-top: 0;
+        }
+        
+        .checklist {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .checklist li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .checklist li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab functionality
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons and contents
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked button and corresponding content
+                    button.classList.add('active');
+                    const tabId = button.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Activate first tab by default
+            if(tabButtons.length > 0) {
+                tabButtons[0].click();
+            }
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>AI Agent Development Guide</h1>
+            <p>Learn to build powerful AI agents for specific tasks</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="introduction.html">Introduction</a></li>
+                <li><a href="frameworks.html">Frameworks</a></li>
+                <li><a href="environment-setup.html">Environment Setup</a></li>
+                <li><a href="code-examples.html">Code Examples</a></li>
+                <li><a href="tutorials.html">Tutorials</a></li>
+                <li><a href="resources.html">Resources</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="breadcrumbs">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#learning-path">Learning Path</a></li>
+                <li class="current">Build Your First Agent</li>
+            </ul>
+        </div>
+    </div>
+    
+    <section class="content-section">
+        <div class="content-container">
+            <div class="section-title">
+                <h1>Build Your First AI Agent</h1>
+                <p>A step-by-step tutorial to create your own task-specific AI agent</p>
+            </div>
+            
+            <div class="content-box">
+                <h2>Introduction</h2>
+                <p>Welcome to this hands-on tutorial where you'll build your first AI agent from scratch. We'll create a research assistant agent that can search for information, summarize content, and answer questions based on retrieved data.</p>
+                
+                <div class="callout">
+                    <h4>Prerequisites</h4>
+                    <p>Before starting this tutorial, make sure you've:</p>
+                    <ul>
+                        <li>Set up your development environment (Python 3.9+)</li>
+                        <li>Installed necessary packages (see <a href="environment-setup.html">Environment Setup</a>)</li>
+                        <li>Obtained API keys for your chosen LLM provider</li>
+                    </ul>
+                </div>
+                
+                <h3>What You'll Build</h3>
+                <p>In this tutorial, you'll create a <strong>Research Assistant Agent</strong> with the following capabilities:</p>
+                <ul>
+                    <li>Answer questions using step-by-step reasoning</li>
+                    <li>Access tools to search for information</li>
+                    <li>Summarize and extract key information from text</li>
+                    <li>Maintain context throughout a conversation</li>
+                </ul>
+                
+                <div class="workflow-diagram">
+                    <img src="/api/placeholder/800/300" alt="Research Assistant Agent Workflow">
+                    <p class="caption">Research Assistant Agent workflow diagram</p>
+                </div>
+            </div>
+            
+            <div class="content-box">
+                <h2>Agent Architecture Overview</h2>
+                
+                <p>Before we start coding, let's understand the architecture of our research assistant agent:</p>
+                
+                <div class="workflow-container">
+                    <div class="workflow-step">
+                        <div class="step-icon">📋</div>
+                        <div class="step-content">
+                            <h3>1. Agent Core</h3>
+                            <p>The core of our agent is powered by a Large Language Model (LLM) and uses the ReAct framework (Reasoning + Acting) to make decisions and process information.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="workflow-step">
+                        <div class="step-icon">🔧</div>
+                        <div class="step-content">
+                            <h3>2. Tool Integration</h3>
+                            <p>Our agent will have access to tools like web search, text processing, and mathematical calculations to help accomplish tasks.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="workflow-step">
+                        <div class="step-icon">🧠</div>
+                        <div class="step-content">
+                            <h3>3. Memory System</h3>
+                            <p>A memory component will allow the agent to maintain context throughout the conversation and refer back to previous exchanges.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="workflow-step">
+                        <div class="step-icon">💬</div>
+                        <div class="step-content">
+                            <h3>4. User Interface</h3>
+                            <p>A simple command-line interface to interact with the agent, asking questions and receiving responses.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="callout tip">
+                    <h4>Framework Selection</h4>
+                    <p>For this tutorial, we'll use <strong>LangChain</strong> as our framework because of its extensive documentation, active community, and flexibility. The concepts you learn can be applied to other frameworks like AutoGen or LlamaIndex as well.</p>
+                </div>
+            </div>
+            
+            <div class="content-box">
+                <h2>Step 1: Project Setup</h2>
+                
+                <p>Let's start by setting up our project structure. If you've followed the <a href="environment-setup.html">Environment Setup</a> guide, you should already have a virtual environment configured.</p>
+                
+                <h3>Create Project Files</h3>
+                <p>Create the following files in your project directory:</p>
+                
+                <div class="code-block">
+                    <code>
+research_agent/
+├── .env                  # Environment variables
+├── main.py               # Entry point
+├── agent.py              # Agent definition
+├── tools.py              # Custom tools
+├── memory.py             # Memory management
+└── prompts.py            # Prompt templates
+                    </code>
+                </div>
+                
+                <h3>Set Up Environment Variables</h3>
+                <p>Create a <code>.env</code> file with your API keys:</p>
+                
+                <div class="code-block">
+                    <code>
+# API Keys
+OPENAI_API_KEY=sk-your-openai-key-here
+# Alternatively, use Anthropic
+# ANTHROPIC_API_KEY=sk-ant-your-anthropic-key-here
+
+# Optional: Set default model
+DEFAULT_MODEL=gpt-4-turbo
+# For Anthropic: DEFAULT_MODEL=claude-3-opus-20240229
+                    </code>
+                </div>
+                
+                <div class="callout warning">
+                    <h4>Security Note</h4>
+                    <p>Never commit your .env file to version control. Add it to your .gitignore file to prevent accidental exposure of your API keys.</p>
+                </div>
+            </div>
+            
+            <div class="content-box">
+                <h2>Step 2: Define Custom Tools</h2>
+                
+                <p>Let's create tools for our agent to use. Open <code>tools.py</code> and add the following code:</p>
+                
+                <div class="tab-container">
+                    <div class="tab-buttons">
+                        <button class="tab-button" data-tab="tools-langchain">LangChain</button>
+                        <button class="tab-button" data-tab="tools-anthropic">Anthropic</button>
+                    </div>
+                    
+                    <div id="tools-langchain" class="tab-content">
+                        <div class="code-block">
+                            <code>
+from langchain.tools import tool
+import requests
+import json
+import math
+
+@tool
+def web_search(query: str) -> str:
+    """Search the web for information on a given query.
+    
+    Args:
+        query: The search query string
+        
+    Returns:
+        A string containing search results
+    """
+    # This is a mock implementation - in a real app, you would use a 
+    # search API like Google Custom Search, Bing, or DuckDuckGo
+    return f"Mock search results for: {query}\n1. Result 1 about {query}\n2. Result 2 about {query}"
+
+@tool
+def calculate(expression: str) -> str:
+    """Evaluate a mathematical expression.
+    
+    Args:
+        expression: The mathematical expression to evaluate
+        
+    Returns:
+        The result of the calculation
+    """
+    try:
+        # Using eval can be dangerous, but this is just for demonstration
+        # In production, use a safer alternative like numexpr
+        return str(eval(expression))
+    except Exception as e:
+        return f"Error calculating: {str(e)}"
+
+@tool
+def summarize_text(text: str, max_length: int = 100) -> str:
+    """Summarize a piece of text.
+    
+    Args:
+        text: The text to summarize
+        max_length: The maximum length of the summary in words
+        
+    Returns:
+        A summarized version of the text
+    """
+    # This would typically be implemented with an LLM API call
+    # Here we're just doing a simple truncation for demonstration
+    words = text.split()
+    if len(words) <= max_length:
+        return text
+    return " ".join(words[:max_length]) + "..."
+
+# Export the tools list for agent use
+tools_list = [web_search, calculate, summarize_text]
+                            </code>
+                        </div>
+                    </div>
+                    
+                    <div id="tools-anthropic" class="tab-content">
+                        <div class="code-block">
+                            <code>
+import requests
+import json
+import math
+from typing import Dict, Any
+
+# Define tool schemas for Anthropic's Tool Use API
+tools_definitions = [
+    {
+        "name": "web_search",
+        "description": "Search the web for information on a given query",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "query": {
+                    "type": "string",
+                    "description": "The search query string"
+                }
+            },
+            "required": ["query"]
+        }
+    },
+    {
+        "name": "calculate",
+        "description": "Evaluate a mathematical expression",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "expression": {
+                    "type": "string", 
+                    "description": "The mathematical expression to evaluate"
+                }
+            },
+            "required": ["expression"]
+        }
+    },
+    {
+        "name": "summarize_text",
+        "description": "Summarize a piece of text",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "text": {
+                    "type": "string",
+                    "description": "The text to summarize"
+                },
+                "max_length": {
+                    "type": "integer",
+                    "description": "The maximum length of the summary in words",
+                    "default": 100
+                }
+            },
+            "required": ["text"]
+        }
+    }
+]
+
+# Tool implementations
+def web_search(query: str) -> str:
+    """Search the web for information on a given query."""
+    # This is a mock implementation - in a real app, you would use a 
+    # search API like Google Custom Search, Bing, or DuckDuckGo
+    return f"Mock search results for: {query}\n1. Result 1 about {query}\n2. Result 2 about {query}"
+
+def calculate(expression: str) -> str:
+    """Evaluate a mathematical expression."""
+    try:
+        # Using eval can be dangerous, but this is just for demonstration
+        # In production, use a safer alternative like numexpr
+        return str(eval(expression))
+    except Exception as e:
+        return f"Error calculating: {str(e)}"
+
+def summarize_text(text: str, max_length: int = 100) -> str:
+    """Summarize a piece of text."""
+    # This would typically be implemented with an LLM API call
+    # Here we're just doing a simple truncation for demonstration
+    words = text.split()
+    if len(words) <= max_length:
+        return text
+    return " ".join(words[:max_length]) + "..."
+
+# Function to execute tools based on tool call from Anthropic API
+def execute_tool(tool_name: str, tool_params: Dict[str, Any]) -> str:
+    """Execute the specified tool with the given parameters."""
+    if tool_name == "web_search":
+        return web_search(tool_params["query"])
+    elif tool_name == "calculate":
+        return calculate(tool_params["expression"])
+    elif tool_name == "summarize_text":
+        max_length = tool_params.get("max_length", 100)
+        return summarize_text(tool_params["text"], max_length)
+    else:
+        return f"Tool {tool_name} not found"
+                            </code>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="callout">
+                    <h4>About Mock Tools</h4>
+                    <p>For this tutorial, we're using mock implementations of our tools. In a production application, you would integrate with real APIs:</p>
+                    <ul>
+                        <li>For web search: Google Custom Search API, Bing Search API, or SerpAPI</li>
+                        <li>For summarization: Use the same LLM with specific prompting</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="content-box">
+                <h2>Step 3: Set Up Memory</h2>
+                
+                <p>Next, let's implement memory functionality to enable our agent to remember previous interactions. Open <code>memory.py</code> and add the following code:</p>
+                
+                <div class="tab-container">
+                    <div class="tab-buttons">
+                        <button class="tab-button" data-tab="memory-langchain">LangChain</button>
+                        <button class="tab-button" data-tab="memory-anthropic">Anthropic</button>
+                    </div>
+                    
+                    <div id="memory-langchain" class="tab-content">
+                        <div class="code-block">
+                            <code>
+from langchain.memory import ConversationBufferMemory
+from langchain.schema import HumanMessage, AIMessage
+
+class AgentMemory:
+    def __init__(self):
+        self.memory = ConversationBufferMemory(return_messages=True)
+    
+    def add_user_message(self, message: str):
+        """Add a user message to memory."""
+        self.memory.chat_memory.add_user_message(message)
+    
+    def add_ai_message(self, message: str):
+        """Add an AI message to memory."""
+        self.memory.chat_memory.add_ai_message(message)
+    
+    def get_chat_history(self) -> str:
+        """Return chat history as a formatted string."""
+        messages = self.memory.chat_memory.messages
+        history = ""
+        
+        for message in messages:
+            if isinstance(message, HumanMessage):
+                history += f"Human: {message.content}\n"
+            elif isinstance(message, AIMessage):
+                history += f"AI: {message.content}\n"
+        
+        return history
+    
+    def clear(self):
+        """Clear the memory."""
+        self.memory.chat_memory.clear()
+                            </code>
+                        </div>
+                    </div>
+                    
+                    <div id="memory-anthropic" class="tab-content">
+                        <div class="code-block">
+                            <code>
+from typing import List, Dict, Any
+
+class Message:
+    def __init__(self, role: str, content: str):
+        self.role = role
+        self.content = content
+    
+    def to_dict(self) -> Dict[str, str]:
+        return {
+            "role": self.role, 
+            "content": content
+        }
+
+class AgentMemory:
+    def __init__(self):
+        self.messages: List[Dict[str, str]] = []
+    
+    def add_user_message(self, message: str):
+        """Add a user message to memory."""
+        self.messages.append({"role": "user", "content": message})
+    
+    def add_ai_message(self, message: str):
+        """Add an AI message to memory."""
+        self.messages.append({"role": "assistant", "content": message})
+    
+    def get_messages(self) -> List[Dict[str, str]]:
+        """Return all messages in the format required by Anthropic's API."""
+        return self.messages
+    
+    def get_chat_history(self) -> str:
+        """Return chat history as a formatted string."""
+        history = ""
+        
+        for message in self.messages:
+            if message["role"] == "user":
+                history += f"Human: {message['content']}\n"
+            elif message["role"] == "assistant":
+                history += f"AI: {message['content']}\n"
+        
+        return history
+    
+    def clear(self):
+        """Clear the memory."""
+        self.messages = []
+                            </code>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="callout tip">
+                    <h4>Memory Types</h4>
+                    <p>We're using a simple buffer memory that stores all conversation turns. For more advanced applications, consider:</p>
+                    <ul>
+                        <li><strong>Summary Memory</strong>: Summarizes past conversations to save context window space</li>
+                        <li><strong>Vector Memory</strong>: Stores embeddings of messages for semantic retrieval</li>
+                        <li><strong>Entity Memory</strong>: Tracks specific entities mentioned in the conversation</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="content-box">
+                <h2>Step 4: Create Prompt Templates</h2>
+                
+                <p>Now, let's define the prompt templates for our agent. Open <code>prompts.py</code> and add:</p>
+                
+                <div class="tab-container">
+                    <div class="tab-buttons">
+                        <button class="tab-button" data-tab="prompts-langchain">LangChain</button>
+                        <button class="tab-button" data-tab="prompts-anthropic">Anthropic</button>
+                    </div>
+                    
+                    <div id="prompts-langchain" class="tab-content">
+                        <div class="code-block">
+                            <code>
+from langchain.prompts import ChatPromptTemplate
+
+RESEARCH_AGENT_PROMPT = ChatPromptTemplate.from_template("""
+You are an advanced AI research assistant designed to help users find and analyze information.
+You have access to several tools that you can use to assist users:
+
+1. web_search: Search the web for up-to-date information
+2. calculate: Perform mathematical calculations
+3. summarize_text: Summarize long pieces of text
+
+When responding to user questions:
+1. Think step-by-step about what information is needed
+2. Use the appropriate tools to gather necessary information
+3. Provide comprehensive, accurate answers with appropriate detail
+4. Cite your sources when you provide information from searches
+
+Previous conversation history:
+{chat_history}
+
+Current User: {input}
+
+Remember to use tools when necessary to answer the user's question accurately.
+""")
+
+SYSTEM_PROMPT = """You are an advanced AI research assistant designed to help users find and analyze information.
+You have access to several tools that you can use to assist users.
+Always think step-by-step and use the appropriate tools when needed to provide accurate information."""
+</code>
+                        </div>
+                    </div>
+                    
+                    <div id="prompts-anthropic" class="tab-content">
+                        <div class="code-block">
+                            <code>
+# Define the system prompt for the research assistant agent
+SYSTEM_PROMPT = """You are an advanced AI research assistant designed to help users find and analyze information.
+You have access to several tools that you can use to assist users:
+
+1. web_search: Search the web for up-to-date information
+2. calculate: Perform mathematical calculations
+3. summarize_text: Summarize long pieces of text
+
+When responding to user questions:
+1. Think step-by-step about what information is needed
+2. Use the appropriate tools to gather necessary information
+3. Provide comprehensive, accurate answers with appropriate detail
+4. Cite your sources when you provide information from searches
+"""
+
+def format_chat_history(chat_history: str) -> str:
+    """Format chat history to be included in the prompt."""
+    if not chat_history:
+        return "No previous conversation."
+    
+    return f"""Previous conversation history:
+{chat_history}"""
+</code>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="callout tip">
+                    <h4>Prompt Engineering Tip</h4>
+                    <p>When designing prompts for agents with tools:</p>
+                    <ul>
+                        <li>Clearly define the agent's role and capabilities</li>
+                        <li>List available tools with clear descriptions</li>
+                        <li>Provide guidelines for when to use each tool</li>
+                        <li>Include examples of appropriate tool usage if possible</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="content-box">
+                <h2>Step 5: Implement the Agent</h2>
+                
+                <p>Now, let's create the main agent implementation. Open <code>agent.py</code> and add the following code:</p>
+                
+                <div class="tab-container">
+                    <div class="tab-buttons">
+                        <button class="tab-button" data-tab="agent-langchain">LangChain</button>
+                        <button class="tab-button" data-tab="agent-anthropic">Anthropic</button>
+                    </div>
+                    
+                    <div id="agent-langchain" class="tab-content">
+                        <div class="code-block">
+                            <code>
+import os
+from langchain.chains import create_structured_output_runnable
+from langchain.chat_models import ChatOpenAI
+from langchain.agents import create_tool_calling_agent, AgentExecutor
+from langchain.schema import HumanMessage
+
+from tools import tools_list
+from memory import AgentMemory
+from prompts import RESEARCH_AGENT_PROMPT, SYSTEM_PROMPT
+
+class ResearchAgent:
+    def __init__(self, model_name=None):
+        # Load API key from environment
+        api_key = os.getenv("OPENAI_API_KEY")
+        if not api_key:
+            raise ValueError("OPENAI_API_KEY not found in environment variables")
+        
+        # Set model name
+        self.model_name = model_name or os.getenv("DEFAULT_MODEL", "gpt-4-turbo")
+        
+        # Initialize LLM
+        self.llm = ChatOpenAI(
+            model=self.model_name,
+            temperature=0.2,
+            api_key=api_key
+        )
+        
+        # Initialize memory
+        self.memory = AgentMemory()
+        
+        # Initialize agent with tools
+        self.agent_executor = create_tool_calling_agent(
+            llm=self.llm,
+            tools=tools_list,
+            prompt=RESEARCH_AGENT_PROMPT,
+            system_message=SYSTEM_PROMPT
+        )
+        
+        self.executor = AgentExecutor(
+            agent=self.agent_executor,
+            tools=tools_list,
+            verbose=True
+        )
+    
+    async def process_query(self, query: str) -> str:
+        """Process a user query and return the agent's response."""
+        # Add user query to memory
+        self.memory.add_user_message(query)
+        
+        # Get chat history for context
+        chat_history = self.memory.get_chat_history()
+        
+        # Execute agent with the query and chat history
+        response = await self.executor.invoke({
+            "input": query,
+            "chat_history": chat_history
+        })
+        
+        # Extract response
+        output = response["output"]
+        
+        # Add agent response to memory
+        self.memory.add_ai_message(output)
+        
+        return output
+</code>
+                        </div>
+                    </div>
+                    
+                    <div id="agent-anthropic" class="tab-content">
+                        <div class="code-block">
+                            <code>
+import os
+import json
+import requests
+from typing import Dict, Any, List
+
+from tools import tools_definitions, execute_tool
+from memory import AgentMemory
+from prompts import SYSTEM_PROMPT, format_chat_history
+
+class ResearchAgent:
+    def __init__(self, model_name=None):
+        # Load API key from environment
+        self.api_key = os.getenv("ANTHROPIC_API_KEY")
+        if not self.api_key:
+            raise ValueError("ANTHROPIC_API_KEY not found in environment variables")
+        
+        # Set model name
+        self.model_name = model_name or os.getenv("DEFAULT_MODEL", "claude-3-opus-20240229")
+        
+        # Initialize memory
+        self.memory = AgentMemory()
+        
+        # API constants
+        self.api_url = "https://api.anthropic.com/v1/messages"
+        self.headers = {
+            "Content-Type": "application/json",
+            "x-api-key": self.api_key,
+            "anthropic-version": "2023-06-01"
+        }
+    
+    async def process_query(self, query: str) -> str:
+        """Process a user query and return the agent's response."""
+        # Add user query to memory
+        self.memory.add_user_message(query)
+        
+        # Get chat history
+        chat_history = self.memory.get_chat_history()
+        formatted_history = format_chat_history(chat_history)
+        
+        # Create message payload
+        messages = self.memory.get_messages()
+        
+        # Create API request data
+        request_data = {
+            "model": self.model_name,
+            "max_tokens": 1024,
+            "temperature": 0.2,
+            "system": SYSTEM_PROMPT + "\n\n" + formatted_history,
+            "messages": messages,
+            "tools": tools_definitions
+        }
+        
+        # Make initial API call
+        response = requests.post(
+            self.api_url, 
+            headers=self.headers,
+            json=request_data
+        )
+        
+        if response.status_code != 200:
+            return f"Error: {response.status_code} - {response.text}"
+        
+        response_data = response.json()
+        
+        # Check if the model wants to use tools
+        content = response_data["content"]
+        final_response = ""
+        
+        # Process any tool calls
+        if response_data.get("tool_calls"):
+            # Handle tool calls and create a follow-up message
+            tool_calls = response_data["tool_calls"]
+            tool_results = []
+            
+            for tool_call in tool_calls:
+                tool_name = tool_call["name"]
+                tool_params = json.loads(tool_call["input"])
+                tool_result = execute_tool(tool_name, tool_params)
+                tool_results.append({
+                    "role": "tool",
+                    "tool_call_id": tool_call["id"],
+                    "name": tool_name,
+                    "content": tool_result
+                })
+            
+            # Add tool responses to messages
+            messages.extend(tool_results)
+            
+            # Make a follow-up API call with tool results
+            follow_up_request = {
+                "model": self.model_name,
+                "max_tokens": 1024,
+                "temperature": 0.2,
+                "system": SYSTEM_PROMPT,
+                "messages": messages
+            }
+            
+            follow_up_response = requests.post(
+                self.api_url, 
+                headers=self.headers,
+                json=follow_up_request
+            )
+            
+            if follow_up_response.status_code != 200:
+                return f"Error in follow-up: {follow_up_response.status_code} - {follow_up_response.text}"
+            
+            follow_up_data = follow_up_response.json()
+            final_response = follow_up_data["content"][0]["text"]
+        else:
+            # If no tool calls, use the direct response
+            final_response = content[0]["text"]
+        
+        # Add agent response to memory
+        self.memory.add_ai_message(final_response)
+        
+        return final_response
+</code>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="callout">
+                    <h4>Model Selection</h4>
+                    <p>For this tutorial, we're using powerful language models:</p>
+                    <ul>
+                        <li><strong>GPT-4-turbo</strong>: Excellent reasoning and tool use capabilities (OpenAI)</li>
+                        <li><strong>Claude 3 Opus</strong>: Strong reasoning and follows instructions well (Anthropic)</li>
+                    </ul>
+                    <p>Depending on your requirements, you might want to use more cost-effective models like GPT-3.5-turbo or Claude 3 Sonnet for less complex tasks.</p>
+                </div>
+            </div>
+            
+            <div class="content-box">
+                <h2>Step 6: Create the Main Application</h2>
+                
+                <p>Finally, let's create our entry point script. Open <code>main.py</code> and add:</p>
+                
+                <div class="tab-container">
+                    <div class="tab-buttons">
+                        <button class="tab-button" data-tab="main-langchain">LangChain</button>
+                        <button class="tab-button" data-tab="main-anthropic">Anthropic</button>
+                    </div>
+                    
+                    <div id="main-langchain" class="tab-content">
+                        <div class="code-block">
+                            <code>
+import os
+import asyncio
+from dotenv import load_dotenv
+from agent import ResearchAgent
+
+# Load environment variables
+load_dotenv()
+
+async def main():
+    print("Starting Research Assistant Agent...")
+    
+    # Initialize the agent
+    agent = ResearchAgent()
+    
+    print("\nResearch Assistant is ready! Type 'exit' to quit.\n")
+    
+    while True:
+        # Get user input
+        user_input = input("You: ")
+        
+        # Exit condition
+        if user_input.lower() in ["exit", "quit", "bye"]:
+            print("Goodbye!")
+            break
+        
+        try:
+            # Process the query
+            response = await agent.process_query(user_input)
+            print(f"\nAssistant: {response}\n")
+        except Exception as e:
+            print(f"Error: {str(e)}")
+
+if __name__ == "__main__":
+    # Run the main function
+    asyncio.run(main())
+</code>
+                        </div>
+                    </div>
+                    
+                    <div id="main-anthropic" class="tab-content">
+                        <div class="code-block">
+                            <code>
+import os
+import asyncio
+from dotenv import load_dotenv
+from agent import ResearchAgent
+
+# Load environment variables
+load_dotenv()
+
+async def main():
+    print("Starting Research Assistant Agent...")
+    
+    # Initialize the agent
+    agent = ResearchAgent()
+    
+    print("\nResearch Assistant is ready! Type 'exit' to quit.\n")
+    
+    while True:
+        # Get user input
+        user_input = input("You: ")
+        
+        # Exit condition
+        if user_input.lower() in ["exit", "quit", "bye"]:
+            print("Goodbye!")
+            break
+        
+        try:
+            # Process the query
+            response = await agent.process_query(user_input)
+            print(f"\nAssistant: {response}\n")
+        except Exception as e:
+            print(f"Error: {str(e)}")
+
+if __name__ == "__main__":
+    # Run the main function
+    asyncio.run(main())
+</code>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="callout tip">
+                    <h4>Running the Application</h4>
+                    <p>To run your research assistant, navigate to your project directory and execute:</p>
+                    <div class="code-block">
+                        <code>python main.py</code>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-box">
+                <h2>Testing Your Agent</h2>
+                
+                <p>Let's test our research assistant with a few example queries to see it in action:</p>
+                
+                <div class="example-box">
+                    <h4>Example 1: Basic Information Query</h4>
+                    <div class="example-header">
+                        <h3>User Query</h3>
+                    </div>
+                    <div class="example-content">
+                        <p class="example-description">This tests the agent's ability to search for information:</p>
+                        <div class="code-block">
+                            <code>What are the key features of LangChain?</code>
+                        </div>
+                    </div>
+                    <div class="example-footer">
+                        <p>Expected behavior: The agent should use the web_search tool to find information about LangChain features and summarize the results.</p>
+                    </div>
+                </div>
+                
+                <div class="example-box">
+                    <h4>Example 2: Calculation Query</h4>
+                    <div class="example-header">
+                        <h3>User Query</h3>
+                    </div>
+                    <div class="example-content">
+                        <p class="example-description">This tests the agent's ability to perform calculations:</p>
+                        <div class="code-block">
+                            <code>If I invest $1000 with an annual interest rate of 7% compounded monthly, how much will I have after 10 years?</code>
+                        </div>
+                    </div>
+                    <div class="example-footer">
+                        <p>Expected behavior: The agent should use the calculate tool to compute the compound interest formula.</p>
+                    </div>
+                </div>
+                
+                <div class="example-box">
+                    <h4>Example 3: Multi-step Query</h4>
+                    <div class="example-header">
+                        <h3>User Query</h3>
+                    </div>
+                    <div class="example-content">
+                        <p class="example-description">This tests the agent's ability to combine multiple tools and reasoning:</p>
+                        <div class="code-block">
+                            <code>Find information about the latest developments in quantum computing and summarize it in 3 key points.</code>
+                        </div>
+                    </div>
+                    <div class="example-footer">
+                        <p>Expected behavior: The agent should use web_search to find information and then summarize_text to condense the information into key points.</p>
+                    </div>
+                </div>
+                
+                <div class="callout warning">
+                    <h4>Mock Tools Reminder</h4>
+                    <p>Remember that we're using mock implementations of our tools in this tutorial. In a real application, you would replace these with actual API calls to search engines, LLM summarization endpoints, etc.</p>
+                </div>
+            </div>
+            
+            <div class="content-box">
+                <h2>Next Steps and Enhancements</h2>
+                
+                <p>Now that you've built a basic research assistant agent, here are some ways to enhance it:</p>
+                
+                <h3>Improve Tool Integration</h3>
+                <ul>
+                    <li>Replace mock tools with real API integrations (Google Search, DuckDuckGo, etc.)</li>
+                    <li>Add more specialized tools like PDF processing, data analysis, or image generation</li>
+                    <li>Implement error handling and retry mechanisms for tool calls</li>
+                </ul>
+                
+                <h3>Enhance Memory and Context</h3>
+                <ul>
+                    <li>Implement vector-based memory for semantic search of past conversations</li>
+                    <li>Add knowledge graph capabilities to track entities and relationships</li>
+                    <li>Implement token-aware context management to handle long conversations</li>
+                </ul>
+                
+                <h3>User Experience Improvements</h3>
+                <ul>
+                    <li>Build a web interface using Flask or Streamlit</li>
+                    <li>Add progress indicators for long-running operations</li>
+                    <li>Implement voice input/output for a conversational interface</li>
+                </ul>
+                
+                <h3>Performance Optimization</h3>
+                <ul>
+                    <li>Implement caching for frequently requested information</li>
+                    <li>Add rate limiting and concurrency control for API calls</li>
+                    <li>Monitor and optimize token usage to reduce costs</li>
+                </ul>
+                
+                <div class="try-it-yourself">
+                    <h3>Try It Yourself</h3>
+                    <p>Challenge yourself to implement one of these enhancements to your research assistant agent:</p>
+                    <ul class="checklist">
+                        <li>Add a real search API integration</li>
+                        <li>Implement a simple web UI using Flask or Streamlit</li>
+                        <li>Add a new tool like weather information or news retrieval</li>
+                        <li>Enhance the prompt to improve the agent's reasoning capabilities</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="content-box">
+                <h2>Conclusion</h2>
+                
+                <p>Congratulations! You've successfully built your first AI agent - a research assistant that can search for information, perform calculations, and summarize text. Through this tutorial, you've learned:</p>
+                
+                <ul>
+                    <li>How to structure an AI agent project</li>
+                    <li>How to integrate tools with an LLM</li>
+                    <li>How to implement memory for context persistence</li>
+                    <li>How to craft effective prompts for agent behavior</li>
+                    <li>How to handle user input and agent responses</li>
+                </ul>
+                
+                <p>This foundation will serve you well as you continue your journey in AI agent development. As you build more complex agents, remember to focus on:</p>
+                
+                <ul>
+                    <li><strong>Clear task definition</strong>: Define exactly what your agent should and shouldn't do</li>
+                    <li><strong>Thoughtful prompt engineering</strong>: Guide the agent's behavior with well-crafted instructions</li>
+                    <li><strong>Robust tool integration</strong>: Give your agent the capabilities it needs to succeed</li>
+                    <li><strong>User-centric design</strong>: Create agents that solve real problems for users</li>
+                </ul>
+                
+                <p>Ready to continue your learning journey? Check out our <a href="advanced-features.html">Advanced Features</a> guide to take your agent development skills to the next level.</p>
+                
+                <a href="advanced-features.html" class="cta-button">Explore Advanced Features</a>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>AI Agent Development Guide | Created to help developers build powerful AI solutions</p>
+        </div>
+    </footer>
+</body>
+</html>
