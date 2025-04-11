@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='20' y='20' width='24' height='24' rx='4' fill='%234F46E5'/%3E%3Ccircle cx='12' cy='12' r='4' fill='%2310B981'/%3E%3Ccircle cx='52' cy='12' r='4' fill='%2310B981'/%3E%3Ccircle cx='12' cy='52' r='4' fill='%2310B981'/%3E%3Ccircle cx='52' cy='52' r='4' fill='%2310B981'/%3E%3Cline x1='16' y1='16' x2='20' y2='20' stroke='%2310B981' stroke-width='2'/%3E%3Cline x1='48' y1='16' x2='44' y2='20' stroke='%2310B981' stroke-width='2'/%3E%3Cline x1='16' y1='48' x2='20' y2='44' stroke='%2310B981' stroke-width='2'/%3E%3Cline x1='48' y1='48' x2='44' y2='44' stroke='%2310B981' stroke-width='2'/%3E%3Ccircle cx='32' cy='32' r='2' fill='%23F9FAFB'/%3E%3Ccircle cx='28' cy='28' r='1.5' fill='%23F9FAFB'/%3E%3Ccircle cx='36' cy='36' r='1.5' fill='%23F9FAFB'/%3E%3Ccircle cx='28' cy='36' r='1.5' fill='%23F9FAFB'/%3E%3Ccircle cx='36' cy='28' r='1.5' fill='%23F9FAFB'/%3E%3C/svg%3E">
+    <title>AI Model Providers</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .model-provider-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .model-provider-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+        
+        .provider-header {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+            background-color: var(--light);
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .provider-logo {
+            width: 60px;
+            height: 60px;
+            background-color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .provider-name {
+            flex-grow: 1;
+        }
+        
+        .provider-name h2 {
+            margin: 0;
+            color: var(--primary);
+        }
+        
+        .provider-name p {
+            margin: 0.25rem 0 0;
+            color: var(--gray);
+        }
+        
+        .provider-body {
+            padding: 1.5rem;
+        }
+        
+        .model-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--light-gray);
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+            padding-bottom: 1px;
+        }
+        
+        .model-tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            color: var(--gray);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        
+        .model-tab.active {
+            border-bottom-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .model-details {
+            margin-bottom: 1.5rem;
+        }
+        
+        .model-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            border: 1px solid var(--light-gray);
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+        
+        .model-header-row {
+            background-color: var(--light);
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+            font-weight: 600;
+        }
+        
+        .model-cell {
+            padding: 0.75rem 1rem;
+            border-right: 1px solid var(--light-gray);
+        }
+        
+        .model-cell:last-child {
+            border-right: none;
+        }
+        
+        .pricing-info {
+            background-color: var(--light);
+            border-radius: 6px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .pricing-info h4 {
+            margin-top: 0;
+            color: var(--primary-dark);
+        }
+        
+        .pricing-info p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .usage-examples {
+            margin-top: 1.5rem;
+        }
+                
+        .api-key-info {
+            background-color: #FFFBEB;
+            border-left: 4px solid #F59E0B;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 6px 6px 0;
+        }
+        
+        .api-key-info h4 {
+            margin-top: 0;
+            color: #B45309;
+        }
+        
+        .comparison-section {
+            margin-top: 3rem;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+        }
+        
+        .comparison-table th, 
+        .comparison-table td {
+            padding: 0.75rem;
+            border: 1px solid var(--light-gray);
+            text-align: left;
+        }
+        
+        .comparison-table th {
+            background-color: var(--light);
+            font-weight: 600;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background-color: #FAFAFA;
+        }
+        
+        .model-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background-color: var(--light);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .rating {
+            display: flex;
+            align-items: center;
+        }
+        
+        .rating-stars {
+            color: #F59E0B;
+            margin-right: 0.5rem;
+        }
+        
+        .local-models {
+            margin-top: 3rem;
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .local-model-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .local-model-card {
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: border-color 0.3s;
+        }
+        
+        .local-model-card:hover {
+            border-color: var(--primary);
+        }
+        
+        .local-model-card h3 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+        
+        .local-model-card .tag {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background-color: var(--light);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .model-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .model-cell {
+                border-right: none;
+                border-bottom: 1px solid var(--light-gray);
+            }
+            
+            .model-cell:last-child {
+                border-bottom: none;
+            }
+            
+            .provider-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .provider-logo {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>AI Model Providers</h1>
+            <p>Comparing foundation models for building intelligent AI agents</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#openai">OpenAI</a></li>
+                <li><a href="#anthropic">Anthropic</a></li>
+                <li><a href="#mistral">Mistral AI</a></li>
+                <li><a href="#local">Local Models</a></li>
+                <li><a href="#comparison">Comparison</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="breadcrumbs">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="current">Model Providers</li>
+            </ul>
+        </div>
+    </div>
+    
+    <section class="content-section">
+        <div class="container content-container">
+            <div class="content-box">
+                <h2>Choosing the Right Foundation Model</h2>
+                
+                <p>Foundation models (like Large Language Models or LLMs) form the core reasoning engine of any AI agent system. The model you choose will determine your agent's capabilities, performance, and cost structure. This guide explores the major model providers and helps you choose the right one for your specific needs.</p>
+                
+                <p>When selecting a foundation model for your AI agent, consider these key factors:</p>
+                
+                <ul>
+                    <li><strong>Capabilities:</strong> The model's reasoning abilities, knowledge, and specialized skills</li>
+                    <li><strong>Performance:</strong> Speed, reliability, and quality of outputs</li>
+                    <li><strong>Cost:</strong> Pricing structure and optimization opportunities</li>
+                    <li><strong>Integration:</strong> Ease of API access and compatibility with agent frameworks</li>
+                    <li><strong>Deployment Options:</strong> Cloud API access vs. local deployment</li>
+                    <li><strong>Compliance:</strong> Data privacy, terms of service, and content policies</li>
+                </ul>
+                
+                <p>Let's explore the leading model providers and their offerings for AI agent development.</p>
+            </div>
+            
+            <div class="model-provider-card" id="openai">
+                <div class="provider-header">
+                    <div class="provider-logo">🔄</div>
+                    <div class="provider-name">
+                        <h2>OpenAI</h2>
+                        <p>Provider of GPT models with strong reasoning capabilities</p>
+                    </div>
+                </div>
+                
+                <div class="provider-body">
+                    <p>OpenAI offers a range of powerful language models through their API, including the GPT series. These models excel at natural language understanding, code generation, and complex reasoning tasks, making them suitable for a wide range of agent applications.</p>
+                    
+                    <div class="model-tabs">
+                        <div class="model-tab active">GPT-4o</div>
+                        <div class="model-tab">GPT-4</div>
+                        <div class="model-tab">GPT-3.5 Turbo</div>
+                    </div>
+                    
+                    <div class="model-details">
+                        <h3>Available Models</h3>
+                        
+                        <div class="model-row model-header-row">
+                            <div class="model-cell">Model Name</div>
+                            <div class="model-cell">Context Window</div>
+                            <div class="model-cell">Best For</div>
+                        </div>
+                        
+                        <div class="model-row">
+                            <div class="model-cell">gpt-4o</div>
+                            <div class="model-cell">128K tokens</div>
+                            <div class="model-cell">General purpose, multimodal capabilities</div>
+                        </div>
+                        
+                        <div class="model-row">
+                            <div class="model-cell">gpt-4-turbo</div>
+                            <div class="model-cell">128K tokens</div>
+                            <div class="model-cell">Complex reasoning, planning, creative tasks</div>
+                        </div>
+                        
+                        <div class="model-row">
+                            <div class="model-cell">gpt-3.5-turbo</div>
+                            <div class="model-cell">16K tokens</div>
+                            <div class="model-cell">Cost-effective, faster responses</div>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-info">
+                        <h4>Pricing Structure</h4>
+                        <p>OpenAI models are priced based on token usage (both input and output tokens). GPT-4 models are more expensive but offer higher quality reasoning.</p>
+                        <p>Example rates (subject to change):</p>
+                        <ul>
+                            <li><strong>GPT-4o:</strong> $5.00 per million input tokens, $15.00 per million output tokens</li>
+                            <li><strong>GPT-3.5-turbo:</strong> $0.50 per million input tokens, $1.50 per million output tokens</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>Integration Example</h3>
+                    
+                    <div class="code-block">
+                        <pre>
+import openai
+
+# Initialize the client
+client = openai.OpenAI(api_key="your-api-key")
+
+# Create an agent function that can process inputs and generate responses
+def agent_process(user_input, context=None):
+    messages = []
+    
+    # System message to define agent behavior
+    messages.append({
+        "role": "system", 
+        "content": "You are an AI research assistant designed to help with information gathering."
+    })
+    
+    # Add conversation context if available
+    if context:
+        messages.extend(context)
+    
+    # Add user input
+    messages.append({"role": "user", "content": user_input})
+    
+    # Call the API
+    response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=messages,
+        temperature=0.7
+    )
+    
+    return response.choices[0].message.content
+
+# Example usage
+result = agent_process("Find recent research papers on climate change mitigation.")
+print(result)
+                        </pre>
+                    </div>
+                    
+                    <div class="api-key-info">
+                        <h4>API Access</h4>
+                        <p>To use OpenAI models in your agent application:</p>
+                        <ol>
+                            <li>Create an account at <a href="https://platform.openai.com">platform.openai.com</a></li>
+                            <li>Generate an API key in your account settings</li>
+                            <li>Set up billing information to access the models</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="model-provider-card" id="anthropic">
+                <div class="provider-header">
+                    <div class="provider-logo">🧠</div>
+                    <div class="provider-name">
+                        <h2>Anthropic</h2>
+                        <p>Provider of Claude models with strong safety alignment</p>
+                    </div>
+                </div>
+                
+                <div class="provider-body">
+                    <p>Anthropic's Claude models are designed with a focus on helpfulness, harmlessness, and honesty. They excel at nuanced reasoning, content generation, and understanding complex instructions, making them excellent for building safe and responsible AI agents.</p>
+                    
+                    <div class="model-tabs">
+                        <div class="model-tab active">Claude 3 Opus</div>
+                        <div class="model-tab">Claude 3 Sonnet</div>
+                        <div class="model-tab">Claude 3 Haiku</div>
+                    </div>
+                    
+                    <div class="model-details">
+                        <h3>Available Models</h3>
+                        
+                        <div class="model-row model-header-row">
+                            <div class="model-cell">Model Name</div>
+                            <div class="model-cell">Context Window</div>
+                            <div class="model-cell">Best For</div>
+                        </div>
+                        
+                        <div class="model-row">
+                            <div class="model-cell">claude-3-opus-20240229</div>
+                            <div class="model-cell">200K tokens</div>
+                            <div class="model-cell">High-complexity reasoning, sophisticated agents</div>
+                        </div>
+                        
+                        <div class="model-row">
+                            <div class="model-cell">claude-3-sonnet-20240229</div>
+                            <div class="model-cell">200K tokens</div>
+                            <div class="model-cell">Balance of quality and cost</div>
+                        </div>
+                        
+                        <div class="model-row">
+                            <div class="model-cell">claude-3-haiku-20240307</div>
+                            <div class="model-cell">200K tokens</div>
+                            <div class="model-cell">Faster responses, lower cost</div>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-info">
+                        <h4>Pricing Structure</h4>
+                        <p>Claude models are priced based on token usage (both input and output tokens).</p>
+                        <p>Example rates (subject to change):</p>
+                        <ul>
+                            <li><strong>Claude 3 Opus:</strong> $15.00 per million input tokens, $75.00 per million output tokens</li>
+                            <li><strong>Claude 3 Sonnet:</strong> $3.00 per million input tokens, $15.00 per million output tokens</li>
+                            <li><strong>Claude 3 Haiku:</strong> $0.25 per million input tokens, $1.25 per million output tokens</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>Integration Example</h3>
+                    
+                    <div class="code-block">
+                        <pre>
+import anthropic
+
+# Initialize the client
+client = anthropic.Anthropic(api_key="your-api-key")
+
+# Create an agent function that can process inputs and generate responses
+def agent_process(user_input, conversation_history=None):
+    # Prepare the messages
+    messages = []
+    
+    # Add conversation history if available
+    if conversation_history:
+        messages.extend(conversation_history)
+    
+    # Add the user's new message
+    messages.append({"role": "user", "content": user_input})
+    
+    # Call the API
+    response = client.messages.create(
+        model="claude-3-opus-20240229",
+        max_tokens=1000,
+        messages=messages,
+        temperature=0.7
+    )
+    
+    # Return the response
+    return response.content[0].text
+
+# Example usage
+result = agent_process("Analyze the potential impact of quantum computing on cryptography.")
+print(result)
+                        </pre>
+                    </div>
+                    
+                    <div class="api-key-info">
+                        <h4>API Access</h4>
+                        <p>To use Anthropic's Claude models in your agent application:</p>
+                        <ol>
+                            <li>Sign up at <a href="https://console.anthropic.com">console.anthropic.com</a></li>
+                            <li>Generate an API key from your account</li>
+                            <li>Set up billing information to access the models</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="model-provider-card" id="mistral">
+                <div class="provider-header">
+                    <div class="provider-logo">🌪️</div>
+                    <div class="provider-name">
+                        <h2>Mistral AI</h2>
+                        <p>Provider of efficient models with strong performance</p>
+                    </div>
+                </div>
+                
+                <div class="provider-body">
+                    <p>Mistral AI offers high-performance language models that strike a good balance between capabilities and efficiency. Their models work well for a wide range of agent tasks and are available both through their cloud API and for local deployment.</p>
+                    
+                    <div class="model-tabs">
+                        <div class="model-tab active">Mixtral</div>
+                        <div class="model-tab">Mistral Large</div>
+                        <div class="model-tab">Mistral Small</div>
+                    </div>
+                    
+                    <div class="model-details">
+                        <h3>Available Models</h3>
+                        
+                        <div class="model-row model-header-row">
+                            <div class="model-cell">Model Name</div>
+                            <div class="model-cell">Context Window</div>
+                            <div class="model-cell">Best For</div>
+                        </div>
+                        
+                        <div class="model-row">
+                            <div class="model-cell">mistral-large-latest</div>
+                            <div class="model-cell">32K tokens</div>
+                            <div class="model-cell">Complex reasoning, high performance tasks</div>
+                        </div>
+                        
+                        <div class="model-row">
+                            <div class="model-cell">mistral-medium-latest</div>
+                            <div class="model-cell">32K tokens</div>
+                            <div class="model-cell">Balance of quality and cost</div>
+                        </div>
+                        
+                        <div class="model-row">
+                            <div class="model-cell">mistral-small-latest</div>
+                            <div class="model-cell">32K tokens</div>
+                            <div class="model-cell">Cost-effective, everyday tasks</div>
+                        </div>
+                        
+                        <div class="model-row">
+                            <div class="model-cell">open-mixtral-8x7b</div>
+                            <div class="model-cell">32K tokens</div>
+                            <div class="model-cell">Open weight model, local deployment</div>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-info">
+                        <h4>Pricing Structure</h4>
+                        <p>Mistral AI models are priced based on token usage (both input and output tokens).</p>
+                        <p>Example rates (subject to change):</p>
+                        <ul>
+                            <li><strong>Mistral Large:</strong> $4.00 per million input tokens, $12.00 per million output tokens</li>
+                            <li><strong>Mistral Small:</strong> $0.20 per million input tokens, $0.60 per million output tokens</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>Integration Example</h3>
+                    
+                    <div class="code-block">
+                        <pre>
+import mistralai
+from mistralai.client import MistralClient
+from mistralai.models.chat_completion import ChatMessage
+
+# Initialize the client
+client = MistralClient(api_key="your-api-key")
+
+# Create an agent function that can process inputs and generate responses
+def agent_process(user_input, chat_history=None):
+    messages = []
+    
+    # System message to define agent behavior
+    messages.append(ChatMessage(
+        role="system",
+        content="You are an AI assistant that helps users with research and analysis."
+    ))
+    
+    # Add conversation history if available
+    if chat_history:
+        messages.extend(chat_history)
+    
+    # Add the user's message
+    messages.append(ChatMessage(role="user", content=user_input))
+    
+    # Call the API
+    response = client.chat(
+        model="mistral-large-latest",
+        messages=messages,
+        temperature=0.7,
+        max_tokens=1000
+    )
+    
+    # Return the response
+    return response.choices[0].message.content
+
+# Example usage
+result = agent_process("Explain the concept of transformers in machine learning.")
+print(result)
+                        </pre>
+                    </div>
+                    
+                    <div class="api-key-info">
+                        <h4>API Access</h4>
+                        <p>To use Mistral AI models in your agent application:</p>
+                        <ol>
+                            <li>Sign up at <a href="https://console.mistral.ai">console.mistral.ai</a></li>
+                            <li>Generate an API key from your account</li>
+                            <li>Set up billing information to access the models</li>
+                        </ol>
+                        <p>Additionally, many Mistral models are available for local deployment through frameworks like Ollama.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="local-models" id="local">
+                <h2>Local Model Deployment</h2>
+                
+                <p>For greater control over data privacy, reduced latency, or lower costs, you can deploy foundation models locally using tools like Ollama or LM Studio. These solutions allow you to run models directly on your own hardware.</p>
+                
+                <div class="local-model-grid">
+                    <div class="local-model-card">
+                        <h3>Ollama</h3>
+                        <div class="tag">Open Source</div>
+                        <div class="tag">Easy Setup</div>
+                        
+                        <p>Ollama provides an easy way to run open-weight models locally. It supports various models and offers a simple API compatible with many agent frameworks.</p>
+                        
+                        <p><strong>Supported Models:</strong> Llama 3, Mistral, Mixtral, Phi-3, and many others</p>
+                        
+                        <p><strong>Installation:</strong> <a href="https://ollama.com">https://ollama.com</a></p>
+                    </div>
+                    
+                    <div class="local-model-card">
+                        <h3>LM Studio</h3>
+                        <div class="tag">GUI Interface</div>
+                        <div class="tag">Model Library</div>
+                        
+                        <p>LM Studio offers a graphical interface for downloading, managing, and running language models locally. It includes a built-in chat interface and an API server.</p>
+                        
+                        <p><strong>Supported Models:</strong> Wide range of GGUF format models</p>
+                        
+                        <p><strong>Installation:</strong> <a href="https://lmstudio.ai">https://lmstudio.ai</a></p>
+                    </div>
+                    
+                    <div class="local-model-card">
+                        <h3>vLLM</h3>
+                        <div class="tag">High Performance</div>
+                        <div class="tag">Advanced Users</div>
+                        
+                        <p>vLLM is an open-source library for fast LLM inference and serving. It's more technical to set up but offers better performance for production deployments.</p>
+                        
+                        <p><strong>Supported Models:</strong> Llama, Mistral, Vicuna, and other open models</p>
+                        
+                        <p><strong>Installation:</strong> <a href="https://github.com/vllm-project/vllm">GitHub - vLLM</a></p>
+                    </div>
+                </div>
+                
+                <h3>Integration Example with Ollama</h3>
+                
+                <div class="code-block">
+                    <pre>
+import requests
+import json
+
+# Function to interact with a locally running Ollama model
+def ollama_agent(user_input, model_name="llama3", system_prompt=None):
+    # Define the API endpoint
+    url = "http://localhost:11434/api/chat"
+    
+    # Prepare the messages
+    messages = []
+    
+    # Add system prompt if provided
+    if system_prompt:
+        messages.append({
+            "role": "system",
+            "content": system_prompt
+        })
+    
+    # Add user message
+    messages.append({
+        "role": "user",
+        "content": user_input
+    })
+    
+    # Prepare the request payload
+    payload = {
+        "model": model_name,
+        "messages": messages,
+        "stream": False
+    }
+    
+    # Make the API request
+    response = requests.post(url, json=payload)
+    
+    # Parse and return the response
+    result = response.json()
+    return result["message"]["content"]
+
+# Example usage
+system_prompt = "You are an AI assistant that helps with coding tasks."
+result = ollama_agent("Write a Python function to calculate Fibonacci numbers.", 
+                     model_name="llama3", 
+                     system_prompt=system_prompt)
+print(result)
+                    </pre>
+                </div>
+            </div>
+            
+            <div class="comparison-section" id="comparison">
+                <h2>Model Comparison</h2>
+                
+                <p>When choosing a foundation model for your AI agent, it's important to compare different options across key dimensions. The table below summarizes the strengths and considerations for each provider.</p>
+                
+                <div class="comparison-table-wrapper">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>OpenAI (GPT)</th>
+                                <th>Anthropic (Claude)</th>
+                                <th>Mistral AI</th>
+                                <th>Local Models</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Reasoning Capability</td>
+                                <td>Excellent</td>
+                                <td>Excellent</td>
+                                <td>Very Good</td>
+                                <td>Good (varies by model)</td>
+                            </tr>
+                            <tr>
+                                <td>Context Window</td>
+                                <td>Up to 128K tokens</td>
+                                <td>Up to 200K tokens</td>
+                                <td>Up to 32K tokens</td>
+                                <td>Varies (8K-128K)</td>
+                            </tr>
+                            <tr>
+                                <td>Speed</td>
+                                <td>Fast</td>
+                                <td>Medium-Fast</td>
+                                <td>Fast</td>
+                                <td>Depends on hardware</td>
+                            </tr>
+                            <tr>
+                                <td>Cost</td>
+                                <td>$$-$$$</td>
+                                <td>$$-$$$</td>
+                                <td>$-$$</td>
+                                <td>$ (compute costs only)</td>
+                            </tr>
+                            <tr>
+                                <td>Data Privacy</td>
+                                <td>API-based</td>
+                                <td>API-based</td>
+                                <td>API & Local options</td>
+                                <td>Full control</td>
+                            </tr>
+                            <tr>
+                                <td>Multimodal</td>
+                                <td>Yes (GPT-4o)</td>
+                                <td>Yes (Claude 3)</td>
+                                <td>Limited</td>
+                                <td>Limited</td>
+                            </tr>
+                            <tr>
+                                <td>Best Use Case</td>
+                                <td>Versatile agents, complex tasks</td>
+                                <td>Thoughtful, nuanced responses</td>
+                                <td>Efficient, cost-effective agents</td>
+                                <td>Data-sensitive applications</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h3>Performance Considerations</h3>
+                
+                <p>When evaluating models for your agent application, consider these performance factors:</p>
+                
+                <ul>
+                    <li><strong>Latency:</strong> Response time is critical for interactive applications. API-based solutions add network latency, while local models depend on your hardware.</li>
+                    <li><strong>Throughput:</strong> How many requests your agent can handle simultaneously affects scaling capabilities.</li>
+                    <li><strong>Reliability:</strong> API services offer high availability but create external dependencies. Local deployments provide independence but require maintenance.</li>
+                </ul>
+                
+                <h3>Cost Optimization Strategies</h3>
+                
+                <div class="content-box">
+                    <h4>Tips for Reducing Model Costs</h4>
+                    
+                    <ol>
+                        <li><strong>Token Optimization:</strong> Minimize input tokens by carefully designing prompts and managing conversation context.</li>
+                        <li><strong>Model Selection:</strong> Use the most powerful models only when necessary. Route simpler tasks to smaller, cheaper models.</li>
+                        <li><strong>Caching:</strong> Store and reuse responses for common queries when appropriate.</li>
+                        <li><strong>Local Deployment:</strong> For high-volume applications, running open-weight models locally can significantly reduce costs.</li>
+                        <li><strong>Batching:</strong> Where possible, combine multiple requests into batches to improve efficiency.</li>
+                    </ol>
+                </div>
+                
+                <h3>Making the Right Choice</h3>
+                
+                <p>The best model choice depends on your specific requirements:</p>
+                
+                <div class="model-row">
+                    <div class="model-cell"><strong>Choose OpenAI if:</strong> You need cutting-edge capabilities, multimodal features, and strong reasoning for complex agent tasks.</div>
+                    <div class="model-cell"><strong>Choose Anthropic if:</strong> You prioritize safety, nuanced responses, and need a very large context window.</div>
+                    <div class="model-cell"><strong>Choose Mistral AI if:</strong> You want a good balance of performance and cost, or need both API and local deployment options.</div>
+                </div>
+                
+                <div class="api-key-info">
+                    <h4>Development Best Practice</h4>
+                    <p>Start your agent development with a flexible architecture that can switch between different model providers. This approach allows you to:</p>
+                    <ul>
+                        <li>Test multiple models to find the best fit for your use case</li>
+                        <li>Switch providers if pricing or policies change</li>
+                        <li>Implement fallback options for improved reliability</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="resources">
+        <div class="container">
+            <h2 class="section-title">Additional Resources</h2>
+            
+            <div class="resource-list">
+                <div class="resource-card">
+                    <h3>Documentation</h3>
+                    <ul>
+                        <li><a href="#">OpenAI API Documentation</a></li>
+                        <li><a href="#">Anthropic Claude API Guide</a></li>
+                        <li><a href="#">Mistral AI Platform Docs</a></li>
+                        <li><a href="#">Ollama User Guide</a></li>
+                    </ul>
+                </div>
+                
+                <div class="resource-card">
+                    <h3>Tutorials & Examples</h3>
+                    <ul>
+                        <li><a href="#">Building a Research Agent with Claude</a></li>
+                        <li><a href="#">Creating a Coding Assistant with GPT-4</a></li>
+                        <li><a href="#">Local LLM Deployment Guide</a></li>
+                        <li><a href="#">Fine-tuning Models for Specialized Agents</a></li>
+                    </ul>
+                </div>
+                
+                <div class="resource-card">
+                    <h3>Tools & Libraries</h3>
+                    <ul>
+                        <li><a href="#">LangChain Framework</a></li>
+                        <li><a href="#">LlamaIndex for Data Integration</a></li>
+                        <li><a href="#">AutoGen Multi-Agent Framework</a></li>
+                        <li><a href="#">CrewAI for Agent Collaboration</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 AI Agent Toolkit. All rights reserved.</p>
+            <p>This guide is for informational purposes only. Model capabilities and pricing are subject to change.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Simple tab functionality for model tabs
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabContainers = document.querySelectorAll('.model-tabs');
+            
+            tabContainers.forEach(container => {
+                const tabs = container.querySelectorAll('.model-tab');
+                
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', function() {
+                        // Remove active class from all tabs in this container
+                        container.querySelectorAll('.model-tab').forEach(t => {
+                            t.classList.remove('active');
+                        });
+                        
+                        // Add active class to clicked tab
+                        this.classList.add('active');
+                        
+                        // Here you would typically show/hide related content
+                        // This is a simplified version just for demo purposes
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

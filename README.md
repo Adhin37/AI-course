@@ -1,36 +1,68 @@
-# AI Agent Development Guide
+# AI Agent Building Guide
 
-A comprehensive guide for building AI agents using modern tools and frameworks. This project provides educational resources, tutorials, and code examples to help developers understand and implement AI agents for specific tasks.
+A comprehensive guide for building AI agents using modern tools and frameworks.
+
+## Project Overview
+
+This project provides educational resources, tutorials, and code examples to help developers understand and implement AI agents for specific tasks.  
+The content is organized as a set of HTML pages with a shared CSS stylesheet, offering a responsive design, modern UI, and code examples with explanations.
+
+## Getting Started
+
+To get started with building AI agents, follow the guide for setting up a development environment in the "environment-setup.html" page.  
+This guide will help you set up your environment and get ready to start building AI agents.
+
+You can view the live version of this guide at: [https://adhin37.github.io/AI-course/](https://adhin37.github.io/AI-course/)
+
+## GitHub Pages Hosting
+
+This project is hosted using GitHub Pages, which allows you to host websites directly from a GitHub repository.  
+The live site is automatically updated whenever changes are pushed to the main branch. This provides an easy way to share your documentation with others without needing a separate hosting service.
+
+To set up GitHub Pages for your own project:
+1. Go to your repository settings
+2. Scroll down to the "GitHub Pages" section
+3. Select the branch you want to deploy (usually main or master)
+4. Choose the folder (/ (root) or /docs)
+5. Click Save
+
+Your site will be available at `https://[username].github.io/[repository-name]/`
 
 ## Project Structure
 
-The project is organized as a set of HTML pages with a shared CSS stylesheet:
+The project is organized as follows:
 
-- `ai-agent-homepage.html` - Main landing page with an overview of AI agent development
-- `introduction.html` - Introduction to AI agents and their capabilities
-- `environment-setup.html` - Guide for setting up a development environment
-- `code-examples.html` - Collection of code examples for AI agent implementation
-- `style.css` - Shared stylesheet for consistent design across all pages
+- `docs/`: Contains all HTML and CSS files for the documentation
+  - `index.html`: Main landing page
+  - `introduction.html`: Introduction to AI agents
+  - `environment-setup.html`: Guide for setting up a development environment
+  - `first-agent.html`: Tutorial for building your first AI agent
+  - `frameworks.html`: Overview of AI agent frameworks
+  - `code-examples.html`: Code examples for common agent patterns
+  - `advanced-features.html`: Advanced features for AI agents including:
+    - Memory systems
+    - Chain-of-thought reasoning
+    - Tool integration
+    - Retrieval-augmented generation (RAG)
+    - Multi-agent systems
+    - Performance optimization
+  - `style.css`: Shared CSS stylesheet for all pages
 
 ## Features
 
-- **Comprehensive Learning Path**: Step-by-step guide from basics to advanced topics
-- **Code Examples**: Practical implementation examples with explanations
-- **Responsive Design**: Mobile-friendly layout that works on all devices
-- **Modern UI**: Clean, intuitive interface with consistent styling
-
-## Webpage
-
-[AI course](https://adhin37.github.io/AI-course/)
+- **Comprehensive Learning Path**: From basic concepts to advanced techniques
+- **Code Examples**: Practical, ready-to-use code snippets
+- **Responsive Design**: Optimized for both desktop and mobile viewing
+- **Modern UI**: Clean, intuitive interface with syntax highlighting for code
 
 ## CSS Structure
 
 The project uses a single consolidated CSS file (`style.css`) with the following key components:
 
-- **Color Variables**: Defined in `:root` for consistent theming
-- **Layout Components**: Container classes, navigation, and section styling
-- **Interactive Elements**: Buttons, cards, and hover effects
-- **Code Display**: Formatting for code blocks and examples
+- **Color Variables**: Consistent color scheme throughout the site
+- **Layout Components**: Flexible containers, grids, and responsive elements
+- **Interactive Elements**: Buttons, tabs, and navigation components
+- **Code Display**: Styled code blocks with proper formatting
 - **Responsive Design**: Media queries for different screen sizes
 
 ### CSS Variables
@@ -47,3 +79,13 @@ The project uses a single consolidated CSS file (`style.css`) with the following
     --code-bg: #2D3748;      /* Background for code blocks */
     --code-text: #E2E8F0;    /* Text color for code */
 }
+```
+
+## Contributing
+
+Contributions to improve the documentation or add new examples are welcome. Please feel free to submit pull requests or open issues to suggest improvements.
+
+## License
+
+This project is licensed under the Apache 2.0 License - a permissive license that allows you to freely use, modify, distribute, and sell your software based on this project, provided you include the required notices.  
+This license also provides an express grant of patent rights from contributors.
