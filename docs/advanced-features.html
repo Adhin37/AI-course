@@ -1,0 +1,1587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='20' y='20' width='24' height='24' rx='4' fill='%234F46E5'/%3E%3Ccircle cx='12' cy='12' r='4' fill='%2310B981'/%3E%3Ccircle cx='52' cy='12' r='4' fill='%2310B981'/%3E%3Ccircle cx='12' cy='52' r='4' fill='%2310B981'/%3E%3Ccircle cx='52' cy='52' r='4' fill='%2310B981'/%3E%3Cline x1='16' y1='16' x2='20' y2='20' stroke='%2310B981' stroke-width='2'/%3E%3Cline x1='48' y1='16' x2='44' y2='20' stroke='%2310B981' stroke-width='2'/%3E%3Cline x1='16' y1='48' x2='20' y2='44' stroke='%2310B981' stroke-width='2'/%3E%3Cline x1='48' y1='48' x2='44' y2='44' stroke='%2310B981' stroke-width='2'/%3E%3Ccircle cx='32' cy='32' r='2' fill='%23F9FAFB'/%3E%3Ccircle cx='28' cy='28' r='1.5' fill='%23F9FAFB'/%3E%3Ccircle cx='36' cy='36' r='1.5' fill='%23F9FAFB'/%3E%3Ccircle cx='28' cy='36' r='1.5' fill='%23F9FAFB'/%3E%3Ccircle cx='36' cy='28' r='1.5' fill='%23F9FAFB'/%3E%3C/svg%3E">
+    <title>Advanced AI Agent Features | AI Agent Development Guide</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-item {
+            background-color: var(--light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            background-color: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+        
+        .code-example {
+            background-color: var(--code-bg);
+            color: var(--code-text);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            white-space: pre;
+            display: block;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .implementation-steps {
+            counter-reset: step-counter;
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .implementation-steps li {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .implementation-steps li::before {
+            content: counter(step-counter);
+            counter-increment: step-counter;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .tip-box {
+            background-color: #E0F2FE;
+            border-left: 4px solid #0EA5E9;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .tip-box h4 {
+            color: #0369A1;
+            margin-top: 0;
+        }
+        
+        .warning-box {
+            background-color: #FEF2F2;
+            border-left: 4px solid #EF4444;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .warning-box h4 {
+            color: #B91C1C;
+            margin-top: 0;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        .comparison-table th {
+            background-color: var(--primary);
+            color: white;
+            text-align: left;
+            padding: 1rem;
+        }
+        
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background-color: var(--light);
+        }
+        
+        .demo-section {
+            background-color: var(--light);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .next-steps {
+            background-color: #ECFDF5;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .next-steps h3 {
+            color: #065F46;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>AI Agent Development Guide</h1>
+            <p>Learn to build powerful AI agents for specific tasks</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="introduction.html">Introduction</a></li>
+                <li><a href="frameworks.html">Frameworks</a></li>
+                <li><a href="environment-setup.html">Environment Setup</a></li>
+                <li><a href="first-agent.html">First Agent</a></li>
+                <li><a href="advanced-features.html">Advanced Features</a></li>
+                <li><a href="deployment.html">Deployment</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="breadcrumbs">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="first-agent.html">First Agent</a></li>
+                <li class="current">Advanced Features</li>
+            </ul>
+        </div>
+    </div>
+    
+    <section class="content-section">
+        <div class="container">
+            <div class="section-title">
+                <h1>Advanced AI Agent Features</h1>
+                <p>Take your AI agent to the next level with powerful capabilities and optimizations</p>
+            </div>
+            
+            <div class="content-box">
+                <h2>Introduction to Advanced Features</h2>
+                <p>Once you've built a basic AI agent, you can enhance its capabilities with advanced features that make it more powerful, useful, and responsive. In this guide, we'll explore techniques for adding sophisticated capabilities to your AI agent including enhanced memory systems, complex reasoning patterns, tool chaining, and more.</p>
+                <p>Building on the foundations from our <a href="first-agent.html">First Agent Tutorial</a>, we'll now focus on:</p>
+                <ul>
+                    <li><strong>Clear task definition:</strong> Define exactly what your agent should and shouldn't do</li>
+                    <li><strong>Thoughtful prompt engineering:</strong> Guide the agent's behavior with well-crafted instructions</li>
+                    <li><strong>Robust tool integration:</strong> Give your agent the capabilities it needs to succeed</li>
+                    <li><strong>User-centric design:</strong> Create agents that solve real problems for users</li>
+                </ul>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🧠</div>
+                    <h3 class="feature-title">Enhanced Memory Systems</h3>
+                    <p>Implement sophisticated memory mechanisms to help your agent maintain context over long interactions.</p>
+                    <a href="#memory-systems" class="cta-button">Learn More</a>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🔄</div>
+                    <h3 class="feature-title">Chain-of-Thought Reasoning</h3>
+                    <p>Enable your agent to break down complex problems and reason through multi-step solutions.</p>
+                    <a href="#chain-of-thought" class="cta-button">Learn More</a>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🛠️</div>
+                    <h3 class="feature-title">Advanced Tool Integration</h3>
+                    <p>Connect your agent to multiple tools and external systems with sophisticated routing.</p>
+                    <a href="#tool-integration" class="cta-button">Learn More</a>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🔍</div>
+                    <h3 class="feature-title">Retrieval-Augmented Generation</h3>
+                    <p>Implement RAG to give your agent access to specific knowledge bases and documents.</p>
+                    <a href="#rag-systems" class="cta-button">Learn More</a>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">👥</div>
+                    <h3 class="feature-title">Multi-Agent Systems</h3>
+                    <p>Create systems where multiple specialized agents collaborate to solve complex problems.</p>
+                    <a href="#multi-agent" class="cta-button">Learn More</a>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Performance Optimization</h3>
+                    <p>Techniques to improve response quality, reduce latency, and manage costs.</p>
+                    <a href="#optimization" class="cta-button">Learn More</a>
+                </div>
+            </div>
+            
+            <div id="memory-systems" class="content-box">
+                <h2>Enhanced Memory Systems</h2>
+                <p>Basic AI agents typically have limited context windows, making it difficult to maintain information over long interactions. Enhanced memory systems solve this problem by storing, retrieving, and managing information effectively.</p>
+                
+                <h3>Types of Memory Systems</h3>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Memory Type</th>
+                            <th>Description</th>
+                            <th>Best Used For</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Short-term (Buffer)</td>
+                            <td>Maintains recent conversation history</td>
+                            <td>Immediate context in conversations</td>
+                        </tr>
+                        <tr>
+                            <td>Long-term (Vector DB)</td>
+                            <td>Stores important information permanently</td>
+                            <td>User preferences, facts, decisions</td>
+                        </tr>
+                        <tr>
+                            <td>Episodic</td>
+                            <td>Organizes memories into related episodes</td>
+                            <td>Task sequences, conversation threads</td>
+                        </tr>
+                        <tr>
+                            <td>Working</td>
+                            <td>Temporarily holds information for current task</td>
+                            <td>Multi-step reasoning processes</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>Implementing a Vector-Based Memory System</h3>
+                
+                <p>Vector databases are ideal for semantic memory systems that can retrieve information based on meaning rather than exact matching:</p>
+                
+                <div class="code-example">
+# Example: Implementing a vector-based memory system with LangChain and Chroma
+
+from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.vectorstores import Chroma
+from langchain.text_splitter import CharacterTextSplitter
+from langchain.llms import OpenAI
+from langchain.chains import ConversationalRetrievalChain
+
+# Initialize embedding model
+embeddings = OpenAIEmbeddings()
+
+# Create a vector store to hold memories
+memory_db = Chroma(embedding_function=embeddings, collection_name="agent_memories")
+
+# Function to add a new memory
+def store_memory(text, metadata=None):
+    # Split long texts into chunks
+    text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
+    texts = text_splitter.split_text(text)
+    
+    # Store in vector database with optional metadata
+    memory_db.add_texts(texts=texts, metadatas=[metadata] * len(texts))
+    print(f"Stored new memory: {text[:50]}...")
+
+# Function to retrieve relevant memories
+def retrieve_memories(query, k=3):
+    docs = memory_db.similarity_search(query, k=k)
+    return [doc.page_content for doc in docs]
+
+# Example usage in an agent
+def agent_with_memory(user_input):
+    # Retrieve relevant memories based on user input
+    relevant_memories = retrieve_memories(user_input)
+    
+    # Use memories to enhance the context for the response
+    context = "\n".join(["Relevant information:", *relevant_memories])
+    
+    # Generate response using the enriched context
+    llm = OpenAI(temperature=0)
+    response = llm(f"Context: {context}\nUser question: {user_input}\nResponse:")
+    
+    # Store this interaction as a new memory
+    store_memory(f"User: {user_input}\nAgent: {response}")
+    
+    return response
+                </div>
+                
+                <div class="tip-box">
+                    <h4>Pro Tip: Memory Summarization</h4>
+                    <p>For long interactions, implement periodic summarization of memories to prevent context overflow while preserving important information:</p>
+                    <ul>
+                        <li>Use the LLM itself to generate summaries of conversation history</li>
+                        <li>Store both detailed memories and their summaries</li>
+                        <li>Implement a hierarchy of memory: recent details + summarized history</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="chain-of-thought" class="content-box">
+                <h2>Chain-of-Thought Reasoning</h2>
+                <p>Chain-of-Thought (CoT) reasoning enables your agent to break down complex problems into smaller steps and think through each step sequentially. This significantly improves performance on tasks requiring multi-step reasoning.</p>
+                
+                <h3>Implementing Chain-of-Thought</h3>
+                
+                <ol class="implementation-steps">
+                    <li>
+                        <h4>Explicit Prompting for Reasoning</h4>
+                        <p>Modify your agent's prompt to explicitly ask for step-by-step thinking:</p>
+                        <div class="code-example">
+# Example: Chain-of-Thought prompt
+
+def cot_prompt(question):
+    return f"""
+Question: {question}
+
+To solve this problem, I need to think through this step by step:
+1. First, I'll understand what is being asked.
+2. Then, I'll break down the problem into smaller parts.
+3. For each part, I'll apply relevant knowledge or techniques.
+4. Finally, I'll combine the results to form my answer.
+
+Let me work through this systematically:
+"""
+
+# Example usage
+question = "If a company's revenue grew by 15% to $690,000, what was the original revenue?"
+response = llm(cot_prompt(question))
+                        </div>
+                    </li>
+                    <li>
+                        <h4>Self-Consistency Techniques</h4>
+                        <p>Generate multiple reasoning paths and select the most consistent answer:</p>
+                        <div class="code-example">
+# Example: Self-consistency with multiple reasoning paths
+
+def solve_with_self_consistency(question, num_paths=3):
+    results = []
+    
+    for i in range(num_paths):
+        # Generate a reasoning path with a different seed
+        response = llm(cot_prompt(question), temperature=0.7)
+        
+        # Extract the final answer
+        # This is a simplified extraction - you may need more robust parsing
+        lines = response.split('\n')
+        final_answer = lines[-1] if "answer" in lines[-1].lower() else response
+        
+        results.append(final_answer)
+    
+    # Find the most common answer
+    from collections import Counter
+    answer_counts = Counter(results)
+    most_common_answer = answer_counts.most_common(1)[0][0]
+    
+    return most_common_answer
+                        </div>
+                    </li>
+                    <li>
+                        <h4>Reflection Mechanisms</h4>
+                        <p>Allow your agent to review and critique its own reasoning:</p>
+                        <div class="code-example">
+# Example: Implementing reflection
+
+def reflective_reasoning(question):
+    # First reasoning attempt
+    initial_reasoning = llm(cot_prompt(question), temperature=0.5)
+    
+    # Prompt for reflection
+    reflection_prompt = f"""
+I solved this problem as follows:
+{initial_reasoning}
+
+Now I'll reflect on my solution:
+1. Did I understand the problem correctly?
+2. Did I make any calculation errors?
+3. Is my reasoning logically sound?
+4. Are there any assumptions I made that might be incorrect?
+5. Is there a more elegant or efficient approach?
+
+My reflection:
+"""
+    
+    # Generate reflection
+    reflection = llm(reflection_prompt)
+    
+    # Final revised answer based on reflection
+    final_answer_prompt = f"""
+Original problem: {question}
+
+My initial solution:
+{initial_reasoning}
+
+My reflection:
+{reflection}
+
+Based on my reflection, my revised and final answer is:
+"""
+    
+    final_answer = llm(final_answer_prompt)
+    return final_answer
+                        </div>
+                    </li>
+                </ol>
+                
+                <div class="warning-box">
+                    <h4>Common Pitfall: Hallucination in Complex Reasoning</h4>
+                    <p>Even with Chain-of-Thought, agents can confidently present incorrect reasoning. Mitigate this by:</p>
+                    <ul>
+                        <li>Implementing verification steps for critical calculations</li>
+                        <li>Using tool calls for mathematical operations rather than relying on the LLM</li>
+                        <li>Adding explicit fact-checking mechanisms for each reasoning step</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="tool-integration" class="content-box">
+                <h2>Advanced Tool Integration</h2>
+                <p>While basic agents might use one or two tools, advanced agents can leverage diverse tools and decide which ones to use based on the task at hand. Effective tool integration requires careful design of tool selection and orchestration.</p>
+                
+                <h3>Tool Orchestration Patterns</h3>
+                
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <h4>ReAct Pattern</h4>
+                        <p>Interleaving reasoning and action, where the agent thinks about what tool to use, uses it, then observes the result before the next step.</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <h4>Function Calling</h4>
+                        <p>Structured tool use where the agent explicitly calls functions with specific parameters, enabling more reliable tool interactions.</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <h4>Tool Chaining</h4>
+                        <p>Sequential use of multiple tools where output from one tool becomes input to another, enabling complex workflows.</p>
+                    </div>
+                </div>
+                
+                <h3>Implementing Function Calling with OpenAI</h3>
+                
+                <div class="code-example">
+# Example: Function calling with OpenAI
+
+from openai import OpenAI
+import json
+import requests
+from datetime import datetime
+
+client = OpenAI()
+
+# Define available tools
+tools = [
+    {
+        "type": "function",
+        "function": {
+            "name": "get_weather",
+            "description": "Get current weather for a location",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "location": {
+                        "type": "string",
+                        "description": "City and state, e.g., San Francisco, CA"
+                    },
+                    "unit": {
+                        "type": "string",
+                        "enum": ["celsius", "fahrenheit"],
+                        "description": "Temperature unit"
+                    }
+                },
+                "required": ["location"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "search_web",
+            "description": "Search the web for information",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "The search query"
+                    }
+                },
+                "required": ["query"]
+            }
+        }
+    }
+]
+
+# Implement the actual functions
+def get_weather(location, unit="celsius"):
+    # In a real implementation, this would call a weather API
+    # This is a mock implementation
+    weather_data = {
+        "location": location,
+        "temperature": "22" if unit == "celsius" else "72",
+        "unit": unit,
+        "condition": "Sunny",
+        "humidity": "45%"
+    }
+    return json.dumps(weather_data)
+
+def search_web(query):
+    # In a real implementation, this would call a search API
+    # This is a mock implementation
+    return json.dumps({
+        "results": [
+            {"title": f"Result for {query}", "snippet": "This is a sample search result."}
+        ]
+    })
+
+# Agent with tool-use capability
+def agent_with_tools(user_input):
+    messages = [{"role": "user", "content": user_input}]
+    
+    # First, let the model decide which tool to use (if any)
+    response = client.chat.completions.create(
+        model="gpt-4",
+        messages=messages,
+        tools=tools,
+        tool_choice="auto"
+    )
+    
+    response_message = response.choices[0].message
+    tool_calls = response_message.tool_calls
+    
+    # If the model wants to use tools
+    if tool_calls:
+        # Add the model's response planning to use tools
+        messages.append(response_message)
+        
+        # Process each tool call
+        for tool_call in tool_calls:
+            function_name = tool_call.function.name
+            function_args = json.loads(tool_call.function.arguments)
+            
+            # Call the appropriate function
+            if function_name == "get_weather":
+                function_response = get_weather(**function_args)
+            elif function_name == "search_web":
+                function_response = search_web(**function_args)
+            else:
+                function_response = f"Error: Function {function_name} not found"
+            
+            # Append the function response to messages
+            messages.append({
+                "tool_call_id": tool_call.id,
+                "role": "tool",
+                "name": function_name,
+                "content": function_response
+            })
+        
+        # Get the final response after tool use
+        second_response = client.chat.completions.create(
+            model="gpt-4",
+            messages=messages
+        )
+        
+        return second_response.choices[0].message.content
+    else:
+        # Model chose not to use tools
+        return response_message.content
+                </div>
+                
+                <h3>Implementing Dynamic Tool Selection</h3>
+                <p>For agents with many tools, implement a dynamic tool selection system:</p>
+                
+                <div class="code-example">
+# Example: Dynamic tool selection based on query analysis
+
+class ToolRegistry:
+    def __init__(self):
+        self.tools = {}
+        self.tool_descriptions = {}
+    
+    def register_tool(self, name, function, description):
+        self.tools[name] = function
+        self.tool_descriptions[name] = description
+    
+    def get_relevant_tools(self, query, max_tools=3):
+        """Select the most relevant tools for a given query"""
+        # In a real implementation, use embeddings or LLM to rank tools
+        # This is a simplified implementation
+        tool_scores = {}
+        
+        for name, description in self.tool_descriptions.items():
+            # Simple keyword matching (use embeddings in a real system)
+            score = sum(keyword in query.lower() for keyword in description.lower().split())
+            tool_scores[name] = score
+        
+        # Get top N tools
+        relevant_tools = sorted(tool_scores.items(), key=lambda x: x[1], reverse=True)[:max_tools]
+        return [name for name, score in relevant_tools if score > 0]
+    
+    def execute_tool(self, name, **kwargs):
+        if name in self.tools:
+            return self.tools[name](**kwargs)
+        else:
+            return f"Error: Tool '{name}' not found"
+
+# Usage example
+registry = ToolRegistry()
+registry.register_tool("get_weather", get_weather, "Get weather information for a location")
+registry.register_tool("search_web", search_web, "Search the web for information")
+# Register more tools...
+
+def agent_with_dynamic_tools(user_input):
+    # Select relevant tools for this query
+    relevant_tool_names = registry.get_relevant_tools(user_input)
+    relevant_tools = [t for t in tools if t["function"]["name"] in relevant_tool_names]
+    
+    # Only provide relevant tools to the model
+    # Rest of the implementation follows the previous example...
+                </div>
+                
+                <div class="tip-box">
+                    <h4>Tool Design Best Practices</h4>
+                    <p>Follow these principles for effective tool integration:</p>
+                    <ul>
+                        <li><strong>Atomic functionality:</strong> Each tool should do one thing well</li>
+                        <li><strong>Clear interfaces:</strong> Use descriptive names and documentation</li>
+                        <li><strong>Robust error handling:</strong> Tools should fail gracefully with helpful error messages</li>
+                        <li><strong>Rate limiting:</strong> Implement safeguards against excessive tool use</li>
+                        <li><strong>Stateless when possible:</strong> Prefer stateless tools for reliability</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="rag-systems" class="content-box">
+                <h2>Retrieval-Augmented Generation (RAG)</h2>
+                <p>RAG systems enable your agent to access and leverage specific knowledge bases, documentation, or other content that may not be in the model's training data.</p>
+                
+                <h3>Building an Effective RAG System</h3>
+                
+                <ol class="implementation-steps">
+                    <li>
+                        <h4>Document Processing</h4>
+                        <p>Prepare your documents for retrieval:</p>
+                        <div class="code-example">
+# Example: Processing documents for RAG
+
+from langchain.document_loaders import DirectoryLoader, TextLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.embeddings import OpenAIEmbeddings
+from langchain.vectorstores import Chroma
+
+# Load documents
+loader = DirectoryLoader('./documents/', glob="**/*.txt", loader_cls=TextLoader)
+documents = loader.load()
+
+# Split documents into chunks
+text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size=1000,
+    chunk_overlap=200,
+    separators=["\n\n", "\n", " ", ""]
+)
+text_chunks = text_splitter.split_documents(documents)
+
+# Create embeddings and store in vector database
+embeddings = OpenAIEmbeddings()
+vector_store = Chroma.from_documents(text_chunks, embeddings, collection_name="document_store")
+                        </div>
+                    </li>
+                    <li>
+                        <h4>Retrieval Strategy</h4>
+                        <p>Implement effective retrieval logic:</p>
+                        <div class="code-example">
+# Example: Advanced retrieval strategies
+
+from langchain.retrievers import ContextualCompressionRetriever
+from langchain.retrievers.document_compressors import LLMChainExtractor
+
+# Basic retriever
+basic_retriever = vector_store.as_retriever(search_type="similarity", search_kwargs={"k": 4})
+
+# Enhanced retriever with LLM-based document filtering
+llm = OpenAI(temperature=0)
+compressor = LLMChainExtractor.from_llm(llm)
+compression_retriever = ContextualCompressionRetriever(
+    base_retriever=basic_retriever,
+    base_compressor=compressor
+)
+
+# Function to retrieve relevant context
+def get_relevant_context(query, advanced=True):
+    if advanced:
+        docs = compression_retriever.get_relevant_documents(query)
+    else:
+        docs = basic_retriever.get_relevant_documents(query)
+    
+    return "\n\n".join([doc.page_content for doc in docs])
+                        </div>
+                    </li>
+                    <li>
+                        <h4>Query Transformation</h4>
+                        <p>Improve retrieval with query optimization:</p>
+                        <div class="code-example">
+# Example: Query transformation for better retrieval
+
+def generate_search_queries(original_query):
+    """Generate multiple search
+
+    queries to improve retrieval results"""
+    prompt = f"""
+Given the original search query: "{original_query}"
+Generate 3 alternative search queries that:
+1. Rephrase the question using different terminology
+2. Break down complex queries into simpler sub-queries
+3. Add relevant context or specify domain information
+
+Format each alternative query on a new line.
+"""
+    response = llm(prompt)
+    # Parse response to extract queries
+    alternative_queries = [line.strip() for line in response.split('\n') if line.strip()]
+    # Include the original query
+    all_queries = [original_query] + alternative_queries
+    return all_queries
+
+def enhanced_retrieval(query):
+    # Generate multiple search queries
+    search_queries = generate_search_queries(query)
+    
+    # Retrieve documents for each query
+    all_docs = []
+    for search_query in search_queries:
+        docs = basic_retriever.get_relevant_documents(search_query)
+        all_docs.extend(docs)
+    
+    # Remove duplicates and rank by relevance
+    unique_docs = {}
+    for doc in all_docs:
+        doc_id = hash(doc.page_content)
+        if doc_id not in unique_docs:
+            unique_docs[doc_id] = doc
+    
+    # Return the most relevant unique documents
+    from langchain.retrievers import BM25Retriever
+    bm25_retriever = BM25Retriever.from_documents(list(unique_docs.values()))
+    final_docs = bm25_retriever.get_relevant_documents(query)
+    
+    return final_docs[:5]  # Return top 5 most relevant documents
+                        </div>
+                    </li>
+                </ol>
+                
+                <h3>Integrating RAG with Your Agent</h3>
+                
+                <div class="code-example">
+# Example: RAG-powered agent
+
+from langchain.agents import initialize_agent, Tool
+from langchain.memory import ConversationBufferMemory
+
+# Define tools including RAG
+tools = [
+    Tool(
+        name="DocumentSearch",
+        func=lambda q: "\n".join(doc.page_content for doc in enhanced_retrieval(q)),
+        description="Useful for when you need to find specific information in documents. Input should be a search query."
+    ),
+    # Add other tools like web search, calculator, etc.
+]
+
+# Set up memory
+memory = ConversationBufferMemory(memory_key="chat_history")
+
+# Initialize the agent
+agent = initialize_agent(
+    tools=tools,
+    llm=llm,
+    memory=memory,
+    agent="chat-conversational-react-description",
+    verbose=True
+)
+
+# Agent handler function
+def rag_agent_response(user_input):
+    try:
+        response = agent.run(input=user_input)
+        return response
+    except Exception as e:
+        return f"I encountered an error: {str(e)}"
+                </div>
+                
+                <div class="warning-box">
+                    <h4>RAG System Challenges</h4>
+                    <p>Be aware of these common challenges when implementing RAG:</p>
+                    <ul>
+                        <li><strong>Hallucination:</strong> Even with retrieval, models may generate incorrect facts</li>
+                        <li><strong>Content contradictions:</strong> Retrieved documents may contain conflicting information</li>
+                        <li><strong>Context window limits:</strong> Retrieved content must fit within model's context window</li>
+                        <li><strong>Retrieval quality:</strong> Semantic search may miss important information</li>
+                        <li><strong>Data freshness:</strong> Vector stores need updating when source content changes</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="multi-agent" class="content-box">
+                <h2>Multi-Agent Systems</h2>
+                <p>Multi-agent systems distribute complex tasks across multiple specialized agents that collaborate to solve problems. This approach can improve robustness, scalability, and specialization.</p>
+                
+                <h3>Multi-Agent Architectures</h3>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Architecture</th>
+                            <th>Description</th>
+                            <th>Best For</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Hub and Spoke</td>
+                            <td>Central coordinator delegates to specialist agents</td>
+                            <td>Task decomposition, diverse specializations</td>
+                        </tr>
+                        <tr>
+                            <td>Debate Framework</td>
+                            <td>Multiple agents critique and refine each other's work</td>
+                            <td>Complex reasoning, reducing bias</td>
+                        </tr>
+                        <tr>
+                            <td>Assembly Line</td>
+                            <td>Sequential processing where each agent handles one step</td>
+                            <td>Well-defined processes with distinct phases</td>
+                        </tr>
+                        <tr>
+                            <td>Hierarchical</td>
+                            <td>Management hierarchy with increasing abstraction</td>
+                            <td>Complex systems requiring multiple levels of planning</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>Implementing a Hub and Spoke Architecture</h3>
+                
+                <div class="code-example">
+# Example: Hub and spoke multi-agent system
+
+class AgentManager:
+    def __init__(self, llm):
+        self.llm = llm
+        self.specialist_agents = {}
+    
+    def register_specialist(self, name, description, handler_function):
+        """Register a specialist agent with the manager"""
+        self.specialist_agents[name] = {
+            "description": description,
+            "handler": handler_function
+        }
+    
+    def route_task(self, user_query):
+        """Determine which specialist should handle this query"""
+        agent_descriptions = "\n".join([
+            f"- {name}: {details['description']}" 
+            for name, details in self.specialist_agents.items()
+        ])
+        
+        routing_prompt = f"""
+Based on the user query, determine which specialist agent should handle this task.
+Available specialists:
+{agent_descriptions}
+
+User query: "{user_query}"
+
+Select the most appropriate specialist by name. If multiple specialists are needed, 
+list them in order of priority. If no specialist is appropriate, respond with "DIRECT_RESPONSE".
+"""
+        
+        response = self.llm(routing_prompt)
+        # Extract agent name(s) - in a real system, use more robust parsing
+        selected_agent = response.strip()
+        
+        return selected_agent
+    
+    def process_query(self, user_query):
+        """Process user query by routing to appropriate specialist(s)"""
+        selected_agent = self.route_task(user_query)
+        
+        if selected_agent == "DIRECT_RESPONSE":
+            # No specialist needed, respond directly
+            return self.generate_direct_response(user_query)
+        
+        # Check if the selected agent exists
+        if selected_agent in self.specialist_agents:
+            # Route to the specialist
+            return self.specialist_agents[selected_agent]["handler"](user_query)
+        else:
+            # Fallback if routing returned an invalid agent
+            return self.generate_direct_response(user_query)
+    
+    def generate_direct_response(self, user_query):
+        """Generate a direct response when no specialist is needed"""
+        response = self.llm(f"User query: {user_query}\nResponse:")
+        return response
+
+# Example usage
+manager = AgentManager(llm)
+
+# Register specialist agents
+manager.register_specialist(
+    name="ResearchAgent",
+    description="Handles in-depth research queries requiring information synthesis",
+    handler_function=lambda q: research_agent_handler(q)
+)
+
+manager.register_specialist(
+    name="CodeAgent",
+    description="Specializes in writing, explaining, and debugging code",
+    handler_function=lambda q: code_agent_handler(q)
+)
+
+manager.register_specialist(
+    name="DataAnalysisAgent",
+    description="Processes and analyzes data, creates visualizations",
+    handler_function=lambda q: data_analysis_handler(q)
+)
+
+# Process user query
+response = manager.process_query("Can you help me analyze this CSV file of sales data?")
+                </div>
+                
+                <h3>Implementing a Debate Framework</h3>
+                
+                <div class="code-example">
+# Example: Debate framework for complex reasoning
+
+def debate_framework(question, num_agents=3, rounds=2):
+    """
+    Use a debate framework where multiple agents discuss a question
+    to arrive at a more accurate answer
+    """
+    # Initialize debate with the question
+    debate_history = [f"Question: {question}\n\nThe agents will debate this question."]
+    
+    # Create agent personas with different perspectives
+    agent_personas = [
+        "You are a critical thinker who questions assumptions and looks for logical flaws.",
+        "You are a creative thinker who considers unconventional approaches and possibilities.",
+        "You are a detail-oriented analyst who focuses on facts and empirical evidence."
+    ][:num_agents]
+    
+    # Conduct the debate for the specified number of rounds
+    for round_num in range(1, rounds + 1):
+        debate_history.append(f"\n\n--- Round {round_num} ---")
+        
+        # Each agent takes a turn
+        for agent_idx, persona in enumerate(agent_personas):
+            agent_prompt = f"""
+{persona}
+
+Below is the debate so far:
+{''.join(debate_history)}
+
+As Agent {agent_idx + 1}, provide your perspective on the question. 
+If this is not the first round, respond to the points made by other agents.
+Be concise but thorough in your reasoning.
+"""
+            # Get this agent's contribution
+            agent_response = llm(agent_prompt, max_tokens=500)
+            
+            # Add to debate history
+            debate_history.append(f"\n\nAgent {agent_idx + 1}:\n{agent_response}")
+    
+    # Final synthesis prompt
+    synthesis_prompt = f"""
+A debate was conducted on the following question:
+{question}
+
+The full debate transcript is below:
+{''.join(debate_history)}
+
+Synthesize the key insights from this debate into a comprehensive answer.
+Highlight areas of agreement and disagreement, and provide a balanced conclusion.
+"""
+    
+    final_answer = llm(synthesis_prompt, max_tokens=800)
+    return final_answer
+                </div>
+                
+                <div class="tip-box">
+                    <h4>Multi-Agent Communication Strategies</h4>
+                    <p>Consider these approaches for agent-to-agent communication:</p>
+                    <ul>
+                        <li><strong>Structured messages:</strong> Standardized formats (JSON, XML) for reliable parsing</li>
+                        <li><strong>Shared memory:</strong> Common knowledge base that all agents can access</li>
+                        <li><strong>Broadcast/subscribe:</strong> Agents subscribe to relevant information channels</li>
+                        <li><strong>Mediator pattern:</strong> Central component manages communication between agents</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="optimization" class="content-box">
+                <h2>Performance Optimization</h2>
+                <p>As agents become more complex, optimizing their performance becomes critical. This involves improving response quality, reducing latency, and managing costs.</p>
+                
+                <h3>Techniques for Optimizing Agents</h3>
+                
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <h4>Model Cascading</h4>
+                        <p>Use smaller, faster models for initial processing and larger models only when necessary.</p>
+                        <div class="code-example">
+# Example: Model cascading approach
+
+def cascading_response(user_query):
+    # 1. Try with small, fast model first
+    fast_model = "gpt-3.5-turbo"
+    response = client.chat.completions.create(
+        model=fast_model,
+        messages=[{"role": "user", "content": user_query}]
+    )
+    fast_response = response.choices[0].message.content
+    
+    # 2. Check confidence or quality using a heuristic
+    confidence_check = client.chat.completions.create(
+        model=fast_model,
+        messages=[
+            {"role": "user", "content": user_query},
+            {"role": "assistant", "content": fast_response},
+            {"role": "user", "content": "On a scale of 1-10, how confident are you in this response? Just provide a number."}
+        ]
+    )
+    confidence = int(confidence_check.choices[0].message.content.strip())
+    
+    # 3. If confidence is high, return the fast response
+    if confidence >= 7:
+        return fast_response
+    
+    # 4. Otherwise, use the more powerful model
+    powerful_model = "gpt-4"
+    response = client.chat.completions.create(
+        model=powerful_model,
+        messages=[{"role": "user", "content": user_query}]
+    )
+    return response.choices[0].message.content
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <h4>Caching Strategies</h4>
+                        <p>Implement smart caching to avoid redundant computation and API calls.</p>
+                        <div class="code-example">
+# Example: Semantic caching for LLM responses
+
+import hashlib
+import json
+from sentence_transformers import SentenceTransformer
+import faiss
+import numpy as np
+
+class SemanticCache:
+    def __init__(self, embedding_model="all-MiniLM-L6-v2"):
+        # Initialize embedding model
+        self.embedding_model = SentenceTransformer(embedding_model)
+        
+        # Initialize cache store
+        self.cache = {}
+        
+        # Initialize FAISS index for fast similarity search
+        embedding_dim = self.embedding_model.get_sentence_embedding_dimension()
+        self.index = faiss.IndexFlatL2(embedding_dim)
+        
+        # Keep track of query-to-index mapping
+        self.query_map = []
+    
+    def _get_embedding(self, text):
+        """Generate embedding for text"""
+        return self.embedding_model.encode([text])[0]
+    
+    def get_response(self, query, generate_func, threshold=0.92):
+        """Get response from cache or generate new one"""
+        # Generate embedding for query
+        query_embedding = self._get_embedding(query)
+        
+        # If we have cached items, search for similar queries
+        if len(self.query_map) > 0:
+            # Search for similar queries
+            D, I = self.index.search(np.array([query_embedding]), 1)
+            distance = D[0][0]
+            
+            # Convert distance to similarity score (higher is better)
+            similarity = 1 / (1 + distance)
+            
+            if similarity > threshold:
+                # Retrieve cached response
+                cache_key = self.query_map[I[0][0]]
+                return self.cache[cache_key], True  # Second value indicates cache hit
+        
+        # Cache miss - generate new response
+        response = generate_func(query)
+        
+        # Add to cache
+        cache_key = hashlib.md5(query.encode()).hexdigest()
+        self.cache[cache_key] = response
+        
+        # Add to index
+        self.index.add(np.array([query_embedding]))
+        self.query_map.append(cache_key)
+        
+        return response, False  # Second value indicates cache miss
+
+# Usage example
+semantic_cache = SemanticCache()
+
+def get_cached_response(query):
+    def generate_response(q):
+        # This is where you'd call your LLM API
+        response = client.chat.completions.create(
+            model="gpt-4",
+            messages=[{"role": "user", "content": q}]
+        )
+        return response.choices[0].message.content
+    
+    response, cache_hit = semantic_cache.get_response(query, generate_response)
+    if cache_hit:
+        print("Cache hit!")
+    else:
+        print("Cache miss - generated new response")
+    
+    return response
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <h4>Request Batching</h4>
+                        <p>Group multiple operations to reduce API overhead and improve throughput.</p>
+                        <div class="code-example">
+# Example: Request batching for multiple operations
+
+import asyncio
+import time
+from collections import deque
+
+class BatchProcessor:
+    def __init__(self, process_func, max_batch_size=10, max_wait_time=0.5):
+        self.process_func = process_func
+        self.max_batch_size = max_batch_size
+        self.max_wait_time = max_wait_time
+        
+        self.queue = deque()
+        self.processing = False
+        self.last_batch_time = time.time()
+    
+    async def add_request(self, item):
+        # Create a future to track this item's result
+        future = asyncio.Future()
+        
+        # Add to queue
+        self.queue.append((item, future))
+        
+        # Start processing if needed
+        if not self.processing:
+            asyncio.create_task(self._process_batch())
+        
+        # Return future so caller can await it
+        return await future
+    
+    async def _process_batch(self):
+        self.processing = True
+        
+        while self.queue:
+            # Determine if we should process a batch now
+            current_time = time.time()
+            queue_size = len(self.queue)
+            time_since_last_batch = current_time - self.last_batch_time
+            
+            should_process = (
+                queue_size >= self.max_batch_size or
+                time_since_last_batch >= self.max_wait_time
+            )
+            
+            if not should_process:
+                # Wait a bit before checking again
+                await asyncio.sleep(0.1)
+                continue
+            
+            # Process a batch
+            batch_size = min(self.max_batch_size, queue_size)
+            batch_items = []
+            batch_futures = []
+            
+            for _ in range(batch_size):
+                item, future = self.queue.popleft()
+                batch_items.append(item)
+                batch_futures.append(future)
+            
+            # Process the batch and get results
+            try:
+                batch_results = await self.process_func(batch_items)
+                
+                # Set results for each future
+                for i, future in enumerate(batch_futures):
+                    future.set_result(batch_results[i])
+            except Exception as e:
+                # Propagate error to all futures
+                for future in batch_futures:
+                    future.set_exception(e)
+            
+            # Update tracking variables
+            self.last_batch_time = time.time()
+        
+        self.processing = False
+
+# Example usage with embeddings
+async def process_embeddings_batch(texts):
+    """Process a batch of texts into embeddings"""
+    # In a real implementation, this would call an embedding API
+    embeddings = client.embeddings.create(
+        model="text-embedding-ada-002",
+        input=texts
+    )
+    return [embedding.embedding for embedding in embeddings.data]
+
+# Create batch processor
+embedding_batcher = BatchProcessor(process_embeddings_batch)
+
+# Example usage
+async def get_embedding(text):
+    return await embedding_batcher.add_request(text)
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Scaling Considerations</h3>
+                
+                <div class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Consideration</th>
+                            <th>Technique</th>
+                            <th>Impact</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Latency</td>
+                            <td>Asynchronous processing, connection pooling</td>
+                            <td>Reduced waiting time for users</td>
+                        </tr>
+                        <tr>
+                            <td>Cost Management</td>
+                            <td>Token optimization, model cascading</td>
+                            <td>Lower API costs, efficient resource use</td>
+                        </tr>
+                        <tr>
+                            <td>Throughput</td>
+                            <td>Request batching, load balancing</td>
+                            <td>Higher system capacity</td>
+                        </tr>
+                        <tr>
+                            <td>Reliability</td>
+                            <td>Circuit breakers, exponential backoff</td>
+                            <td>Graceful handling of failures</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="warning-box">
+                    <h4>Performance Monitoring</h4>
+                    <p>Implement comprehensive monitoring to identify bottlenecks:</p>
+                    <ul>
+                        <li><strong>Response times:</strong> Track latency at each stage of processing</li>
+                        <li><strong>Token usage:</strong> Monitor input and output tokens to control costs</li>
+                        <li><strong>Error rates:</strong> Track failures and categorize error types</li>
+                        <li><strong>Cache efficiency:</strong> Measure hit rates and optimization opportunities</li>
+                        <li><strong>User satisfaction:</strong> Collect feedback on agent responses</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="content-box">
+                <h2>Putting It All Together: Advanced Agent Development Principles</h2>
+                <p>Let's explore the four key principles for building effective advanced AI agents:</p>
+                
+                <h3>1. Clear Task Definition</h3>
+                <p>Before adding advanced features, you need a precise understanding of what your agent should do.</p>
+                
+                <div class="implementation-steps">
+                    <li>
+                        <h4>Define Boundaries</h4>
+                        <p>Clearly articulate what your agent should and shouldn't do. This includes:</p>
+                        <ul>
+                            <li>Primary objectives the agent should accomplish</li>
+                            <li>Out-of-scope requests the agent should decline</li>
+                            <li>Fallback behaviors for edge cases</li>
+                        </ul>
+                        <div class="code-example">
+# Example: Task definition specification
+
+agent_specification = {
+    "name": "ResearchAssistant",
+    "primary_objectives": [
+        "Search and synthesize information from provided documents",
+        "Answer factual questions about topics in the knowledge base",
+        "Summarize long documents into key points"
+    ],
+    "out_of_scope": [
+        "Providing medical or legal advice",
+        "Generating creative content unrelated to research",
+        "Executing actions outside the provided tools"
+    ],
+    "fallback_behavior": "When encountering requests outside primary objectives, politely explain limitations and redirect to approved tasks"
+}
+
+def is_task_in_scope(user_request):
+    """Determine if a user request is within the agent's scope"""
+    # In a real implementation, use the LLM to evaluate this
+    prompt = f"""
+Given the following agent specification:
+{json.dumps(agent_specification, indent=2)}
+
+And the user request: "{user_request}"
+
+Determine if this request falls within the agent's primary objectives or if it's out of scope.
+Return "IN_SCOPE" or "OUT_OF_SCOPE" followed by a brief explanation.
+"""
+    response = llm(prompt)
+    return "IN_SCOPE" in response
+                        </div>
+                    </li>
+                    <li>
+                        <h4>Specify Success Criteria</h4>
+                        <p>Define measurable outcomes that determine if your agent is successful:</p>
+                        <ul>
+                            <li>Performance metrics (accuracy, speed, etc.)</li>
+                            <li>User satisfaction indicators</li>
+                            <li>Minimum quality thresholds</li>
+                        </ul>
+                    </li>
+                </div>
+                
+                <h3>2. Thoughtful Prompt Engineering</h3>
+                <p>Your agent's behavior is guided by its instructions. Effective prompt engineering is crucial for reliable performance.</p>
+                
+                <div class="implementation-steps">
+                    <li>
+                        <h4>Multi-part Prompts</h4>
+                        <p>Structure your agent's system prompt with distinct sections:</p>
+                        <div class="code-example">
+# Example: Multi-part system prompt structure
+
+def create_system_prompt(agent_spec, custom_instructions=None):
+    base_prompt = f"""
+# {agent_spec["name"]} - System Instructions
+
+## Role and Purpose
+You are {agent_spec["name"]}, an AI assistant designed to help users with research tasks.
+
+## Core Responsibilities
+{bullet_points(agent_spec["primary_objectives"])}
+
+## Limitations and Boundaries
+{bullet_points(agent_spec["out_of_scope"])}
+
+## Style Guide
+- Respond in a helpful, accurate, and concise manner
+- Cite sources when providing factual information
+- Ask clarifying questions when user requests are ambiguous
+- Present information in a structured, easy-to-understand format
+
+## Response Format
+When answering questions, follow this structure:
+1. Direct answer to the question (1-2 sentences)
+2. Supporting details and explanation
+3. Source citations where applicable
+"""
+
+    # Add custom instructions if provided
+    if custom_instructions:
+        base_prompt += f"\n## Additional Instructions\n{custom_instructions}"
+    
+    return base_prompt
+
+def bullet_points(items):
+    return "\n".join([f"- {item}" for item in items])
+                        </div>
+                    </li>
+                    <li>
+                        <h4>Dynamic Prompt Augmentation</h4>
+                        <p>Adjust prompts based on context and user behavior:</p>
+                        <div class="code-example">
+# Example: Dynamic prompt augmentation
+
+class DynamicPromptManager:
+    def __init__(self, base_system_prompt):
+        self.base_system_prompt = base_system_prompt
+        self.user_preferences = {}
+        self.conversation_context = []
+        self.specialized_contexts = {}
+    
+    def add_user_preference(self, key, value):
+        """Store a user preference to customize prompts"""
+        self.user_preferences[key] = value
+    
+    def add_conversation_context(self, context):
+        """Add relevant context from the conversation"""
+        self.conversation_context.append(context)
+        # Keep only the 5 most recent context items
+        if len(self.conversation_context) > 5:
+            self.conversation_context.pop(0)
+    
+    def register_specialized_context(self, topic, context):
+        """Register specialized instructions for specific topics"""
+        self.specialized_contexts[topic] = context
+    
+    def get_topic_from_query(self, query):
+        """Detect the topic of a user query"""
+        # In a real implementation, use an LLM to classify the query
+        # For this example, we'll use a simple keyword approach
+        topics = {
+            "research": ["find", "research", "information", "sources"],
+            "summarize": ["summarize", "summary", "condense", "brief"],
+            "analyze": ["analyze", "analysis", "compare", "evaluate"]
+        }
+        
+        for topic, keywords in topics.items():
+            if any(keyword in query.lower() for keyword in keywords):
+                return topic
+        return "general"
+    
+    def generate_prompt(self, user_query):
+        """Generate a dynamic system prompt based on context"""
+        # Start with the base prompt
+        dynamic_prompt = self.base_system_prompt
+        
+        # Add user preferences section if any exist
+        if self.user_preferences:
+            prefs_text = "\n## User Preferences\n"
+            for key, value in self.user_preferences.items():
+                prefs_text += f"- {key}: {value}\n"
+            dynamic_prompt += prefs_text
+        
+        # Add conversation context if available
+        if self.conversation_context:
+            context_text = "\n## Relevant Context\n"
+            for ctx in self.conversation_context:
+                context_text += f"- {ctx}\n"
+            dynamic_prompt += context_text
+        
+        # Add specialized instructions based on detected topic
+        topic = self.get_topic_from_query(user_query)
+        if topic in self.specialized_contexts:
+            dynamic_prompt += f"\n## Topic-Specific Instructions ({topic})\n"
+            dynamic_prompt += self.specialized_contexts[topic]
+        
+        return dynamic_prompt
+                        </div>
+                    </li>
+                </div>
+                
+                <div class="tip-box">
+                    <h4>Prompt Testing Strategy</h4>
+                    <p>Systematically test your prompts using these approaches:</p>
+                    <ul>
+                        <li><strong>Edge case testing:</strong> Challenge your agent with boundary conditions</li>
+                        <li><strong>Adversarial testing:</strong> Try to cause the agent to violate its constraints</li>
+                        <li><strong>A/B testing:</strong> Compare different prompt versions against the same queries</li>
+                        <li><strong>Prompt versioning:</strong> Maintain a history of prompts and their performance</li>
+                    </ul>
+                </div>
+                
+                <h3>3. Robust Tool Integration</h3>
+                <p>Tools extend your agent's capabilities beyond what the language model can do alone.</p>
+                
+                <div class="implementation-steps">
+                    <li>
+                        <h4>Tool Selection Strategy</h4>
+                        <p>Choose tools based on your agent's specific needs:</p>
+                        <ul>
+                            <li><strong>Information retrieval tools:</strong> Search engines, knowledge bases, databases</li>
+                            <li><strong>Processing tools:</strong> Calculators, code interpreters, data analyzers</li>
+                            <li><strong>External system integrations:</strong> APIs, third-party services</li>
+                            <li><strong>Memory systems:</strong> Vector stores, document databases</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>Tool Governance</h4>
+                        <p>Implement safeguards to ensure tools are used appropriately:</p>
+                        <div class="code-example">
+# Example: Tool governance framework
+
+class ToolGovernance:
+    def __init__(self):
+        self.tool_policies = {}
+        self.usage_logs = {}
+        self.alert_thresholds = {}
+    
+    def register_tool_policy(self, tool_name, allowed_use_cases, disallowed_use_cases, 
+                            usage_limit=None, approval_required=False):
+        """Register policies for a tool"""
+        self.tool_policies[tool_name] = {
+            "allowed_use_cases": allowed_use_cases,
+            "disallowed_use_cases": disallowed_use_cases,
+            "usage_limit": usage_limit,
+            "approval_required": approval_required
+        }
+        self.usage_logs[tool_name] = []
+    
+    def set_alert_threshold(self, tool_name, threshold, alert_handler):
+        """Set an alert threshold for a tool"""
+        self.alert_thresholds[tool_name] = {
+            "threshold": threshold,
+            "handler": alert_handler
+        }
+    
+    def check_tool_use_permission(self, tool_name, use_case_description, user_id=None):
+        """Check if a proposed tool use is permitted"""
+        if tool_name not in self.tool_policies:
+            return False, "Tool not registered in governance system"
+        
+        policy = self.tool_policies[tool_name]
+        
+        # Check if use case is explicitly disallowed
+        for disallowed in policy["disallowed_use_cases"]:
+            if disallowed.lower() in use_case_description.lower():
+                return False, f"Use case contains disallowed pattern: {disallowed}"
+        
+        # Check if use case matches allowed patterns
+        allowed = False
+
+        
