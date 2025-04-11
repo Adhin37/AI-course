@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='20' y='20' width='24' height='24' rx='4' fill='%234F46E5'/%3E%3Ccircle cx='12' cy='12' r='4' fill='%2310B981'/%3E%3Ccircle cx='52' cy='12' r='4' fill='%2310B981'/%3E%3Ccircle cx='12' cy='52' r='4' fill='%2310B981'/%3E%3Ccircle cx='52' cy='52' r='4' fill='%2310B981'/%3E%3Cline x1='16' y1='16' x2='20' y2='20' stroke='%2310B981' stroke-width='2'/%3E%3Cline x1='48' y1='16' x2='44' y2='20' stroke='%2310B981' stroke-width='2'/%3E%3Cline x1='16' y1='48' x2='20' y2='44' stroke='%2310B981' stroke-width='2'/%3E%3Cline x1='48' y1='48' x2='44' y2='44' stroke='%2310B981' stroke-width='2'/%3E%3Ccircle cx='32' cy='32' r='2' fill='%23F9FAFB'/%3E%3Ccircle cx='28' cy='28' r='1.5' fill='%23F9FAFB'/%3E%3Ccircle cx='36' cy='36' r='1.5' fill='%23F9FAFB'/%3E%3Ccircle cx='28' cy='36' r='1.5' fill='%23F9FAFB'/%3E%3Ccircle cx='36' cy='28' r='1.5' fill='%23F9FAFB'/%3E%3C/svg%3E">
+    <title>AI Agent Development Tutorials</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .video-container {
+            margin-bottom: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .video-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .video-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .video-header h3 {
+            margin: 0;
+            color: var(--primary);
+        }
+        
+        .video-header p {
+            margin: 0.5rem 0 0;
+            color: var(--gray);
+        }
+        
+        .video-content {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+        
+        .video-content iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-info {
+            padding: 1.5rem;
+            background-color: var(--light);
+        }
+        
+        .video-info p {
+            margin: 0;
+        }
+        
+        .video-info .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .video-info .tag {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 16px;
+            font-size: 0.8rem;
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .tutorial-section {
+            padding: 3rem 0;
+        }
+        
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+        
+        .filter-button {
+            background-color: white;
+            border: 1px solid var(--light-gray);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-button:hover, .filter-button.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .breadcrumbs {
+            padding: 1rem 0;
+            background-color: var(--light);
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        /* Loading spinner for videos */
+        .video-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        /* Custom play button overlay */
+        .video-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .play-button {
+            width: 68px;
+            height: 48px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+        
+        .play-button:hover {
+            background-color: rgba(230, 33, 23, 1);
+        }
+        
+        .play-button:after {
+            content: "";
+            display: block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 0 10px 20px;
+            border-color: transparent transparent transparent white;
+            margin-left: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>AI Agent Development Guide</h1>
+            <p>Learn to build powerful AI agents for specific tasks</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="index.html#introduction">Introduction</a></li>
+                <li><a href="index.html#features">Key Concepts</a></li>
+                <li><a href="index.html#learning-path">Learning Path</a></li>
+                <li><a href="index.html#resources">Resources</a></li>
+                <li><a href="code-examples.html">Code Examples</a></li>
+                <li><a href="frameworks.html">Frameworks</a></li>
+                <li><a href="tutorials.html">Tutorials</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="breadcrumbs">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="current">Tutorials</li>
+            </ul>
+        </div>
+    </div>
+    
+    <section class="page-title">
+        <div class="container">
+            <h1>Video Tutorials</h1>
+            <p>Learn AI agent development concepts through detailed video lessons</p>
+        </div>
+    </section>
+    
+    <section class="tutorial-section">
+        <div class="container">
+            <div class="filters">
+                <button class="filter-button active" data-filter="all">All Tutorials</button>
+                <button class="filter-button" data-filter="beginner">Beginner</button>
+                <button class="filter-button" data-filter="intermediate">Intermediate</button>
+                <button class="filter-button" data-filter="advanced">Advanced</button>
+                <button class="filter-button" data-filter="langchain">LangChain</button>
+                <button class="filter-button" data-filter="autogen">AutoGen</button>
+                <button class="filter-button" data-filter="llamaindex">LlamaIndex</button>
+            </div>
+            
+            <div class="video-grid">
+                <div class="video-container" data-categories="beginner langchain">
+                    <div class="video-header">
+                        <h3>Building Your First AI Agent with LangChain</h3>
+                        <p>By AI Developer Hub</p>
+                    </div>
+                    <div class="video-content" data-videoid="b-ecoI4MCm4">
+                        <div class="video-thumbnail" style="background-image: url('https://img.youtube.com/vi/b-ecoI4MCm4/maxresdefault.jpg')">
+                            <div class="play-button"></div>
+                        </div>
+                        <div class="video-loading" style="display: none;"></div>
+                    </div>
+                    <div class="video-info">
+                        <p>Learn how to create a basic task-specific agent using LangChain. This tutorial covers setup, model integration, and testing your first agent.</p>
+                        <div class="tags">
+                            <span class="tag">Beginner</span>
+                            <span class="tag">LangChain</span>
+                            <span class="tag">Python</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="video-container" data-categories="intermediate autogen">
+                    <div class="video-header">
+                        <h3>Multi-Agent Systems with AutoGen</h3>
+                        <p>By Code with Vini</p>
+                    </div>
+                    <div class="video-content" data-videoid="XN7meA98ace">
+                        <div class="video-thumbnail" style="background-image: url('https://img.youtube.com/vi/XN7meA98ace/maxresdefault.jpg')">
+                            <div class="play-button"></div>
+                        </div>
+                        <div class="video-loading" style="display: none;"></div>
+                    </div>
+                    <div class="video-info">
+                        <p>Discover how to build collaborative multi-agent systems using AutoGen. This tutorial shows how to create agents that can communicate and work together.</p>
+                        <div class="tags">
+                            <span class="tag">Intermediate</span>
+                            <span class="tag">AutoGen</span>
+                            <span class="tag">Multi-agent</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="video-container" data-categories="beginner llamaindex">
+                    <div class="video-header">
+                        <h3>RAG Patterns with LlamaIndex</h3>
+                        <p>By AI Academy</p>
+                    </div>
+                    <div class="video-content" data-videoid="9ISVjh8mdlA">
+                        <div class="video-thumbnail" style="background-image: url('https://img.youtube.com/vi/9ISVjh8mdlA/maxresdefault.jpg')">
+                            <div class="play-button"></div>
+                        </div>
+                        <div class="video-loading" style="display: none;"></div>
+                    </div>
+                    <div class="video-info">
+                        <p>This tutorial explains how to implement Retrieval-Augmented Generation (RAG) using LlamaIndex to give your AI agent access to custom knowledge.</p>
+                        <div class="tags">
+                            <span class="tag">Beginner</span>
+                            <span class="tag">LlamaIndex</span>
+                            <span class="tag">RAG</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="video-container" data-categories="advanced langchain">
+                    <div class="video-header">
+                        <h3>Advanced Tool Use in LangChain Agents</h3>
+                        <p>By AI Engineering Lab</p>
+                    </div>
+                    <div class="video-content" data-videoid="dXxQ0LR-3Hg">
+                        <div class="video-thumbnail" style="background-image: url('https://img.youtube.com/vi/dXxQ0LR-3Hg/maxresdefault.jpg')">
+                            <div class="play-button"></div>
+                        </div>
+                        <div class="video-loading" style="display: none;"></div>
+                    </div>
+                    <div class="video-info">
+                        <p>Take your agents to the next level by integrating external tools and APIs. Learn how to create custom tools and add them to your LangChain agent.</p>
+                        <div class="tags">
+                            <span class="tag">Advanced</span>
+                            <span class="tag">LangChain</span>
+                            <span class="tag">Tool Integration</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="video-container" data-categories="intermediate langchain">
+                    <div class="video-header">
+                        <h3>Building a Research Assistant with LangChain</h3>
+                        <p>By LLM Builders</p>
+                    </div>
+                    <div class="video-content" data-videoid="2xxziIWXcDE">
+                        <div class="video-thumbnail" style="background-image: url('https://img.youtube.com/vi/2xxziIWXcDE/maxresdefault.jpg')">
+                            <div class="play-button"></div>
+                        </div>
+                        <div class="video-loading" style="display: none;"></div>
+                    </div>
+                    <div class="video-info">
+                        <p>Create an AI research assistant that can search for information, summarize findings, and generate reports using LangChain and vector databases.</p>
+                        <div class="tags">
+                            <span class="tag">Intermediate</span>
+                            <span class="tag">LangChain</span>
+                            <span class="tag">Vector DB</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="video-container" data-categories="advanced autogen">
+                    <div class="video-header">
+                        <h3>Autonomous AI Agents with AutoGen</h3>
+                        <p>By Future Code Academy</p>
+                    </div>
+                    <div class="video-content" data-videoid="QF5qiV-zkpQ">
+                        <div class="video-thumbnail" style="background-image: url('https://img.youtube.com/vi/QF5qiV-zkpQ/maxresdefault.jpg')">
+                            <div class="play-button"></div>
+                        </div>
+                        <div class="video-loading" style="display: none;"></div>
+                    </div>
+                    <div class="video-info">
+                        <p>Learn how to create fully autonomous agents that can solve complex problems through reasoning, planning, and task decomposition.</p>
+                        <div class="tags">
+                            <span class="tag">Advanced</span>
+                            <span class="tag">AutoGen</span>
+                            <span class="tag">Autonomous Agents</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="video-container" data-categories="beginner llamaindex">
+                    <div class="video-header">
+                        <h3>Talk to Your Documents, Powered by Llama-Index</h3>
+                        <p>By Prompt Engineering</p>
+                    </div>
+                    <div class="video-content" data-videoid="WL7V9JUy2sE">
+                        <div class="video-thumbnail" style="background-image: url('https://img.youtube.com/vi/WL7V9JUy2sE/maxresdefault.jpg')">
+                            <div class="play-button"></div>
+                        </div>
+                        <div class="video-loading" style="display: none;"></div>
+                    </div>
+                    <div class="video-info">
+                        <p>Build an agent that can analyze and extract insights from documents using LlamaIndex's document processing capabilities.</p>
+                        <div class="tags">
+                            <span class="tag">Beginner</span>
+                            <span class="tag">LlamaIndex</span>
+                            <span class="tag">Document Processing</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="video-container" data-categories="intermediate langchain">
+                    <div class="video-header">
+                        <h3>Memory Systems for LangChain Agents</h3>
+                        <p>By AI Developer Network</p>
+                    </div>
+                    <div class="video-content" data-videoid="P3-M-frMcjc">
+                        <div class="video-thumbnail" style="background-image: url('https://img.youtube.com/vi/P3-M-frMcjc/maxresdefault.jpg')">
+                            <div class="play-button"></div>
+                        </div>
+                        <div class="video-loading" style="display: none;"></div>
+                    </div>
+                    <div class="video-info">
+                        <p>Implement different types of memory systems to give your LangChain agents the ability to remember past interactions and maintain context.</p>
+                        <div class="tags">
+                            <span class="tag">Intermediate</span>
+                            <span class="tag">LangChain</span>
+                            <span class="tag">Memory Systems</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>AI Agent Development Guide | Created to help developers build powerful AI solutions</p>
+        </div>
+    </footer>
+
+    <script>
+        // Filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-button');
+            const videoContainers = document.querySelectorAll('.video-container');
+            
+            // Set up filtering
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const filter = this.getAttribute('data-filter');
+                    
+                    videoContainers.forEach(container => {
+                        if (filter === 'all') {
+                            container.style.display = 'block';
+                        } else {
+                            const categories = container.getAttribute('data-categories');
+                            if (categories.includes(filter)) {
+                                container.style.display = 'block';
+                            } else {
+                                container.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            });
+
+            // Video thumbnail click to load actual YouTube video
+            document.querySelectorAll('.video-thumbnail').forEach(thumbnail => {
+                thumbnail.addEventListener('click', function() {
+                    const videoContent = this.parentElement;
+                    const videoId = videoContent.getAttribute('data-videoid');
+                    
+                    // Show loading spinner
+                    this.style.display = 'none';
+                    videoContent.querySelector('.video-loading').style.display = 'block';
+                    
+                    // Create iframe
+                    const iframe = document.createElement('iframe');
+                    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+                    iframe.title = "YouTube video player";
+                    iframe.frameborder = "0";
+                    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+                    iframe.allowFullscreen = true;
+                    
+                    // When iframe loads, hide spinner
+                    iframe.onload = function() {
+                        videoContent.querySelector('.video-loading').style.display = 'none';
+                    };
+                    
+                    // Add iframe to container
+                    videoContent.appendChild(iframe);
+                });
+            });
+            
+            // Handle thumbnail errors
+            document.querySelectorAll('.video-thumbnail').forEach(thumbnail => {
+                const img = new Image();
+                img.src = thumbnail.style.backgroundImage.replace(/url\(['"](.+)['"]\)/, '$1');
+                img.onerror = function() {
+                    // If thumbnail fails to load, use medium quality
+                    const videoId = thumbnail.parentElement.getAttribute('data-videoid');
+                    thumbnail.style.backgroundImage = `url('https://img.youtube.com/vi/${videoId}/mqdefault.jpg')`;
+                };
+            });
+        });
+    </script>
+</body>
+</html>
