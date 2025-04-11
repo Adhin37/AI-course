@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="img/icon.svg">
+    <title>Getting Started with AI Agents</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .prerequisites {
+            background-color: var(--light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .prerequisites h3 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+        
+        .prerequisites ul {
+            margin-bottom: 0;
+        }
+        
+        .steps-container {
+            margin: 2rem 0;
+        }
+        
+        .step-box {
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        
+        .step-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .step-number {
+            background-color: white;
+            color: var(--primary);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+        
+        .step-header h3 {
+            margin: 0;
+        }
+        
+        .step-content {
+            padding: 1.5rem;
+        }
+        
+        .code-snippet {
+            background-color: var(--dark);
+            color: white;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .resource-item {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .resource-item h4 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+        
+        .next-steps {
+            background-color: var(--light);
+            border-left: 4px solid var(--secondary);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .next-steps h3 {
+            color: var(--secondary);
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Getting Started with AI Agents</h1>
+            <p>Your first steps toward building functional AI agents</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="introduction.html">Introduction</a></li>
+                <li><a href="#prerequisites">Prerequisites</a></li>
+                <li><a href="#setup">Environment Setup</a></li>
+                <li><a href="#first-agent">First Agent</a></li>
+                <li><a href="#resources">Resources</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="breadcrumbs">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="current">Getting Started</li>
+            </ul>
+        </div>
+    </div>
+    
+    <section class="content-section" id="prerequisites">
+        <div class="container content-container">
+            <div class="content-box">
+                <h2>Prerequisites</h2>
+                
+                <p>Before you dive into building AI agents, it's helpful to have some foundational knowledge and tools in place. Don't worry if you're missing some of these - you can always learn as you go!</p>
+                
+                <div class="prerequisites">
+                    <h3>Technical Requirements</h3>
+                    <ul>
+                        <li><strong>Python basics:</strong> Familiarity with Python programming (variables, functions, loops, etc.)</li>
+                        <li><strong>Package management:</strong> Experience with pip or conda for installing libraries</li>
+                        <li><strong>API concepts:</strong> Understanding of how APIs work and how to make API calls</li>
+                        <li><strong>Virtual environment:</strong> Knowledge of how to set up Python virtual environments</li>
+                    </ul>
+                </div>
+                
+                <div class="prerequisites">
+                    <h3>Accounts & API Keys</h3>
+                    <ul>
+                        <li><strong>LLM provider account:</strong> Sign up with OpenAI, Anthropic, or another provider</li>
+                        <li><strong>API keys:</strong> Generate and securely store API keys for your chosen services</li>
+                        <li><strong>GitHub account:</strong> For accessing example repositories and sharing your work</li>
+                    </ul>
+                </div>
+                
+                <p>If you're missing any of these prerequisites, don't worry! We'll provide links to resources that can help you get up to speed.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="content-section" id="setup">
+        <div class="container content-container">
+            <div class="section-title">
+                <h2>Setting Up Your Development Environment</h2>
+                <p>Creating the foundation for your AI agent projects</p>
+            </div>
+            
+            <div class="steps-container">
+                <div class="step-box">
+                    <div class="step-header">
+                        <div class="step-number">1</div>
+                        <h3>Create a Virtual Environment</h3>
+                    </div>
+                    <div class="step-content">
+                        <p>Start by creating a dedicated Python virtual environment for your AI agent development. This keeps your project dependencies isolated from other Python projects.</p>
+                        
+                        <div class="code-snippet">
+                            <pre>
+# Create a new directory for your project
+mkdir my-ai-agent
+cd my-ai-agent
+
+# Create a virtual environment
+python -m venv venv
+
+# Activate the virtual environment
+# On Windows:
+venv\Scripts\activate
+# On macOS/Linux:
+source venv/bin/activate
+                            </pre>
+                        </div>
+                        
+                        <p>Your command prompt should now show the virtual environment name, indicating it's active.</p>
+                    </div>
+                </div>
+                
+                <div class="step-box">
+                    <div class="step-header">
+                        <div class="step-number">2</div>
+                        <h3>Install Essential Libraries</h3>
+                    </div>
+                    <div class="step-content">
+                        <p>Install the core libraries you'll need for building AI agents. We'll start with a popular framework like LangChain and the necessary packages for your chosen LLM provider.</p>
+                        
+                        <div class="code-snippet">
+                            <pre>
+# Install core dependencies
+pip install langchain langchain-openai python-dotenv
+
+# For Anthropic's Claude models
+pip install langchain-anthropic
+
+# For vector stores and embedding
+pip install chromadb sentence-transformers
+                            </pre>
+                        </div>
+                        
+                        <p>These packages provide the foundation for building agents with tool use, memory, and knowledge retrieval capabilities.</p>
+                    </div>
+                </div>
+                
+                <div class="step-box">
+                    <div class="step-header">
+                        <div class="step-number">3</div>
+                        <h3>Set Up API Keys</h3>
+                    </div>
+                    <div class="step-content">
+                        <p>Create a <code>.env</code> file in your project root to securely store your API keys:</p>
+                        
+                        <div class="code-snippet">
+                            <pre>
+# .env file
+OPENAI_API_KEY=your_openai_api_key_here
+ANTHROPIC_API_KEY=your_anthropic_api_key_here
+                            </pre>
+                        </div>
+                        
+                        <p>Create a <code>.gitignore</code> file to ensure your API keys aren't accidentally published:</p>
+                        
+                        <div class="code-snippet">
+                            <pre>
+# .gitignore
+.env
+venv/
+__pycache__/
+*.pyc
+                            </pre>
+                        </div>
+                        
+                        <p>This approach keeps your sensitive keys secure while making them accessible to your code.</p>
+                    </div>
+                </div>
+                
+                <div class="step-box">
+                    <div class="step-header">
+                        <div class="step-number">4</div>
+                        <h3>Create Project Structure</h3>
+                    </div>
+                    <div class="step-content">
+                        <p>Set up a basic project structure to organize your code:</p>
+                        
+                        <div class="code-snippet">
+                            <pre>
+my-ai-agent/
+├── .env                  # API keys and configuration
+├── .gitignore            # Git ignore file
+├── main.py               # Entry point for your agent
+├── tools/                # Custom tools for your agent
+│   └── __init__.py
+├── prompts/              # Prompt templates
+│   └── __init__.py
+└── README.md             # Project documentation
+                            </pre>
+                        </div>
+                        
+                        <p>This structure will help keep your project organized as it grows in complexity.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="content-section" id="first-agent">
+        <div class="container content-container">
+            <div class="content-box">
+                <h2>Creating Your First Agent</h2>
+                
+                <p>Let's build a simple AI agent that can respond to questions and use a basic tool. This example uses LangChain with OpenAI's models, but the concepts apply to other frameworks and models as well.</p>
+                
+                <div class="code-snippet">
+                    <pre>
+# main.py
+import os
+from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
+from langchain.agents import Tool, create_react_agent, AgentExecutor
+from langchain.tools import DuckDuckGoSearchRun
+from langchain import hub
+
+# Load environment variables
+load_dotenv()
+
+def main():
+    # Initialize the language model
+    llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+    
+    # Initialize tools
+    search_tool = DuckDuckGoSearchRun()
+    
+    tools = [
+        Tool(
+            name="Web Search",
+            func=search_tool.run,
+            description="Useful for searching the web for current information."
+        )
+    ]
+    
+    # Get prompt from LangChain Hub
+    react_prompt = hub.pull("langchain/react-agent")
+    
+    # Create the agent
+    agent = create_react_agent(llm, tools, react_prompt)
+    
+    # Create an agent executor
+    agent_executor = AgentExecutor(
+        agent=agent,
+        tools=tools,
+        verbose=True,
+        handle_parsing_errors=True
+    )
+    
+    # Run the agent
+    print("AI Research Assistant initialized. Type 'exit' to quit.")
+    
+    while True:
+        user_input = input("\nYour question: ")
+        
+        if user_input.lower() == 'exit':
+            print("Goodbye!")
+            break
+            
+        try:
+            response = agent_executor.invoke({"input": user_input})
+            print(f"\nResponse: {response['output']}")
+        except Exception as e:
+            print(f"Error: {e}")
+
+if __name__ == "__main__":
+    main()
+                    </pre>
+                </div>
+                
+                <p>This basic agent can:</p>
+                <ul>
+                    <li>Understand user questions using the language model</li>
+                    <li>Decide when to use the search tool to find information</li>
+                    <li>Formulate appropriate search queries</li>
+                    <li>Process the search results to create a coherent response</li>
+                </ul>
+                
+                <p>Run this agent with the command <code>python main.py</code> in your terminal and ask it questions that might require web search!</p>
+                
+                <div class="example-box">
+                    <h4>Example Usage</h4>
+                    <pre>
+AI Research Assistant initialized. Type 'exit' to quit.
+
+Your question: What are the latest developments in AI agent frameworks?
+
+Response: Recent developments in AI agent frameworks include advancements in LangChain with improved agents and tool usage, AutoGen's multi-agent collaboration capabilities, CrewAI's specialized agent roles for complex tasks, LlamaIndex's enhanced retrieval features, and Microsoft's AutoGen framework for multi-agent systems. These frameworks are focusing on better reasoning, autonomous planning, and more reliable tool use to create more capable AI systems that can solve complex problems with less human supervision.
+                    </pre>
+                </div>
+            </div>
+            
+            <div class="next-steps">
+                <h3>Improving Your First Agent</h3>
+                <p>Now that you have a basic agent working, here are some ways to enhance it:</p>
+                <ul>
+                    <li>Add more tools like a calculator, weather API, or note-taking functionality</li>
+                    <li>Implement a memory system to remember previous interactions</li>
+                    <li>Create a knowledge retrieval system using vector embeddings</li>
+                    <li>Define better prompts to improve the agent's reasoning</li>
+                    <li>Add error handling and graceful fallbacks</li>
+                </ul>
+                <p>These improvements will make your agent more capable and reliable for real-world tasks.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="content-section" id="resources">
+        <div class="container content-container">
+            <div class="section-title">
+                <h2>Essential Resources</h2>
+                <p>Tools and references to help you on your AI agent development journey</p>
+            </div>
+            
+            <div class="resource-grid">
+                <div class="resource-item">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="#">LangChain Documentation</a></li>
+                        <li><a href="#">OpenAI API Reference</a></li>
+                        <li><a href="#">Anthropic Claude API Docs</a></li>
+                        <li><a href="#">LlamaIndex Guides</a></li>
+                    </ul>
+                </div>
+                
+                <div class="resource-item">
+                    <h4>Example Projects</h4>
+                    <ul>
+                        <li><a href="#">Research Assistant Agent</a></li>
+                        <li><a href="#">Document QA Bot</a></li>
+                        <li><a href="#">Data Analysis Agent</a></li>
+                        <li><a href="#">Personal Task Assistant</a></li>
+                    </ul>
+                </div>
+                
+                <div class="resource-item">
+                    <h4>Learning Materials</h4>
+                    <ul>
+                        <li><a href="#">Effective Prompt Engineering</a></li>
+                        <li><a href="#">Tool Creation Guide</a></li>
+                        <li><a href="#">Agent Memory Systems</a></li>
+                        <li><a href="#">RAG Implementation Tutorial</a></li>
+                    </ul>
+                </div>
+                
+                <div class="resource-item">
+                    <h4>Community & Support</h4>
+                    <ul>
+                        <li><a href="#">LangChain Discord</a></li>
+                        <li><a href="#">AI Agent Developer Forum</a></li>
+                        <li><a href="#">Stack Overflow - LangChain Tag</a></li>
+                        <li><a href="#">GitHub Discussions</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="content-box">
+                <h3>Next in Your Learning Journey</h3>
+                <p>Now that you've created your first basic agent, explore these topics to deepen your understanding:</p>
+                
+                <ul>
+                    <li><a href="frameworks.html">Compare different agent frameworks</a> to find the best fit for your projects</li>
+                    <li><a href="code-examples.html">Study more complex agent examples</a> to learn advanced techniques</li>
+                    <li><a href="advanced-features.html">Add advanced features</a> like memory, reasoning chains, and retrieval systems</li>
+                    <li><a href="deployment.html">Learn how to deploy your agents</a> as web services or applications</li>
+                </ul>
+                
+                <p>Continue building and experimenting with different agent designs to gain practical experience!</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>AI Agent Development Guide | Created to help developers build powerful AI solutions</p>
+        </div>
+    </footer>
+</body>
+</html>
