@@ -1581,45 +1581,64 @@ class DynamicPromptManager:
                         <p>Implement safeguards to ensure tools are used appropriately:</p>
                         <div class="code-block">
                             <code>
-# Example: Tool governance framework
+                                # Example: Tool governance framework
 
-class ToolGovernance:
-    def __init__(self):
-        self.tool_policies = {}
-        self.usage_logs = {}
-        self.alert_thresholds = {}
-    
-    def register_tool_policy(self, tool_name, allowed_use_cases, disallowed_use_cases, 
-                            usage_limit=None, approval_required=False):
-        """Register policies for a tool"""
-        self.tool_policies[tool_name] = {
-            "allowed_use_cases": allowed_use_cases,
-            "disallowed_use_cases": disallowed_use_cases,
-            "usage_limit": usage_limit,
-            "approval_required": approval_required
-        }
-        self.usage_logs[tool_name] = []
-    
-    def set_alert_threshold(self, tool_name, threshold, alert_handler):
-        """Set an alert threshold for a tool"""
-        self.alert_thresholds[tool_name] = {
-            "threshold": threshold,
-            "handler": alert_handler
-        }
-    
-    def check_tool_use_permission(self, tool_name, use_case_description, user_id=None):
-        """Check if a proposed tool use is permitted"""
-        if tool_name not in self.tool_policies:
-            return False, "Tool not registered in governance system"
-        
-        policy = self.tool_policies[tool_name]
-        
-        # Check if use case is explicitly disallowed
-        for disallowed in policy["disallowed_use_cases"]:
-            if disallowed.lower() in use_case_description.lower():
-                return False, f"Use case contains disallowed pattern: {disallowed}"
-        
-        # Check if use case matches allowed patterns
-        allowed = False
+                                class ToolGovernance:
+                                    def __init__(self):
+                                        self.tool_policies = {}
+                                        self.usage_logs = {}
+                                        self.alert_thresholds = {}
 
+                                    def register_tool_policy(self, tool_name, allowed_use_cases, disallowed_use_cases, 
+                                                            usage_limit=None, approval_required=False):
+                                        """Register policies for a tool"""
+                                        self.tool_policies[tool_name] = {
+                                            "allowed_use_cases": allowed_use_cases,
+                                            "disallowed_use_cases": disallowed_use_cases,
+                                            "usage_limit": usage_limit,
+                                            "approval_required": approval_required
+                                        }
+                                        self.usage_logs[tool_name] = []
+
+                                    def set_alert_threshold(self, tool_name, threshold, alert_handler):
+                                        """Set an alert threshold for a tool"""
+                                        self.alert_thresholds[tool_name] = {
+                                            "threshold": threshold,
+                                            "handler": alert_handler
+                                        }
+
+                                    def check_tool_use_permission(self, tool_name, use_case_description, user_id=None):
+                                        """Check if a proposed tool use is permitted"""
+                                        if tool_name not in self.tool_policies:
+                                            return False, "Tool not registered in governance system"
+                                        
+                                        policy = self.tool_policies[tool_name]
+                                        
+                                        # Check if use case is explicitly disallowed
+                                        for disallowed in policy["disallowed_use_cases"]:
+                                            if disallowed.lower() in use_case_description.lower():
+                                                return False, f"Use case contains disallowed pattern: {disallowed}"
+                                        
+                                        # Check if use case matches allowed patterns
+                                        allowed = False
+                                        for allowed_use_case in policy["allowed_use_cases"]:
+                                            if allowed_use_case.lower() in use_case_description.lower():
+                                                allowed = True
+                                                break
+                                        
+                                        if not allowed:
+                                            return False, "Use case does not match allowed patterns"
+
+                                        # Check if usage limit is exceeded
+                                        if "usage_limit" in policy and len(self.usage_logs[tool_name]) >= policy["usage_limit"]:
+                                            return False, f"Tool usage limit exceeded: {policy['usage_limit']}"
+
+                                        # Check if approval is required
+                                        if "approval_required" in policy and user_id is None:
+                                            return False, "Tool usage requires approval"
+
+                                        return True, "Tool use permitted"
+                            </code>
+                        </div>
+                    </li>
         

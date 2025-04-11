@@ -4,90 +4,177 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='20' y='20' width='24' height='24' rx='4' fill='%234F46E5'/%3E%3Ccircle cx='12' cy='12' r='4' fill='%2310B981'/%3E%3Ccircle cx='52' cy='12' r='4' fill='%2310B981'/%3E%3Ccircle cx='12' cy='52' r='4' fill='%2310B981'/%3E%3Ccircle cx='52' cy='52' r='4' fill='%2310B981'/%3E%3Cline x1='16' y1='16' x2='20' y2='20' stroke='%2310B981' stroke-width='2'/%3E%3Cline x1='48' y1='16' x2='44' y2='20' stroke='%2310B981' stroke-width='2'/%3E%3Cline x1='16' y1='48' x2='20' y2='44' stroke='%2310B981' stroke-width='2'/%3E%3Cline x1='48' y1='48' x2='44' y2='44' stroke='%2310B981' stroke-width='2'/%3E%3Ccircle cx='32' cy='32' r='2' fill='%23F9FAFB'/%3E%3Ccircle cx='28' cy='28' r='1.5' fill='%23F9FAFB'/%3E%3Ccircle cx='36' cy='36' r='1.5' fill='%23F9FAFB'/%3E%3Ccircle cx='28' cy='36' r='1.5' fill='%23F9FAFB'/%3E%3Ccircle cx='36' cy='28' r='1.5' fill='%23F9FAFB'/%3E%3C/svg%3E">
-    <title>Introduction to AI Agents | AI Agent Development Guide</title>
+    <title>Introduction to AI Agents</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        header {
-            padding: 2rem 0;
-        }
-        
-        .image-container {
-            text-align: center;
-            margin: 2rem 0;
-        }
-        
-        .image-container img {
-            max-width: 100%;
-            border-radius: 4px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        .caption {
-            margin-top: 0.5rem;
-            color: var(--gray);
-            font-style: italic;
-        }
-        
-        .callout {
-            background-color: rgba(79, 70, 229, 0.1);
+        .definition-box {
+            background-color: var(--light);
             border-left: 4px solid var(--primary);
             padding: 1.5rem;
             margin: 1.5rem 0;
             border-radius: 0 4px 4px 0;
         }
         
-        .callout h4 {
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .info-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .info-card h3 {
+            color: var(--primary);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .info-card h3 span {
+            margin-right: 0.75rem;
+            font-size: 1.5rem;
+        }
+        
+        .ai-evolution {
+            margin: 3rem 0;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 20px;
+            width: 4px;
+            background: var(--primary);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 60px;
+        }
+        
+        .timeline-date {
+            position: absolute;
+            left: 0;
+            width: 40px;
+            height: 40px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-content h3 {
             margin-top: 0;
             color: var(--primary);
         }
         
-        .next-steps {
-            background-color: var(--light);
-            padding: 3rem 0;
-            text-align: center;
+        .use-cases {
+            margin: 3rem 0;
         }
         
-        .next-steps h2 {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
+        .use-case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
         }
         
-        .button-container {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
+        .use-case-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         
-        .button {
-            display: inline-block;
+        .use-case-header {
             background-color: var(--primary);
             color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.3s;
+            padding: 1rem;
         }
         
-        .button:hover {
-            background-color: var(--primary-dark);
+        .use-case-header h3 {
+            margin: 0;
         }
         
-        .button.secondary {
-            background-color: var(--secondary);
+        .use-case-content {
+            padding: 1.5rem;
         }
         
-        .button.secondary:hover {
-            background-color: #0EA271;
+        .use-case-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .next-step-box {
+            background-color: var(--light);
+            border: 2px solid var(--secondary);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            margin: 3rem 0;
+        }
+        
+        .next-step-box h2 {
+            color: var(--secondary);
+            margin-top: 0;
+        }
+        
+        .next-step-box .cta-button {
+            margin-top: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 15px;
+            }
+            
+            .timeline-item {
+                padding-left: 50px;
+            }
+            
+            .timeline-date {
+                width: 30px;
+                height: 30px;
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>AI Agent Development Guide</h1>
-            <p>Learn to build powerful AI agents for specific tasks</p>
+            <h1>Introduction to AI Agents</h1>
+            <p>Understanding intelligent software that performs tasks autonomously</p>
         </div>
     </header>
     
@@ -95,11 +182,11 @@
         <div class="container">
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="introduction.html">Introduction</a></li>
-                <li><a href="frameworks.html">Frameworks</a></li>
-                <li><a href="code-examples.html">Code Examples</a></li>
-                <li><a href="tutorials.html">Tutorials</a></li>
-                <li><a href="resources.html">Resources</a></li>
+                <li><a href="#what-are-ai-agents">What Are AI Agents</a></li>
+                <li><a href="#components">Key Components</a></li>
+                <li><a href="#evolution">Evolution</a></li>
+                <li><a href="#use-cases">Use Cases</a></li>
+                <li><a href="#getting-started">Getting Started</a></li>
             </ul>
         </div>
     </nav>
@@ -108,335 +195,274 @@
         <div class="container">
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li class="current">Introduction to AI Agents</li>
+                <li class="current">Introduction</li>
             </ul>
         </div>
     </div>
     
-    <section class="content-section">
-        <div class="content-container">
+    <section class="content-section" id="what-are-ai-agents">
+        <div class="container content-container">
+            <div class="content-box">
+                <h2>What Are AI Agents?</h2>
+                
+                <p>AI agents are software systems that can perceive their environment, make decisions, and take actions to achieve specific goals. Unlike traditional software that follows explicit instructions, AI agents can operate with varying degrees of autonomy and adapt their behavior based on feedback and changing circumstances.</p>
+                
+                <div class="definition-box">
+                    <h3>Definition</h3>
+                    <p>An <strong>AI agent</strong> is a system that can perceive its environment through sensors, process the information based on its knowledge or models, and then act upon the environment using actuators or tools to achieve specific objectives.</p>
+                </div>
+                
+                <p>Modern AI agents are often powered by large language models (LLMs) or other foundation models that provide the reasoning capabilities, allowing the agent to:</p>
+                
+                <ul>
+                    <li><strong>Understand natural language instructions</strong> from users</li>
+                    <li><strong>Plan</strong> a sequence of actions to achieve goals</li>
+                    <li><strong>Execute</strong> those actions through integration with external tools and APIs</li>
+                    <li><strong>Learn and adapt</strong> based on feedback and new information</li>
+                </ul>
+                
+                <p>AI agents can range from simple rule-based systems to complex autonomous systems that utilize multiple AI models and techniques to solve problems in specific domains.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="content-section" id="components">
+        <div class="container content-container">
             <div class="section-title">
-                <h1>Introduction to AI Agents</h1>
-                <p>Understanding the fundamentals of AI agents and how they work</p>
+                <h2>Key Components of AI Agents</h2>
+                <p>Understanding the building blocks that make AI agents work</p>
             </div>
             
-            <div class="content-box">
-                <h2>What are AI Agents?</h2>
-                <p>AI agents are autonomous or semi-autonomous software systems that can perceive their environment, make decisions, and take actions to achieve specific goals. Unlike traditional AI systems that may perform specific, isolated tasks, AI agents are designed to operate with a degree of independence, solving problems through a combination of:</p>
-                
-                <ul>
-                    <li><strong>Perception</strong> - Gathering information from their environment</li>
-                    <li><strong>Reasoning</strong> - Processing information to make decisions</li>
-                    <li><strong>Planning</strong> - Determining sequences of actions to achieve goals</li>
-                    <li><strong>Action</strong> - Executing those plans in the environment</li>
-                    <li><strong>Learning</strong> - Improving performance over time</li>
-                </ul>
-                
-                <p>Modern AI agents are often built on top of foundation models like Large Language Models (LLMs), which provide them with powerful reasoning and language understanding capabilities.</p>
-                
-                <div class="image-container">
-                    <img src="/api/placeholder/700/400" alt="AI Agent Components">
-                    <p class="caption">Figure 1: Core components of an AI agent system</p>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3><span>🧠</span>Foundation Model</h3>
+                    <p>The core AI model (often an LLM like GPT-4, Claude, or Llama) that provides reasoning, language understanding, and generation capabilities. This serves as the "brain" of the agent.</p>
                 </div>
-            </div>
-            
-            <div class="content-box">
-                <h2>Types of AI Agents</h2>
                 
-                <h3>Based on Capabilities</h3>
-                <ul>
-                    <li><strong>Simple Reflex Agents</strong> - React based on current perceptions only</li>
-                    <li><strong>Model-Based Agents</strong> - Maintain internal models of their environment</li>
-                    <li><strong>Goal-Based Agents</strong> - Work toward achieving specific objectives</li>
-                    <li><strong>Utility-Based Agents</strong> - Optimize actions based on utility functions</li>
-                    <li><strong>Learning Agents</strong> - Improve performance through experience</li>
-                </ul>
-                
-                <h3>Based on Application Areas</h3>
-                <ul>
-                    <li><strong>Conversational Agents</strong> - Chatbots, virtual assistants, customer service agents</li>
-                    <li><strong>Research Agents</strong> - Information gathering, synthesis, and analysis</li>
-                    <li><strong>Creative Agents</strong> - Content generation, design assistance</li>
-                    <li><strong>Code Agents</strong> - Programming assistance, code generation and analysis</li>
-                    <li><strong>Workflow Agents</strong> - Process automation, task management</li>
-                    <li><strong>Multi-Agent Systems</strong> - Multiple coordinated agents working together</li>
-                </ul>
-                
-                <div class="callout">
-                    <h4>Key Insight</h4>
-                    <p>The most powerful AI agents today combine the reasoning capabilities of LLMs with the ability to use tools, access specific knowledge sources, and execute code - creating systems that can tackle complex, multi-step problems.</p>
+                <div class="info-card">
+                    <h3><span>🔍</span>Perception System</h3>
+                    <p>Components that allow the agent to receive and process inputs from its environment, including user instructions, documents, data, or sensory information.</p>
                 </div>
-            </div>
-            
-            <div class="content-box">
-                <h2>Core Components of Modern AI Agents</h2>
                 
-                <h3>1. Foundation Models</h3>
-                <p>The "brain" of most modern AI agents is a foundation model - typically a Large Language Model (LLM) like GPT-4, Claude, or Llama. These models provide:</p>
-                <ul>
-                    <li>Natural language understanding and generation</li>
-                    <li>Reasoning capabilities</li>
-                    <li>Knowledge encoded during pre-training</li>
-                    <li>Ability to follow instructions</li>
-                </ul>
-                
-                <h3>2. Memory Systems</h3>
-                <p>AI agents need memory to maintain context over time:</p>
-                <ul>
-                    <li><strong>Short-term memory</strong> - Current conversation or task context</li>
-                    <li><strong>Long-term memory</strong> - Persistent storage of important information</li>
-                    <li><strong>Episodic memory</strong> - Records of past interactions and their outcomes</li>
-                </ul>
-                
-                <h3>3. Tool Use</h3>
-                <p>Agents become more powerful when they can use external tools:</p>
-                <ul>
-                    <li>Web search and browsing</li>
-                    <li>API calls to external services</li>
-                    <li>Database queries</li>
-                    <li>Code execution</li>
-                    <li>File system operations</li>
-                </ul>
-                
-                <h3>4. Knowledge Retrieval</h3>
-                <p>Agents can access specific knowledge through:</p>
-                <ul>
-                    <li><strong>RAG (Retrieval-Augmented Generation)</strong> - Retrieving relevant documents or data</li>
-                    <li><strong>Knowledge Graphs</strong> - Structured information about entities and relationships</li>
-                    <li><strong>Vector Databases</strong> - Semantic search over large corpuses</li>
-                </ul>
-                
-                <h3>5. Planning and Reasoning</h3>
-                <p>Advanced agents employ structured approaches to problem-solving:</p>
-                <ul>
-                    <li><strong>Chain-of-Thought</strong> - Step-by-step reasoning</li>
-                    <li><strong>Tree-of-Thought</strong> - Exploring multiple reasoning paths</li>
-                    <li><strong>ReAct</strong> - Alternating between reasoning and acting</li>
-                    <li><strong>Reflexion</strong> - Self-reflection and error correction</li>
-                </ul>
-                
-                <div class="example-box">
-                    <h4>Example: ReAct Framework</h4>
-                    <p>The ReAct framework combines reasoning and acting in a loop:</p>
-                    <ol>
-                        <li><strong>Thought</strong>: The agent considers what it knows and what it needs to do</li>
-                        <li><strong>Action</strong>: The agent takes an action (using a tool, making an API call, etc.)</li>
-                        <li><strong>Observation</strong>: The agent observes the result of its action</li>
-                        <li><strong>Repeat</strong>: The cycle continues until the task is complete</li>
-                    </ol>
-                    <div class="code-block">
-                        <code>
-# Simplified ReAct pattern in Python
-def react_agent(task, tools):
-    while not task.is_complete():
-        # Reasoning step
-        thought = llm.generate_thought(task.context)
-        
-        # Action selection
-        action = llm.select_action(thought, available_tools=tools)
-        
-        # Execute action
-        result = action.execute()
-        
-        # Update context with observation
-        task.update_context(thought, action, result)
-        
-    return task.get_final_answer()
-                        </code>
-                    </div>
+                <div class="info-card">
+                    <h3><span>🛠️</span>Tool Integration</h3>
+                    <p>Connections to external tools, APIs, and services that expand the agent's capabilities beyond just conversation, allowing it to take actions in the digital world.</p>
                 </div>
-            </div>
-            
-            <div class="content-box">
-                <h2>Building Your First AI Agent</h2>
                 
-                <p>Building an AI agent involves several key steps:</p>
-                
-                <h3>1. Define the Agent's Purpose</h3>
-                <p>Start by clearly defining what your agent will do:</p>
-                <ul>
-                    <li>What specific problem will it solve?</li>
-                    <li>What are its goals and constraints?</li>
-                    <li>How will it interact with users or systems?</li>
-                </ul>
-                
-                <h3>2. Choose Your Foundation Model</h3>
-                <p>Select an appropriate LLM based on:</p>
-                <ul>
-                    <li>Reasoning capabilities required</li>
-                    <li>Cost considerations</li>
-                    <li>Deployment requirements (cloud API vs. local)</li>
-                    <li>Specialized knowledge needed</li>
-                </ul>
-                
-                <h3>3. Design the Agent Architecture</h3>
-                <p>Determine how your agent will:</p>
-                <ul>
-                    <li>Process inputs and generate outputs</li>
-                    <li>Maintain context and memory</li>
-                    <li>Make decisions and plan actions</li>
-                    <li>Access external tools and knowledge</li>
-                </ul>
-                
-                <h3>4. Implement Using a Framework</h3>
-                <p>Choose a framework that matches your needs:</p>
-                <ul>
-                    <li><strong>LangChain</strong> - Flexible, comprehensive framework for building LLM applications</li>
-                    <li><strong>AutoGen</strong> - Multi-agent conversation framework</li>
-                    <li><strong>LlamaIndex</strong> - Data framework for connecting LLMs to external data</li>
-                    <li><strong>CrewAI</strong> - Framework for creating multiple agents that work together</li>
-                </ul>
-                
-                <h3>5. Test and Refine</h3>
-                <p>Iteratively improve your agent by:</p>
-                <ul>
-                    <li>Testing with various inputs and scenarios</li>
-                    <li>Refining prompts and instructions</li>
-                    <li>Optimizing tool usage and workflows</li>
-                    <li>Gathering user feedback</li>
-                </ul>
-                
-                <div class="callout">
-                    <h4>Pro Tip</h4>
-                    <p>Start simple and add complexity incrementally. Begin with a basic agent that performs a core function well, then gradually add features like memory, tool use, and more advanced reasoning as needed.</p>
+                <div class="info-card">
+                    <h3><span>📚</span>Knowledge Base</h3>
+                    <p>Information sources the agent can reference, including vector databases, retrieval systems, or structured knowledge graphs that provide domain-specific expertise.</p>
                 </div>
-            </div>
-            
-            <div class="content-box">
-                <h2>Common AI Agent Patterns</h2>
                 
-                <h3>Single-Purpose Agents</h3>
-                <p>Focused on doing one thing exceptionally well:</p>
-                <ul>
-                    <li>Research assistants that gather and synthesize information</li>
-                    <li>Writing assistants that help draft specific types of content</li>
-                    <li>Coding assistants that generate or review code</li>
-                </ul>
-                
-                <h3>Tool-Using Agents</h3>
-                <p>Agents that leverage external tools to extend their capabilities:</p>
-                <ul>
-                    <li>Browsing the web to find current information</li>
-                    <li>Executing code to perform calculations or data processing</li>
-                    <li>Calling APIs to access external services</li>
-                </ul>
-                
-                <h3>Multi-Agent Systems</h3>
-                <p>Multiple specialized agents working together:</p>
-                <ul>
-                    <li>Agent teams with different roles (researcher, writer, critic)</li>
-                    <li>Agents that debate or critique each other's work</li>
-                    <li>Hierarchical agent systems with managers and workers</li>
-                </ul>
-                
-                <h3>Autonomous Agents</h3>
-                <p>Agents that can operate with minimal human supervision:</p>
-                <ul>
-                    <li>Setting their own goals based on high-level directives</li>
-                    <li>Breaking complex tasks into subtasks</li>
-                    <li>Monitoring progress and adapting to changing conditions</li>
-                </ul>
-                
-                <div class="example-box">
-                    <h4>Example: Multi-Agent Debate System</h4>
-                    <div class="code-block">
-                        <code>
-# Simplified multi-agent debate in Python
-from langchain.agents import Agent
-
-def create_debate(topic, num_rounds=3):
-    # Create specialized agents
-    proposer = Agent(name="Proposer", system_prompt="You argue FOR the given topic...")
-    opposer = Agent(name="Opposer", system_prompt="You argue AGAINST the given topic...")
-    moderator = Agent(name="Moderator", system_prompt="You evaluate arguments and provide balanced feedback...")
-    
-    debate_history = []
-    
-    # Run debate rounds
-    for round in range(num_rounds):
-        # Proposer's turn
-        proposer_arg = proposer.generate(
-            topic=topic, 
-            history=debate_history,
-            round=round
-        )
-        debate_history.append({"role": "proposer", "content": proposer_arg})
-        
-        # Opposer's turn
-        opposer_arg = opposer.generate(
-            topic=topic,
-            history=debate_history,
-            round=round
-        )
-        debate_history.append({"role": "opposer", "content": opposer_arg})
-        
-        # Moderator feedback
-        feedback = moderator.generate(
-            topic=topic,
-            history=debate_history,
-            round=round
-        )
-        debate_history.append({"role": "moderator", "content": feedback})
-    
-    # Generate final summary
-    return moderator.generate_summary(topic=topic, history=debate_history)
-                        </code>
-                    </div>
+                <div class="info-card">
+                    <h3><span>🔄</span>Planning & Reasoning</h3>
+                    <p>The ability to break down complex tasks into steps, reason about the best approach, and adapt plans as circumstances change.</p>
                 </div>
-            </div>
-            
-            <div class="content-box">
-                <h2>Challenges and Considerations</h2>
                 
-                <h3>Hallucination and Accuracy</h3>
-                <p>LLM-based agents may generate plausible-sounding but incorrect information. Mitigate this by:</p>
-                <ul>
-                    <li>Using RAG to ground responses in verified information</li>
-                    <li>Implementing fact-checking mechanisms</li>
-                    <li>Designing self-verification steps</li>
-                </ul>
-                
-                <h3>Context Limitations</h3>
-                <p>LLMs have finite context windows, limiting how much information they can process at once:</p>
-                <ul>
-                    <li>Implement effective memory management</li>
-                    <li>Use summarization to condense information</li>
-                    <li>Develop strategies for handling long-running tasks</li>
-                </ul>
-                
-                <h3>Cost and Latency</h3>
-                <p>Sophisticated agents can be expensive and slow:</p>
-                <ul>
-                    <li>Optimize prompt design to reduce token usage</li>
-                    <li>Consider using smaller models for certain tasks</li>
-                    <li>Implement caching strategies for common operations</li>
-                </ul>
-                
-                <h3>Security and Safety</h3>
-                <p>Agents with tool access require careful security considerations:</p>
-                <ul>
-                    <li>Implement proper authentication and authorization</li>
-                    <li>Set clear boundaries on what actions agents can take</li>
-                    <li>Monitor and log agent activities</li>
-                </ul>
-                
-                <div class="callout">
-                    <h4>Important</h4>
-                    <p>Always design AI agents with appropriate safeguards and limitations. Unrestricted tool use or overly broad capabilities can lead to security vulnerabilities or unintended consequences.</p>
+                <div class="info-card">
+                    <h3><span>🧩</span>Memory System</h3>
+                    <p>Mechanisms for retaining relevant context, conversation history, or learned information to inform future decisions and maintain coherence.</p>
                 </div>
             </div>
         </div>
     </section>
     
-    <section class="next-steps">
-        <div class="container">
-            <h2>Ready to Build Your First AI Agent?</h2>
-            <p>Continue your learning journey with these next steps</p>
+    <section class="content-section ai-evolution" id="evolution">
+        <div class="container content-container">
+            <div class="section-title">
+                <h2>Evolution of AI Agents</h2>
+                <p>From simple scripts to autonomous systems</p>
+            </div>
             
-            <div class="button-container">
-                <a href="frameworks.html" class="button">Explore Frameworks</a>
-                <a href="first-agent.html" class="button secondary">Build Your First Agent</a>
-                <a href="code-examples.html" class="button">View Code Examples</a>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">1</div>
+                    <div class="timeline-content">
+                        <h3>Rule-Based Systems</h3>
+                        <p>Early AI agents relied on explicit if-then rules programmed by humans. These systems could only handle predefined scenarios and lacked the ability to adapt to new situations.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">2</div>
+                    <div class="timeline-content">
+                        <h3>Machine Learning Integration</h3>
+                        <p>Agents began incorporating statistical models and machine learning to improve decision-making and pattern recognition, allowing for more flexible responses to varied inputs.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">3</div>
+                    <div class="timeline-content">
+                        <h3>Conversational Interfaces</h3>
+                        <p>With advances in natural language processing, AI agents gained the ability to understand and respond to human language, making them more accessible and user-friendly.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">4</div>
+                    <div class="timeline-content">
+                        <h3>LLM-Powered Agents</h3>
+                        <p>The emergence of large language models like GPT and Claude created a paradigm shift, enabling agents with much stronger reasoning, planning, and language capabilities.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">5</div>
+                    <div class="timeline-content">
+                        <h3>Tool-Using Agents</h3>
+                        <p>Modern agents can now use external tools, APIs, and services to extend their capabilities beyond conversation, allowing them to perform real actions in digital environments.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">6</div>
+                    <div class="timeline-content">
+                        <h3>Multi-Agent Systems</h3>
+                        <p>The latest development involves multiple specialized agents working together in coordinated systems, collaborating to solve complex problems through division of labor.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="content-section use-cases" id="use-cases">
+        <div class="container content-container">
+            <div class="section-title">
+                <h2>Common Use Cases for AI Agents</h2>
+                <p>Real-world applications of AI agent technology</p>
+            </div>
+            
+            <div class="use-case-grid">
+                <div class="use-case-card">
+                    <div class="use-case-header">
+                        <h3>Research Assistants</h3>
+                    </div>
+                    <div class="use-case-content">
+                        <p>AI agents that can search multiple sources, synthesize information, and generate comprehensive research reports on specific topics.</p>
+                        <p>These agents can save researchers hours of manual searching and summarization work.</p>
+                    </div>
+                </div>
+                
+                <div class="use-case-card">
+                    <div class="use-case-header">
+                        <h3>Customer Support</h3>
+                    </div>
+                    <div class="use-case-content">
+                        <p>Agents that can understand customer inquiries, access relevant knowledge bases, and either resolve issues directly or route to appropriate human support.</p>
+                        <p>They can operate 24/7 and handle multiple conversations simultaneously.</p>
+                    </div>
+                </div>
+                
+                <div class="use-case-card">
+                    <div class="use-case-header">
+                        <h3>Data Analysis</h3>
+                    </div>
+                    <div class="use-case-content">
+                        <p>Specialized agents that can process large datasets, identify patterns, generate visualizations, and provide insights in natural language.</p>
+                        <p>They make data analysis accessible to non-technical users through conversational interfaces.</p>
+                    </div>
+                </div>
+                
+                <div class="use-case-card">
+                    <div class="use-case-header">
+                        <h3>Personal Assistants</h3>
+                    </div>
+                    <div class="use-case-content">
+                        <p>Agents that help manage calendars, set reminders, draft emails, and perform other administrative tasks through natural language instructions.</p>
+                        <p>They can integrate with various productivity tools and services.</p>
+                    </div>
+                </div>
+                
+                <div class="use-case-card">
+                    <div class="use-case-header">
+                        <h3>Code Generation</h3>
+                    </div>
+                    <div class="use-case-content">
+                        <p>Developer-focused agents that can generate code based on requirements, explain existing code, debug issues, and even execute code to test solutions.</p>
+                        <p>These agents accelerate development workflows and help with programming education.</p>
+                    </div>
+                </div>
+                
+                <div class="use-case-card">
+                    <div class="use-case-header">
+                        <h3>Autonomous Systems</h3>
+                    </div>
+                    <div class="use-case-content">
+                        <p>Complex agents that can monitor environments, make decisions, and take actions without human intervention, such as in automated trading, network management, or IoT systems.</p>
+                        <p>These require robust safety mechanisms and oversight.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="content-section" id="getting-started">
+        <div class="container content-container">
+            <div class="content-box">
+                <h2>How AI Agents Work: A Simple Example</h2>
+                
+                <p>To understand how AI agents function, let's look at a simple example of a research agent tasked with gathering information about climate change:</p>
+                
+                <ol>
+                    <li><strong>User Input:</strong> The user asks the agent to "Create a report on the latest research about climate change mitigation strategies."</li>
+                    <li><strong>Understanding:</strong> The agent's foundation model (LLM) processes this request and understands that it needs to find recent research on climate change mitigation.</li>
+                    <li><strong>Planning:</strong> The agent creates a plan: 1) Search for recent papers, 2) Extract key findings, 3) Organize the information, and 4) Generate a comprehensive report.</li>
+                    <li><strong>Tool Use:</strong> The agent uses a search tool to find recent papers and research on climate change mitigation strategies.</li>
+                    <li><strong>Information Processing:</strong> The agent processes the information it finds, identifying key themes, approaches, and findings.</li>
+                    <li><strong>Report Generation:</strong> Using its language capabilities, the agent creates a structured report summarizing the latest research.</li>
+                    <li><strong>Delivery:</strong> The agent presents the completed report to the user, who can ask follow-up questions or request modifications.</li>
+                </ol>
+                
+                <div class="example-box">
+                    <h4>Code Example: Simple AI Agent Structure</h4>
+                    <pre>
+from langchain import LLMChain, PromptTemplate
+from langchain.agents import Tool, initialize_agent
+from langchain.llms import OpenAI
+
+# Initialize the foundation model (LLM)
+llm = OpenAI(temperature=0)
+
+# Define tools the agent can use
+search_tool = Tool(
+    name="Search",
+    func=search_function,  # Function that performs a search
+    description="Search for information on the web"
+)
+
+document_reader = Tool(
+    name="ReadDocument",
+    func=read_document,  # Function that reads and extracts info from documents
+    description="Read and extract information from documents"
+)
+
+# Define the tools available to the agent
+tools = [search_tool, document_reader]
+
+# Initialize the agent
+agent = initialize_agent(
+    tools, 
+    llm, 
+    agent="zero-shot-react-description",
+    verbose=True
+)
+
+# Use the agent to perform a task
+result = agent.run(
+    "Create a report on the latest research about climate change mitigation strategies."
+)
+                    </pre>
+                </div>
+                
+                <p>This simplified example illustrates the core components of an AI agent: understanding user instructions, planning, using tools to gather information, processing that information, and generating a response that fulfills the user's request.</p>
+            </div>
+            
+            <div class="next-step-box">
+                <h2>Ready to Build Your First AI Agent?</h2>
+                <p>Now that you understand the basics of AI agents, it's time to start building your own. Explore our step-by-step guides to get started with practical implementation.</p>
+                <a href="frameworks.html" class="cta-button">Explore AI Agent Frameworks</a>
+                <a href="first-agent.html" class="cta-button">Build Your First Agent</a>
             </div>
         </div>
     </section>

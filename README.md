@@ -87,5 +87,5 @@ Contributions to improve the documentation or add new examples are welcome. Plea
 
 ## License
 
-This project is licensed under the Apache License 2.0 - a permissive license that allows you to freely use, modify, distribute, and sell your software based on this project, provided you include the required notices.  
+This project is licensed under the Apache 2.0 License - a permissive license that allows you to freely use, modify, distribute, and sell your software based on this project, provided you include the required notices.  
 This license also provides an express grant of patent rights from contributors.
