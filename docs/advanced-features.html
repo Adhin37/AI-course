@@ -1713,6 +1713,8 @@ class DynamicPromptManager:
 <code class="language-python">
 # Example: Tool governance framework
 
+import time
+
 class ToolGovernance:
     def __init__(self):
         self.tool_policies = {}
@@ -1760,11 +1762,11 @@ class ToolGovernance:
             return False, "Use case does not match allowed patterns"
 
         # Check if usage limit is exceeded
-        if "usage_limit" in policy and len(self.usage_logs[tool_name]) >= policy["usage_limit"]:
+        if policy["usage_limit"] and len(self.usage_logs[tool_name]) >= policy["usage_limit"]:
             return False, f"Tool usage limit exceeded: {policy['usage_limit']}"
 
         # Check if approval is required
-        if "approval_required" in policy and user_id is None:
+        if policy["approval_required"] and user_id is None:
             return False, "Tool usage requires approval"
 
         return True, "Tool use permitted"
@@ -1987,7 +1989,7 @@ class AgentEvaluator:
                         <a href="deployment.html" class="cta-button">Continue to Deployment →</a>
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
     </section>
 
