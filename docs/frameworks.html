@@ -54,7 +54,7 @@
             background-color: var(--secondary);
         }
         
-        .framework-card {
+        .component-card {
             background-color: white;
             border-radius: 8px;
             margin-bottom: 3rem;
@@ -62,7 +62,7 @@
             overflow: hidden;
         }
         
-        .framework-header {
+        .component-header {
             background-color: var(--primary);
             color: white;
             padding: 1rem;
@@ -73,10 +73,20 @@
             align-items: center;
         }
         
-        .framework-header h3 {
+        .component-header h3 {
             margin: 0;
         }
         
+        .component-content {
+            padding: 1.5rem;
+        }
+        
+        .component-footer {
+            background-color: #F3F4F6;
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #E5E7EB;
+        }
+
         .tag {
             background-color: rgba(255, 255, 255, 0.2);
             padding: 0.25rem 0.5rem;
@@ -84,11 +94,7 @@
             font-size: 0.85rem;
             font-weight: 500;
         }
-        
-        .framework-content {
-            padding: 1.5rem;
-        }
-        
+
         .pros-cons {
             display: flex;
             gap: 1.5rem;
@@ -145,13 +151,7 @@
             color: var(--primary);
         }
         
-        .framework-footer {
-            background-color: #F3F4F6;
-            padding: 1rem 1.5rem;
-            border-top: 1px solid #E5E7EB;
-        }
-        
-        .decision-guide {
+        .selection-guide {
             margin-top: 3rem;
             padding: 2rem;
             background-color: white;
@@ -159,29 +159,29 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         
-        .decision-flow {
+        .selection-flow {
             margin-top: 2rem;
             padding: 1.5rem;
             background-color: #F3F4F6;
             border-radius: 8px;
         }
         
-        .decision-flow h4 {
+        .selection-flow h4 {
             margin-top: 0;
             color: var(--primary);
         }
         
-        .decision-step {
+        .selection-step {
             margin-bottom: 1.5rem;
             padding-left: 1.5rem;
             border-left: 3px solid var(--primary);
         }
         
-        .decision-step:last-child {
+        .selection-step:last-child {
             margin-bottom: 0;
         }
         
-        .decision-step h5 {
+        .selection-step h5 {
             margin-top: 0;
             color: var(--primary);
         }
@@ -532,13 +532,13 @@
         <div class="container">
             <h2 class="section-title" id="langchain">LangChain</h2>
             
-            <div class="framework-card">
-                <div class="framework-header">
+            <div class="component-card">
+                <div class="component-header">
                     <h3>LangChain Framework</h3>
                     <span class="tag">Most Popular</span>
                 </div>
                 
-                <div class="framework-content">
+                <div class="component-content">
                     <p>
                         LangChain is a comprehensive framework designed to build applications powered by language models. It provides an extensive collection of components for working with LLMs, including chains, agents, memory systems, and tool integration, making it one of the most flexible and widely-used frameworks for AI agent development.
                     </p>
@@ -582,7 +582,7 @@
                     </div>
                 </div>
                 
-                <div class="framework-footer">
+                <div class="component-footer">
                     <h4>Resources</h4>
                     <ul class="resources-list">
                         <li><a href="code-examples.html#basic">Basic LangChain Agent Example</a></li>
@@ -599,13 +599,13 @@
         <div class="container">
             <h2 class="section-title" id="autogen">AutoGen</h2>
             
-            <div class="framework-card">
-                <div class="framework-header">
+            <div class="component-card">
+                <div class="component-header">
                     <h3>AutoGen Framework</h3>
                     <span class="tag">Multi-Agent Focused</span>
                 </div>
                 
-                <div class="framework-content">
+                <div class="component-content">
                     <p>
                         AutoGen is a framework developed by Microsoft Research that specializes in building conversational multi-agent systems. It enables the creation of customizable, conversational agents that can work together to solve complex tasks through dynamic conversation flows and collaborative problem-solving.
                     </p>
@@ -649,7 +649,7 @@
                     </div>
                 </div>
                 
-                <div class="framework-footer">
+                <div class="component-footer">
                     <h4>Resources</h4>
                     <ul class="resources-list">
                         <li><a href="code-examples.html#multi-agent">AutoGen Multi-Agent Conversation Example</a></li>
@@ -664,13 +664,13 @@
         <div class="container">
             <h2 class="section-title" id="llamaindex">LlamaIndex</h2>
             
-            <div class="framework-card">
-                <div class="framework-header">
+            <div class="component-card">
+                <div class="component-header">
                     <h3>LlamaIndex Framework</h3>
                     <span class="tag">RAG Specialist</span>
                 </div>
                 
-                <div class="framework-content">
+                <div class="component-content">
                     <p>
                         LlamaIndex (formerly GPT Index) is a data framework for LLM applications to ingest, structure, and access private or domain-specific data. It specializes in retrieval-augmented generation (RAG) use cases, making it an excellent choice for applications that need to ground LLM responses in specific data sources.
                     </p>
@@ -714,7 +714,7 @@
                     </div>
                 </div>
                 
-                <div class="framework-footer">
+                <div class="component-footer">
                     <h4>Resources</h4>
                     <ul class="resources-list">
                         <li><a href="code-examples.html#llamaindex-rag">LlamaIndex RAG Example</a></li>
@@ -730,13 +730,13 @@
         <div class="container">
             <h2 class="section-title" id="crewai">CrewAI</h2>
             
-            <div class="framework-card">
-                <div class="framework-header">
+            <div class="component-card">
+                <div class="component-header">
                     <h3>CrewAI Framework</h3>
                     <span class="tag">Role-Based Collaboration</span>
                 </div>
                 
-                <div class="framework-content">
+                <div class="component-content">
                     <p>
                         CrewAI is a framework specifically designed for orchestrating role-based autonomous AI agents. It provides a structured approach to creating multi-agent systems where each agent has a specific role, goal, and capabilities, allowing them to collaborate effectively on complex tasks.
                     </p>
@@ -780,7 +780,7 @@
                     </div>
                 </div>
                 
-                <div class="framework-footer">
+                <div class="component-footer">
                     <h4>Resources</h4>
                     <ul class="resources-list">
                         <li><a href="code-examples.html#crewai">CrewAI Collaborative Agents Example</a></li>
@@ -796,13 +796,13 @@
         <div class="container">
             <h2 class="section-title" id="direct-api">Direct API Use</h2>
             
-            <div class="framework-card">
-                <div class="framework-header">
+            <div class="component-card">
+                <div class="component-header">
                     <h3>Direct LLM API Integration</h3>
                     <span class="tag">Maximum Control</span>
                 </div>
                 
-                <div class="framework-content">
+                <div class="component-content">
                     <p>
                         Building AI agents by directly integrating with LLM provider APIs (like OpenAI, Anthropic, or others) without using a specialized framework gives you maximum control and flexibility. This approach involves implementing your own agent architecture, tool integration, and reasoning patterns from scratch.
                     </p>
@@ -847,7 +847,7 @@
                     </div>
                 </div>
                 
-                <div class="framework-footer">
+                <div class="component-footer">
                     <h4>Resources</h4>
                     <ul class="resources-list">
                         <li><a href="code-examples.html#direct-api">Basic Agent with Direct API Integration</a></li>
@@ -862,15 +862,15 @@
     
     <section class="content-section">
         <div class="container">
-            <h2 class="section-title" id="decision-guide">Framework Selection Guide</h2>
+            <h2 class="section-title" id="selection-guide">Framework Selection Guide</h2>
             
-            <div class="decision-guide">
+            <div class="selection-guide">
                 <p>Choosing the right framework for your AI agent project depends on several factors, including your specific requirements, use case, development experience, and project complexity. The guide below will help you navigate the decision process.</p>
                 
-                <div class="decision-flow">
+                <div class="selection-flow">
                     <h4>Decision Flow for Framework Selection</h4>
                     
-                    <div class="decision-step">
+                    <div class="selection-step">
                         <h5>Step 1: Define Your Primary Use Case</h5>
                         <p>Start by clearly defining what your AI agent needs to accomplish:</p>
                         <ul>
@@ -882,7 +882,7 @@
                         </ul>
                     </div>
                     
-                    <div class="decision-step">
+                    <div class="selection-step">
                         <h5>Step 2: Consider Your Development Constraints</h5>
                         <p>Evaluate your team's expertise and project timelines:</p>
                         <ul>
@@ -893,7 +893,7 @@
                         </ul>
                     </div>
                     
-                    <div class="decision-step">
+                    <div class="selection-step">
                         <h5>Step 3: Evaluate Technical Requirements</h5>
                         <p>Consider the technical aspects of your project:</p>
                         <ul>
@@ -905,7 +905,7 @@
                         </ul>
                     </div>
                     
-                    <div class="decision-step">
+                    <div class="selection-step">
                         <h5>Step 4: Consider Future Expansion</h5>
                         <p>Think about how your application might evolve:</p>
                         <ul>
