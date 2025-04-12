@@ -12,16 +12,6 @@
             padding: 2rem 0;
         }
 
-        .command {
-            background-color: var(--dark);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            font-family: monospace;
-            margin: 0.5rem 0;
-            display: inline-block;
-        }
-
         .image-container {
             text-align: center;
             margin: 2rem 0;
@@ -132,44 +122,44 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-        // Find all tab containers
-        const tabContainers = document.querySelectorAll('.tab-container');
-        
-        // Process each container individually
-        tabContainers.forEach(container => {
-            const tabButtons = container.querySelectorAll('.tab-button');
-            
-            tabButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Get only the tabs in this container
-                    const containerButtons = container.querySelectorAll('.tab-button');
-                    const tabId = button.getAttribute('data-tab');
-                    const tabContent = document.getElementById(tabId);
-                    
-                    // Remove active class from buttons in this container
-                    containerButtons.forEach(btn => btn.classList.remove('active'));
-                    
-                    // Remove active class from all related tab contents
-                    const tabContents = document.querySelectorAll('.tab-content');
-                    tabContents.forEach(content => {
-                        if (containerButtons.length > 0 && 
-                            Array.from(containerButtons).some(btn => btn.getAttribute('data-tab') === content.id)) {
-                            content.classList.remove('active');
-                        }
+            // Find all tab containers
+            const tabContainers = document.querySelectorAll('.tab-container');
+
+            // Process each container individually
+            tabContainers.forEach(container => {
+                const tabButtons = container.querySelectorAll('.tab-button');
+
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        // Get only the tabs in this container
+                        const containerButtons = container.querySelectorAll('.tab-button');
+                        const tabId = button.getAttribute('data-tab');
+                        const tabContent = document.getElementById(tabId);
+
+                        // Remove active class from buttons in this container
+                        containerButtons.forEach(btn => btn.classList.remove('active'));
+
+                        // Remove active class from all related tab contents
+                        const tabContents = document.querySelectorAll('.tab-content');
+                        tabContents.forEach(content => {
+                            if (containerButtons.length > 0 &&
+                                Array.from(containerButtons).some(btn => btn.getAttribute('data-tab') === content.id)) {
+                                content.classList.remove('active');
+                            }
+                        });
+
+                        // Add active class to clicked button and corresponding content
+                        button.classList.add('active');
+                        tabContent.classList.add('active');
                     });
-                    
-                    // Add active class to clicked button and corresponding content
-                    button.classList.add('active');
-                    tabContent.classList.add('active');
                 });
+
+                // Activate first tab by default for this container
+                if (tabButtons.length > 0) {
+                    tabButtons[0].click();
+                }
             });
-            
-            // Activate first tab by default for this container
-            if (tabButtons.length > 0) {
-                tabButtons[0].click();
-            }
         });
-    });
     </script>
 </head>
 
@@ -260,9 +250,17 @@
                             <li>Click "Install Now"</li>
                             <li>Verify installation by opening Command Prompt and typing:</li>
                         </ol>
-                        <div class="command">python --version</div>
+                        <div class="code-block">
+                            <pre>
+<code class="language-bash">python --version</code>
+                        </pre>
+                        </div>
                         <p>Alternatively, you can install Python using Windows Package Manager:</p>
-                        <div class="command">winget install Python.Python.3.11</div>
+                        <div class="code-block">
+                            <pre>
+<code class="language-bash">winget install Python.Python.3.11</code>
+                        </pre>
+                        </div>
                     </div>
 
                     <div id="python-macos" class="tab-content">
@@ -270,10 +268,16 @@
                         <p>Option 1: Using Homebrew (recommended):</p>
                         <ol>
                             <li>Install Homebrew if you don't have it already:</li>
-                            <div class="command">/bin/bash -c "$(curl -fsSL
-                                https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</div>
+                            <div class="code-block">
+                                <pre>/bin/bash -c "$(curl -fsSL
+                                https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</pre>
+                            </div>
                             <li>Install Python using Homebrew:</li>
-                            <div class="command">brew install python</div>
+                            <div class="code-block">
+                                <pre>
+<code class="language-bash">brew install python</code>
+                            </pre>
+                            </div>
                         </ol>
                         <p>Option 2: Using the installer:</p>
                         <ol>
@@ -283,22 +287,42 @@
                             <li>Run the installer and follow the instructions</li>
                         </ol>
                         <p>Verify installation by opening Terminal and typing:</p>
-                        <div class="command">python3 --version</div>
+                        <div class="code-block">
+                            <pre>
+<code class="language-bash">python3 --version</code>
+                        </pre>
+                        </div>
                     </div>
 
                     <div id="python-linux" class="tab-content">
                         <h4>Installing Python on Linux</h4>
                         <p>For Ubuntu/Debian:</p>
-                        <div class="command">sudo apt update<br>sudo apt install python3 python3-pip python3-venv</div>
+                        <div class="code-block">
+                            <pre>
+<code class="language-bash">sudo apt update<br>sudo apt install python3 python3-pip python3-venv</code>
+                        </pre>
+                        </div>
 
                         <p>For Fedora:</p>
-                        <div class="command">sudo dnf install python3 python3-pip</div>
+                        <div class="code-block">
+                            <pre>
+<code class="language-bash">sudo dnf install python3 python3-pip</code>
+                        </pre>
+                        </div>
 
                         <p>For Arch Linux:</p>
-                        <div class="command">sudo pacman -S python python-pip</div>
+                        <div class="code-block">
+                            <pre>
+<code class="language-bash">sudo pacman -S python python-pip</code>
+                        </pre>
+                        </div>
 
                         <p>Verify installation:</p>
-                        <div class="command">python3 --version</div>
+                        <div class="code-block">
+                            <pre>
+<code class="language-bash">python3 --version</code>
+                        </pre>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -318,11 +342,23 @@
                         <h4>Setting Up a Virtual Environment on Windows</h4>
                         <ol>
                             <li>Create a project directory:</li>
-                            <div class="command">mkdir ai-agent-project<br>cd ai-agent-project</div>
+                            <div class="code-block">
+                                <pre>
+<code class="language-bash">mkdir ai-agent-project<br>cd ai-agent-project</code>
+                            </pre>
+                            </div>
                             <li>Create a virtual environment:</li>
-                            <div class="command">python -m venv venv</div>
+                            <div class="code-block">
+                                <pre>
+<code class="language-bash">python -m venv venv</code>
+                            </pre>
+                            </div>
                             <li>Activate the virtual environment:</li>
-                            <div class="command">venv\Scripts\activate</div>
+                            <div class="code-block">
+                                <pre>
+<code class="language-bash">venv\Scripts\activate</code>
+                            </pre>
+                            </div>
                             <p>You should see <code>(venv)</code> at the beginning of your command prompt, indicating
                                 that the virtual environment is active.</p>
                         </ol>
@@ -332,11 +368,23 @@
                         <h4>Setting Up a Virtual Environment on macOS/Linux</h4>
                         <ol>
                             <li>Create a project directory:</li>
-                            <div class="command">mkdir ai-agent-project<br>cd ai-agent-project</div>
+                            <div class="code-block">
+                                <pre>
+<code class="language-bash">mkdir ai-agent-project<br>cd ai-agent-project</code>
+                            </pre>
+                            </div>
                             <li>Create a virtual environment:</li>
-                            <div class="command">python3 -m venv venv</div>
+                            <div class="code-block">
+                                <pre>
+<code class="language-bash">python3 -m venv venv</code>
+                            </pre>
+                            </div>
                             <li>Activate the virtual environment:</li>
-                            <div class="command">source venv/bin/activate</div>
+                            <div class="code-block">
+                                <pre>
+<code class="language-bash">source venv/bin/activate</code>
+                            </pre>
+                            </div>
                             <p>You should see <code>(venv)</code> at the beginning of your command prompt, indicating
                                 that the virtual environment is active.</p>
                         </ol>
@@ -346,7 +394,8 @@
                 <div class="callout">
                     <h4>Tip</h4>
                     <p>To deactivate the virtual environment when you're done working on your project, simply run the
-                        <code>deactivate</code> command.</p>
+                        <code>deactivate</code> command.
+                    </p>
                 </div>
             </div>
 
@@ -372,47 +421,86 @@
 
                     <div id="install-langchain" class="tab-content">
                         <h4>Installing LangChain</h4>
-                        <div class="command">pip install langchain langchain-openai</div>
+                        <div class="code-block">
+                            <pre>
+<code class="language-bash">pip install langchain langchain-openai</code>
+                        </pre>
+                        </div>
 
                         <p>For additional functionality:</p>
-                        <div class="command">pip install langchain[all]</div>
+                        <div class="code-block">
+                            <pre>
+<code class="language-bash">pip install langchain[all]</code>
+                        </pre>
+                        </div>
 
                         <p>Common integrations:</p>
-                        <div class="command">pip install langchain-anthropic langchain-community langchain-experimental
-                            chroma chromadb</div>
+                        <div class="code-block">
+                            <pre>
+<code class="language-bash">pip install langchain-anthropic langchain-community langchain-experimental chroma chromadb</code>
+                        </pre>
+                        </div>
                     </div>
 
                     <div id="install-autogen" class="tab-content">
                         <h4>Installing AutoGen</h4>
-                        <div class="command">pip install pyautogen</div>
+                        <div class="code-block">
+                            <pre>
+<code class="language-bash">pip install pyautogen</code>
+                        </pre>
+                        </div>
 
                         <p>For enhanced functionality:</p>
-                        <div class="command">pip install pyautogen[retrievers,blendsearch]</div>
+                        <div class="code-block">
+                            <pre>
+<code class="language-bash">pip install pyautogen[retrievers,blendsearch]</code>
+                        </pre>
+                        </div>
 
                         <p>For OpenAI integrations:</p>
-                        <div class="command">pip install openai</div>
+                        <div class="code-block">
+                            <pre>
+<code class="language-bash">pip install openai</code>
+                        </pre>
+                        </div>
                     </div>
 
                     <div id="install-llamaindex" class="tab-content">
                         <h4>Installing LlamaIndex</h4>
-                        <div class="command">pip install llama-index llama-index-llms-openai</div>
+                        <div class="code-block">
+                            <pre>
+<code class="language-bash">pip install llama-index llama-index-llms-openai</code>
+                        </pre>
+                        </div>
 
                         <p>For additional integrations:</p>
-                        <div class="command">pip install llama-index-llms-anthropic llama-index-embeddings-openai
-                            llama-index-vector-stores-chroma</div>
+                        <div class="code-block">
+                            <pre>
+<code class="language-bash">pip install llama-index-llms-anthropic llama-index-embeddings-openai llama-index-vector-stores-chroma</code>
+                        </pre>
+                        </div>
                     </div>
 
                     <div id="install-crewai" class="tab-content">
                         <h4>Installing CrewAI</h4>
-                        <div class="command">pip install crewai crewai_tools</div>
+                        <div class="code-block">
+                            <pre>
+<code class="language-bash">pip install crewai crewai_tools</code>
+                        </pre>
+                        </div>
 
                         <p>For LLM providers:</p>
-                        <div class="command">pip install openai anthropic</div>
+                        <div class="code-block">
+                            <pre>
+<code class="language-bash">pip install openai anthropic</code>
+                        </pre>
+                        </div>
                     </div>
                 </div>
 
                 <h3>Option B: All-in-One Installation</h3>
-                <p>If you want to experiment with multiple frameworks, you can create a <code>requirements.txt</code> file with the following content:</p>
+                <p>If you want to experiment with multiple frameworks, you can create a <code>requirements.txt</code>
+                    file with the following content:</p>
 
                 <div class="code-block">
                     <pre>
@@ -443,12 +531,20 @@ tiktoken>=0.5.0
                 </div>
 
                 <p>Then install all dependencies at once:</p>
-                <div class="command">pip install -r requirements.txt</div>
+                <div class="code-block">
+                    <pre>
+<code class="language-bash">pip install -r requirements.txt</code>
+                </pre>
+                </div>
 
                 <div class="callout">
                     <h4>Tip</h4>
                     <p>Keep your dependencies up-to-date, especially for rapidly evolving frameworks:</p>
-                    <div class="command">pip install --upgrade -r requirements.txt</div>
+                    <div class="code-block">
+                        <pre>
+<code class="language-bash">pip install --upgrade -r requirements.txt</code>
+                    </pre>
+                    </div>
                 </div>
             </div>
 
@@ -606,36 +702,44 @@ ai-agent-project/
                     </div>
 
                     <div id="structure-windows" class="tab-content">
-                        <div class="command">
-                            mkdir agents tools prompts memory data data\raw data\processed data\vectorstore tests
-                            type nul > .env
-                            type nul > .gitignore
-                            type nul > README.md
-                            type nul > requirements.txt
-                            type nul > main.py
-                            type nul > agents\__init__.py
-                            type nul > agents\base_agent.py
-                            type nul > agents\specialized_agents.py
-                            type nul > tools\__init__.py
-                            type nul > tools\tool_definitions.py
-                            type nul > prompts\__init__.py
-                            type nul > prompts\templates.py
-                            type nul > memory\__init__.py
-                            type nul > memory\memory_handlers.py
-                            type nul > tests\__init__.py
-                            type nul > tests\test_agents.py
+                        <div class="code-block">
+                            <pre>
+                            <code class="language-bash">
+mkdir agents tools prompts memory data data\raw data\processed data\vectorstore tests
+type nul > .env
+type nul > .gitignore
+type nul > README.md
+type nul > requirements.txt
+type nul > main.py
+type nul > agents\__init__.py
+type nul > agents\base_agent.py
+type nul > agents\specialized_agents.py
+type nul > tools\__init__.py
+type nul > tools\tool_definitions.py
+type nul > prompts\__init__.py
+type nul > prompts\templates.py
+type nul > memory\__init__.py
+type nul > memory\memory_handlers.py
+type nul > tests\__init__.py
+type nul > tests\test_agents.py
+                            </code>
+                        </pre>
                         </div>
                     </div>
 
                     <div id="structure-macos-linux" class="tab-content">
-                        <div class="command">
-                            mkdir -p agents tools prompts memory data/raw data/processed data/vectorstore tests
-                            touch .env .gitignore README.md requirements.txt main.py
-                            touch agents/__init__.py agents/base_agent.py agents/specialized_agents.py
-                            touch tools/__init__.py tools/tool_definitions.py
-                            touch prompts/__init__.py prompts/templates.py
-                            touch memory/__init__.py memory/memory_handlers.py
-                            touch tests/__init__.py tests/test_agents.py
+                        <div class="code-block">
+                            <pre>
+                            <code class="language-bash">
+mkdir -p agents tools prompts memory data/raw data/processed data/vectorstore tests
+touch .env .gitignore README.md requirements.txt main.py
+touch agents/__init__.py agents/base_agent.py agents/specialized_agents.py
+touch tools/__init__.py tools/tool_definitions.py
+touch prompts/__init__.py prompts/templates.py
+touch memory/__init__.py memory/memory_handlers.py
+touch tests/__init__.py tests/test_agents.py
+                            </code>
+                        </pre>
                         </div>
                     </div>
                 </div>
@@ -718,10 +822,18 @@ if __name__ == "__main__":
                 <h3>Testing Your Setup</h3>
                 <p>Run your agent to verify everything is working correctly:</p>
 
-                <div class="command">python main.py</div>
+                <div class="code-block">
+                    <pre>
+<code class="language-bash">python main.py</code>
+                </pre>
+                </div>
 
                 <p>Try asking a question that uses the calculator tool, such as:</p>
-                <div class="command">You: What is 42 * 3.14?</div>
+                <div class="code-block">
+                    <pre>
+<code class="language-bash">You: What is 42 * 3.14?</code>
+                </pre>
+                </div>
 
                 <div class="callout">
                     <h4>Troubleshooting Common Issues</h4>
@@ -741,12 +853,21 @@ if __name__ == "__main__":
                 <p>Setting up version control is recommended for tracking changes and collaborating with others:</p>
 
                 <h3>Initialize Git Repository</h3>
-                <div class="command">git init</div>
+                <div class="code-block">
+                    <pre>
+<code class="language-bash">git init</code>
+                </pre>
+                </div>
 
                 <h3>Make Initial Commit</h3>
-                <div class="command">git add .gitignore README.md requirements.txt main.py agents/ tools/ prompts/
-                    memory/ tests/
-                    git commit -m "Initial project setup"</div>
+                <div class="code-block">
+                    <pre>
+<code class="language-bash">
+git add .gitignore README.md requirements.txt main.py agents/ tools/ prompts/ memory/ tests/
+git commit -m "Initial project setup"
+</code>
+                </pre>
+                </div>
 
                 <div class="callout">
                     <h4>Reminder</h4>
