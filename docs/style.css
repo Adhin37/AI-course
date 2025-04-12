@@ -266,6 +266,7 @@ footer p {
 
 .example-header h3 {
     margin: 0;
+    color: white;
 }
 
 .example-content {
@@ -389,26 +390,22 @@ footer p {
 }
 
 .code-block {
-    background-color: var(--dark);
-    color: white;
+    background-color: transparent; /* Let Prism handle the background */
     border-radius: 4px;
-    padding: 1rem;
     margin: 1.5rem 0;
     overflow: auto;
-    border-left: 4px solid #3498db;
+    /* border-left: 4px solid #3498db; */
 }
 
 .code-block pre {
     margin: 0;
+    padding: 0;
     font-family: 'Courier New', Courier, monospace;
     font-size: 0.9rem;
     line-height: 1.5;
-    white-space: pre-wrap;
-    word-break: break-word;
+    background: transparent;
 }
 
-.code-block code {
-    display: block;
-    font-family: monospace;
-    white-space: pre;
+.code-block pre code {
+    padding: 1rem;
 }

@@ -169,6 +169,15 @@
             }
         }
     </style>
+    <!-- Prism CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" />
+    <!-- Prism core JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <!-- Additional languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
 </head>
 <body>
     <header>
@@ -417,6 +426,7 @@
                 <div class="example-box">
                     <h4>Code Example: Simple AI Agent Structure</h4>
                     <pre>
+<code class="language-python">
 from langchain import LLMChain, PromptTemplate
 from langchain.agents import Tool, initialize_agent
 from langchain.llms import OpenAI
@@ -452,6 +462,7 @@ agent = initialize_agent(
 result = agent.run(
     "Create a report on the latest research about climate change mitigation strategies."
 )
+</code>
                     </pre>
                 </div>
                 

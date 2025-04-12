@@ -142,6 +142,15 @@
             margin-top: 0;
         }
     </style>
+    <!-- Prism CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" />
+    <!-- Prism core JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <!-- Additional languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
 </head>
 <body>
     <header>
@@ -281,7 +290,8 @@
                 <p>Vector databases are ideal for semantic memory systems that can retrieve information based on meaning rather than exact matching:</p>
                 
                 <div class="code-block">
-<code>
+<pre>
+<code class="language-python">
 # Example: Implementing a vector-based memory system with LangChain and Chroma
 
 from langchain.embeddings.openai import OpenAIEmbeddings
@@ -329,6 +339,7 @@ def agent_with_memory(user_input):
     return response
                 
 </code>
+</pre>
 </div>
                 
                 <div class="tip-box">
@@ -353,7 +364,8 @@ def agent_with_memory(user_input):
                         <h4>Explicit Prompting for Reasoning</h4>
                         <p>Modify your agent's prompt to explicitly ask for step-by-step thinking:</p>
                         <div class="code-block">
-<code>
+<pre>
+<code class="language-python">
 # Example: Chain-of-Thought prompt
 
 def cot_prompt(question):
@@ -374,13 +386,15 @@ question = "If a company's revenue grew by 15% to $690,000, what was the origina
 response = llm(cot_prompt(question))
                         
 </code>
+</pre>
 </div>
                     </li>
                     <li>
                         <h4>Self-Consistency Techniques</h4>
                         <p>Generate multiple reasoning paths and select the most consistent answer:</p>
                         <div class="code-block">
-<code>
+<pre>
+<code class="language-python">
 # Example: Self-consistency with multiple reasoning paths
 
 def solve_with_self_consistency(question, num_paths=3):
@@ -405,13 +419,15 @@ def solve_with_self_consistency(question, num_paths=3):
     return most_common_answer
                         
 </code>
+</pre>
 </div>
                     </li>
                     <li>
                         <h4>Reflection Mechanisms</h4>
                         <p>Allow your agent to review and critique its own reasoning:</p>
                         <div class="code-block">
-<code>
+<pre>
+<code class="language-python">
 # Example: Implementing reflection
 
 def reflective_reasoning(question):
@@ -453,6 +469,7 @@ Based on my reflection, my revised and final answer is:
     return final_answer
                         
 </code>
+</pre>
 </div>
                     </li>
                 </ol>
@@ -494,7 +511,8 @@ Based on my reflection, my revised and final answer is:
                 <h3>Implementing Function Calling with OpenAI</h3>
                 
                 <div class="code-block">
-<code>
+<pre>
+<code class="language-python">
 # Example: Function calling with OpenAI
 
 from openai import OpenAI
@@ -622,13 +640,15 @@ def agent_with_tools(user_input):
         return response_message.content
                 
 </code>
+</pre>
 </div>
                 
                 <h3>Implementing Dynamic Tool Selection</h3>
                 <p>For agents with many tools, implement a dynamic tool selection system:</p>
                 
                 <div class="code-block">
-<code>
+<pre>
+<code class="language-python">
 # Example: Dynamic tool selection based on query analysis
 
 class ToolRegistry:
@@ -676,6 +696,7 @@ def agent_with_dynamic_tools(user_input):
     # Rest of the implementation follows the previous example...
                 
 </code>
+</pre>
 </div>
                 
                 <div class="tip-box">
@@ -702,7 +723,8 @@ def agent_with_dynamic_tools(user_input):
                         <h4>Document Processing</h4>
                         <p>Prepare your documents for retrieval:</p>
                         <div class="code-block">
-                            <code>
+                            <pre>
+<code class="language-python">
 # Example: Processing documents for RAG
 
 from langchain.document_loaders import DirectoryLoader, TextLoader
@@ -726,13 +748,15 @@ text_chunks = text_splitter.split_documents(documents)
 embeddings = OpenAIEmbeddings()
 vector_store = Chroma.from_documents(text_chunks, embeddings, collection_name="document_store")
                             </code>
+</pre>
                         </div>
                     </li>
                     <li>
                         <h4>Retrieval Strategy</h4>
                         <p>Implement effective retrieval logic:</p>
                         <div class="code-block">
-<code>
+<pre>
+<code class="language-python">
 # Example: Advanced retrieval strategies
 
 from langchain.retrievers import ContextualCompressionRetriever
@@ -759,13 +783,15 @@ def get_relevant_context(query, advanced=True):
     return "\n\n".join([doc.page_content for doc in docs])
                         
 </code>
+</pre>
 </div>
                     </li>
                     <li>
                         <h4>Query Transformation</h4>
                         <p>Improve retrieval with query optimization:</p>
                         <div class="code-block">
-<code>
+<pre>
+<code class="language-python">
 # Example: Query transformation for better retrieval
 
 def generate_search_queries(original_query):
@@ -813,6 +839,7 @@ def enhanced_retrieval(query):
     return final_docs[:5]  # Return top 5 most relevant documents
                         
 </code>
+</pre>
 </div>
                     </li>
                 </ol>
@@ -820,7 +847,8 @@ def enhanced_retrieval(query):
                 <h3>Integrating RAG with Your Agent</h3>
                 
                 <div class="code-block">
-<code>
+<pre>
+<code class="language-python">
 # Example: RAG-powered agent
 
 from langchain.agents import initialize_agent, Tool
@@ -857,6 +885,7 @@ def rag_agent_response(user_input):
         return f"I encountered an error: {str(e)}"
                 
 </code>
+</pre>
 </div>
                 
                 <div class="warning-box">
@@ -913,7 +942,8 @@ def rag_agent_response(user_input):
                 <h3>Implementing a Hub and Spoke Architecture</h3>
                 
                 <div class="code-block">
-<code>
+<pre>
+<code class="language-python">
 # Example: Hub and spoke multi-agent system
 
 class AgentManager:
@@ -999,12 +1029,14 @@ manager.register_specialist(
 response = manager.process_query("Can you help me analyze this CSV file of sales data?")
                 
 </code>
+</pre>
 </div>
                 
                 <h3>Implementing a Debate Framework</h3>
                 
                 <div class="code-block">
-<code>
+<pre>
+<code class="language-python">
 # Example: Debate framework for complex reasoning
 
 def debate_framework(question, num_agents=3, rounds=2):
@@ -1060,6 +1092,7 @@ Highlight areas of agreement and disagreement, and provide a balanced conclusion
     return final_answer
                 
 </code>
+</pre>
 </div>
                 
                 <div class="tip-box">
@@ -1085,7 +1118,8 @@ Highlight areas of agreement and disagreement, and provide a balanced conclusion
                         <h4>Model Cascading</h4>
                         <p>Use smaller, faster models for initial processing and larger models only when necessary.</p>
                         <div class="code-block">
-<code>
+<pre>
+<code class="language-python">
 # Example: Model cascading approach
 
 def cascading_response(user_query):
@@ -1121,6 +1155,7 @@ def cascading_response(user_query):
     return response.choices[0].message.content
                         
 </code>
+</pre>
 </div>
                     </div>
                     
@@ -1128,7 +1163,8 @@ def cascading_response(user_query):
                         <h4>Caching Strategies</h4>
                         <p>Implement smart caching to avoid redundant computation and API calls.</p>
                         <div class="code-block">
-<code>
+<pre>
+<code class="language-python">
 # Example: Semantic caching for LLM responses
 
 import hashlib
@@ -1209,6 +1245,7 @@ def get_cached_response(query):
     return response
                         
 </code>
+</pre>
 </div>
                     </div>
                     
@@ -1216,7 +1253,8 @@ def get_cached_response(query):
                         <h4>Request Batching</h4>
                         <p>Group multiple operations to reduce API overhead and improve throughput.</p>
                         <div class="code-block">
-<code>
+<pre>
+<code class="language-python">
 # Example: Request batching for multiple operations
 
 import asyncio
@@ -1311,6 +1349,7 @@ async def get_embedding(text):
     return await embedding_batcher.add_request(text)
                         
 </code>
+</pre>
 </div>
                     </div>
                 </div>
@@ -1379,7 +1418,8 @@ async def get_embedding(text):
                             <li>Fallback behaviors for edge cases</li>
                         </ul>
                         <div class="code-block">
-<code>
+<pre>
+<code class="language-python">
 # Example: Task definition specification
 
 agent_specification = {
@@ -1413,6 +1453,7 @@ Return "IN_SCOPE" or "OUT_OF_SCOPE" followed by a brief explanation.
     return "IN_SCOPE" in response
                         
 </code>
+</pre>
 </div>
                     </li>
                     <li>
@@ -1434,7 +1475,8 @@ Return "IN_SCOPE" or "OUT_OF_SCOPE" followed by a brief explanation.
                         <h4>Multi-part Prompts</h4>
                         <p>Structure your agent's system prompt with distinct sections:</p>
                         <div class="code-block">
-<code>
+<pre>
+<code class="language-python">
 # Example: Multi-part system prompt structure
 
 def create_system_prompt(agent_spec, custom_instructions=None):
@@ -1473,13 +1515,15 @@ def bullet_points(items):
     return "\n".join([f"- {item}" for item in items])
                         
 </code>
+</pre>
 </div>
                     </li>
                     <li>
                         <h4>Dynamic Prompt Augmentation</h4>
                         <p>Adjust prompts based on context and user behavior:</p>
                         <div class="code-block">
-<code>
+<pre>
+<code class="language-python">
 # Example: Dynamic prompt augmentation
 
 class DynamicPromptManager:
@@ -1547,6 +1591,7 @@ class DynamicPromptManager:
         return dynamic_prompt
                         
 </code>
+</pre>
 </div>
                     </li>
                 </div>
@@ -1580,7 +1625,8 @@ class DynamicPromptManager:
                         <h4>Tool Governance</h4>
                         <p>Implement safeguards to ensure tools are used appropriately:</p>
                         <div class="code-block">
-                            <code>
+                            <pre>
+<code class="language-python">
                                 # Example: Tool governance framework
 
                                 class ToolGovernance:
@@ -1639,6 +1685,7 @@ class DynamicPromptManager:
 
                                         return True, "Tool use permitted"
                             </code>
+</pre>
                         </div>
                     </li>
         
