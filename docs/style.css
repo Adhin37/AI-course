@@ -409,3 +409,40 @@ footer p {
 .code-block pre code {
     padding: 1rem;
 }
+
+.tab-container {
+    margin: 1.5rem 0;
+}
+
+.tab-buttons {
+    display: flex;
+    border-bottom: 2px solid var(--light-gray);
+    margin-bottom: 1rem;
+}
+
+.tab-button {
+    padding: 0.5rem 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--gray);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+}
+
+.tab-button.active {
+    color: var(--primary);
+    border-bottom: 2px solid var(--primary);
+}
+
+.tab-content {
+    display: none;
+    padding: 1rem;
+    background-color: var(--light);
+    border-radius: 4px;
+}
+
+.tab-content.active {
+    display: block;
+}
