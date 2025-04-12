@@ -1279,7 +1279,7 @@ class SemanticCache:
         # If we have cached items, search for similar queries
         if len(self.query_map) > 0:
             # Search for similar queries
-            D, I = self.index.search(np.array([query_embedding]), 1)
+            D, I = self.index.search(np.array([query_embedding]).astype('float32'), 1)
             distance = D[0][0]
             
             # Convert distance to similarity score (higher is better)
@@ -1298,12 +1298,20 @@ class SemanticCache:
         self.cache[cache_key] = response
         
         # Add to index
-        self.index.add(np.array([query_embedding]))
+        self.index.add(np.array([query_embedding]).astype('float32'))
         self.query_map.append(cache_key)
         
         return response, False  # Second value indicates cache miss
 
-    # Usage example
+
+# Example usage (separated from class definition)
+def example_usage():
+    from openai import OpenAI
+    
+    # Initialize your LLM client
+    client = OpenAI(api_key="your-api-key")
+    
+    # Initialize the semantic cache
     semantic_cache = SemanticCache()
 
     def get_cached_response(query):
@@ -1322,6 +1330,14 @@ class SemanticCache:
             print("Cache miss - generated new response")
         
         return response
+    
+    # Example queries
+    print(get_cached_response("What is the capital of France?"))
+    print(get_cached_response("Tell me about Paris, the capital city of France"))  # Should hit cache
+
+
+if __name__ == "__main__":
+    example_usage()
 </code>
                             </pre>
                         </div>
