@@ -257,6 +257,15 @@
             }
         }
     </style>
+    <!-- Prism CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" />
+    <!-- Prism core JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <!-- Additional languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
 </head>
 <body>
     <header>
@@ -369,6 +378,7 @@
                     
                     <div class="code-block">
                         <pre>
+<code class="language-python">
 import openai
 
 # Initialize the client
@@ -403,6 +413,7 @@ def agent_process(user_input, context=None):
 # Example usage
 result = agent_process("Find recent research papers on climate change mitigation.")
 print(result)
+</code>
                         </pre>
                     </div>
                     
@@ -479,6 +490,7 @@ print(result)
                     
                     <div class="code-block">
                         <pre>
+<code class="language-python">
 import anthropic
 
 # Initialize the client
@@ -510,6 +522,7 @@ def agent_process(user_input, conversation_history=None):
 # Example usage
 result = agent_process("Analyze the potential impact of quantum computing on cryptography.")
 print(result)
+</code>
                         </pre>
                     </div>
                     
@@ -591,6 +604,7 @@ print(result)
                     
                     <div class="code-block">
                         <pre>
+<code class="language-python">
 import mistralai
 from mistralai.client import MistralClient
 from mistralai.models.chat_completion import ChatMessage
@@ -629,6 +643,7 @@ def agent_process(user_input, chat_history=None):
 # Example usage
 result = agent_process("Explain the concept of transformers in machine learning.")
 print(result)
+</code>
                         </pre>
                     </div>
                     
@@ -692,6 +707,7 @@ print(result)
                 
                 <div class="code-block">
                     <pre>
+<code class="language-python">
 import requests
 import json
 
@@ -736,6 +752,7 @@ result = ollama_agent("Write a Python function to calculate Fibonacci numbers.",
                      model_name="llama3", 
                      system_prompt=system_prompt)
 print(result)
+</code>
                     </pre>
                 </div>
             </div>

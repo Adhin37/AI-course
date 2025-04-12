@@ -7,6 +7,15 @@
     <link rel="icon" type="image/svg+xml" href="img/icon.svg">
     <title>Deploying Your AI Agent - AI Agent Development Guide</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Prism CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" />
+    <!-- Prism core JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <!-- Additional languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
 </head>
 
 <body>
@@ -75,7 +84,9 @@
                 <p>For Python-based agents, Flask and FastAPI are popular frameworks for creating web services.</p>
 
                 <div class="code-block">
-                    <pre><code># Basic Flask implementation for an AI agent API
+                    <pre>
+                        <code class="language-python">
+# Basic Flask implementation for an AI agent API
 from flask import Flask, request, jsonify
 import os
 from langchain.agents import initialize_agent, Tool
@@ -103,7 +114,9 @@ def query_agent():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))</code></pre>
+    app.run(debug=False, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
+</code>
+</pre>
                 </div>
 
                 <h3>Deploying to Cloud Platforms</h3>
@@ -118,7 +131,8 @@ if __name__ == '__main__':
                 <div class="example-box">
                     <h4>Deploying to Google Cloud Run Example</h4>
                     <p>1. Create a Dockerfile in your project directory:</p>
-                    <pre>FROM python:3.9-slim
+                    <pre><code class="language-docker">
+FROM python:3.9-slim
 
 WORKDIR /app
 COPY requirements.txt .
@@ -126,7 +140,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 ENV PORT=8080
-CMD exec gunicorn --bind :$PORT app:app</pre>
+CMD exec gunicorn --bind :$PORT app:app
+</code></pre>
                     <p>2. Build and deploy with Google Cloud CLI:</p>
                     <pre>gcloud builds submit --tag gcr.io/PROJECT_ID/ai-agent
 gcloud run deploy ai-agent --image gcr.io/PROJECT_ID/ai-agent --platform managed</pre>
@@ -162,7 +177,8 @@ gcloud run deploy ai-agent --image gcr.io/PROJECT_ID/ai-agent --platform managed
                     <h4>OpenAPI Specification Example</h4>
                     <p>Documenting your API with OpenAPI (formerly Swagger) helps users understand how to interact with
                         your agent:</p>
-                    <pre>{
+                    <pre><code class="language-json">
+{
   "openapi": "3.0.0",
   "info": {
     "title": "AI Agent API",
@@ -217,7 +233,8 @@ gcloud run deploy ai-agent --image gcr.io/PROJECT_ID/ai-agent --platform managed
       }
     }
   }
-}</pre>
+}
+</code></pre>
                 </div>
             </div>
 
@@ -235,7 +252,8 @@ gcloud run deploy ai-agent --image gcr.io/PROJECT_ID/ai-agent --platform managed
                 </ul>
 
                 <div class="code-block">
-                    <pre><code># AWS Lambda function for an AI agent (Python)
+                    <pre><code class="language-python">
+# AWS Lambda function for an AI agent (Python)
 import json
 import os
 from langchain.agents import initialize_agent, Tool
@@ -298,59 +316,61 @@ def lambda_handler(event, context):
 
                 <h3>Mobile App Integration Example</h3>
                 <div class="code-block">
-                    <pre><code>
-    // Example: Calling an AI agent API from a React Native app
-    import React, { useState } from 'react';
-    import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
+                    <pre>
+                        <code class="language-java">
+// Example: Calling an AI agent API from a React Native app
+import React, { useState } from 'react';
+import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
+
+export default function AgentScreen() {
+const [query, setQuery] = useState('');
+const [response, setResponse] = useState('');
+const [loading, setLoading] = useState(false);
+
+const queryAgent = async () => {
+    if (!query.trim()) return;
     
-    export default function AgentScreen() {
-    const [query, setQuery] = useState('');
-    const [response, setResponse] = useState('');
-    const [loading, setLoading] = useState(false);
+    setLoading(true);
     
-    const queryAgent = async () => {
-        if (!query.trim()) return;
-        
-        setLoading(true);
-        
-        try {
-        const result = await fetch('https://your-agent-api.com/api/agent', {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer YOUR_API_KEY'
-            },
-            body: JSON.stringify({ query: query })
-        });
-        
-        const data = await result.json();
-        setResponse(data.response);
-        } catch (error) {
-        setResponse(`Error: ${error.message}`);
-        } finally {
-        setLoading(false);
-        }
-    };
+    try {
+    const result = await fetch('https://your-agent-api.com/api/agent', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer YOUR_API_KEY'
+        },
+        body: JSON.stringify({ query: query })
+    });
     
-    return (
-        &lt;View style={styles.container}&gt;
-        &lt;TextInput
-            style={styles.input}
-            value={query}
-            onChangeText={setQuery}
-            placeholder="Ask the AI agent..."
-        /&gt;
-        &lt;Button title={loading ? "Loading..." : "Send"} onPress={queryAgent} disabled={loading} /&gt;
-        {response ? (
-            &lt;View style={styles.responseContainer}&gt;
-            &lt;Text style={styles.responseTitle}&gt;Response:&lt;/Text&gt;
-            &lt;Text style={styles.responseText}&gt;{response}&lt;/Text&gt;
-            &lt;/View&gt;
-        ) : null}
-        &lt;/View&gt;
-    );
+    const data = await result.json();
+    setResponse(data.response);
+    } catch (error) {
+    setResponse(`Error: ${error.message}`);
+    } finally {
+    setLoading(false);
     }
-                    </code></pre>
+};
+
+return (
+    &lt;View style={styles.container}&gt;
+    &lt;TextInput
+        style={styles.input}
+        value={query}
+        onChangeText={setQuery}
+        placeholder="Ask the AI agent..."
+    /&gt;
+    &lt;Button title={loading ? "Loading..." : "Send"} onPress={queryAgent} disabled={loading} /&gt;
+    {response ? (
+        &lt;View style={styles.responseContainer}&gt;
+        &lt;Text style={styles.responseTitle}&gt;Response:&lt;/Text&gt;
+        &lt;Text style={styles.responseText}&gt;{response}&lt;/Text&gt;
+        &lt;/View&gt;
+    ) : null}
+    &lt;/View&gt;
+);
+}
+                    </code>
+                </pre>
                 </div>
             </div>
 
@@ -369,7 +389,8 @@ def lambda_handler(event, context):
 
                 <h3>Basic Dockerfile for an AI Agent</h3>
                 <div class="code-block">
-                    <pre><code># Dockerfile for an AI agent
+                    <pre><code class="language-docker">
+# Dockerfile for an AI agent
 FROM python:3.9-slim
 
 # Set working directory
@@ -390,7 +411,9 @@ ENV MODEL_PATH=/app/models
 ENV LOG_LEVEL=INFO
 
 # Command to run the application
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]</code></pre>
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+</code>
+</pre>
                 </div>
 
                 <h3>Container Orchestration</h3>
@@ -420,7 +443,8 @@ CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]</code></p
                 <h3>Logging and Observability</h3>
                 <p>Implement comprehensive logging to troubleshoot issues and understand agent behavior:</p>
                 <div class="code-block">
-                    <pre><code>import logging
+                    <pre><code class="language-python">
+import logging
 import time
 from contextlib import contextmanager
 
@@ -516,7 +540,8 @@ def process_query(query, user_id):
 
                 <div class="example-box">
                     <h4>Simple Response Caching Implementation</h4>
-                    <pre>import hashlib
+                    <pre><code class="language-python">
+import hashlib
 import json
 import redis
 
@@ -550,7 +575,8 @@ class CachedAgent:
             json.dumps(response)
         )
         
-        return response</pre>
+        return response
+</code></pre>
                 </div>
             </div>
 

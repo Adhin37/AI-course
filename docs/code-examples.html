@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +15,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             overflow: hidden;
         }
-        
+
         .tag {
             background-color: rgba(255, 255, 255, 0.2);
             padding: 0.25rem 0.5rem;
@@ -22,7 +23,7 @@
             font-size: 0.85rem;
             font-weight: 500;
         }
-        
+
         .diagram {
             background-color: white;
             padding: 1.5rem;
@@ -31,24 +32,24 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
-        
+
         .diagram img {
             max-width: 100%;
             height: auto;
         }
-        
+
         .diagram-caption {
             margin-top: 1rem;
             color: var(--gray);
             font-style: italic;
         }
-        
+
         .code-tabs {
             display: flex;
             border-bottom: 1px solid var(--light-gray);
             margin-bottom: 0;
         }
-        
+
         .code-tab {
             padding: 0.5rem 1rem;
             cursor: pointer;
@@ -59,14 +60,24 @@
             border-top-right-radius: 4px;
             margin-right: 0.5rem;
         }
-        
+
         .code-tab.active {
             background-color: var(--code-bg);
             color: white;
             border-color: var(--code-bg);
         }
     </style>
+    <!-- Prism CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" />
+    <!-- Prism core JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <!-- Additional languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
 </head>
+
 <body>
     <header>
         <div class="container">
@@ -74,7 +85,7 @@
             <p>Learn to build powerful AI agents for specific tasks</p>
         </div>
     </header>
-    
+
     <nav>
         <div class="container">
             <ul>
@@ -87,31 +98,33 @@
             </ul>
         </div>
     </nav>
-    
+
     <div class="page-title">
         <div class="container">
             <h1>AI Agent Code Examples</h1>
             <p>Practical code snippets to help you build task-specific AI agents</p>
         </div>
     </div>
-    
+
     <section class="content-section" id="basic">
         <div class="container">
             <h2 class="section-title">Basic AI Agent Setup</h2>
-            
+
             <div class="example-box">
                 <div class="example-header">
                     <h3>Simple LangChain Agent</h3>
                     <span class="tag">Beginner</span>
                 </div>
-                
+
                 <div class="example-content">
                     <p class="example-description">
-                        This example demonstrates how to create a basic agent using LangChain that can respond to queries and use tools.
+                        This example demonstrates how to create a basic agent using LangChain that can respond to
+                        queries and use tools.
                     </p>
-                    
+
                     <div class="code-block">
                         <pre>
+<code class="language-python">
 import os
 from langchain_openai import ChatOpenAI
 from langchain.agents import AgentType, initialize_agent, load_tools
@@ -141,41 +154,48 @@ agent = initialize_agent(
 
 # Run the agent
 agent.invoke({"input": "What is the square root of 256 plus the year Wikipedia was launched?"})
+</code>
 </pre>
                     </div>
-                    
+
                     <div class="example-notes">
                         <h4>Key Points</h4>
                         <ul>
-                            <li>The agent uses the ZERO_SHOT_REACT_DESCRIPTION agent type, which doesn't require examples.</li>
-                            <li>We've loaded two tools: llm-math for calculations and wikipedia for retrieving information.</li>
-                            <li>The agent will reason through how to solve the query step by step, using the appropriate tools.</li>
+                            <li>The agent uses the ZERO_SHOT_REACT_DESCRIPTION agent type, which doesn't require
+                                examples.</li>
+                            <li>We've loaded two tools: llm-math for calculations and wikipedia for retrieving
+                                information.</li>
+                            <li>The agent will reason through how to solve the query step by step, using the appropriate
+                                tools.</li>
                         </ul>
                     </div>
                 </div>
-                
+
                 <div class="example-footer">
                     <h4>Related Resources</h4>
                     <ul class="resources-list">
-                        <li><a href="https://python.langchain.com/docs/modules/agents/" target="_blank">LangChain Agents Documentation</a></li>
+                        <li><a href="https://python.langchain.com/docs/modules/agents/" target="_blank">LangChain Agents
+                                Documentation</a></li>
                         <li><a href="frameworks.html#langchain">LangChain Framework Guide</a></li>
                     </ul>
                 </div>
             </div>
-            
+
             <div class="example-box">
                 <div class="example-header">
                     <h3>Anthropic Claude Agent</h3>
                     <span class="tag">Beginner</span>
                 </div>
-                
+
                 <div class="example-content">
                     <p class="example-description">
-                        This example shows how to create a simple agent using Anthropic's Claude model with direct API calls.
+                        This example shows how to create a simple agent using Anthropic's Claude model with direct API
+                        calls.
                     </p>
-                    
+
                     <div class="code-block">
                         <pre>
+<code class="language-python">
 import os
 import anthropic
 from typing import List, Dict, Any
@@ -209,9 +229,10 @@ if __name__ == "__main__":
     agent = ClaudeAgent()
     response = agent.run("I need to analyze the sentiment of the following customer feedback: 'The product arrived damaged and customer service was unhelpful.'")
     print(response)
+</code>
 </pre>
                     </div>
-                    
+
                     <div class="example-notes">
                         <h4>Key Points</h4>
                         <ul>
@@ -221,35 +242,38 @@ if __name__ == "__main__":
                         </ul>
                     </div>
                 </div>
-                
+
                 <div class="example-footer">
                     <h4>Related Resources</h4>
                     <ul class="resources-list">
-                        <li><a href="https://docs.anthropic.com/claude/reference/getting-started-with-the-api" target="_blank">Anthropic API Documentation</a></li>
+                        <li><a href="https://docs.anthropic.com/claude/reference/getting-started-with-the-api"
+                                target="_blank">Anthropic API Documentation</a></li>
                         <li><a href="models.html#anthropic">Anthropic Claude Models Guide</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
-    
+
     <section class="content-section" id="tools">
         <div class="container">
             <h2 class="section-title">Tool-Using Agents</h2>
-            
+
             <div class="example-box">
                 <div class="example-header">
                     <h3>Agent with Custom Tools</h3>
                     <span class="tag">Intermediate</span>
                 </div>
-                
+
                 <div class="example-content">
                     <p class="example-description">
-                        This example demonstrates how to create an agent with custom tools using LangChain's tool definition pattern.
+                        This example demonstrates how to create an agent with custom tools using LangChain's tool
+                        definition pattern.
                     </p>
-                    
+
                     <div class="code-block">
                         <pre>
+<code class="language-python">
 import os
 import requests
 import json
@@ -335,42 +359,49 @@ agent = initialize_agent(
 if __name__ == "__main__":
     response = agent.invoke({"input": "What's the weather in New York City? Also, how is Apple's stock doing today?"})
     print(response["output"])
+</code>
 </pre>
                     </div>
-                    
+
                     <div class="example-notes">
                         <h4>Key Points</h4>
                         <ul>
-                            <li>Custom tools are defined by extending the BaseTool class and implementing _run methods.</li>
-                            <li>Using Pydantic models (WeatherInput, StockPriceInput) to validate and document tool inputs.</li>
-                            <li>The OPENAI_FUNCTIONS agent type is designed to work with OpenAI's function calling capabilities.</li>
+                            <li>Custom tools are defined by extending the BaseTool class and implementing _run methods.
+                            </li>
+                            <li>Using Pydantic models (WeatherInput, StockPriceInput) to validate and document tool
+                                inputs.</li>
+                            <li>The OPENAI_FUNCTIONS agent type is designed to work with OpenAI's function calling
+                                capabilities.</li>
                             <li>Error handling in the tools helps the agent understand when something goes wrong.</li>
                         </ul>
                     </div>
                 </div>
-                
+
                 <div class="example-footer">
                     <h4>Related Resources</h4>
                     <ul class="resources-list">
-                        <li><a href="https://python.langchain.com/docs/modules/tools/" target="_blank">LangChain Tools Documentation</a></li>
+                        <li><a href="https://python.langchain.com/docs/modules/tools/" target="_blank">LangChain Tools
+                                Documentation</a></li>
                         <li><a href="tool-development.html">Advanced Tool Development Guide</a></li>
                     </ul>
                 </div>
             </div>
-            
+
             <div class="example-box">
                 <div class="example-header">
                     <h3>Function Calling with Claude</h3>
                     <span class="tag">Intermediate</span>
                 </div>
-                
+
                 <div class="example-content">
                     <p class="example-description">
-                        This example shows how to implement tool use with Anthropic's Claude model using tool use (function calling) capabilities.
+                        This example shows how to implement tool use with Anthropic's Claude model using tool use
+                        (function calling) capabilities.
                     </p>
-                    
+
                     <div class="code-block">
                         <pre>
+<code class="language-python">
 import os
 import json
 import anthropic
@@ -507,9 +538,10 @@ if __name__ == "__main__":
     agent = ClaudeToolAgent()
     response = agent.run("What's the weather in Seattle and find information about AI agents")
     print(response)
+</code>
 </pre>
                     </div>
-                    
+
                     <div class="example-notes">
                         <h4>Key Points</h4>
                         <ul>
@@ -520,40 +552,44 @@ if __name__ == "__main__":
                         </ul>
                     </div>
                 </div>
-                
+
                 <div class="example-footer">
                     <h4>Related Resources</h4>
                     <ul class="resources-list">
-                        <li><a href="https://docs.anthropic.com/claude/docs/tool-use" target="_blank">Claude Tool Use Documentation</a></li>
+                        <li><a href="https://docs.anthropic.com/claude/docs/tool-use" target="_blank">Claude Tool Use
+                                Documentation</a></li>
                         <li><a href="advanced-features.html#tool-use">Advanced Tool Use Patterns</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
-    
+
     <section class="content-section" id="rag">
         <div class="container">
             <h2 class="section-title">Retrieval-Augmented Generation (RAG)</h2>
-            
+
             <div class="diagram">
                 <img src="img/RAG-diagram.png" alt="RAG Architecture Diagram">
-                <p class="diagram-caption">Figure 1: Basic RAG Architecture showing document processing, embedding, vector storage, and retrieval flow</p>
+                <p class="diagram-caption">Figure 1: Basic RAG Architecture showing document processing, embedding,
+                    vector storage, and retrieval flow</p>
             </div>
-            
+
             <div class="example-box">
                 <div class="example-header">
                     <h3>Simple RAG Implementation</h3>
                     <span class="tag">Intermediate</span>
                 </div>
-                
+
                 <div class="example-content">
                     <p class="example-description">
-                        This example demonstrates how to create a basic RAG system that can answer questions based on custom documents.
+                        This example demonstrates how to create a basic RAG system that can answer questions based on
+                        custom documents.
                     </p>
-                    
+
                     <div class="code-block">
                         <pre>
+<code class="language-python">
 import os
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_community.vectorstores import Chroma
@@ -610,43 +646,50 @@ if __name__ == "__main__":
     question = "What is the company policy on remote work?"
     response = rag_chain.invoke(question)
     print(response)
+</code>
 </pre>
                     </div>
-                    
+
                     <div class="example-notes">
                         <h4>Key Points</h4>
                         <ul>
-                            <li>Documents are split into smaller chunks to fit into context windows and improve retrieval granularity.</li>
-                            <li>The vector store (Chroma) allows semantic search of document chunks based on their embeddings.</li>
-                            <li>The retriever finds relevant document chunks based on the question's semantic meaning.</li>
+                            <li>Documents are split into smaller chunks to fit into context windows and improve
+                                retrieval granularity.</li>
+                            <li>The vector store (Chroma) allows semantic search of document chunks based on their
+                                embeddings.</li>
+                            <li>The retriever finds relevant document chunks based on the question's semantic meaning.
+                            </li>
                             <li>The prompt template combines the retrieved context with the user's question.</li>
                             <li>The LLM generates an answer based on the retrieved context.</li>
                         </ul>
                     </div>
                 </div>
-                
+
                 <div class="example-footer">
                     <h4>Related Resources</h4>
                     <ul class="resources-list">
-                        <li><a href="https://python.langchain.com/docs/modules/data_connection/" target="_blank">LangChain Document Loading & Retrieval</a></li>
+                        <li><a href="https://python.langchain.com/docs/modules/data_connection/"
+                                target="_blank">LangChain Document Loading & Retrieval</a></li>
                         <li><a href="advanced-features.html#advanced-rag">Advanced RAG Techniques</a></li>
                     </ul>
                 </div>
             </div>
-            
+
             <div class="example-box">
                 <div class="example-header">
                     <h3>Conversational RAG Agent</h3>
                     <span class="tag">Advanced</span>
                 </div>
-                
+
                 <div class="example-content">
                     <p class="example-description">
-                        This example shows how to build a conversational agent that combines RAG with tool use and conversation memory.
+                        This example shows how to build a conversational agent that combines RAG with tool use and
+                        conversation memory.
                     </p>
-                    
-<div class="code-block">
-<pre>
+
+                    <div class="code-block">
+                        <pre>
+<code class="language-python">
 import os
 from typing import List, Dict, Any
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
@@ -737,45 +780,51 @@ if __name__ == "__main__":
     # Follow-up query using memory
     response = agent.invoke({"input": "How does that compare to the industry standard?"})
     print(f"Response: {response['output']}")
+</code>
 </pre>
-</div>
+                    </div>
 
-<div class="example-notes">
-    <h4>Key Points</h4>
-    <ul>
-        <li>This implementation combines RAG with agent capabilities and conversation memory.</li>
-        <li>The DocumentSearchTool wraps the retriever to make it available as a tool for the agent.</li>
-        <li>ConversationBufferMemory allows the agent to reference previous exchanges in the conversation.</li>
-        <li>The agent can choose when to use the document search tool versus when to use its own knowledge.</li>
-        <li>Directory loading allows processing multiple documents at once from a folder.</li>
-    </ul>
-</div>
-</div>
-</div>
-</section>
+                    <div class="example-notes">
+                        <h4>Key Points</h4>
+                        <ul>
+                            <li>This implementation combines RAG with agent capabilities and conversation memory.</li>
+                            <li>The DocumentSearchTool wraps the retriever to make it available as a tool for the agent.
+                            </li>
+                            <li>ConversationBufferMemory allows the agent to reference previous exchanges in the
+                                conversation.</li>
+                            <li>The agent can choose when to use the document search tool versus when to use its own
+                                knowledge.</li>
+                            <li>Directory loading allows processing multiple documents at once from a folder.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+    </section>
 
-<section class="content-section" id="multi-agent">
-<div class="container">
-    <h2 class="section-title">Multi-Agent Systems</h2>
-    
-    <div class="diagram">
-        <img src="img/multi-agent.png" alt="Multi-Agent System Architecture">
-        <p class="diagram-caption">Figure 2: Multi-Agent Architecture showing agent communication and task delegation</p>
-    </div>
-    
-    <div class="example-box">
-        <div class="example-header">
-            <h3>CrewAI Multi-Agent System</h3>
-            <span class="tag">Advanced</span>
-        </div>
-        
-        <div class="example-content">
-            <p class="example-description">
-                This example demonstrates how to create a multi-agent system with different roles using CrewAI.
-            </p>
-            
-            <div class="code-block">
-                <pre>
+    <section class="content-section" id="multi-agent">
+        <div class="container">
+            <h2 class="section-title">Multi-Agent Systems</h2>
+
+            <div class="diagram">
+                <img src="img/multi-agent.png" alt="Multi-Agent System Architecture">
+                <p class="diagram-caption">Figure 2: Multi-Agent Architecture showing agent communication and task
+                    delegation</p>
+            </div>
+
+            <div class="example-box">
+                <div class="example-header">
+                    <h3>CrewAI Multi-Agent System</h3>
+                    <span class="tag">Advanced</span>
+                </div>
+
+                <div class="example-content">
+                    <p class="example-description">
+                        This example demonstrates how to create a multi-agent system with different roles using CrewAI.
+                    </p>
+
+                    <div class="code-block">
+                        <pre>
+<code class="language-python">
 import os
 from crewai import Agent, Task, Crew, Process
 from langchain_openai import ChatOpenAI
@@ -859,42 +908,49 @@ market_analysis_crew = Crew(
 # Execute the crew
 result = market_analysis_crew.kickoff()
 print(result)
+</code>
 </pre>
+                    </div>
+
+                    <div class="example-notes">
+                        <h4>Key Points</h4>
+                        <ul>
+                            <li>CrewAI allows you to create specialized agents with distinct roles, goals, and
+                                backstories.</li>
+                            <li>Tasks can be connected through context, allowing output from one task to flow to
+                                another.</li>
+                            <li>The sequential process ensures tasks are completed in order, with each agent building on
+                                previous work.</li>
+                            <li>Agent delegation allows certain agents to request help from others when needed.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="example-footer">
+                    <h4>Related Resources</h4>
+                    <ul class="resources-list">
+                        <li><a href="https://docs.crewai.com/" target="_blank">CrewAI Documentation</a></li>
+                        <li><a href="advanced-features.html#multi-agent-orchestration">Multi-Agent Orchestration
+                                Patterns</a></li>
+                    </ul>
+                </div>
             </div>
-            
-            <div class="example-notes">
-                <h4>Key Points</h4>
-                <ul>
-                    <li>CrewAI allows you to create specialized agents with distinct roles, goals, and backstories.</li>
-                    <li>Tasks can be connected through context, allowing output from one task to flow to another.</li>
-                    <li>The sequential process ensures tasks are completed in order, with each agent building on previous work.</li>
-                    <li>Agent delegation allows certain agents to request help from others when needed.</li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="example-footer">
-            <h4>Related Resources</h4>
-            <ul class="resources-list">
-                <li><a href="https://docs.crewai.com/" target="_blank">CrewAI Documentation</a></li>
-                <li><a href="advanced-features.html#multi-agent-orchestration">Multi-Agent Orchestration Patterns</a></li>
-            </ul>
-        </div>
-    </div>
-    
-    <div class="example-box">
-        <div class="example-header">
-            <h3>AutoGen Multi-Agent Conversation</h3>
-            <span class="tag">Advanced</span>
-        </div>
-        
-        <div class="example-content">
-            <p class="example-description">
-                This example shows how to create a conversational multi-agent system using Microsoft's AutoGen framework.
-            </p>
-            
-            <div class="code-block">
-                <pre>
+
+            <div class="example-box">
+                <div class="example-header">
+                    <h3>AutoGen Multi-Agent Conversation</h3>
+                    <span class="tag">Advanced</span>
+                </div>
+
+                <div class="example-content">
+                    <p class="example-description">
+                        This example shows how to create a conversational multi-agent system using Microsoft's AutoGen
+                        framework.
+                    </p>
+
+                    <div class="code-block">
+                        <pre>
+<code class="language-python">
 import os
 import autogen
 from autogen import Agent, AssistantAgent, UserProxyAgent, GroupChat, GroupChatManager
@@ -979,36 +1035,41 @@ The scraper should:
 4. Respect the website's robots.txt and rate limits
 Help me build this application step by step."""
 )
+</code>
 </pre>
-            </div>
-            
-            <div class="example-notes">
-                <h4>Key Points</h4>
-                <ul>
-                    <li>AutoGen enables dynamic conversations between multiple agents with specialized roles.</li>
-                    <li>The GroupChat framework manages turn-taking and facilitates agent collaboration.</li>
-                    <li>Each agent has a distinct system message that guides its behavior and expertise.</li>
-                    <li>The UserProxyAgent acts as an interface between the human user and the agent group.</li>
-                    <li>The GroupChatManager orchestrates the conversation flow and ensures productive collaboration.</li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="example-footer">
-            <h4>Related Resources</h4>
-            <ul class="resources-list">
-                <li><a href="https://microsoft.github.io/autogen/" target="_blank">AutoGen Documentation</a></li>
-                <li><a href="frameworks.html#autogen">AutoGen Framework Guide</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-</section>
+                    </div>
 
-<footer>
-<div class="container">
-    <p>AI Agent Development Guide | Created to help developers build powerful AI solutions</p>
-</div>
-</footer>
+                    <div class="example-notes">
+                        <h4>Key Points</h4>
+                        <ul>
+                            <li>AutoGen enables dynamic conversations between multiple agents with specialized roles.
+                            </li>
+                            <li>The GroupChat framework manages turn-taking and facilitates agent collaboration.</li>
+                            <li>Each agent has a distinct system message that guides its behavior and expertise.</li>
+                            <li>The UserProxyAgent acts as an interface between the human user and the agent group.</li>
+                            <li>The GroupChatManager orchestrates the conversation flow and ensures productive
+                                collaboration.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="example-footer">
+                    <h4>Related Resources</h4>
+                    <ul class="resources-list">
+                        <li><a href="https://microsoft.github.io/autogen/" target="_blank">AutoGen Documentation</a>
+                        </li>
+                        <li><a href="frameworks.html#autogen">AutoGen Framework Guide</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>AI Agent Development Guide | Created to help developers build powerful AI solutions</p>
+        </div>
+    </footer>
 </body>
+
 </html>
