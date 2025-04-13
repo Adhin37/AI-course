@@ -1181,267 +1181,390 @@ Highlight areas of agreement and disagreement, and provide a balanced conclusion
 
             <div id="optimization" class="content-box">
                 <h2>Performance Optimization</h2>
-                <p>As agents become more complex, optimizing their performance becomes critical. This involves improving
-                    response quality, reducing latency, and managing costs.</p>
+                <p>As AI agents become more complex and handle more sophisticated tasks, optimizing their performance
+                    becomes critical. This involves improving response quality, reducing latency, managing costs, and
+                    ensuring scalability.</p>
 
-                <h2>Techniques for Optimizing Agents</h2>
-                <p>Here are several strategies to improve the performance and efficiency of your AI agents:</p>
+                <div class="info-box">
+                    <h4>Why Optimization Matters</h4>
+                    <p>Performance optimization directly impacts user experience, operational costs, and system
+                        reliability. Optimizing your AI agents helps:</p>
+                    <ul>
+                        <li><strong>Improve user experience</strong> with faster, more responsive interactions</li>
+                        <li><strong>Reduce operational costs</strong> by minimizing unnecessary API calls and token
+                            usage</li>
+                        <li><strong>Enhance system reliability</strong> by preventing bottlenecks and handling larger
+                            workloads</li>
+                        <li><strong>Support scaling</strong> as your user base and functionality grows</li>
+                    </ul>
+                </div>
+
+                <h3>Core Optimization Techniques</h3>
+                <p>Here are several proven strategies to improve the performance and efficiency of your AI agents:</p>
 
                 <div class="tab-container">
                     <div class="tab-buttons">
                         <button class="tab-button" data-tab="model-cascading">Model Cascading</button>
                         <button class="tab-button" data-tab="caching-strategies">Caching Strategies</button>
                         <button class="tab-button" data-tab="request-batching">Request Batching</button>
+                        <button class="tab-button" data-tab="token-optimization">Token Optimization</button>
                     </div>
 
                     <div id="model-cascading" class="tab-content">
                         <h4>Model Cascading</h4>
-                        <p>Use smaller, faster models for initial processing and larger models only when necessary.</p>
+                        <p>Use smaller, faster models for initial processing and larger models only when necessary. This
+                            approach balances cost and quality efficiently.</p>
                         <div class="code-block">
                             <pre>
-<code class="language-python">
-# Example: Model cascading approach
-
-def cascading_response(user_query):
-    # 1. Try with small, fast model first
-    fast_model = "gpt-3.5-turbo"
-    response = client.chat.completions.create(
-        model=fast_model,
-        messages=[{"role": "user", "content": user_query}]
-    )
-    fast_response = response.choices[0].message.content
-    
-    # 2. Check confidence or quality using a heuristic
-    confidence_check = client.chat.completions.create(
-        model=fast_model,
-        messages=[
-            {"role": "user", "content": user_query},
-            {"role": "assistant", "content": fast_response},
-            {"role": "user", "content": "On a scale of 1-10, how confident are you in this response? Just provide a number."}
-        ]
-    )
-    confidence = int(confidence_check.choices[0].message.content.strip())
-    
-    # 3. If confidence is high, return the fast response
-    if confidence >= 7:
-        return fast_response
-    
-    # 4. Otherwise, use the more powerful model
-    powerful_model = "gpt-4"
-    response = client.chat.completions.create(
-        model=powerful_model,
-        messages=[{"role": "user", "content": user_query}]
-    )
-    return response.choices[0].message.content
-                </code>
-                                </pre>
+            <code class="language-python">
+            # Example: Model cascading approach
+            
+            def cascading_response(user_query):
+                # 1. Try with small, fast model first
+                fast_model = "gpt-3.5-turbo"
+                response = client.chat.completions.create(
+                    model=fast_model,
+                    messages=[{"role": "user", "content": user_query}]
+                )
+                fast_response = response.choices[0].message.content
+                
+                # 2. Check confidence or quality using a heuristic
+                confidence_check = client.chat.completions.create(
+                    model=fast_model,
+                    messages=[
+                        {"role": "user", "content": user_query},
+                        {"role": "assistant", "content": fast_response},
+                        {"role": "user", "content": "On a scale of 1-10, how confident are you in this response? Just provide a number."}
+                    ]
+                )
+                confidence = int(confidence_check.choices[0].message.content.strip())
+                
+                # 3. If confidence is high, return the fast response
+                if confidence >= 7:
+                    return fast_response
+                
+                # 4. Otherwise, use the more powerful model
+                powerful_model = "gpt-4"
+                response = client.chat.completions.create(
+                    model=powerful_model,
+                    messages=[{"role": "user", "content": user_query}]
+                )
+                return response.choices[0].message.content
+                            </code>
+                            </pre>
                         </div>
                     </div>
 
                     <div id="caching-strategies" class="tab-content">
                         <h4>Caching Strategies</h4>
-                        <p>Implement smart caching to avoid redundant computation and API calls.</p>
+                        <p>Implement smart caching to avoid redundant computation and API calls, significantly reducing
+                            latency and costs.</p>
                         <div class="code-block">
                             <pre>
-<code class="language-python">
-# Example: Semantic caching for LLM responses
-
-import hashlib
-import json
-from sentence_transformers import SentenceTransformer
-import faiss
-import numpy as np
-
-class SemanticCache:
-    def __init__(self, embedding_model="all-MiniLM-L6-v2"):
-        # Initialize embedding model
-        self.embedding_model = SentenceTransformer(embedding_model)
-        
-        # Initialize cache store
-        self.cache = {}
-        
-        # Initialize FAISS index for fast similarity search
-        embedding_dim = self.embedding_model.get_sentence_embedding_dimension()
-        self.index = faiss.IndexFlatL2(embedding_dim)
-        
-        # Keep track of query-to-index mapping
-        self.query_map = []
-    
-    def _get_embedding(self, text):
-        """Generate embedding for text"""
-        return self.embedding_model.encode([text])[0]
-    
-    def get_response(self, query, generate_func, threshold=0.92):
-        """Get response from cache or generate new one"""
-        # Generate embedding for query
-        query_embedding = self._get_embedding(query)
-        
-        # If we have cached items, search for similar queries
-        if len(self.query_map) > 0:
-            # Search for similar queries
-            D, I = self.index.search(np.array([query_embedding]).astype('float32'), 1)
-            distance = D[0][0]
+            <code class="language-python">
+            # Example: Semantic caching for LLM responses
             
-            # Convert distance to similarity score (higher is better)
-            similarity = 1 / (1 + distance)
+            import hashlib
+            import json
+            from sentence_transformers import SentenceTransformer
+            import faiss
+            import numpy as np
             
-            if similarity > threshold:
-                # Retrieve cached response
-                cache_key = self.query_map[I[0][0]]
-                return self.cache[cache_key], True  # Second value indicates cache hit
-        
-        # Cache miss - generate new response
-        response = generate_func(query)
-        
-        # Add to cache
-        cache_key = hashlib.md5(query.encode()).hexdigest()
-        self.cache[cache_key] = response
-        
-        # Add to index
-        self.index.add(np.array([query_embedding]).astype('float32'))
-        self.query_map.append(cache_key)
-        
-        return response, False  # Second value indicates cache miss
-
-
-# Example usage (separated from class definition)
-def example_usage():
-    from openai import OpenAI
-    
-    # Initialize your LLM client
-    client = OpenAI(api_key="your-api-key")
-    
-    # Initialize the semantic cache
-    semantic_cache = SemanticCache()
-
-    def get_cached_response(query):
-        def generate_response(q):
-            # This is where you'd call your LLM API
-            response = client.chat.completions.create(
-                model="gpt-4",
-                messages=[{"role": "user", "content": q}]
-            )
-            return response.choices[0].message.content
-        
-        response, cache_hit = semantic_cache.get_response(query, generate_response)
-        if cache_hit:
-            print("Cache hit!")
-        else:
-            print("Cache miss - generated new response")
-        
-        return response
-    
-    # Example queries
-    print(get_cached_response("What is the capital of France?"))
-    print(get_cached_response("Tell me about Paris, the capital city of France"))  # Should hit cache
-
-
-if __name__ == "__main__":
-    example_usage()
-</code>
+            class SemanticCache:
+                def __init__(self, embedding_model="all-MiniLM-L6-v2"):
+                    # Initialize embedding model
+                    self.embedding_model = SentenceTransformer(embedding_model)
+                    
+                    # Initialize cache store
+                    self.cache = {}
+                    
+                    # Initialize FAISS index for fast similarity search
+                    embedding_dim = self.embedding_model.get_sentence_embedding_dimension()
+                    self.index = faiss.IndexFlatL2(embedding_dim)
+                    
+                    # Keep track of query-to-index mapping
+                    self.query_map = []
+                
+                def _get_embedding(self, text):
+                    """Generate embedding for text"""
+                    return self.embedding_model.encode([text])[0]
+                
+                def get_response(self, query, generate_func, threshold=0.92):
+                    """Get response from cache or generate new one"""
+                    # Generate embedding for query
+                    query_embedding = self._get_embedding(query)
+                    
+                    # If we have cached items, search for similar queries
+                    if len(self.query_map) > 0:
+                        # Search for similar queries
+                        D, I = self.index.search(np.array([query_embedding]).astype('float32'), 1)
+                        distance = D[0][0]
+                        
+                        # Convert distance to similarity score (higher is better)
+                        similarity = 1 / (1 + distance)
+                        
+                        if similarity > threshold:
+                            # Retrieve cached response
+                            cache_key = self.query_map[I[0][0]]
+                            return self.cache[cache_key], True  # Second value indicates cache hit
+                    
+                    # Cache miss - generate new response
+                    response = generate_func(query)
+                    
+                    # Add to cache
+                    cache_key = hashlib.md5(query.encode()).hexdigest()
+                    self.cache[cache_key] = response
+                    
+                    # Add to index
+                    self.index.add(np.array([query_embedding]).astype('float32'))
+                    self.query_map.append(cache_key)
+                    
+                    return response, False  # Second value indicates cache miss
+            
+            
+            # Example usage (separated from class definition)
+            def example_usage():
+                from openai import OpenAI
+                
+                # Initialize your LLM client
+                client = OpenAI(api_key="your-api-key")
+                
+                # Initialize the semantic cache
+                semantic_cache = SemanticCache()
+            
+                def get_cached_response(query):
+                    def generate_response(q):
+                        # This is where you'd call your LLM API
+                        response = client.chat.completions.create(
+                            model="gpt-4",
+                            messages=[{"role": "user", "content": q}]
+                        )
+                        return response.choices[0].message.content
+                    
+                    response, cache_hit = semantic_cache.get_response(query, generate_response)
+                    if cache_hit:
+                        print("Cache hit!")
+                    else:
+                        print("Cache miss - generated new response")
+                    
+                    return response
+                
+                # Example queries
+                print(get_cached_response("What is the capital of France?"))
+                print(get_cached_response("Tell me about Paris, the capital city of France"))  # Should hit cache
+            
+            
+            if __name__ == "__main__":
+                example_usage()
+            </code>
                             </pre>
                         </div>
                     </div>
 
                     <div id="request-batching" class="tab-content">
                         <h4>Request Batching</h4>
-                        <p>Group multiple operations to reduce API overhead and improve throughput.</p>
+                        <p>Group multiple operations to reduce API overhead and improve throughput, especially useful
+                            for embedding and processing multiple inputs.</p>
                         <div class="code-block">
                             <pre>
-<code class="language-python">
-# Example: Request batching for multiple operations
-
-import asyncio
-import time
-from collections import deque
-
-class BatchProcessor:
-    def __init__(self, process_func, max_batch_size=10, max_wait_time=0.5):
-        self.process_func = process_func
-        self.max_batch_size = max_batch_size
-        self.max_wait_time = max_wait_time
-        
-        self.queue = deque()
-        self.processing = False
-        self.last_batch_time = time.time()
-    
-    async def add_request(self, item):
-        # Create a future to track this item's result
-        future = asyncio.Future()
-        
-        # Add to queue
-        self.queue.append((item, future))
-        
-        # Start processing if needed
-        if not self.processing:
-            asyncio.create_task(self._process_batch())
-        
-        # Return future so caller can await it
-        return await future
-    
-    async def _process_batch(self):
-        self.processing = True
-        
-        while self.queue:
-            # Determine if we should process a batch now
-            current_time = time.time()
-            queue_size = len(self.queue)
-            time_since_last_batch = current_time - self.last_batch_time
+            <code class="language-python">
+            # Example: Request batching for multiple operations
             
-            should_process = (
-                queue_size >= self.max_batch_size or
-                time_since_last_batch >= self.max_wait_time
-            )
+            import asyncio
+            import time
+            from collections import deque
             
-            if not should_process:
-                # Wait a bit before checking again
-                await asyncio.sleep(0.1)
-                continue
-            
-            # Process a batch
-            batch_size = min(self.max_batch_size, queue_size)
-            batch_items = []
-            batch_futures = []
-            
-            for _ in range(batch_size):
-                item, future = self.queue.popleft()
-                batch_items.append(item)
-                batch_futures.append(future)
-            
-            # Process the batch and get results
-            try:
-                batch_results = await self.process_func(batch_items)
+            class BatchProcessor:
+                def __init__(self, process_func, max_batch_size=10, max_wait_time=0.5):
+                    self.process_func = process_func
+                    self.max_batch_size = max_batch_size
+                    self.max_wait_time = max_wait_time
+                    
+                    self.queue = deque()
+                    self.processing = False
+                    self.last_batch_time = time.time()
                 
-                # Set results for each future
-                for i, future in enumerate(batch_futures):
-                    future.set_result(batch_results[i])
-            except Exception as e:
-                # Propagate error to all futures
-                for future in batch_futures:
-                    future.set_exception(e)
+                async def add_request(self, item):
+                    # Create a future to track this item's result
+                    future = asyncio.Future()
+                    
+                    # Add to queue
+                    self.queue.append((item, future))
+                    
+                    # Start processing if needed
+                    if not self.processing:
+                        asyncio.create_task(self._process_batch())
+                    
+                    # Return future so caller can await it
+                    return await future
+                
+                async def _process_batch(self):
+                    self.processing = True
+                    
+                    while self.queue:
+                        # Determine if we should process a batch now
+                        current_time = time.time()
+                        queue_size = len(self.queue)
+                        time_since_last_batch = current_time - self.last_batch_time
+                        
+                        should_process = (
+                            queue_size >= self.max_batch_size or
+                            time_since_last_batch >= self.max_wait_time
+                        )
+                        
+                        if not should_process:
+                            # Wait a bit before checking again
+                            await asyncio.sleep(0.1)
+                            continue
+                        
+                        # Process a batch
+                        batch_size = min(self.max_batch_size, queue_size)
+                        batch_items = []
+                        batch_futures = []
+                        
+                        for _ in range(batch_size):
+                            item, future = self.queue.popleft()
+                            batch_items.append(item)
+                            batch_futures.append(future)
+                        
+                        # Process the batch and get results
+                        try:
+                            batch_results = await self.process_func(batch_items)
+                            
+                            # Set results for each future
+                            for i, future in enumerate(batch_futures):
+                                future.set_result(batch_results[i])
+                        except Exception as e:
+                            # Propagate error to all futures
+                            for future in batch_futures:
+                                future.set_exception(e)
+                        
+                        # Update tracking variables
+                        self.last_batch_time = time.time()
+                    
+                    self.processing = False
             
-            # Update tracking variables
-            self.last_batch_time = time.time()
-        
-        self.processing = False
+            # Example usage with embeddings
+            async def process_embeddings_batch(texts):
+                """Process a batch of texts into embeddings"""
+                # In a real implementation, this would call an embedding API
+                embeddings = client.embeddings.create(
+                    model="text-embedding-ada-002",
+                    input=texts
+                )
+                return [embedding.embedding for embedding in embeddings.data]
+            
+            # Create batch processor
+            embedding_batcher = BatchProcessor(process_embeddings_batch)
+            
+            # Example usage
+            async def get_embedding(text):
+                return await embedding_batcher.add_request(text)
+            </code>
+                            </pre>
+                        </div>
+                    </div>
 
-# Example usage with embeddings
-async def process_embeddings_batch(texts):
-    """Process a batch of texts into embeddings"""
-    # In a real implementation, this would call an embedding API
-    embeddings = client.embeddings.create(
-        model="text-embedding-ada-002",
-        input=texts
-    )
-    return [embedding.embedding for embedding in embeddings.data]
-
-# Create batch processor
-embedding_batcher = BatchProcessor(process_embeddings_batch)
-
-# Example usage
-async def get_embedding(text):
-    return await embedding_batcher.add_request(text)
-</code>
+                    <div id="token-optimization" class="tab-content">
+                        <h4>Token Optimization</h4>
+                        <p>Minimize token usage to reduce costs and improve response times while maintaining output
+                            quality.</p>
+                        <div class="code-block">
+                            <pre>
+            <code class="language-python">
+            # Example: Token optimization techniques
+            
+            class TokenOptimizer:
+                def __init__(self, max_context_tokens=4000):
+                    self.max_context_tokens = max_context_tokens
+                
+                def count_tokens(self, text):
+                    """Estimate token count in text - real implementation would use tokenizer"""
+                    # Approximate estimate (in a real implementation, use the specific model's tokenizer)
+                    return len(text.split()) * 1.3  # rough estimate
+                
+                def prioritize_context(self, context_items, query, reserved_tokens=500):
+                    """Prioritize context items to fit within token limit"""
+                    # Reserve tokens for the query and response
+                    available_tokens = self.max_context_tokens - reserved_tokens
+                    
+                    # Get token count for query
+                    query_tokens = self.count_tokens(query)
+                    available_tokens -= query_tokens
+                    
+                    # Prioritize and select context items
+                    selected_items = []
+                    current_tokens = 0
+                    
+                    # Sort context items by relevance (in a real implementation, use semantic relevance)
+                    # For this example, we'll use recency as a proxy for relevance
+                    sorted_items = sorted(context_items, key=lambda x: x.get('relevance', 0), reverse=True)
+                    
+                    for item in sorted_items:
+                        item_tokens = self.count_tokens(item['text'])
+                        
+                        if current_tokens + item_tokens <= available_tokens:
+                            selected_items.append(item)
+                            current_tokens += item_tokens
+                        else:
+                            # If the item is too large, we could truncate it instead of skipping
+                            # (implementation depends on the specific use case)
+                            continue
+                    
+                    return selected_items
+                
+                def optimize_prompt(self, system_prompt, user_messages, context_items=None):
+                    """Optimize a complete prompt for token efficiency"""
+                    # Count tokens in fixed parts
+                    system_tokens = self.count_tokens(system_prompt)
+                    
+                    # Calculate tokens used by user messages (excluding current query)
+                    message_tokens = sum(self.count_tokens(msg['content']) for msg in user_messages)
+                    
+                    # Reserve tokens for response
+                    reserved_tokens = 500
+                    
+                    # Calculate available tokens for context
+                    available_tokens = self.max_context_tokens - system_tokens - message_tokens - reserved_tokens
+                    
+                    # If we have context items, prioritize them
+                    optimized_context = []
+                    if context_items and available_tokens > 0:
+                        # Get current query
+                        current_query = user_messages[-1]['content'] if user_messages else ""
+                        
+                        # Prioritize context
+                        optimized_context = self.prioritize_context(
+                            context_items, 
+                            current_query,
+                            reserved_tokens
+                        )
+                    
+                    # If we're still over budget, trim conversation history
+                    # (keeping the most recent messages)
+                    if system_tokens + message_tokens + reserved_tokens > self.max_context_tokens:
+                        # Keep the most recent messages, dropping older ones
+                        preserved_messages = []
+                        current_tokens = system_tokens + reserved_tokens
+                        
+                        # Process messages in reverse order (newest first)
+                        for msg in reversed(user_messages):
+                            msg_tokens = self.count_tokens(msg['content'])
+                            
+                            if current_tokens + msg_tokens <= self.max_context_tokens:
+                                preserved_messages.insert(0, msg)  # Add to front of list
+                                current_tokens += msg_tokens
+                            else:
+                                break  # Stop once we can't add more messages
+                        
+                        user_messages = preserved_messages
+                    
+                    return {
+                        "system_prompt": system_prompt,
+                        "user_messages": user_messages,
+                        "context_items": optimized_context
+                    }
+            </code>
                             </pre>
                         </div>
                     </div>
@@ -1492,502 +1615,85 @@ async def get_embedding(text):
                             <li><strong>User satisfaction:</strong> Collect feedback on agent responses</li>
                         </ul>
                     </div>
+
+                    <h3>Advanced Optimization Patterns</h3>
+
+                    <div class="component-grid">
+                        <div class="component-card">
+                            <div class="component-icon">💡</div>
+                            <h3 class="component-title">Progressive Enhancement</h3>
+                            <p>Deliver a basic response quickly, then enhance it with additional details as they become
+                                available.</p>
+                            <ul>
+                                <li>Prioritize critical information delivery</li>
+                                <li>Stream responses when possible</li>
+                                <li>Use background processing for enrichment</li>
+                            </ul>
+                        </div>
+
+                        <div class="component-card">
+                            <div class="component-icon">🔄</div>
+                            <h3 class="component-title">Precomputation</h3>
+                            <p>Compute expensive operations in advance and store results for quick retrieval.</p>
+                            <ul>
+                                <li>Generate embeddings for common queries</li>
+                                <li>Preprocess documents for retrieval</li>
+                                <li>Build knowledge graphs offline</li>
+                            </ul>
+                        </div>
+
+                        <div class="component-card">
+                            <div class="component-icon">📱</div>
+                            <h3 class="component-title">Client-Side Optimization</h3>
+                            <p>Offload suitable tasks to the client to reduce server load and improve responsiveness.
+                            </p>
+                            <ul>
+                                <li>Implement request debouncing</li>
+                                <li>Cache responses locally</li>
+                                <li>Compress data transmissions</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="action-box">
+                        <h3>Optimization Action Plan</h3>
+                        <p>Follow these steps to implement a comprehensive optimization strategy for your AI agent:</p>
+
+                        <ol class="numbered-steps">
+                            <li>
+                                <h4>Establish Performance Baselines</h4>
+                                <p>Measure current performance metrics to identify optimization opportunities and track
+                                    improvements.</p>
+                            </li>
+                            <li>
+                                <h4>Identify Bottlenecks</h4>
+                                <p>Use profiling tools to find the slowest components and highest cost operations in
+                                    your agent system.</p>
+                            </li>
+                            <li>
+                                <h4>Implement Core Optimizations</h4>
+                                <p>Apply the techniques described above, starting with those that address your biggest
+                                    bottlenecks.</p>
+                            </li>
+                            <li>
+                                <h4>Monitor and Iterate</h4>
+                                <p>Continuously track performance metrics and adjust your optimization strategy as usage
+                                    patterns evolve.</p>
+                            </li>
+                        </ol>
+
+                        <p>Remember that optimization is an ongoing process, not a one-time effort. As your agent
+                            evolves and usage patterns change, regularly revisit your optimization strategy.</p>
+                    </div>
                 </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <p>AI Agent Development Guide | Created to help developers build powerful AI solutions</p>
+        </div>
+    </footer>
+</body>
 
-                <div class="content-box">
-                    <h2>Putting It All Together: Advanced Agent Development Principles</h2>
-                    <p>Let's explore the four key principles for building effective advanced AI agents:</p>
-
-                    <h3>1. Clear Task Definition</h3>
-                    <p>Before adding advanced features, you need a precise understanding of what your agent should do.
-                    </p>
-
-                    <div class="numbered-steps">
-                        <li>
-                            <h4>Define Boundaries</h4>
-                            <p>Clearly articulate what your agent should and shouldn't do. This includes:</p>
-                            <ul>
-                                <li>Primary objectives the agent should accomplish</li>
-                                <li>Out-of-scope requests the agent should decline</li>
-                                <li>Fallback behaviors for edge cases</li>
-                            </ul>
-                            <div class="code-block">
-                                <pre>
-<code class="language-python">
-# Example: Task definition specification
-
-agent_specification = {
-    "name": "ResearchAssistant",
-    "primary_objectives": [
-        "Search and synthesize information from provided documents",
-        "Answer factual questions about topics in the knowledge base",
-        "Summarize long documents into key points"
-    ],
-    "out_of_scope": [
-        "Providing medical or legal advice",
-        "Generating creative content unrelated to research",
-        "Executing actions outside the provided tools"
-    ],
-    "fallback_behavior": "When encountering requests outside primary objectives, politely explain limitations and redirect to approved tasks"
-}
-
-def is_task_in_scope(user_request):
-    """Determine if a user request is within the agent's scope"""
-    # In a real implementation, use the LLM to evaluate this
-    prompt = f"""
-Given the following agent specification:
-{json.dumps(agent_specification, indent=2)}
-
-And the user request: "{user_request}"
-
-Determine if this request falls within the agent's primary objectives or if it's out of scope.
-Return "IN_SCOPE" or "OUT_OF_SCOPE" followed by a brief explanation.
-"""
-    response = llm(prompt)
-    return "IN_SCOPE" in response
-                        
-</code>
-                                </pre>
-                            </div>
-                        </li>
-                        <li>
-                            <h4>Specify Success Criteria</h4>
-                            <p>Define measurable outcomes that determine if your agent is successful:</p>
-                            <ul>
-                                <li>Performance metrics (accuracy, speed, etc.)</li>
-                                <li>User satisfaction indicators</li>
-                                <li>Minimum quality thresholds</li>
-                            </ul>
-                        </li>
-                    </div>
-
-                    <h3>2. Thoughtful Prompt Engineering</h3>
-                    <p>Your agent's behavior is guided by its instructions. Effective prompt engineering is crucial for
-                        reliable performance.</p>
-
-                    <div class="numbered-steps">
-                        <li>
-                            <h4>Multi-part Prompts</h4>
-                            <p>Structure your agent's system prompt with distinct sections:</p>
-                            <div class="code-block">
-                                <pre>
-<code class="language-python">
-# Example: Multi-part system prompt structure
-
-def create_system_prompt(agent_spec, custom_instructions=None):
-    base_prompt = f"""
-# {agent_spec["name"]} - System Instructions
-
-## Role and Purpose
-You are {agent_spec["name"]}, an AI assistant designed to help users with research tasks.
-
-## Core Responsibilities
-{bullet_points(agent_spec["primary_objectives"])}
-
-## Limitations and Boundaries
-{bullet_points(agent_spec["out_of_scope"])}
-
-## Style Guide
-- Respond in a helpful, accurate, and concise manner
-- Cite sources when providing factual information
-- Ask clarifying questions when user requests are ambiguous
-- Present information in a structured, easy-to-understand format
-
-## Response Format
-When answering questions, follow this structure:
-1. Direct answer to the question (1-2 sentences)
-2. Supporting details and explanation
-3. Source citations where applicable
-"""
-
-    # Add custom instructions if provided
-    if custom_instructions:
-        base_prompt += f"\n## Additional Instructions\n{custom_instructions}"
-    
-    return base_prompt
-
-def bullet_points(items):
-    return "\n".join([f"- {item}" for item in items])
-                        
-</code>
-                                </pre>
-                            </div>
-                        </li>
-                        <li>
-                            <h4>Dynamic Prompt Augmentation</h4>
-                            <p>Adjust prompts based on context and user behavior:</p>
-                            <div class="code-block">
-                                <pre>
-<code class="language-python">
-# Example: Dynamic prompt augmentation
-
-class DynamicPromptManager:
-    def __init__(self, base_system_prompt):
-        self.base_system_prompt = base_system_prompt
-        self.user_preferences = {}
-        self.conversation_context = []
-        self.specialized_contexts = {}
-    
-    def add_user_preference(self, key, value):
-        """Store a user preference to customize prompts"""
-        self.user_preferences[key] = value
-    
-    def add_conversation_context(self, context):
-        """Add relevant context from the conversation"""
-        self.conversation_context.append(context)
-        # Keep only the 5 most recent context items
-        if len(self.conversation_context) > 5:
-            self.conversation_context.pop(0)
-    
-    def register_specialized_context(self, topic, context):
-        """Register specialized instructions for specific topics"""
-        self.specialized_contexts[topic] = context
-    
-    def get_topic_from_query(self, query):
-        """Detect the topic of a user query"""
-        # In a real implementation, use an LLM to classify the query
-        # For this example, we'll use a simple keyword approach
-        topics = {
-            "research": ["find", "research", "information", "sources"],
-            "summarize": ["summarize", "summary", "condense", "brief"],
-            "analyze": ["analyze", "analysis", "compare", "evaluate"]
-        }
-        
-        for topic, keywords in topics.items():
-            if any(keyword in query.lower() for keyword in keywords):
-                return topic
-        return "general"
-    
-    def generate_prompt(self, user_query):
-        """Generate a dynamic system prompt based on context"""
-        # Start with the base prompt
-        dynamic_prompt = self.base_system_prompt
-        
-        # Add user preferences section if any exist
-        if self.user_preferences:
-            prefs_text = "\n## User Preferences\n"
-            for key, value in self.user_preferences.items():
-                prefs_text += f"- {key}: {value}\n"
-            dynamic_prompt += prefs_text
-        
-        # Add conversation context if available
-        if self.conversation_context:
-            context_text = "\n## Relevant Context\n"
-            for ctx in self.conversation_context:
-                context_text += f"- {ctx}\n"
-            dynamic_prompt += context_text
-        
-        # Add specialized instructions based on detected topic
-        topic = self.get_topic_from_query(user_query)
-        if topic in self.specialized_contexts:
-            dynamic_prompt += f"\n## Topic-Specific Instructions ({topic})\n"
-            dynamic_prompt += self.specialized_contexts[topic]
-        
-        return dynamic_prompt
-                        
-</code>
-</pre>
-                            </div>
-                        </li>
-                    </div>
-
-                    <div class="info-box">
-                        <h4>Prompt Testing Strategy</h4>
-                        <p>Systematically test your prompts using these approaches:</p>
-                        <ul>
-                            <li><strong>Edge case testing:</strong> Challenge your agent with boundary conditions</li>
-                            <li><strong>Adversarial testing:</strong> Try to cause the agent to violate its constraints
-                            </li>
-                            <li><strong>A/B testing:</strong> Compare different prompt versions against the same queries
-                            </li>
-                            <li><strong>Prompt versioning:</strong> Maintain a history of prompts and their performance
-                            </li>
-                        </ul>
-                    </div>
-
-                    <h3>3. Robust Tool Integration</h3>
-                    <p>Tools extend your agent's capabilities beyond what the language model can do alone.</p>
-
-                    <div class="numbered-steps">
-                        <li>
-                            <h4>Tool Selection Strategy</h4>
-                            <p>Choose tools based on your agent's specific needs:</p>
-                            <ul>
-                                <li><strong>Information retrieval tools:</strong> Search engines, knowledge bases,
-                                    databases</li>
-                                <li><strong>Processing tools:</strong> Calculators, code interpreters, data analyzers
-                                </li>
-                                <li><strong>External system integrations:</strong> APIs, third-party services</li>
-                                <li><strong>Memory systems:</strong> Vector stores, document databases</li>
-                            </ul>
-                        </li>
-                        <li>
-                            <h4>Tool Governance</h4>
-                            <p>Implement safeguards to ensure tools are used appropriately:</p>
-                            <div class="code-block">
-                                <pre>
-<code class="language-python">
-# Example: Tool governance framework
-
-import time
-
-class ToolGovernance:
-    def __init__(self):
-        self.tool_policies = {}
-        self.usage_logs = {}
-        self.alert_thresholds = {}
-
-    def register_tool_policy(self, tool_name, allowed_use_cases, disallowed_use_cases, 
-                            usage_limit=None, approval_required=False):
-        """Register policies for a tool"""
-        self.tool_policies[tool_name] = {
-            "allowed_use_cases": allowed_use_cases,
-            "disallowed_use_cases": disallowed_use_cases,
-            "usage_limit": usage_limit,
-            "approval_required": approval_required
-        }
-        self.usage_logs[tool_name] = []
-
-    def set_alert_threshold(self, tool_name, threshold, alert_handler):
-        """Set an alert threshold for a tool"""
-        self.alert_thresholds[tool_name] = {
-            "threshold": threshold,
-            "handler": alert_handler
-        }
-
-    def check_tool_use_permission(self, tool_name, use_case_description, user_id=None):
-        """Check if a proposed tool use is permitted"""
-        if tool_name not in self.tool_policies:
-            return False, "Tool not registered in governance system"
-        
-        policy = self.tool_policies[tool_name]
-        
-        # Check if use case is explicitly disallowed
-        for disallowed in policy["disallowed_use_cases"]:
-            if disallowed.lower() in use_case_description.lower():
-                return False, f"Use case contains disallowed pattern: {disallowed}"
-        
-        # Check if use case matches allowed patterns
-        allowed = False
-        for allowed_use_case in policy["allowed_use_cases"]:
-            if allowed_use_case.lower() in use_case_description.lower():
-                allowed = True
-                break
-        
-        if not allowed:
-            return False, "Use case does not match allowed patterns"
-
-        # Check if usage limit is exceeded
-        if policy["usage_limit"] and len(self.usage_logs[tool_name]) >= policy["usage_limit"]:
-            return False, f"Tool usage limit exceeded: {policy['usage_limit']}"
-
-        # Check if approval is required
-        if policy["approval_required"] and user_id is None:
-            return False, "Tool usage requires approval"
-
-        return True, "Tool use permitted"
-
-    def log_tool_usage(self, tool_name, use_case_description, user_id=None, result=None):
-        """Log a tool usage"""
-        timestamp = time.time()
-        log_entry = {
-            "timestamp": timestamp,
-            "use_case": use_case_description,
-            "user_id": user_id,
-            "result": result
-        }
-        self.usage_logs[tool_name].append(log_entry)
-        
-        # Check if we need to trigger an alert
-        if tool_name in self.alert_thresholds:
-            alert_config = self.alert_thresholds[tool_name]
-            if len(self.usage_logs[tool_name]) >= alert_config["threshold"]:
-                alert_config["handler"](tool_name, self.usage_logs[tool_name])
-</code>
-                                </pre>
-                            </div>
-                        </li>
-                    </div>
-
-                    <h3>4. Continuous Monitoring and Improvement</h3>
-                    <p>Advanced agents require ongoing observation and refinement to maintain and improve performance.
-                    </p>
-
-                    <div class="numbered-steps">
-                        <li>
-                            <h4>Evaluation Framework</h4>
-                            <p>Implement a comprehensive evaluation system:</p>
-                            <div class="code-block">
-                                <pre>
-<code class="language-python">
-# Example: Agent evaluation framework
-
-class AgentEvaluator:
-    def __init__(self):
-        self.evaluation_metrics = {
-            "accuracy": [],
-            "helpfulness": [],
-            "task_completion": [],
-            "response_time": [],
-            "cost_efficiency": []
-        }
-        self.benchmark_datasets = {}
-        self.human_ratings = []
-    
-    def register_benchmark_dataset(self, name, dataset):
-        """Register a benchmark dataset for evaluation"""
-        self.benchmark_datasets[name] = dataset
-    
-    def evaluate_on_benchmark(self, agent_function, dataset_name):
-        """Evaluate agent on a benchmark dataset"""
-        if dataset_name not in self.benchmark_datasets:
-            raise ValueError(f"Dataset {dataset_name} not found")
-        
-        dataset = self.benchmark_datasets[dataset_name]
-        results = {
-            "correct": 0,
-            "total": len(dataset),
-            "response_times": [],
-            "token_usage": []
-        }
-        
-        for i, example in enumerate(dataset):
-            query = example["query"]
-            expected = example["expected_result"]
-            
-            # Measure response time
-            start_time = time.time()
-            response = agent_function(query)
-            end_time = time.time()
-            
-            # Record response time
-            response_time = end_time - start_time
-            results["response_times"].append(response_time)
-            
-            # Check correctness (in a real implementation, use a more sophisticated matching)
-            is_correct = self._check_correctness(response, expected)
-            if is_correct:
-                results["correct"] += 1
-            
-            # Optionally track token usage if available
-            token_usage = getattr(response, "token_usage", None)
-            if token_usage:
-                results["token_usage"].append(token_usage)
-            
-            # Print progress
-            if (i + 1) % 10 == 0:
-                print(f"Evaluated {i + 1}/{len(dataset)} examples")
-        
-        # Calculate metrics
-        accuracy = results["correct"] / results["total"]
-        avg_response_time = sum(results["response_times"]) / len(results["response_times"])
-        
-        # Store metrics
-        self.evaluation_metrics["accuracy"].append({
-            "dataset": dataset_name,
-            "value": accuracy,
-            "timestamp": time.time()
-        })
-        
-        self.evaluation_metrics["response_time"].append({
-            "dataset": dataset_name,
-            "value": avg_response_time,
-            "timestamp": time.time()
-        })
-        
-        return {
-            "accuracy": accuracy,
-            "avg_response_time": avg_response_time,
-            "detailed_results": results
-        }
-    
-    def record_human_rating(self, query, response, rating, feedback=None):
-        """Record a human rating for an agent response"""
-        self.human_ratings.append({
-            "query": query,
-            "response": response,
-            "rating": rating,
-            "feedback": feedback,
-            "timestamp": time.time()
-        })
-    
-    def _check_correctness(self, response, expected):
-        """Check if a response is correct"""
-        # In a real implementation, this would be more sophisticated
-        # Could use semantic similarity, exact matching, or other techniques
-        return expected.lower() in response.lower()
-    
-    def get_performance_trends(self, metric, timeframe=None):
-        """Get performance trends for a specific metric"""
-        if metric not in self.evaluation_metrics:
-            raise ValueError(f"Metric {metric} not found")
-        
-        data = self.evaluation_metrics[metric]
-        
-        if timeframe:
-            # Filter data by timeframe
-            now = time.time()
-            filtered_data = [d for d in data if now - d["timestamp"] <= timeframe]
-        else:
-            filtered_data = data
-        
-        # Group by dataset
-        datasets = {}
-        for entry in filtered_data:
-            dataset = entry["dataset"]
-            if dataset not in datasets:
-                datasets[dataset] = []
-            datasets[dataset].append((entry["timestamp"], entry["value"]))
-        
-        # Sort by timestamp
-        for dataset in datasets:
-            datasets[dataset].sort(key=lambda x: x[0])
-        
-        return datasets
-    
-    def generate_performance_report(self):
-        """Generate a comprehensive performance report"""
-        report = {
-            "summary": {},
-            "metrics": {},
-            "human_feedback": {}
-        }
-        
-        # Generate summary
-        for metric, data in self.evaluation_metrics.items():
-            if data:
-                recent_values = [entry["value"] for entry in data[-5:]]
-                report["summary"][metric] = {
-                    "current": recent_values[-1] if recent_values else None,
-                    "trend": "improving" if len(recent_values) > 1 and recent_values[-1] > recent_values[0] else "stable"
-                }
-        
-        # Include detailed metrics
-        report["metrics"] = {metric: data for metric, data in self.evaluation_metrics.items()}
-        
-        # Summarize human feedback
-        if self.human_ratings:
-            avg_rating = sum(entry["rating"] for entry in self.human_ratings) / len(self.human_ratings)
-            report["human_feedback"]["average_rating"] = avg_rating
-            report["human_feedback"]["total_ratings"] = len(self.human_ratings)
-            
-            # Common feedback themes (in a real implementation, use NLP to extract themes)
-            feedback_with_text = [entry for entry in self.human_ratings if entry.get("feedback")]
-            report["human_feedback"]["feedback_samples"] = [entry["feedback"] for entry in feedback_with_text[:5]]
-        
-        return report
-</code>
-                                </pre>
-                            </div>
-                        </li>
-                        <li>
-                            <h4>Feedback Incorporation Pipeline</h4>
-                            <p>Create a systematic process for using evaluation results to improve your agent:</p>
-                            <ul>
-                                <li>Collect evaluation data from multiple sources</li>
-                                <li>Identify patterns and improvement opportunities</li>
-                                <li>Implement targeted adjustments</li>
-                                <li>Measure impact of changes</li>
-                            </ul>
-                        </li>
-                    </div
+</html>

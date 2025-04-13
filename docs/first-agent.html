@@ -135,6 +135,203 @@
             color: var(--secondary);
             font-weight: bold;
         }
+
+        /* Conclusion Section Styles */
+        .conclusion-section {
+            background-color: var(--light);
+            padding: 4rem 0;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .conclusion-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .conclusion-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .conclusion-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .divider-line {
+            height: 2px;
+            background-color: var(--light-gray);
+            flex-grow: 1;
+            max-width: 100px;
+        }
+
+        .divider-icon {
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            color: var(--primary);
+        }
+
+        .achievement-banner {
+            display: flex;
+            align-items: center;
+            background-color: #ECFDF5;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .achievement-icon {
+            font-size: 2.5rem;
+            margin-right: 1.5rem;
+        }
+
+        .achievement-text h3 {
+            color: var(--secondary);
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .achievement-text p {
+            margin-bottom: 0;
+        }
+
+        .learnings-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .learnings-section h4 {
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+
+        .learning-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1rem;
+        }
+
+        .learning-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .learning-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: var(--primary);
+        }
+
+        .card-text {
+            font-weight: 500;
+        }
+
+        .future-tips {
+            background-color: #F3F4F6;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .future-tips h4 {
+            color: var(--primary-dark);
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tip h5 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .highlight {
+            background-color: rgba(79, 70, 229, 0.1);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .next-steps {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .next-steps p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .button-text {
+            margin-right: 0.5rem;
+        }
+
+        .button-icon {
+            font-size: 1.25rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+
+            .learning-cards,
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .achievement-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .achievement-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+
+            .conclusion-header h2 {
+                font-size: 2rem;
+            }
+        }
     </style>
     <!-- Prism CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" />
@@ -147,44 +344,44 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-        // Find all tab containers
-        const tabContainers = document.querySelectorAll('.tab-container');
-        
-        // Process each container individually
-        tabContainers.forEach(container => {
-            const tabButtons = container.querySelectorAll('.tab-button');
-            
-            tabButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Get only the tabs in this container
-                    const containerButtons = container.querySelectorAll('.tab-button');
-                    const tabId = button.getAttribute('data-tab');
-                    const tabContent = document.getElementById(tabId);
-                    
-                    // Remove active class from buttons in this container
-                    containerButtons.forEach(btn => btn.classList.remove('active'));
-                    
-                    // Remove active class from all related tab contents
-                    const tabContents = document.querySelectorAll('.tab-content');
-                    tabContents.forEach(content => {
-                        if (containerButtons.length > 0 && 
-                            Array.from(containerButtons).some(btn => btn.getAttribute('data-tab') === content.id)) {
-                            content.classList.remove('active');
-                        }
+            // Find all tab containers
+            const tabContainers = document.querySelectorAll('.tab-container');
+
+            // Process each container individually
+            tabContainers.forEach(container => {
+                const tabButtons = container.querySelectorAll('.tab-button');
+
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        // Get only the tabs in this container
+                        const containerButtons = container.querySelectorAll('.tab-button');
+                        const tabId = button.getAttribute('data-tab');
+                        const tabContent = document.getElementById(tabId);
+
+                        // Remove active class from buttons in this container
+                        containerButtons.forEach(btn => btn.classList.remove('active'));
+
+                        // Remove active class from all related tab contents
+                        const tabContents = document.querySelectorAll('.tab-content');
+                        tabContents.forEach(content => {
+                            if (containerButtons.length > 0 &&
+                                Array.from(containerButtons).some(btn => btn.getAttribute('data-tab') === content.id)) {
+                                content.classList.remove('active');
+                            }
+                        });
+
+                        // Add active class to clicked button and corresponding content
+                        button.classList.add('active');
+                        tabContent.classList.add('active');
                     });
-                    
-                    // Add active class to clicked button and corresponding content
-                    button.classList.add('active');
-                    tabContent.classList.add('active');
                 });
+
+                // Activate first tab by default for this container
+                if (tabButtons.length > 0) {
+                    tabButtons[0].click();
+                }
             });
-            
-            // Activate first tab by default for this container
-            if (tabButtons.length > 0) {
-                tabButtons[0].click();
-            }
         });
-    });
     </script>
 </head>
 
@@ -1009,7 +1206,7 @@ from agent import ResearchAgent
 load_dotenv()
 
 async def main():
-    print("Starting Research Assistant Agent...")
+    print("Starting Research Assistant Agent (LangChain version)...")
     
     # Initialize the agent
     agent = ResearchAgent()
@@ -1026,11 +1223,11 @@ async def main():
             break
         
         try:
-            # Process the query
+            # Process the query with LangChain agent
             response = await agent.process_query(user_input)
             print(f"\nAssistant: {response}\n")
         except Exception as e:
-            print(f"Error: {str(e)}")
+            print(f"Error processing with LangChain agent: {str(e)}")
 
 if __name__ == "__main__":
     # Run the main function
@@ -1053,28 +1250,33 @@ from agent import ResearchAgent
 load_dotenv()
 
 async def main():
-    print("Starting Research Assistant Agent...")
+    print("Starting Research Assistant Agent (Anthropic Claude version)...")
     
-    # Initialize the agent
-    agent = ResearchAgent()
-    
-    print("\nResearch Assistant is ready! Type 'exit' to quit.\n")
-    
-    while True:
-        # Get user input
-        user_input = input("You: ")
+    try:
+        # Initialize the Anthropic-based agent
+        agent = ResearchAgent()
         
-        # Exit condition
-        if user_input.lower() in ["exit", "quit", "bye"]:
-            print("Goodbye!")
-            break
+        print("\nResearch Assistant is ready! Type 'exit' to quit.\n")
         
-        try:
-            # Process the query
-            response = await agent.process_query(user_input)
-            print(f"\nAssistant: {response}\n")
-        except Exception as e:
-            print(f"Error: {str(e)}")
+        while True:
+            # Get user input
+            user_input = input("You: ")
+            
+            # Exit condition
+            if user_input.lower() in ["exit", "quit", "bye"]:
+                print("Goodbye!")
+                break
+            
+            try:
+                # Process the query with Anthropic-based agent
+                response = await agent.process_query(user_input)
+                print(f"\nAssistant: {response}\n")
+            except Exception as e:
+                print(f"Error in Claude API request: {str(e)}")
+    except ValueError as e:
+        # Handle missing API key error
+        print(f"Configuration error: {str(e)}")
+        print("Please make sure ANTHROPIC_API_KEY is set in your .env file")
 
 if __name__ == "__main__":
     # Run the main function
@@ -1211,39 +1413,85 @@ if __name__ == "__main__":
                     </ul>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="content-box">
+    <section class="conclusion-section">
+        <div class="conclusion-container">
+            <div class="conclusion-header">
                 <h2>Conclusion</h2>
+                <div class="divider">
+                    <div class="divider-line"></div>
+                    <div class="divider-icon">🎯</div>
+                    <div class="divider-line"></div>
+                </div>
+            </div>
 
-                <p>Congratulations! You've successfully built your first AI agent - a research assistant that can search
-                    for information, perform calculations, and summarize text. Through this tutorial, you've learned:
-                </p>
+            <div class="conclusion-content">
+                <div class="achievement-banner">
+                    <div class="achievement-icon">🏆</div>
+                    <div class="achievement-text">
+                        <h3>Congratulations!</h3>
+                        <p>You've successfully built your first AI agent - a research assistant that can search for
+                            information, perform calculations, and summarize text.</p>
+                    </div>
+                </div>
 
-                <ul>
-                    <li>How to structure an AI agent project</li>
-                    <li>How to integrate tools with an LLM</li>
-                    <li>How to implement memory for context persistence</li>
-                    <li>How to craft effective prompts for agent behavior</li>
-                    <li>How to handle user input and agent responses</li>
-                </ul>
+                <div class="learnings-section">
+                    <h4>What You've Learned</h4>
+                    <div class="learning-cards">
+                        <div class="learning-card">
+                            <div class="card-icon">🏗️</div>
+                            <div class="card-text">How to structure an AI agent project</div>
+                        </div>
+                        <div class="learning-card">
+                            <div class="card-icon">🔧</div>
+                            <div class="card-text">How to integrate tools with an LLM</div>
+                        </div>
+                        <div class="learning-card">
+                            <div class="card-icon">🧠</div>
+                            <div class="card-text">How to implement memory for context persistence</div>
+                        </div>
+                        <div class="learning-card">
+                            <div class="card-icon">💬</div>
+                            <div class="card-text">How to craft effective prompts for agent behavior</div>
+                        </div>
+                        <div class="learning-card">
+                            <div class="card-icon">👥</div>
+                            <div class="card-text">How to handle user input and agent responses</div>
+                        </div>
+                    </div>
+                </div>
 
-                <p>This foundation will serve you well as you continue your journey in AI agent development. As you
-                    build more complex agents, remember to focus on:</p>
+                <div class="future-tips">
+                    <h4>Key Focus Areas for Future Development</h4>
+                    <div class="tips-grid">
+                        <div class="tip">
+                            <h5><span class="highlight">Clear task definition</span></h5>
+                            <p>Define exactly what your agent should and shouldn't do</p>
+                        </div>
+                        <div class="tip">
+                            <h5><span class="highlight">Thoughtful prompt engineering</span></h5>
+                            <p>Guide the agent's behavior with well-crafted instructions</p>
+                        </div>
+                        <div class="tip">
+                            <h5><span class="highlight">Robust tool integration</span></h5>
+                            <p>Give your agent the capabilities it needs to succeed</p>
+                        </div>
+                        <div class="tip">
+                            <h5><span class="highlight">User-centric design</span></h5>
+                            <p>Create agents that solve real problems for users</p>
+                        </div>
+                    </div>
+                </div>
 
-                <ul>
-                    <li><strong>Clear task definition</strong>: Define exactly what your agent should and shouldn't do
-                    </li>
-                    <li><strong>Thoughtful prompt engineering</strong>: Guide the agent's behavior with well-crafted
-                        instructions</li>
-                    <li><strong>Robust tool integration</strong>: Give your agent the capabilities it needs to succeed
-                    </li>
-                    <li><strong>User-centric design</strong>: Create agents that solve real problems for users</li>
-                </ul>
-
-                <p>Ready to continue your learning journey? Check out our <a href="advanced-features.html">Advanced
-                        Features</a> guide to take your agent development skills to the next level.</p>
-
-                <a href="advanced-features.html" class="cta-button">Explore Advanced Features</a>
+                <div class="next-steps">
+                    <p>Ready to continue your learning journey?</p>
+                    <a href="advanced-features.html" class="cta-button">
+                        <span class="button-text">Explore Advanced Features</span>
+                        <span class="button-icon">→</span>
+                    </a>
+                </div>
             </div>
         </div>
     </section>

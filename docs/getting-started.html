@@ -104,6 +104,36 @@
             color: var(--secondary);
             margin-top: 0;
         }
+        
+        .redirect-section {
+            background-color: #EFF6FF;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            border: 1px solid #DBEAFE;
+        }
+        
+        .redirect-section h3 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+        
+        .redirect-button {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .redirect-button:hover {
+            background-color: var(--primary-dark);
+        }
     </style>
 </head>
 
@@ -172,6 +202,17 @@
 
                 <p>If you're missing any of these prerequisites, don't worry! We'll provide links to resources that can
                     help you get up to speed.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container content-container">
+            <div class="redirect-section">
+                <h3>New to AI Agents?</h3>
+                <p>If you're completely new to AI agents or want to understand the core concepts before diving into the implementation, we recommend starting with our comprehensive introduction.</p>
+                <p>The introduction covers fundamental concepts, explains how AI agents work, and provides context for the practical knowledge in this guide.</p>
+                <a href="introduction.html" class="redirect-button">Read the Introduction First</a>
             </div>
         </div>
     </section>

@@ -917,57 +917,97 @@
                     </div>
                 </div>
                 
-                <h3 style="margin-top: 2rem;">Framework Selection Recommendations</h3>
-                
-                <div style="margin-top: 1.5rem;">
-                    <h4>Choose LangChain if:</h4>
-                    <ul>
-                        <li>You need a flexible, general-purpose framework with extensive capabilities</li>
-                        <li>Your application requires integration with many external tools and services</li>
-                        <li>You value a large ecosystem and community support</li>
-                        <li>You're building a production application that will evolve over time</li>
-                    </ul>
-                </div>
-                
-                <div style="margin-top: 1.5rem;">
-                    <h4>Choose AutoGen if:</h4>
-                    <ul>
-                        <li>Your primary focus is on multi-agent conversation and collaboration</li>
-                        <li>You need sophisticated agent-to-agent communication patterns</li>
-                        <li>You're implementing systems where agents need to critique and improve each other's work</li>
-                        <li>Your application involves complex problem-solving through collaborative dialogue</li>
-                    </ul>
-                </div>
-                
-                <div style="margin-top: 1.5rem;">
-                    <h4>Choose LlamaIndex if:</h4>
-                    <ul>
-                        <li>Your application is primarily focused on data retrieval and RAG</li>
-                        <li>You need advanced document processing and indexing capabilities</li>
-                        <li>You're building a knowledge base or question-answering system over documents</li>
-                        <li>You require specialized retrieval optimizations for accuracy and relevance</li>
-                    </ul>
-                </div>
-                
-                <div style="margin-top: 1.5rem;">
-                    <h4>Choose CrewAI if:</h4>
-                    <ul>
-                        <li>You need a system with clearly defined agent roles and responsibilities</li>
-                        <li>Your use case maps well to human organizational structures</li>
-                        <li>You want an intuitive framework specifically designed for agent collaboration</li>
-                        <li>You prefer a higher-level abstraction for multi-agent orchestration</li>
-                    </ul>
-                </div>
-                
-                <div style="margin-top: 1.5rem;">
-                    <h4>Choose Direct API Integration if:</h4>
-                    <ul>
-                        <li>You need complete control over implementation details</li>
-                        <li>Your application is relatively simple or highly specialized</li>
-                        <li>You want to minimize dependencies on third-party libraries</li>
-                        <li>You're building a learning project to understand agent fundamentals</li>
-                        <li>You have unique requirements not well-supported by existing frameworks</li>
-                    </ul>
+                <div class="content-section">
+                    <div class="container">
+                        <h2 class="section-title" id="recommendations">Framework Selection Recommendations</h2>
+                        
+                        <div class="selection-guide">
+                            <p>Choose the right framework based on your specific needs and use cases. Each framework has unique strengths that make it ideal for particular scenarios.</p>
+                            
+                            <div class="resource-list" style="margin-top: 2rem;">
+                                <div class="resource-card">
+                                    <h3>LangChain</h3>
+                                    <p><span class="tag" style="background-color: var(--primary); color: white;">Most Popular</span></p>
+                                    <p>Perfect for developers seeking a comprehensive, flexible framework with extensive tool integrations.</p>
+                                    <ul>
+                                        <li>General-purpose applications with diverse requirements</li>
+                                        <li>Projects needing many external tool integrations</li>
+                                        <li>Applications that will evolve and scale over time</li>
+                                        <li>Teams valuing community support and ecosystem</li>
+                                    </ul>
+                                    <div class="component-footer" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--light-gray);">
+                                        <a href="code-examples.html#langchain" class="cta-button">Explore LangChain Examples</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="resource-card">
+                                    <h3>AutoGen</h3>
+                                    <p><span class="tag" style="background-color: var(--primary); color: white;">Multi-Agent Focused</span></p>
+                                    <p>Specialized for creating sophisticated multi-agent conversations and collaborations.</p>
+                                    <ul>
+                                        <li>Complex multi-agent conversation systems</li>
+                                        <li>Agent-to-agent communication patterns</li>
+                                        <li>Collaborative problem-solving through dialogue</li>
+                                        <li>Systems where agents critique each other's work</li>
+                                    </ul>
+                                    <div class="component-footer" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--light-gray);">
+                                        <a href="code-examples.html#autogen" class="cta-button">Explore AutoGen Examples</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="resource-card">
+                                    <h3>LlamaIndex</h3>
+                                    <p><span class="tag" style="background-color: var(--primary); color: white;">RAG Specialist</span></p>
+                                    <p>Excels at data retrieval, document processing, and knowledge-base applications.</p>
+                                    <ul>
+                                        <li>Document-based question answering systems</li>
+                                        <li>Advanced retrieval-augmented generation (RAG)</li>
+                                        <li>Knowledge bases and information retrieval</li>
+                                        <li>Applications with complex document processing</li>
+                                    </ul>
+                                    <div class="component-footer" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--light-gray);">
+                                        <a href="code-examples.html#llamaindex" class="cta-button">Explore LlamaIndex Examples</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="resource-card">
+                                    <h3>CrewAI</h3>
+                                    <p><span class="tag" style="background-color: var(--primary); color: white;">Role-Based Collaboration</span></p>
+                                    <p>Designed for creating role-based agent teams with clear responsibilities.</p>
+                                    <ul>
+                                        <li>Systems with defined agent roles and responsibilities</li>
+                                        <li>Applications modeling human organizational structures</li>
+                                        <li>Complex task decomposition and delegation</li>
+                                        <li>Projects requiring intuitive multi-agent orchestration</li>
+                                    </ul>
+                                    <div class="component-footer" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--light-gray);">
+                                        <a href="code-examples.html#crewai" class="cta-button">Explore CrewAI Examples</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="resource-card">
+                                    <h3>Direct API Integration</h3>
+                                    <p><span class="tag" style="background-color: var(--primary); color: white;">Maximum Control</span></p>
+                                    <p>Provides complete control and flexibility by directly integrating with LLM provider APIs.</p>
+                                    <ul>
+                                        <li>Simple or highly specialized applications</li>
+                                        <li>Projects requiring full control over implementation</li>
+                                        <li>Applications with minimal third-party dependencies</li>
+                                        <li>Learning projects to understand agent fundamentals</li>
+                                    </ul>
+                                    <div class="component-footer" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--light-gray);">
+                                        <a href="code-examples.html#direct-api" class="cta-button">Explore Direct API Examples</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="example-notes" style="margin-top: 3rem;">
+                                <h4>Making Your Decision</h4>
+                                <p>When selecting a framework, consider your specific use case, team expertise, development timeline, and long-term maintenance needs. For complex projects, you may even combine multiple frameworks to leverage their respective strengths.</p>
+                                <p>Remember that the best framework is the one that aligns with your project goals and constraints while providing the right balance of functionality and development efficiency.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
