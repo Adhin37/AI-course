@@ -345,9 +345,7 @@
                     rather than exact matching:</p>
 
                 <div class="code-block">
-                    <pre>
-<code class="language-python">
-# Example: Implementing a vector-based memory system with LangChain and Chroma
+                    <pre><code class="language-python"># Example: Implementing a vector-based memory system with LangChain and Chroma
 
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import Chroma
@@ -391,10 +389,7 @@ def agent_with_memory(user_input):
     # Store this interaction as a new memory
     store_memory(f"User: {user_input}\nAgent: {response}")
     
-    return response
-                
-</code>
-</pre>
+    return response</code></pre>
                 </div>
 
                 <div class="info-box">
@@ -422,9 +417,7 @@ def agent_with_memory(user_input):
                         <h4>Explicit Prompting for Reasoning</h4>
                         <p>Modify your agent's prompt to explicitly ask for step-by-step thinking:</p>
                         <div class="code-block">
-                            <pre>
-<code class="language-python">
-# Example: Chain-of-Thought prompt
+                            <pre><code class="language-python"># Example: Chain-of-Thought prompt
 
 def cot_prompt(question):
     return f"""
@@ -441,19 +434,14 @@ Let me work through this systematically:
 
 # Example usage
 question = "If a company's revenue grew by 15% to $690,000, what was the original revenue?"
-response = llm(cot_prompt(question))
-                        
-</code>
-</pre>
+response = llm(cot_prompt(question))</code></pre>
                         </div>
                     </li>
                     <li>
                         <h4>Self-Consistency Techniques</h4>
                         <p>Generate multiple reasoning paths and select the most consistent answer:</p>
                         <div class="code-block">
-                            <pre>
-<code class="language-python">
-# Example: Self-consistency with multiple reasoning paths
+                            <pre><code class="language-python"># Example: Self-consistency with multiple reasoning paths
 
 def solve_with_self_consistency(question, num_paths=3):
     results = []
@@ -474,19 +462,14 @@ def solve_with_self_consistency(question, num_paths=3):
     answer_counts = Counter(results)
     most_common_answer = answer_counts.most_common(1)[0][0]
     
-    return most_common_answer
-                        
-</code>
-</pre>
+    return most_common_answer</code></pre>
                         </div>
                     </li>
                     <li>
                         <h4>Reflection Mechanisms</h4>
                         <p>Allow your agent to review and critique its own reasoning:</p>
                         <div class="code-block">
-                            <pre>
-<code class="language-python">
-# Example: Implementing reflection
+                            <pre><code class="language-python"># Example: Implementing reflection
 
 def reflective_reasoning(question):
     # First reasoning attempt
@@ -524,10 +507,7 @@ Based on my reflection, my revised and final answer is:
 """
     
     final_answer = llm(final_answer_prompt)
-    return final_answer
-                        
-</code>
-</pre>
+    return final_answer</code></pre>
                         </div>
                     </li>
                 </ol>
@@ -575,9 +555,7 @@ Based on my reflection, my revised and final answer is:
                 <h3>Implementing Function Calling with OpenAI</h3>
 
                 <div class="code-block">
-                    <pre>
-<code class="language-python">
-# Example: Function calling with OpenAI
+                    <pre><code class="language-python"># Example: Function calling with OpenAI
 
 from openai import OpenAI
 import json
@@ -701,19 +679,14 @@ def agent_with_tools(user_input):
         return second_response.choices[0].message.content
     else:
         # Model chose not to use tools
-        return response_message.content
-                
-</code>
-</pre>
+        return response_message.content</code></pre>
                 </div>
 
                 <h3>Implementing Dynamic Tool Selection</h3>
                 <p>For agents with many tools, implement a dynamic tool selection system:</p>
 
                 <div class="code-block">
-                    <pre>
-<code class="language-python">
-# Example: Dynamic tool selection based on query analysis
+                    <pre><code class="language-python"># Example: Dynamic tool selection based on query analysis
 
 class ToolRegistry:
     def __init__(self):
@@ -757,10 +730,7 @@ def agent_with_dynamic_tools(user_input):
     relevant_tools = [t for t in tools if t["function"]["name"] in relevant_tool_names]
     
     # Only provide relevant tools to the model
-    # Rest of the implementation follows the previous example...
-                
-</code>
-</pre>
+    # Rest of the implementation follows the previous example...</code></pre>
                 </div>
 
                 <div class="info-box">
@@ -789,9 +759,7 @@ def agent_with_dynamic_tools(user_input):
                         <h4>Document Processing</h4>
                         <p>Prepare your documents for retrieval:</p>
                         <div class="code-block">
-                            <pre>
-<code class="language-python">
-# Example: Processing documents for RAG
+                            <pre><code class="language-python"># Example: Processing documents for RAG
 
 from langchain.document_loaders import DirectoryLoader, TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -812,18 +780,14 @@ text_chunks = text_splitter.split_documents(documents)
 
 # Create embeddings and store in vector database
 embeddings = OpenAIEmbeddings()
-vector_store = Chroma.from_documents(text_chunks, embeddings, collection_name="document_store")
-                            </code>
-</pre>
+vector_store = Chroma.from_documents(text_chunks, embeddings, collection_name="document_store")</code></pre>
                         </div>
                     </li>
                     <li>
                         <h4>Retrieval Strategy</h4>
                         <p>Implement effective retrieval logic:</p>
                         <div class="code-block">
-                            <pre>
-<code class="language-python">
-# Example: Advanced retrieval strategies
+                            <pre><code class="language-python"># Example: Advanced retrieval strategies
 
 from langchain.retrievers import ContextualCompressionRetriever
 from langchain.retrievers.document_compressors import LLMChainExtractor
@@ -846,19 +810,14 @@ def get_relevant_context(query, advanced=True):
     else:
         docs = basic_retriever.get_relevant_documents(query)
     
-    return "\n\n".join([doc.page_content for doc in docs])
-                        
-</code>
-</pre>
+    return "\n\n".join([doc.page_content for doc in docs])</code></pre>
                         </div>
                     </li>
                     <li>
                         <h4>Query Transformation</h4>
                         <p>Improve retrieval with query optimization:</p>
                         <div class="code-block">
-                            <pre>
-<code class="language-python">
-# Example: Query transformation for better retrieval
+                            <pre><code class="language-python"># Example: Query transformation for better retrieval
 
 def generate_search_queries(original_query):
     """Generate multiple search
@@ -902,10 +861,7 @@ def enhanced_retrieval(query):
     bm25_retriever = BM25Retriever.from_documents(list(unique_docs.values()))
     final_docs = bm25_retriever.get_relevant_documents(query)
     
-    return final_docs[:5]  # Return top 5 most relevant documents
-                        
-</code>
-</pre>
+    return final_docs[:5]  # Return top 5 most relevant documents</code></pre>
                         </div>
                     </li>
                 </ol>
@@ -913,9 +869,7 @@ def enhanced_retrieval(query):
                 <h3>Integrating RAG with Your Agent</h3>
 
                 <div class="code-block">
-                    <pre>
-<code class="language-python">
-# Example: RAG-powered agent
+                    <pre><code class="language-python"># Example: RAG-powered agent
 
 from langchain.agents import initialize_agent, Tool
 from langchain.memory import ConversationBufferMemory
@@ -948,10 +902,7 @@ def rag_agent_response(user_input):
         response = agent.run(input=user_input)
         return response
     except Exception as e:
-        return f"I encountered an error: {str(e)}"
-                
-</code>
-</pre>
+        return f"I encountered an error: {str(e)}"</code></pre>
                 </div>
 
                 <div class="warning-box">
@@ -1013,9 +964,7 @@ def rag_agent_response(user_input):
                 <h3>Implementing a Hub and Spoke Architecture</h3>
 
                 <div class="code-block">
-                    <pre>
-<code class="language-python">
-# Example: Hub and spoke multi-agent system
+                    <pre><code class="language-python"># Example: Hub and spoke multi-agent system
 
 class AgentManager:
     def __init__(self, llm):
@@ -1097,18 +1046,13 @@ manager.register_specialist(
 )
 
 # Process user query
-response = manager.process_query("Can you help me analyze this CSV file of sales data?")
-                
-</code>
-</pre>
+response = manager.process_query("Can you help me analyze this CSV file of sales data?")</code></pre>
                 </div>
 
                 <h3>Implementing a Debate Framework</h3>
 
                 <div class="code-block">
-                    <pre>
-<code class="language-python">
-# Example: Debate framework for complex reasoning
+                    <pre><code class="language-python"># Example: Debate framework for complex reasoning
 
 def debate_framework(question, num_agents=3, rounds=2):
     """
@@ -1160,10 +1104,7 @@ Highlight areas of agreement and disagreement, and provide a balanced conclusion
 """
     
     final_answer = llm(synthesis_prompt, max_tokens=800)
-    return final_answer
-                
-</code>
-</pre>
+    return final_answer</code></pre>
                 </div>
 
                 <div class="info-box">
@@ -1216,9 +1157,7 @@ Highlight areas of agreement and disagreement, and provide a balanced conclusion
                         <p>Use smaller, faster models for initial processing and larger models only when necessary. This
                             approach balances cost and quality efficiently.</p>
                         <div class="code-block">
-                            <pre>
-            <code class="language-python">
-# Example: Model cascading approach
+                            <pre><code class="language-python"># Example: Model cascading approach
 
 def cascading_response(user_query):
     # 1. Try with small, fast model first
@@ -1250,9 +1189,7 @@ def cascading_response(user_query):
         model=powerful_model,
         messages=[{"role": "user", "content": user_query}]
     )
-    return response.choices[0].message.content
-                            </code>
-                            </pre>
+    return response.choices[0].message.content</code></pre>
                         </div>
                     </div>
 
@@ -1261,9 +1198,7 @@ def cascading_response(user_query):
                         <p>Implement smart caching to avoid redundant computation and API calls, significantly reducing
                             latency and costs.</p>
                         <div class="code-block">
-                            <pre>
-            <code class="language-python">
-# Example: Semantic caching for LLM responses
+                            <pre><code class="language-python"># Example: Semantic caching for LLM responses
 
 import hashlib
 import json
@@ -1357,8 +1292,7 @@ def example_usage():
 
 if __name__ == "__main__":
     example_usage()
-            </code>
-                            </pre>
+            </code></pre>
                         </div>
                     </div>
 
@@ -1367,9 +1301,7 @@ if __name__ == "__main__":
                         <p>Group multiple operations to reduce API overhead and improve throughput, especially useful
                             for embedding and processing multiple inputs.</p>
                         <div class="code-block">
-                            <pre>
-            <code class="language-python">
-# Example: Request batching for multiple operations
+                            <pre><code class="language-python"># Example: Request batching for multiple operations
 
 import asyncio
 import time
@@ -1461,8 +1393,7 @@ embedding_batcher = BatchProcessor(process_embeddings_batch)
 # Example usage
 async def get_embedding(text):
     return await embedding_batcher.add_request(text)
-            </code>
-                            </pre>
+            </code></pre>
                         </div>
                     </div>
 
@@ -1471,9 +1402,7 @@ async def get_embedding(text):
                         <p>Minimize token usage to reduce costs and improve response times while maintaining output
                             quality.</p>
                         <div class="code-block">
-                            <pre>
-            <code class="language-python">
-# Example: Token optimization techniques
+                            <pre><code class="language-python"># Example: Token optimization techniques
 
 class TokenOptimizer:
     def __init__(self, max_context_tokens=4000):
@@ -1564,9 +1493,7 @@ class TokenOptimizer:
             "system_prompt": system_prompt,
             "user_messages": user_messages,
             "context_items": optimized_context
-        }
-            </code>
-                            </pre>
+        }</code></pre>
                         </div>
                     </div>
                 </div>

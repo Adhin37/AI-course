@@ -240,15 +240,11 @@
                             <li>Verify installation by opening Command Prompt and typing:</li>
                         </ol>
                         <div class="code-single-line">
-                            <pre>
-<code class="language-bash">python --version</code>
-                        </pre>
+                            <pre><code class="language-bash">python --version</code></pre>
                         </div>
                         <p>Alternatively, you can install Python using Windows Package Manager:</p>
                         <div class="code-single-line">
-                            <pre>
-<code class="language-bash">winget install Python.Python.3.11</code>
-                        </pre>
+                            <pre><code class="language-bash">winget install Python.Python.3.11</code></pre>
                         </div>
                     </div>
 
@@ -258,15 +254,11 @@
                         <ol>
                             <li>Install Homebrew if you don't have it already:</li>
                             <div class="code-single-line">
-                                <pre>
-<code class="language-bash">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code>
-                                </pre>
+                                <pre><code class="language-bash">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code></pre>
                             </div>
                             <li>Install Python using Homebrew:</li>
                             <div class="code-single-line">
-                                <pre>
-<code class="language-bash">brew install python</code>
-                            </pre>
+                                <pre><code class="language-bash">brew install python</code></pre>
                             </div>
                         </ol>
                         <p>Option 2: Using the installer:</p>
@@ -278,9 +270,7 @@
                         </ol>
                         <p>Verify installation by opening Terminal and typing:</p>
                         <div class="code-single-line">
-                            <pre>
-<code class="language-bash">python3 --version</code>
-                        </pre>
+                            <pre><code class="language-bash">python3 --version</code></pre>
                         </div>
                     </div>
 
@@ -288,33 +278,23 @@
                         <h4>Installing Python on Linux</h4>
                         <p>For Ubuntu/Debian:</p>
                         <div class="code-block">
-                            <pre>
-<code class="language-bash">
-sudo apt update
-sudo apt install python3 python3-pip python3-venv
-</code>
-                        </pre>
+                            <pre><code class="language-bash">sudo apt update
+sudo apt install python3 python3-pip python3-venv</code></pre>
                         </div>
 
                         <p>For Fedora:</p>
                         <div class="code-single-line">
-                            <pre>
-<code class="language-bash">sudo dnf install python3 python3-pip</code>
-                        </pre>
+                            <pre><code class="language-bash">sudo dnf install python3 python3-pip</code></pre>
                         </div>
 
                         <p>For Arch Linux:</p>
                         <div class="code-single-line">
-                            <pre>
-<code class="language-bash">sudo pacman -S python python-pip</code>
-                        </pre>
+                            <pre><code class="language-bash">sudo pacman -S python python-pip</code></pre>
                         </div>
 
                         <p>Verify installation:</p>
                         <div class="code-single-line">
-                            <pre>
-<code class="language-bash">python3 --version</code>
-                        </pre>
+                            <pre><code class="language-bash">python3 --version</code></pre>
                         </div>
                     </div>
                 </div>
@@ -336,24 +316,16 @@ sudo apt install python3 python3-pip python3-venv
                         <ol>
                             <li>Create a project directory:</li>
                             <div class="code-block">
-                                <pre>
-<code class="language-bash">
-mkdir ai-agent-project
-cd ai-agent-project
-</code>
-                            </pre>
+                                <pre><code class="language-bash">mkdir ai-agent-project
+cd ai-agent-project</code></pre>
                             </div>
                             <li>Create a virtual environment:</li>
                             <div class="code-single-line">
-                                <pre>
-<code class="language-bash">python -m venv venv</code>
-                            </pre>
+                                <pre><code class="language-bash">python -m venv venv</code></pre>
                             </div>
                             <li>Activate the virtual environment:</li>
                             <div class="code-single-line">
-                                <pre>
-<code class="language-bash">source venv\Scripts\activate</code>
-                            </pre>
+                                <pre><code class="language-bash">source venv\Scripts\activate</code></pre>
                             </div>
                             <p>You should see <code>(venv)</code> at the beginning of your command prompt, indicating
                                 that the virtual environment is active.</p>
@@ -365,24 +337,16 @@ cd ai-agent-project
                         <ol>
                             <li>Create a project directory:</li>
                             <div class="code-block">
-                                <pre>
-<code class="language-bash">
-mkdir ai-agent-project
-cd ai-agent-project
-</code>
-                            </pre>
+                                <pre><code class="language-bash">mkdir ai-agent-project
+cd ai-agent-project</code></pre>
                             </div>
                             <li>Create a virtual environment:</li>
                             <div class="code-single-line">
-                                <pre>
-<code class="language-bash">python3 -m venv venv</code>
-                            </pre>
+                                <pre><code class="language-bash">python3 -m venv venv</code></pre>
                             </div>
                             <li>Activate the virtual environment:</li>
                             <div class="code-single-line">
-                                <pre>
-<code class="language-bash">source venv/bin/activate</code>
-                            </pre>
+                                <pre><code class="language-bash">source venv/bin/activate</code></pre>
                             </div>
                             <p>You should see <code>(venv)</code> at the beginning of your command prompt, indicating
                                 that the virtual environment is active.</p>
@@ -421,78 +385,58 @@ cd ai-agent-project
                     <div id="install-langchain" class="tab-content">
                         <h4>Installing LangChain</h4>
                         <div class="code-single-line">
-                            <pre>
-<code class="language-bash">pip install langchain langchain-openai</code>
-                        </pre>
+                            <pre><code class="language-bash">pip install langchain langchain-openai</code></pre>
                         </div>
 
                         <p>For additional functionality:</p>
                         <div class="code-single-line">
-                            <pre>
-<code class="language-bash">pip install langchain[all]</code>
-                        </pre>
+                            <pre><code class="language-bash">pip install langchain[all]</code></pre>
                         </div>
 
                         <p>Common integrations:</p>
                         <div class="code-single-line">
-                            <pre>
-<code class="language-bash">pip install langchain-anthropic langchain-community langchain-experimental chroma chromadb</code>
-                        </pre>
+                            <pre><code class="language-bash">pip install langchain-anthropic langchain-community langchain-experimental chroma chromadb</code></pre>
                         </div>
                     </div>
 
                     <div id="install-autogen" class="tab-content">
                         <h4>Installing AutoGen</h4>
                         <div class="code-single-line">
-                            <pre>
-<code class="language-bash">pip install pyautogen</code>
-                        </pre>
+                            <pre><code class="language-bash">pip install pyautogen</code></pre>
                         </div>
 
                         <p>For enhanced functionality:</p>
                         <div class="code-single-line">
-                            <pre>
-<code class="language-bash">pip install pyautogen[retrievers,blendsearch]</code>
-                        </pre>
+                            <pre><code class="language-bash">pip install pyautogen[retrievers,blendsearch]</code></pre>
                         </div>
 
                         <p>For OpenAI integrations:</p>
                         <div class="code-single-line">
-                            <pre>
-<code class="language-bash">pip install openai</code>
-                        </pre>
+                            <pre><code class="language-bash">pip install openai</code></pre>
                         </div>
                     </div>
 
                     <div id="install-llamaindex" class="tab-content">
                         <h4>Installing LlamaIndex</h4>
                         <div class="code-single-line">
-                            <pre>
-<code class="language-bash">pip install llama-index llama-index-llms-openai</code>
-                        </pre>
+                            <pre><code class="language-bash">pip install llama-index llama-index-llms-openai</code></pre>
                         </div>
 
                         <p>For additional integrations:</p>
                         <div class="code-single-line">
-                            <pre>
-<code class="language-bash">pip install llama-index-llms-anthropic llama-index-embeddings-openai llama-index-vector-stores-chroma</code>
-                        </pre>
+                            <pre><code class="language-bash">pip install llama-index-llms-anthropic llama-index-embeddings-openai llama-index-vector-stores-chroma</code></pre>
                         </div>
                     </div>
 
                     <div id="install-crewai" class="tab-content">
                         <h4>Installing CrewAI</h4>
                         <div class="code-single-line">
-                            <pre>
-<code class="language-bash">pip install crewai crewai_tools</code>
-                        </pre>
+                            <pre><code class="language-bash">pip install crewai crewai_tools</code></pre>
                         </div>
 
                         <p>For LLM providers:</p>
                         <div class="code-single-line">
-                            <pre>
-<code class="language-bash">pip install openai anthropic</code>
-                        </pre>
+                            <pre><code class="language-bash">pip install openai anthropic</code></pre>
                         </div>
                     </div>
                 </div>
@@ -502,9 +446,7 @@ cd ai-agent-project
                     file with the following content:</p>
 
                 <div class="code-block">
-                    <pre>
-<code class="language-python">
-# Core frameworks
+                    <pre><code class="language-python"># Core frameworks
 langchain>=0.1.0
 langchain-openai>=0.0.2
 langchain-anthropic>=0.1.1
@@ -524,25 +466,19 @@ sentence-transformers>=2.2.2
 # Utilities
 python-dotenv>=1.0.0
 pydantic>=2.5.0
-tiktoken>=0.5.0
-    </code>
-</pre>
+tiktoken>=0.5.0</code></pre>
                 </div>
 
                 <p>Then install all dependencies at once:</p>
                 <div class="code-single-line">
-                    <pre>
-<code class="language-bash">pip install -r requirements.txt</code>
-                </pre>
+                    <pre><code class="language-bash">pip install -r requirements.txt</code></pre>
                 </div>
 
                 <div class="callout">
                     <h4>Tip</h4>
                     <p>Keep your dependencies up-to-date, especially for rapidly evolving frameworks:</p>
                     <div class="code-single-line">
-                        <pre>
-<code class="language-bash">pip install --upgrade -r requirements.txt</code>
-                    </pre>
+                        <pre><code class="language-bash">pip install --upgrade -r requirements.txt</code></pre>
                     </div>
                 </div>
             </div>
@@ -591,26 +527,20 @@ tiktoken>=0.5.0
                 <p>In your project root, create a file named <code>.env</code> with your API keys:</p>
 
                 <div class="code-block">
-                    <pre>
-<code class="language-bash">
-# API Keys
+                    <pre><code class="language-bash"># API Keys
 OPENAI_API_KEY=sk-your-openai-key-here
 ANTHROPIC_API_KEY=sk-ant-your-anthropic-key-here
 
 # Configuration
 DEFAULT_LLM_MODEL=gpt-4-turbo
-VECTOR_DB_PATH=./data/vectorstore
-    </code>
-</pre>
+VECTOR_DB_PATH=./data/vectorstore</code></pre>
                 </div>
 
                 <h3>Loading Environment Variables in Your Code</h3>
                 <p>Use the <code>python-dotenv</code> package to load environment variables:</p>
 
                 <div class="code-block">
-                    <pre>
-<code class="language-python">
-# Import at the top of your main script
+                    <pre><code class="language-python"># Import at the top of your main script
 from dotenv import load_dotenv
 import os
 
@@ -619,9 +549,7 @@ load_dotenv()
 
 # Access variables in your code
 openai_api_key = os.getenv("OPENAI_API_KEY")
-anthropic_api_key = os.getenv("ANTHROPIC_API_KEY")
-    </code>
-</pre>
+anthropic_api_key = os.getenv("ANTHROPIC_API_KEY")</code></pre>
                 </div>
 
                 <h3>Add .env to .gitignore</h3>
@@ -629,9 +557,7 @@ anthropic_api_key = os.getenv("ANTHROPIC_API_KEY")
                     information:</p>
 
                 <div class="code-block">
-                    <pre>
-<code class="language-git">
-# Environment variables
+                    <pre><code class="language-git"># Environment variables
 .env
 
 # Virtual environment
@@ -648,9 +574,7 @@ build/
 *.egg-info/
 
 # Vector stores and local data
-data/
-    </code>
-</pre>
+data/</code></pre>
                 </div>
             </div>
 
@@ -660,9 +584,7 @@ data/
                     agent projects:</p>
 
                 <div class="code-block">
-                    <pre>
-<code class="language-bash">
-ai-agent-project/
+                    <pre><code class="language-bash">ai-agent-project/
 ├── .env                  # Environment variables
 ├── .gitignore            # Git ignore file
 ├── README.md             # Project documentation
@@ -687,9 +609,7 @@ ai-agent-project/
 │   └── vectorstore/
 └── tests/                # Test files
     ├── __init__.py
-    └── test_agents.py
-    </code>
-</pre>
+    └── test_agents.py</code></pre>
                 </div>
 
                 <p>Create this structure using the following commands:</p>
@@ -702,9 +622,7 @@ ai-agent-project/
 
                     <div id="structure-windows" class="tab-content">
                         <div class="code-block">
-                            <pre>
-                            <code class="language-bash">
-mkdir agents tools prompts memory data data\raw data\processed data\vectorstore tests
+                            <pre><code class="language-bash">mkdir agents tools prompts memory data data\raw data\processed data\vectorstore tests
 type nul > .env
 type nul > .gitignore
 type nul > README.md
@@ -720,25 +638,19 @@ type nul > prompts\templates.py
 type nul > memory\__init__.py
 type nul > memory\memory_handlers.py
 type nul > tests\__init__.py
-type nul > tests\test_agents.py
-                            </code>
-                        </pre>
+type nul > tests\test_agents.py</code></pre>
                         </div>
                     </div>
 
                     <div id="structure-macos-linux" class="tab-content">
                         <div class="code-block">
-                            <pre>
-                            <code class="language-bash">
-mkdir -p agents tools prompts memory data/raw data/processed data/vectorstore tests
+                            <pre><code class="language-bash">mkdir -p agents tools prompts memory data/raw data/processed data/vectorstore tests
 touch .env .gitignore README.md requirements.txt main.py
 touch agents/__init__.py agents/base_agent.py agents/specialized_agents.py
 touch tools/__init__.py tools/tool_definitions.py
 touch prompts/__init__.py prompts/templates.py
 touch memory/__init__.py memory/memory_handlers.py
-touch tests/__init__.py tests/test_agents.py
-                            </code>
-                        </pre>
+touch tests/__init__.py tests/test_agents.py</code></pre>
                         </div>
                     </div>
                 </div>
@@ -750,9 +662,7 @@ touch tests/__init__.py tests/test_agents.py
 
                 <h3>main.py</h3>
                 <div class="code-block">
-                    <pre>
-<code class="language-python">
-import os
+                    <pre><code class="language-python">import os
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain.agents import AgentExecutor, create_react_agent
@@ -813,25 +723,19 @@ def main():
             print(f"\nError: {str(e)}")
 
 if __name__ == "__main__":
-    main()
-                    </code>
-</pre>
+    main()</code></pre>
                 </div>
 
                 <h3>Testing Your Setup</h3>
                 <p>Run your agent to verify everything is working correctly:</p>
 
                 <div class="code-single-line">
-                    <pre>
-<code class="language-bash">python main.py</code>
-                </pre>
+                    <pre><code class="language-bash">python main.py</code></pre>
                 </div>
 
                 <p>Try asking a question that uses the calculator tool, such as:</p>
                 <div class="code-single-line">
-                    <pre>
-<code class="language-bash">You: What is 42 * 3.14?</code>
-                </pre>
+                    <pre><code class="language-bash">You: What is 42 * 3.14?</code></pre>
                 </div>
 
                 <div class="callout">
@@ -853,19 +757,13 @@ if __name__ == "__main__":
 
                 <h3>Initialize Git Repository</h3>
                 <div class="code-single-line">
-                    <pre>
-<code class="language-bash">git init</code>
-                </pre>
+                    <pre><code class="language-bash">git init</code></pre>
                 </div>
 
                 <h3>Make Initial Commit</h3>
                 <div class="code-block">
-                    <pre>
-<code class="language-bash">
-git add .gitignore README.md requirements.txt main.py agents/ tools/ prompts/ memory/ tests/
-git commit -m "Initial project setup"
-</code>
-                </pre>
+                    <pre><code class="language-bash">git add .gitignore README.md requirements.txt main.py agents/ tools/ prompts/ memory/ tests/
+git commit -m "Initial project setup"</code></pre>
                 </div>
 
                 <div class="callout">

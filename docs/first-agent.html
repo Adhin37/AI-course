@@ -493,35 +493,27 @@
                 <p>Create the following files in your project directory:</p>
 
                 <div class="code-block">
-                    <pre>
-<code class="language-bash">
-research_agent/
+                    <pre><code class="language-bash">research_agent/
 ├── .env                  # Environment variables
 ├── main.py               # Entry point
 ├── agent.py              # Agent definition
 ├── tools.py              # Custom tools
 ├── memory.py             # Memory management
-└── prompts.py            # Prompt templates
-                    </code>
-</pre>
+└── prompts.py            # Prompt templates</code></pre>
                 </div>
 
                 <h3>Set Up Environment Variables</h3>
                 <p>Create a <code>.env</code> file with your API keys:</p>
 
                 <div class="code-block">
-                    <pre>
-<code class="language-bash">
-# API Keys
+                    <pre><code class="language-bash"># API Keys
 OPENAI_API_KEY=sk-your-openai-key-here
 # Alternatively, use Anthropic
 # ANTHROPIC_API_KEY=sk-ant-your-anthropic-key-here
 
 # Optional: Set default model
 DEFAULT_MODEL=gpt-4-turbo
-# For Anthropic: DEFAULT_MODEL=claude-3-opus-20240229
-                    </code>
-</pre>
+# For Anthropic: DEFAULT_MODEL=claude-3-opus-20240229</code></pre>
                 </div>
 
                 <div class="callout warning">
@@ -544,9 +536,7 @@ DEFAULT_MODEL=gpt-4-turbo
 
                     <div id="tools-langchain" class="tab-content">
                         <div class="code-block">
-                            <pre>
-<code class="language-python">
-from langchain.tools import tool
+                            <pre><code class="language-python">from langchain.tools import tool
 import requests
 import json
 import math
@@ -601,17 +591,13 @@ def summarize_text(text: str, max_length: int = 100) -> str:
     return " ".join(words[:max_length]) + "..."
 
 # Export the tools list for agent use
-tools_list = [web_search, calculate, summarize_text]
-                            </code>
-</pre>
+tools_list = [web_search, calculate, summarize_text]</code></pre>
                         </div>
                     </div>
 
                     <div id="tools-anthropic" class="tab-content">
                         <div class="code-block">
-                            <pre>
-<code class="language-python">
-import requests
+                            <pre><code class="language-python">import requests
 import json
 import math
 from typing import Dict, Any
@@ -703,9 +689,7 @@ def execute_tool(tool_name: str, tool_params: Dict[str, Any]) -> str:
         max_length = tool_params.get("max_length", 100)
         return summarize_text(tool_params["text"], max_length)
     else:
-        return f"Tool {tool_name} not found"
-                            </code>
-</pre>
+        return f"Tool {tool_name} not found"</code></pre>
                         </div>
                     </div>
                 </div>
@@ -735,9 +719,7 @@ def execute_tool(tool_name: str, tool_params: Dict[str, Any]) -> str:
 
                     <div id="memory-langchain" class="tab-content">
                         <div class="code-block">
-                            <pre>
-<code class="language-python">
-from langchain.memory import ConversationBufferMemory
+                            <pre><code class="language-python">from langchain.memory import ConversationBufferMemory
 from langchain.schema import HumanMessage, AIMessage
 
 class AgentMemory:
@@ -767,17 +749,13 @@ class AgentMemory:
     
     def clear(self):
         """Clear the memory."""
-        self.memory.chat_memory.clear()
-                            </code>
-</pre>
+        self.memory.chat_memory.clear()</code></pre>
                         </div>
                     </div>
 
                     <div id="memory-anthropic" class="tab-content">
                         <div class="code-block">
-                            <pre>
-<code class="language-python">
-from typing import List, Dict, Any
+                            <pre><code class="language-python">from typing import List, Dict, Any
 
 class Message:
     def __init__(self, role: str, content: str):
@@ -820,9 +798,7 @@ class AgentMemory:
     
     def clear(self):
         """Clear the memory."""
-        self.messages = []
-                            </code>
-</pre>
+        self.messages = []</code></pre>
                         </div>
                     </div>
                 </div>
@@ -853,9 +829,7 @@ class AgentMemory:
 
                     <div id="prompts-langchain" class="tab-content">
                         <div class="code-block">
-                            <pre>
-<code class="language-python">
-from langchain.prompts import ChatPromptTemplate
+                            <pre><code class="language-python">from langchain.prompts import ChatPromptTemplate
 
 RESEARCH_AGENT_PROMPT = ChatPromptTemplate.from_template("""
 You are an advanced AI research assistant designed to help users find and analyze information.
@@ -881,17 +855,13 @@ Remember to use tools when necessary to answer the user's question accurately.
 
 SYSTEM_PROMPT = """You are an advanced AI research assistant designed to help users find and analyze information.
 You have access to several tools that you can use to assist users.
-Always think step-by-step and use the appropriate tools when needed to provide accurate information."""
-</code>
-</pre>
+Always think step-by-step and use the appropriate tools when needed to provide accurate information."""</code></pre>
                         </div>
                     </div>
 
                     <div id="prompts-anthropic" class="tab-content">
                         <div class="code-block">
-                            <pre>
-<code class="language-python">
-# Define the system prompt for the research assistant agent
+                            <pre><code class="language-python"># Define the system prompt for the research assistant agent
 SYSTEM_PROMPT = """You are an advanced AI research assistant designed to help users find and analyze information.
 You have access to several tools that you can use to assist users:
 
@@ -912,9 +882,7 @@ def format_chat_history(chat_history: str) -> str:
         return "No previous conversation."
     
     return f"""Previous conversation history:
-{chat_history}"""
-</code>
-</pre>
+{chat_history}"""</code></pre>
                         </div>
                     </div>
                 </div>
@@ -945,9 +913,7 @@ def format_chat_history(chat_history: str) -> str:
 
                     <div id="agent-langchain" class="tab-content">
                         <div class="code-block">
-                            <pre>
-<code class="language-python">
-import os
+                            <pre><code class="language-python">import os
 from langchain.chains import create_structured_output_runnable
 from langchain.chat_models import ChatOpenAI
 from langchain.agents import create_tool_calling_agent, AgentExecutor
@@ -1011,17 +977,13 @@ class ResearchAgent:
         # Add agent response to memory
         self.memory.add_ai_message(output)
         
-        return output
-</code>
-</pre>
+        return output</code></pre>
                         </div>
                     </div>
 
                     <div id="agent-anthropic" class="tab-content">
                         <div class="code-block">
-                            <pre>
-<code class="language-python">
-import os
+                            <pre><code class="language-python">import os
 import json
 import requests
 from typing import Dict, Any, List
@@ -1136,9 +1098,7 @@ class ResearchAgent:
         # Add agent response to memory
         self.memory.add_ai_message(final_response)
         
-        return final_response
-</code>
-</pre>
+        return final_response</code></pre>
                         </div>
                     </div>
                 </div>
@@ -1169,9 +1129,7 @@ class ResearchAgent:
 
                     <div id="main-langchain" class="tab-content">
                         <div class="code-block">
-                            <pre>
-<code class="language-python">
-import os
+                            <pre><code class="language-python">import os
 import asyncio
 from dotenv import load_dotenv
 from agent import ResearchAgent
@@ -1205,17 +1163,13 @@ async def main():
 
 if __name__ == "__main__":
     # Run the main function
-    asyncio.run(main())
-</code>
-</pre>
+    asyncio.run(main())</code></pre>
                         </div>
                     </div>
 
                     <div id="main-anthropic" class="tab-content">
                         <div class="code-block">
-                            <pre>
-<code class="language-python">
-import os
+                            <pre><code class="language-python">import os
 import asyncio
 from dotenv import load_dotenv
 from agent import ResearchAgent
@@ -1254,9 +1208,7 @@ async def main():
 
 if __name__ == "__main__":
     # Run the main function
-    asyncio.run(main())
-</code>
-</pre>
+    asyncio.run(main())</code></pre>
                         </div>
                     </div>
                 </div>
@@ -1264,10 +1216,8 @@ if __name__ == "__main__":
                 <div class="callout tip">
                     <h4>Running the Application</h4>
                     <p>To run your research assistant, navigate to your project directory and execute:</p>
-                    <div class="code-block">
-                        <pre>
-<code class="language-none">python main.py</code>
-</pre>
+                    <div class="code-single-line">
+                        <pre><code class="language-bash">python main.py</code></pre>
                     </div>
                 </div>
             </div>
@@ -1284,10 +1234,8 @@ if __name__ == "__main__":
                     </div>
                     <div class="example-content">
                         <p class="example-description">This tests the agent's ability to search for information:</p>
-                        <div class="code-block">
-                            <pre>
-<code class="language-none">What are the key features of LangChain?</code>
-</pre>
+                        <div class="code-single-line">
+                            <pre><code class="language-none">What are the key features of LangChain?</code></pre>
                         </div>
                     </div>
                     <div class="example-footer">
@@ -1303,10 +1251,8 @@ if __name__ == "__main__":
                     </div>
                     <div class="example-content">
                         <p class="example-description">This tests the agent's ability to perform calculations:</p>
-                        <div class="code-block">
-                            <pre>
-<code class="language-none">If I invest $1000 with an annual interest rate of 7% compounded monthly, how much will I have after 10 years?</code>
-</pre>
+                        <div class="code-single-line">
+                            <pre><code class="language-none">If I invest $1000 with an annual interest rate of 7% compounded monthly, how much will I have after 10 years?</code></pre>
                         </div>
                     </div>
                     <div class="example-footer">
@@ -1323,10 +1269,8 @@ if __name__ == "__main__":
                     <div class="example-content">
                         <p class="example-description">This tests the agent's ability to combine multiple tools and
                             reasoning:</p>
-                        <div class="code-block">
-                            <pre>
-<code class="language-none">Find information about the latest developments in quantum computing and summarize it in 3 key points.</code>
-</pre>
+                        <div class="code-single-line">
+                            <pre><code class="language-none">Find information about the latest developments in quantum computing and summarize it in 3 key points.</code></pre>
                         </div>
                     </div>
                     <div class="example-footer">

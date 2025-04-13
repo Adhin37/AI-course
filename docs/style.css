@@ -396,24 +396,19 @@ footer p {
   border-radius: 4px;
   margin: 1rem 0;
   overflow: auto;
-  /* border-left: 4px solid #3498db; */
 }
 
 .code-block pre {
   margin: 0;
-  padding: 0 1.5em 0 1.5em !important;
+  padding: 1.5em !important;
   font-family: "Courier New", Courier, monospace;
   font-size: 0.9rem;
   line-height: 1.5;
   background: transparent;
 }
 
-.code-block pre code {
-  /* padding: 1rem; */
-}
-
 .code-single-line {
-  background-color: transparent; /* Let Prism handle the background */
+  background-color: transparent;
   border-radius: 4px;
   margin: 1rem 0;
   overflow: auto;
@@ -421,7 +416,6 @@ footer p {
 
 .code-single-line pre {
   margin: 0;
-  padding: 1em 1em 0 1em !important;
   font-family: "Courier New", Courier, monospace;
   font-size: 0.9rem;
   line-height: 1.5;
@@ -429,8 +423,7 @@ footer p {
 }
 
 .code-single-line pre code {
-  padding: 0.5rem 1rem; /* Reduced vertical padding */
-  /* display: inline-block; */
+  padding: 0.5rem 1rem;
 }
 
 .tab-container {

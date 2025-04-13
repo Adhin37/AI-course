@@ -84,9 +84,7 @@
                 <p>For Python-based agents, Flask and FastAPI are popular frameworks for creating web services.</p>
 
                 <div class="code-block">
-                    <pre>
-                        <code class="language-python">
-# Basic Flask implementation for an AI agent API
+                    <pre><code class="language-python"># Basic Flask implementation for an AI agent API
 from flask import Flask, request, jsonify
 import os
 from langchain.agents import initialize_agent, Tool
@@ -114,9 +112,7 @@ def query_agent():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
-</code>
-</pre>
+    app.run(debug=False, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))</code></pre>
                 </div>
 
                 <h3>Deploying to Cloud Platforms</h3>
@@ -131,8 +127,7 @@ if __name__ == '__main__':
                 <div class="example-box">
                     <h4>Deploying to Google Cloud Run Example</h4>
                     <p>1. Create a Dockerfile in your project directory:</p>
-                    <pre><code class="language-docker">
-FROM python:3.9-slim
+                    <pre><code class="language-docker">FROM python:3.9-slim
 
 WORKDIR /app
 COPY requirements.txt .
@@ -140,8 +135,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 ENV PORT=8080
-CMD exec gunicorn --bind :$PORT app:app
-</code></pre>
+CMD exec gunicorn --bind :$PORT app:app</code></pre>
                     <p>2. Build and deploy with Google Cloud CLI:</p>
                     <pre>gcloud builds submit --tag gcr.io/PROJECT_ID/ai-agent
 gcloud run deploy ai-agent --image gcr.io/PROJECT_ID/ai-agent --platform managed</pre>
@@ -177,8 +171,7 @@ gcloud run deploy ai-agent --image gcr.io/PROJECT_ID/ai-agent --platform managed
                     <h4>OpenAPI Specification Example</h4>
                     <p>Documenting your API with OpenAPI (formerly Swagger) helps users understand how to interact with
                         your agent:</p>
-                    <pre><code class="language-json">
-{
+                    <pre><code class="language-json">{
   "openapi": "3.0.0",
   "info": {
     "title": "AI Agent API",
@@ -233,8 +226,7 @@ gcloud run deploy ai-agent --image gcr.io/PROJECT_ID/ai-agent --platform managed
       }
     }
   }
-}
-</code></pre>
+}</code></pre>
                 </div>
             </div>
 
@@ -252,8 +244,7 @@ gcloud run deploy ai-agent --image gcr.io/PROJECT_ID/ai-agent --platform managed
                 </ul>
 
                 <div class="code-block">
-                    <pre><code class="language-python">
-# AWS Lambda function for an AI agent (Python)
+                    <pre><code class="language-python"># AWS Lambda function for an AI agent (Python)
 import json
 import os
 from langchain.agents import initialize_agent, Tool
@@ -316,9 +307,7 @@ def lambda_handler(event, context):
 
                 <h3>Mobile App Integration Example</h3>
                 <div class="code-block">
-                    <pre>
-                        <code class="language-java">
-// Example: Calling an AI agent API from a React Native app
+                    <pre><code class="language-java">// Example: Calling an AI agent API from a React Native app
 import React, { useState } from 'react';
 import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
 
@@ -368,9 +357,7 @@ return (
     ) : null}
     &lt;/View&gt;
 );
-}
-                    </code>
-                </pre>
+}</code></pre>
                 </div>
             </div>
 
@@ -389,8 +376,7 @@ return (
 
                 <h3>Basic Dockerfile for an AI Agent</h3>
                 <div class="code-block">
-                    <pre><code class="language-docker">
-# Dockerfile for an AI agent
+                    <pre><code class="language-docker"># Dockerfile for an AI agent
 FROM python:3.9-slim
 
 # Set working directory
@@ -411,9 +397,7 @@ ENV MODEL_PATH=/app/models
 ENV LOG_LEVEL=INFO
 
 # Command to run the application
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
-</code>
-</pre>
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]</code></pre>
                 </div>
 
                 <h3>Container Orchestration</h3>
@@ -443,8 +427,7 @@ CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
                 <h3>Logging and Observability</h3>
                 <p>Implement comprehensive logging to troubleshoot issues and understand agent behavior:</p>
                 <div class="code-block">
-                    <pre><code class="language-python">
-import logging
+                    <pre><code class="language-python">import logging
 import time
 from contextlib import contextmanager
 
@@ -540,8 +523,7 @@ def process_query(query, user_id):
 
                 <div class="example-box">
                     <h4>Simple Response Caching Implementation</h4>
-                    <pre><code class="language-python">
-import hashlib
+                    <pre><code class="language-python">import hashlib
 import json
 import redis
 
@@ -575,8 +557,7 @@ class CachedAgent:
             json.dumps(response)
         )
         
-        return response
-</code></pre>
+        return response</code></pre>
                 </div>
             </div>
 

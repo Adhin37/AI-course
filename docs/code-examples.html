@@ -124,9 +124,7 @@
                     </p>
 
                     <div class="code-block">
-                        <pre>
-<code class="language-python">
-import os
+                        <pre><code class="language-python">import os
 from langchain_openai import ChatOpenAI
 from langchain.agents import AgentType, initialize_agent, load_tools
 from langchain.callbacks import StreamingStdOutCallbackHandler
@@ -154,9 +152,7 @@ agent = initialize_agent(
 )
 
 # Run the agent
-agent.invoke({"input": "What is the square root of 256 plus the year Wikipedia was launched?"})
-</code>
-</pre>
+agent.invoke({"input": "What is the square root of 256 plus the year Wikipedia was launched?"})</code></pre>
                     </div>
 
                     <div class="example-notes">
@@ -195,9 +191,7 @@ agent.invoke({"input": "What is the square root of 256 plus the year Wikipedia w
                     </p>
 
                     <div class="code-block">
-                        <pre>
-<code class="language-python">
-import os
+                        <pre><code class="language-python">import os
 import anthropic
 from typing import List, Dict, Any
 
@@ -229,9 +223,7 @@ Always explain your reasoning."""
 if __name__ == "__main__":
     agent = ClaudeAgent()
     response = agent.run("I need to analyze the sentiment of the following customer feedback: 'The product arrived damaged and customer service was unhelpful.'")
-    print(response)
-</code>
-</pre>
+    print(response)</code></pre>
                     </div>
 
                     <div class="example-notes">
@@ -273,9 +265,7 @@ if __name__ == "__main__":
                     </p>
 
                     <div class="code-block">
-                        <pre>
-<code class="language-python">
-import os
+                        <pre><code class="language-python">import os
 import requests
 import json
 from typing import List, Dict, Any, Optional
@@ -359,9 +349,7 @@ agent = initialize_agent(
 # Example usage
 if __name__ == "__main__":
     response = agent.invoke({"input": "What's the weather in New York City? Also, how is Apple's stock doing today?"})
-    print(response["output"])
-</code>
-</pre>
+    print(response["output"])</code></pre>
                     </div>
 
                     <div class="example-notes">
@@ -401,9 +389,7 @@ if __name__ == "__main__":
                     </p>
 
                     <div class="code-block">
-                        <pre>
-<code class="language-python">
-import os
+                        <pre><code class="language-python">import os
 import json
 import anthropic
 import requests
@@ -538,9 +524,7 @@ Think carefully about which tool to use based on the user's request."""
 if __name__ == "__main__":
     agent = ClaudeToolAgent()
     response = agent.run("What's the weather in Seattle and find information about AI agents")
-    print(response)
-</code>
-</pre>
+    print(response)</code></pre>
                     </div>
 
                     <div class="example-notes">
@@ -589,9 +573,7 @@ if __name__ == "__main__":
                     </p>
 
                     <div class="code-block">
-                        <pre>
-<code class="language-python">
-import os
+                        <pre><code class="language-python">import os
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_community.vectorstores import Chroma
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -646,9 +628,7 @@ rag_chain = (
 if __name__ == "__main__":
     question = "What is the company policy on remote work?"
     response = rag_chain.invoke(question)
-    print(response)
-</code>
-</pre>
+    print(response)</code></pre>
                     </div>
 
                     <div class="example-notes">
@@ -689,9 +669,7 @@ if __name__ == "__main__":
                     </p>
 
                     <div class="code-block">
-                        <pre>
-<code class="language-python">
-import os
+                        <pre><code class="language-python">import os
 from typing import List, Dict, Any
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_community.vectorstores import Chroma
@@ -780,9 +758,7 @@ if __name__ == "__main__":
     
     # Follow-up query using memory
     response = agent.invoke({"input": "How does that compare to the industry standard?"})
-    print(f"Response: {response['output']}")
-</code>
-</pre>
+    print(f"Response: {response['output']}")</code></pre>
                     </div>
 
                     <div class="example-notes">
@@ -824,9 +800,7 @@ if __name__ == "__main__":
                     </p>
 
                     <div class="code-block">
-                        <pre>
-<code class="language-python">
-import os
+                        <pre><code class="language-python">import os
 from crewai import Agent, Task, Crew, Process
 from langchain_openai import ChatOpenAI
 
@@ -908,9 +882,7 @@ market_analysis_crew = Crew(
 
 # Execute the crew
 result = market_analysis_crew.kickoff()
-print(result)
-</code>
-</pre>
+print(result)</code></pre>
                     </div>
 
                     <div class="example-notes">
@@ -950,9 +922,7 @@ print(result)
                     </p>
 
                     <div class="code-block">
-                        <pre>
-<code class="language-python">
-import os
+                        <pre><code class="language-python">import os
 import autogen
 from autogen import Agent, AssistantAgent, UserProxyAgent, GroupChat, GroupChatManager
 
@@ -1035,9 +1005,7 @@ The scraper should:
 3. Be able to handle pagination
 4. Respect the website's robots.txt and rate limits
 Help me build this application step by step."""
-)
-</code>
-</pre>
+)</code></pre>
                     </div>
 
                     <div class="example-notes">
