@@ -70,17 +70,6 @@
             font-weight: bold;
         }
 
-        .next-steps {
-            background-color: var(--light);
-            padding: 3rem 0;
-            text-align: center;
-        }
-
-        .next-steps h2 {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-        }
-
         .button-container {
             display: flex;
             justify-content: center;
@@ -250,13 +239,13 @@
                             <li>Click "Install Now"</li>
                             <li>Verify installation by opening Command Prompt and typing:</li>
                         </ol>
-                        <div class="code-block">
+                        <div class="code-single-line">
                             <pre>
 <code class="language-bash">python --version</code>
                         </pre>
                         </div>
                         <p>Alternatively, you can install Python using Windows Package Manager:</p>
-                        <div class="code-block">
+                        <div class="code-single-line">
                             <pre>
 <code class="language-bash">winget install Python.Python.3.11</code>
                         </pre>
@@ -268,12 +257,13 @@
                         <p>Option 1: Using Homebrew (recommended):</p>
                         <ol>
                             <li>Install Homebrew if you don't have it already:</li>
-                            <div class="code-block">
-                                <pre>/bin/bash -c "$(curl -fsSL
-                                https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</pre>
+                            <div class="code-single-line">
+                                <pre>
+<code class="language-bash">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code>
+                                </pre>
                             </div>
                             <li>Install Python using Homebrew:</li>
-                            <div class="code-block">
+                            <div class="code-single-line">
                                 <pre>
 <code class="language-bash">brew install python</code>
                             </pre>
@@ -287,7 +277,7 @@
                             <li>Run the installer and follow the instructions</li>
                         </ol>
                         <p>Verify installation by opening Terminal and typing:</p>
-                        <div class="code-block">
+                        <div class="code-single-line">
                             <pre>
 <code class="language-bash">python3 --version</code>
                         </pre>
@@ -299,26 +289,29 @@
                         <p>For Ubuntu/Debian:</p>
                         <div class="code-block">
                             <pre>
-<code class="language-bash">sudo apt update<br>sudo apt install python3 python3-pip python3-venv</code>
+<code class="language-bash">
+sudo apt update
+sudo apt install python3 python3-pip python3-venv
+</code>
                         </pre>
                         </div>
 
                         <p>For Fedora:</p>
-                        <div class="code-block">
+                        <div class="code-single-line">
                             <pre>
 <code class="language-bash">sudo dnf install python3 python3-pip</code>
                         </pre>
                         </div>
 
                         <p>For Arch Linux:</p>
-                        <div class="code-block">
+                        <div class="code-single-line">
                             <pre>
 <code class="language-bash">sudo pacman -S python python-pip</code>
                         </pre>
                         </div>
 
                         <p>Verify installation:</p>
-                        <div class="code-block">
+                        <div class="code-single-line">
                             <pre>
 <code class="language-bash">python3 --version</code>
                         </pre>
@@ -344,19 +337,22 @@
                             <li>Create a project directory:</li>
                             <div class="code-block">
                                 <pre>
-<code class="language-bash">mkdir ai-agent-project<br>cd ai-agent-project</code>
+<code class="language-bash">
+mkdir ai-agent-project
+cd ai-agent-project
+</code>
                             </pre>
                             </div>
                             <li>Create a virtual environment:</li>
-                            <div class="code-block">
+                            <div class="code-single-line">
                                 <pre>
 <code class="language-bash">python -m venv venv</code>
                             </pre>
                             </div>
                             <li>Activate the virtual environment:</li>
-                            <div class="code-block">
+                            <div class="code-single-line">
                                 <pre>
-<code class="language-bash">venv\Scripts\activate</code>
+<code class="language-bash">source venv\Scripts\activate</code>
                             </pre>
                             </div>
                             <p>You should see <code>(venv)</code> at the beginning of your command prompt, indicating
@@ -370,17 +366,20 @@
                             <li>Create a project directory:</li>
                             <div class="code-block">
                                 <pre>
-<code class="language-bash">mkdir ai-agent-project<br>cd ai-agent-project</code>
+<code class="language-bash">
+mkdir ai-agent-project
+cd ai-agent-project
+</code>
                             </pre>
                             </div>
                             <li>Create a virtual environment:</li>
-                            <div class="code-block">
+                            <div class="code-single-line">
                                 <pre>
 <code class="language-bash">python3 -m venv venv</code>
                             </pre>
                             </div>
                             <li>Activate the virtual environment:</li>
-                            <div class="code-block">
+                            <div class="code-single-line">
                                 <pre>
 <code class="language-bash">source venv/bin/activate</code>
                             </pre>
@@ -421,21 +420,21 @@
 
                     <div id="install-langchain" class="tab-content">
                         <h4>Installing LangChain</h4>
-                        <div class="code-block">
+                        <div class="code-single-line">
                             <pre>
 <code class="language-bash">pip install langchain langchain-openai</code>
                         </pre>
                         </div>
 
                         <p>For additional functionality:</p>
-                        <div class="code-block">
+                        <div class="code-single-line">
                             <pre>
 <code class="language-bash">pip install langchain[all]</code>
                         </pre>
                         </div>
 
                         <p>Common integrations:</p>
-                        <div class="code-block">
+                        <div class="code-single-line">
                             <pre>
 <code class="language-bash">pip install langchain-anthropic langchain-community langchain-experimental chroma chromadb</code>
                         </pre>
@@ -444,21 +443,21 @@
 
                     <div id="install-autogen" class="tab-content">
                         <h4>Installing AutoGen</h4>
-                        <div class="code-block">
+                        <div class="code-single-line">
                             <pre>
 <code class="language-bash">pip install pyautogen</code>
                         </pre>
                         </div>
 
                         <p>For enhanced functionality:</p>
-                        <div class="code-block">
+                        <div class="code-single-line">
                             <pre>
 <code class="language-bash">pip install pyautogen[retrievers,blendsearch]</code>
                         </pre>
                         </div>
 
                         <p>For OpenAI integrations:</p>
-                        <div class="code-block">
+                        <div class="code-single-line">
                             <pre>
 <code class="language-bash">pip install openai</code>
                         </pre>
@@ -467,14 +466,14 @@
 
                     <div id="install-llamaindex" class="tab-content">
                         <h4>Installing LlamaIndex</h4>
-                        <div class="code-block">
+                        <div class="code-single-line">
                             <pre>
 <code class="language-bash">pip install llama-index llama-index-llms-openai</code>
                         </pre>
                         </div>
 
                         <p>For additional integrations:</p>
-                        <div class="code-block">
+                        <div class="code-single-line">
                             <pre>
 <code class="language-bash">pip install llama-index-llms-anthropic llama-index-embeddings-openai llama-index-vector-stores-chroma</code>
                         </pre>
@@ -483,14 +482,14 @@
 
                     <div id="install-crewai" class="tab-content">
                         <h4>Installing CrewAI</h4>
-                        <div class="code-block">
+                        <div class="code-single-line">
                             <pre>
 <code class="language-bash">pip install crewai crewai_tools</code>
                         </pre>
                         </div>
 
                         <p>For LLM providers:</p>
-                        <div class="code-block">
+                        <div class="code-single-line">
                             <pre>
 <code class="language-bash">pip install openai anthropic</code>
                         </pre>
@@ -531,7 +530,7 @@ tiktoken>=0.5.0
                 </div>
 
                 <p>Then install all dependencies at once:</p>
-                <div class="code-block">
+                <div class="code-single-line">
                     <pre>
 <code class="language-bash">pip install -r requirements.txt</code>
                 </pre>
@@ -540,7 +539,7 @@ tiktoken>=0.5.0
                 <div class="callout">
                     <h4>Tip</h4>
                     <p>Keep your dependencies up-to-date, especially for rapidly evolving frameworks:</p>
-                    <div class="code-block">
+                    <div class="code-single-line">
                         <pre>
 <code class="language-bash">pip install --upgrade -r requirements.txt</code>
                     </pre>
@@ -822,14 +821,14 @@ if __name__ == "__main__":
                 <h3>Testing Your Setup</h3>
                 <p>Run your agent to verify everything is working correctly:</p>
 
-                <div class="code-block">
+                <div class="code-single-line">
                     <pre>
 <code class="language-bash">python main.py</code>
                 </pre>
                 </div>
 
                 <p>Try asking a question that uses the calculator tool, such as:</p>
-                <div class="code-block">
+                <div class="code-single-line">
                     <pre>
 <code class="language-bash">You: What is 42 * 3.14?</code>
                 </pre>
@@ -853,7 +852,7 @@ if __name__ == "__main__":
                 <p>Setting up version control is recommended for tracking changes and collaborating with others:</p>
 
                 <h3>Initialize Git Repository</h3>
-                <div class="code-block">
+                <div class="code-single-line">
                     <pre>
 <code class="language-bash">git init</code>
                 </pre>
@@ -878,14 +877,12 @@ git commit -m "Initial project setup"
         </div>
     </section>
 
-    <section class="next-steps">
-        <div class="container">
-            <h2>Ready to Build Your First AI Agent?</h2>
-            <p>Now that your environment is set up, you're ready to start building more complex AI agents!</p>
-
-            <div class="button-container">
-                <a href="first-agent.html" class="button">Build Your First Agent</a>
-                <a href="frameworks.html" class="button secondary">Compare Frameworks</a>
+    <section class="content-section">
+        <div class="container content-container">
+            <div class="next-step-box">
+                <h2>Create a Simple AI Assistant</h2>
+                <p>Ready to get hands-on? Follow our step-by-step walkthrough to build your first basic AI assistant that can complete tasks independently.</p>
+                <a href="first-agent.html" class="cta-button">Build Agent</a>
             </div>
         </div>
     </section>
