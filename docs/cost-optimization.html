@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="img/icon.svg">
+    <title>Cost Optimization Strategies - AI Agent Development Guide</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Prism CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" />
+    <!-- Prism core JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <!-- Additional languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>AI Agent Development Guide</h1>
+            <p>Learn to build powerful AI agents for specific tasks</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#introduction">Introduction</a></li>
+                <li><a href="index.html#features">Key Concepts</a></li>
+                <li><a href="index.html#learning-path">Learning Path</a></li>
+                <li><a href="index.html#resources">Resources</a></li>
+                <li><a href="code-examples.html">Code Examples</a></li>
+                <li><a href="frameworks.html">Frameworks</a></li>
+                <li><a href="tutorials.html">Tutorials</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="breadcrumbs">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="deployment.html">Deployment Guide</a></li>
+                <li class="current">Cost Optimization Strategies</li>
+            </ul>
+        </div>
+    </div>
+
+    <section class="content-section">
+        <div class="content-container">
+            <div class="section-title">
+                <h1>Cost Optimization Strategies for AI Agents</h1>
+                <p>Learn effective techniques to manage and reduce costs when deploying AI agents at scale</p>
+            </div>
+
+            <div class="content-box">
+                <h2>Understanding AI Agent Costs</h2>
+                <p>Deploying AI agents can be expensive, particularly when using commercial large language models (LLMs) 
+                   and other AI services. This guide will help you identify cost drivers and implement proven strategies 
+                   to optimize your expenses without compromising quality.</p>
+
+                <h3>Primary Cost Components</h3>
+                <ul>
+                    <li><strong>API usage fees:</strong> Per-token charges for commercial LLM APIs</li>
+                    <li><strong>Infrastructure costs:</strong> Compute resources, storage, and networking</li>
+                    <li><strong>Bandwidth:</strong> Data transfer fees and networking costs</li>
+                    <li><strong>Vector database usage:</strong> Storage and query costs for embedding databases</li>
+                    <li><strong>Additional services:</strong> Image generation, speech recognition, etc.</li>
+                </ul>
+                
+                <div class="example-box">
+                    <h4>Example Cost Breakdown</h4>
+                    <p>For a customer support AI agent handling 10,000 queries per day:</p>
+                    <ul>
+                        <li>LLM API costs: ~$30-50 per day (depending on model and query complexity)</li>
+                        <li>Vector database: ~$5-10 per day</li>
+                        <li>Infrastructure: ~$10-20 per day (depending on scaling needs)</li>
+                        <li><strong>Monthly total:</strong> ~$1,500-2,400</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h2>LLM Token Optimization</h2>
+                <p>Since many commercial LLMs charge by token count, optimizing token usage is one of the most effective 
+                   ways to reduce costs.</p>
+
+                <h3>Prompt Engineering for Cost Efficiency</h3>
+                <ul>
+                    <li><strong>Concise prompts:</strong> Reduce unnecessary context in system and user prompts</li>
+                    <li><strong>Context windowing:</strong> Only include relevant portions of documents</li>
+                    <li><strong>Dynamic temperature:</strong> Use higher temperatures for creative tasks, lower for factual ones</li>
+                    <li><strong>Task-specific models:</strong> Use smaller, specialized models when appropriate</li>
+                </ul>
+
+                <div class="code-block">
+                    <pre><code class="language-python"># Example: Dynamic temperature setting based on task type
+def get_optimal_temperature(task_type):
+    """Return the optimal temperature setting based on task type."""
+    temp_settings = {
+        "creative_writing": 0.7,
+        "code_generation": 0.2,
+        "factual_qa": 0.0,
+        "summarization": 0.3,
+        "classification": 0.0,
+        "default": 0.5
+    }
+    return temp_settings.get(task_type, temp_settings["default"])
+
+def query_llm(prompt, task_type):
+    """Query LLM with optimized settings for the specific task."""
+    temperature = get_optimal_temperature(task_type)
+    
+    # Use the appropriate model based on task complexity
+    if task_type in ["code_generation", "creative_writing"]:
+        model = "gpt-4"  # More capable but expensive
+    else:
+        model = "gpt-3.5-turbo"  # Less expensive
+    
+    return openai.ChatCompletion.create(
+        model=model,
+        messages=[{"role": "user", "content": prompt}],
+        temperature=temperature
+    )</code></pre>
+                </div>
+
+                <h3>Context Management Techniques</h3>
+                <p>Efficiently managing context is crucial for reducing token usage:</p>
+                <ul>
+                    <li><strong>Message summarization:</strong> Condense chat history instead of sending full transcripts</li>
+                    <li><strong>Key information extraction:</strong> Only retain essential information from previous interactions</li>
+                    <li><strong>Semantic chunking:</strong> Break documents into meaningful chunks before retrieval</li>
+                </ul>
+
+                <div class="example-box">
+                    <h4>Message Summarization Example</h4>
+                    <pre><code class="language-python"># Example: Summarizing conversation history to reduce token count
+def summarize_conversation(conversation_history):
+    """Summarize conversation history to reduce token count."""
+    if len(conversation_history) <= 2:
+        return conversation_history  # Not enough history to summarize
+    
+    # Extract only the last two messages for immediate context
+    recent_messages = conversation_history[-2:]
+    
+    # If the history is longer, summarize everything before that
+    if len(conversation_history) > 2:
+        # Create a summary prompt
+        summary_prompt = "Summarize the following conversation concisely, " \
+                        "focusing only on key points and user needs:\n\n"
+        
+        for msg in conversation_history[:-2]:
+            summary_prompt += f"{msg['role']}: {msg['content']}\n"
+        
+        # Get summary from a cheaper, smaller model
+        summary_response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[{"role": "user", "content": summary_prompt}],
+            temperature=0.3,
+            max_tokens=100  # Limit summary length
+        )
+        
+        summary = summary_response.choices[0].message.content
+        
+        # Return the summary as system message + recent messages
+        return [
+            {"role": "system", "content": f"Previous conversation summary: {summary}"},
+            *recent_messages
+        ]
+    
+    return conversation_history</code></pre>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h2>Caching and Memoization</h2>
+                <p>Implementing caching strategies can significantly reduce API calls for common queries and scenarios.</p>
+
+                <h3>Response Caching</h3>
+                <p>Store responses to common queries to avoid redundant API calls:</p>
+
+                <div class="code-block">
+                    <pre><code class="language-python"># Example: Advanced caching system with semantic similarity
+import redis
+import hashlib
+import numpy as np
+from sentence_transformers import SentenceTransformer
+
+class SemanticCache:
+    def __init__(self, redis_url, similarity_threshold=0.92, ttl=86400):
+        self.redis = redis.from_url(redis_url)
+        self.encoder = SentenceTransformer('all-MiniLM-L6-v2')
+        self.similarity_threshold = similarity_threshold
+        self.ttl = ttl  # Cache TTL in seconds (default: 24 hours)
+        
+    def _get_embedding(self, text):
+        """Get embedding for a text string."""
+        return self.encoder.encode(text)
+    
+    def _compute_similarity(self, embedding1, embedding2):
+        """Compute cosine similarity between embeddings."""
+        return np.dot(embedding1, embedding2) / (np.linalg.norm(embedding1) * np.linalg.norm(embedding2))
+    
+    def get_from_cache(self, query):
+        """Get response from cache if semantically similar query exists."""
+        query_embedding = self._get_embedding(query)
+        
+        # Check exact match first (faster)
+        query_hash = hashlib.md5(query.encode()).hexdigest()
+        exact_match = self.redis.hgetall(f"exact:{query_hash}")
+        
+        if exact_match:
+            return exact_match.get(b'response').decode()
+        
+        # Look for semantic matches
+        cache_keys = self.redis.keys("semantic:*")
+        
+        for key in cache_keys:
+            cached_embedding = np.frombuffer(self.redis.hget(key, 'embedding'), dtype=np.float32)
+            similarity = self._compute_similarity(query_embedding, cached_embedding)
+            
+            if similarity >= self.similarity_threshold:
+                return self.redis.hget(key, 'response').decode()
+        
+        return None
+    
+    def add_to_cache(self, query, response):
+        """Add query-response pair to cache."""
+        # Add exact match
+        query_hash = hashlib.md5(query.encode()).hexdigest()
+        self.redis.hset(f"exact:{query_hash}", mapping={'response': response})
+        self.redis.expire(f"exact:{query_hash}", self.ttl)
+        
+        # Add semantic match
+        query_embedding = self._get_embedding(query)
+        semantic_key = f"semantic:{query_hash}"
+        
+        self.redis.hset(semantic_key, mapping={
+            'query': query,
+            'response': response,
+            'embedding': query_embedding.tobytes()
+        })
+        self.redis.expire(semantic_key, self.ttl)
+        
+    def query_with_cache(self, query_function, query):
+        """Query with caching wrapper."""
+        cached_response = self.get_from_cache(query)
+        
+        if cached_response:
+            return cached_response
+        
+        # Call the actual query function if not in cache
+        response = query_function(query)
+        
+        # Add to cache
+        self.add_to_cache(query, response)
+        
+        return response</code></pre>
+                </div>
+
+                <h3>Tiered Caching Strategies</h3>
+                <p>Implement multi-level caching for optimal performance and cost savings:</p>
+                <ul>
+                    <li><strong>In-memory cache:</strong> For highest frequency queries with minimal latency</li>
+                    <li><strong>Redis/Memcached:</strong> For medium frequency queries across multiple instances</li>
+                    <li><strong>Database cache:</strong> For longer-term storage of common queries</li>
+                </ul>
+
+                <div class="example-box">
+                    <h4>Cache Effectiveness</h4>
+                    <p>For a production AI assistant with 1 million queries per month:</p>
+                    <ul>
+                        <li>Without caching: ~$10,000 in API costs</li>
+                        <li>With basic caching (30% hit rate): ~$7,000 in API costs</li>
+                        <li>With advanced semantic caching (50% hit rate): ~$5,000 in API costs</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h2>Model Selection and Cascading</h2>
+                <p>Not every query requires your most powerful and expensive model. Implementing model cascading can 
+                   significantly reduce costs.</p>
+
+                <h3>Model Cascading Approach</h3>
+                <p>Start with smaller, cheaper models and only escalate to more expensive ones when necessary:</p>
+
+                <div class="code-block">
+                    <pre><code class="language-python"># Example: Cascading model selection based on task complexity
+def cascading_query(query, system_prompt="You are a helpful assistant"):
+    """Use cascading models to optimize for cost while maintaining quality."""
+    
+    # Step 1: Classify the query complexity
+    classification_prompt = f"""
+    Classify the following query as SIMPLE, MEDIUM, or COMPLEX:
+    - SIMPLE: Basic factual questions, simple tasks, routine operations
+    - MEDIUM: Multi-step tasks, explanations requiring domain knowledge
+    - COMPLEX: Tasks requiring reasoning, creativity, or specialized expertise
+    
+    Query: {query}
+    
+    Answer with just one word: SIMPLE, MEDIUM, or COMPLEX.
+    """
+    
+    classification = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",  # Use cheaper model for classification
+        messages=[{"role": "user", "content": classification_prompt}],
+        temperature=0,
+        max_tokens=10
+    ).choices[0].message.content.strip()
+    
+    # Step 2: Select appropriate model based on complexity
+    if "SIMPLE" in classification:
+        model = "gpt-3.5-turbo"
+        max_tokens = 500
+    elif "MEDIUM" in classification:
+        model = "gpt-3.5-turbo-16k"  # More context but still cost-effective
+        max_tokens = 1000
+    else:  # COMPLEX
+        model = "gpt-4"  # Most capable but expensive
+        max_tokens = 2000
+    
+    # Step 3: Process with selected model
+    response = openai.ChatCompletion.create(
+        model=model,
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": query}
+        ],
+        temperature=0.7,
+        max_tokens=max_tokens
+    )
+    
+    return {
+        "response": response.choices[0].message.content,
+        "model_used": model,
+        "complexity": classification
+    }</code></pre>
+                </div>
+
+                <h3>Local Model Integration</h3>
+                <p>For certain tasks, local open-source models can provide significant cost savings:</p>
+
+                <ul>
+                    <li><strong>Embedding models:</strong> Use local models for embeddings and similarity search</li>
+                    <li><strong>Classification tasks:</strong> Fine-tuned smaller models can handle specific classifications</li>
+                    <li><strong>Hybrid approaches:</strong> Combine local models with cloud APIs for optimal performance</li>
+                </ul>
+
+                <div class="example-box">
+                    <h4>Example: Local Embedding Model</h4>
+                    <pre><code class="language-python"># Example: Using local embedding model instead of OpenAI's
+from sentence_transformers import SentenceTransformer
+
+# Load model once at startup
+local_embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
+
+def get_embeddings(texts):
+    """Generate embeddings using local model instead of API calls."""
+    return local_embedding_model.encode(texts)
+
+# Usage for vector search
+document_embeddings = get_embeddings(documents)
+query_embedding = get_embeddings([user_query])[0]
+
+# Find similar documents
+similarities = document_embeddings @ query_embedding
+top_doc_indices = np.argsort(similarities)[-3:][::-1]  # Top 3 matches</code></pre>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h2>Infrastructure Optimization</h2>
+                <p>Beyond API costs, infrastructure expenses can be significant. Here are strategies to optimize your 
+                   cloud and hardware costs.</p>
+
+                <h3>Cloud Resource Management</h3>
+                <ul>
+                    <li><strong>Auto-scaling:</strong> Scale resources based on actual demand patterns</li>
+                    <li><strong>Spot instances:</strong> Use discounted compute resources for non-critical workloads</li>
+                    <li><strong>Reserved instances:</strong> Pre-purchase capacity for predictable workloads</li>
+                    <li><strong>Right-sizing:</strong> Match instance types to actual workload requirements</li>
+                </ul>
+
+                <div class="code-block">
+                    <pre><code class="language-json"># Example: Terraform configuration for auto-scaling with AWS
+{
+  "resource": {
+    "aws_appautoscaling_target": {
+      "ecs_target": {
+        "service_namespace": "ecs",
+        "resource_id": "service/ai-agent-cluster/ai-agent-service",
+        "scalable_dimension": "ecs:service:DesiredCount",
+        "min_capacity": 2,
+        "max_capacity": 10
+      }
+    },
+    "aws_appautoscaling_policy": {
+      "scale_up": {
+        "name": "scale_up",
+        "service_namespace": "ecs",
+        "resource_id": "service/ai-agent-cluster/ai-agent-service",
+        "scalable_dimension": "ecs:service:DesiredCount",
+        "step_scaling_policy_configuration": {
+          "adjustment_type": "ChangeInCapacity",
+          "cooldown": 60,
+          "metric_aggregation_type": "Average",
+          "step_adjustment": {
+            "metric_interval_lower_bound": 0,
+            "scaling_adjustment": 1
+          }
+        }
+      },
+      "scale_down": {
+        "name": "scale_down",
+        "service_namespace": "ecs",
+        "resource_id": "service/ai-agent-cluster/ai-agent-service",
+        "scalable_dimension": "ecs:service:DesiredCount",
+        "step_scaling_policy_configuration": {
+          "adjustment_type": "ChangeInCapacity",
+          "cooldown": 60,
+          "metric_aggregation_type": "Average",
+          "step_adjustment": {
+            "metric_interval_upper_bound": 0,
+            "scaling_adjustment": -1
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+                </div>
+
+                <h3>Serverless vs. Container Trade-offs</h3>
+                <p>Choose the right deployment approach based on your usage patterns:</p>
+                <ul>
+                    <li><strong>Serverless:</strong> Best for sporadic usage with cost-effective scaling to zero</li>
+                    <li><strong>Containers:</strong> More economical for consistent, predictable workloads</li>
+                </ul>
+
+                <div class="example-box">
+                    <h4>Deployment Cost Comparison</h4>
+                    <table style="width:100%; border-collapse: collapse; margin: 15px 0;">
+                        <tr style="background-color: #f3f4f6; border-bottom: 1px solid #e5e7eb;">
+                            <th style="padding: 12px; text-align: left;">Deployment Type</th>
+                            <th style="padding: 12px; text-align: left;">Low Usage<br>(1K queries/day)</th>
+                            <th style="padding: 12px; text-align: left;">Medium Usage<br>(10K queries/day)</th>
+                            <th style="padding: 12px; text-align: left;">High Usage<br>(100K queries/day)</th>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e5e7eb;">
+                            <td style="padding: 12px;">Serverless</td>
+                            <td style="padding: 12px;">$40-60/month</td>
+                            <td style="padding: 12px;">$200-300/month</td>
+                            <td style="padding: 12px;">$3,000-4,000/month</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e5e7eb;">
+                            <td style="padding: 12px;">Containers (K8s)</td>
+                            <td style="padding: 12px;">$150-250/month</td>
+                            <td style="padding: 12px;">$200-350/month</td>
+                            <td style="padding: 12px;">$1,500-2,500/month</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px;">VMs</td>
+                            <td style="padding: 12px;">$100-200/month</td>
+                            <td style="padding: 12px;">$250-400/month</td>
+                            <td style="padding: 12px;">$2,000-3,000/month</td>
+                        </tr>
+                    </table>
+                    <p><em>Note: These are approximate costs that can vary based on cloud provider, region, and specific implementation details.</em></p>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h2>Batch Processing and Asynchronous Patterns</h2>
+                <p>Batch processing requests can lead to significant cost reductions and better resource utilization.</p>
+
+                <h3>Batch Processing Implementation</h3>
+                <div class="code-block">
+                    <pre><code class="language-python"># Example: Batch processing for LLM requests
+import asyncio
+import time
+from typing import List, Dict
+import openai
+
+class BatchProcessor:
+    def __init__(self, max_batch_size=20, max_wait_time=2.0):
+        self.queue = []
+        self.max_batch_size = max_batch_size
+        self.max_wait_time = max_wait_time
+        self.processing = False
+        self.last_item_time = None
+    
+    async def add_item(self, prompt: str) -> str:
+        """Add item to queue and wait for result."""
+        # Create future to track this specific request
+        future = asyncio.Future()
+        
+        # Add to queue
+        self.queue.append((prompt, future))
+        
+        # Update timestamp of last item
+        self.last_item_time = time.time()
+        
+        # Start processing if not already running
+        if not self.processing:
+            asyncio.create_task(self._process_queue())
+        
+        # Wait for result
+        return await future
+    
+    async def _process_queue(self):
+        """Process items in queue as batches."""
+        self.processing = True
+        
+        while self.queue:
+            # Determine if we should process now
+            should_process = len(self.queue) >= self.max_batch_size
+            
+            # If queue isn't full, check if we've waited long enough
+            if not should_process and self.last_item_time:
+                time_since_last_item = time.time() - self.last_item_time
+                should_process = time_since_last_item >= self.max_wait_time
+            
+            if should_process:
+                # Get batch from queue (up to max size)
+                batch = self.queue[:self.max_batch_size]
+                self.queue = self.queue[self.max_batch_size:]
+                
+                # Process batch
+                prompts = [item[0] for item in batch]
+                try:
+                    results = await self._batch_call_llm(prompts)
+                    
+                    # Resolve all futures with their results
+                    for (_, future), result in zip(batch, results):
+                        future.set_result(result)
+                        
+                except Exception as e:
+                    # Set exception for all futures in batch
+                    for _, future in batch:
+                        future.set_exception(e)
+            else:
+                # Wait a bit before checking again
+                await asyncio.sleep(0.1)
+        
+        # Queue is empty
+        self.processing = False
+    
+    async def _batch_call_llm(self, prompts: List[str]) -> List[str]:
+        """Make batch API call to LLM."""
+        # Create batch request to OpenAI
+        responses = []
+        
+        # Process in parallel using asyncio
+        async def process_single(prompt):
+            response = await openai.ChatCompletion.acreate(
+                model="gpt-3.5-turbo",
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.7
+            )
+            return response.choices[0].message.content
+        
+        # Process all prompts in parallel
+        tasks = [process_single(prompt) for prompt in prompts]
+        responses = await asyncio.gather(*tasks)
+        
+        return responses
+
+# Usage example
+async def main():
+    processor = BatchProcessor(max_batch_size=10, max_wait_time=1.0)
+    
+    # Simulate multiple concurrent requests
+    tasks = []
+    for i in range(25):
+        query = f"Tell me about topic {i}"
+        tasks.append(processor.add_item(query))
+    
+    responses = await asyncio.gather(*tasks)
+    
+    # Process responses
+    for i, response in enumerate(responses):
+        print(f"Response {i}: {response[:50]}...")</code></pre>
+                </div>
+
+                <h3>Asynchronous Processing Patterns</h3>
+                <p>Implement asynchronous patterns for non-time-sensitive tasks:</p>
+                <ul>
+                    <li><strong>Job queues:</strong> Queue requests for processing during off-peak times</li>
+                    <li><strong>Webhooks:</strong> Notify clients when long-running tasks complete</li>
+                    <li><strong>Pre-computation:</strong> Process predictable queries ahead of time</li>
+                </ul>
+            </div>
+
+            <div class="content-box">
+                <h2>Cost Monitoring and Budgeting</h2>
+                <p>Establish robust monitoring and alerting systems to track expenses and prevent unexpected costs.</p>
+
+                <h3>Key Monitoring Metrics</h3>
+                <ul>
+                    <li><strong>API calls per minute/hour/day:</strong> Track usage patterns and anomalies</li>
+                    <li><strong>Token consumption:</strong> Monitor input and output tokens</li>
+                    <li><strong>Cost per query:</strong> Track the average and outlier costs</li>
+                    <li><strong>Cache hit rate:</strong> Measure cache effectiveness</li>
+                    <li><strong>Model distribution:</strong> Track usage across different models</li>
+                </ul>
+
+                <div class="example-box">
+                    <h4>Cost Dashboard Example</h4>
+                    <img src="/api/placeholder/800/400" alt="Cost monitoring dashboard" style="max-width:100%; border:1px solid #e5e7eb; border-radius:4px;" />
+                    <p><em>A comprehensive cost dashboard should track API usage, model distribution, and historical trends.</em></p>
+                </div>
+
+                <h3>Budget Alerts and Throttling</h3>
+                <p>Implement automatic alerts and controls to prevent cost overruns:</p>
+                <div class="code-block">
+                    <pre><code class="language-python"># Example: Budget control system for API usage
+class BudgetController:
+    def __init__(self, daily_budget=100.0, alert_threshold=0.8):
+        self.daily_budget = daily_budget
+        self.alert_threshold = alert_threshold
+        self.current_spend = 0.0
+        self.last_reset = datetime.now().date()
+        self.alerted = False
+        self.lock = asyncio.Lock()
+        
+    async def reset_if_needed(self):
+        """Reset counters if it's a new day."""
+        today = datetime.now().date()
+        if today > self.last_reset:
+            async with self.lock:
+                self.current_spend = 0.0
+                self.last_reset = today
+                self.alerted = False
+    
+    async def check_budget(self, estimated_cost):
+        """Check if operation fits within budget."""
+        await self.reset_if_needed()
+        
+        async with self.lock:
+            # Check if we would exceed budget
+            if self.current_spend + estimated_cost > self.daily_budget:
+                return False
+            
+            # Check if we need to send an alert
+            if not self.alerted and self.current_spend >= self.daily_budget * self.alert_threshold:
+                self.alerted = True
+                await self.send_alert()
+            
+            return True
+    
+    async def record_spend(self, actual_cost):
+        """Record actual cost of operation."""
+        async with self.lock:
+            self.current_spend += actual_cost
+    
+    async def send_alert(self):
+        """Send alert when approaching budget limit."""
+        # Send email, Slack notification, etc.
+        message = f"ALERT: AI API usage has reached {self.alert_threshold*100}% " \
+                  f"of daily budget (${self.current_spend:.2f} / ${self.daily_budget:.2f})"
+        
+        # Example: Send to Slack
+        # await send_to_slack(message)
+        
+        print(message)  # For demo purposes
+
+# Usage example
+async def query_with_budget_control(query, budget_controller):
+    # Estimate cost based on token count
+    input_tokens = len(query.split())
+    estimated_output_tokens = input_tokens * 2  # Rough estimate
+    estimated_cost = (input_tokens * 0.001 + estimated_output_tokens * 0.002) / 1000
+    
+    # Check budget before proceeding
+    if not await budget_controller.check_budget(estimated_cost):
+        return "Sorry, daily API budget limit reached. Please try again tomorrow."
+    
+    try:
+        # Make the actual API call
+        response = await openai.ChatCompletion.acreate(
+            model="gpt-3.5-turbo",
+            messages=[{"role": "user", "content": query}],
+            temperature=0.7
+        )
+        
+        # Record actual spend
+        actual_input_tokens = response.usage.prompt_tokens
+        actual_output_tokens = response.usage.completion_tokens
+        actual_cost = (actual_input_tokens * 0.001 + actual_output_tokens * 0.002) / 1000
+                await budget_controller.record_spend(actual_cost)
+                
+                return response.choices[0].message.content
+    except Exception as e:
+        # Handle error
+        print(f"Error in API call: {e}")
+        return f"An error occurred: {str(e)}"</code></pre>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h2>Optimization for Vector Databases</h2>
+                <p>Vector databases used for retrieval-augmented generation (RAG) can be a significant cost driver. Here are strategies to optimize these costs.</p>
+
+                <h3>Vector Database Cost Factors</h3>
+                <ul>
+                    <li><strong>Storage costs:</strong> Cost of storing embeddings and metadata</li>
+                    <li><strong>Query costs:</strong> Cost per vector similarity search</li>
+                    <li><strong>Indexing costs:</strong> Computational expenses for building and maintaining indexes</li>
+                    <li><strong>Data transfer:</strong> Costs for moving data in and out of the database</li>
+                </ul>
+
+                <h3>Vector Database Optimization Techniques</h3>
+                <div class="code-block">
+                    <pre><code class="language-python"># Example: Optimized vector database configuration
+from pymilvus import connections, utility
+from pymilvus import Collection, FieldSchema, CollectionSchema, DataType
+
+def optimize_vector_collection():
+    """Create an optimized vector collection with balanced performance and cost."""
+    # Connect to Milvus
+    connections.connect("default", host="localhost", port="19530")
+    
+    # Define optimized collection schema
+    fields = [
+        # Use smaller dimensions for embeddings when possible
+        FieldSchema(name="id", dtype=DataType.INT64, is_primary=True),
+        FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=384),  # Using smaller dimensions
+        FieldSchema(name="metadata", dtype=DataType.JSON)
+    ]
+    
+    schema = CollectionSchema(fields)
+    
+    # Create collection with optimized settings
+    collection = Collection(name="optimized_docs", schema=schema)
+    
+    # Create IVF_FLAT index (good balance between search speed and memory usage)
+    index_params = {
+        "metric_type": "L2",
+        "index_type": "IVF_FLAT",
+        "params": {"nlist": 1024}  # Adjust based on dataset size
+    }
+    
+    collection.create_index("embedding", index_params)
+    
+    # Load collection (keep loaded only when needed)
+    collection.load()
+    
+    # Configure caching behavior for cost efficiency
+    utility.set_cache_config({"enable_cpu_cache": True, "cache_size": "4GB"})
+    
+    return collection
+
+def cost_efficient_search(collection, query_vector, top_k=3):
+    """Perform cost-efficient vector search."""
+    # Use smaller top_k to reduce computation
+    search_params = {
+        "metric_type": "L2",
+        "params": {"nprobe": 16}  # Lower nprobe reduces computation cost but may affect recall
+    }
+    
+    results = collection.search(
+        data=[query_vector],
+        anns_field="embedding",
+        param=search_params,
+        limit=top_k,
+        expr=None
+    )
+    
+    return results</code></pre>
+                </div>
+
+                <div class="example-box">
+                    <h4>Vector Database Cost Comparison</h4>
+                    <table style="width:100%; border-collapse: collapse; margin: 15px 0;">
+                        <tr style="background-color: #f3f4f6; border-bottom: 1px solid #e5e7eb;">
+                            <th style="padding: 12px; text-align: left;">Optimization Technique</th>
+                            <th style="padding: 12px; text-align: left;">Cost Impact</th>
+                            <th style="padding: 12px; text-align: left;">Performance Impact</th>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e5e7eb;">
+                            <td style="padding: 12px;">Dimension Reduction (768 to 384)</td>
+                            <td style="padding: 12px;">-40% storage cost</td>
+                            <td style="padding: 12px;">-5% accuracy</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e5e7eb;">
+                            <td style="padding: 12px;">Optimized Index Parameters</td>
+                            <td style="padding: 12px;">-25% compute cost</td>
+                            <td style="padding: 12px;">+10ms latency</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px;">Selective Loading/Unloading</td>
+                            <td style="padding: 12px;">-30% memory cost</td>
+                            <td style="padding: 12px;">+200ms initial query</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h2>Real-world Case Studies</h2>
+                <p>Learn from real-world implementations of cost optimization strategies in AI agent deployments.</p>
+
+                <h3>E-commerce Assistant: 70% Cost Reduction</h3>
+                <div class="example-box">
+                    <h4>Case Study: Online Retailer</h4>
+                    <p>An e-commerce platform deployed an AI shopping assistant handling 50,000 customer interactions daily. Initial costs were approximately $15,000/month.</p>
+                    
+                    <p><strong>Implemented optimizations:</strong></p>
+                    <ul>
+                        <li>Created a tiered model approach using GPT-3.5 Turbo for 85% of queries and GPT-4 only for complex cases</li>
+                        <li>Implemented semantic caching with a 42% hit rate</li>
+                        <li>Reduced prompt sizes through careful engineering and context summarization</li>
+                        <li>Used vector database dimension reduction and query optimization</li>
+                    </ul>
+                    
+                    <p><strong>Results:</strong></p>
+                    <ul>
+                        <li>Reduced monthly costs to $4,500 (70% reduction)</li>
+                        <li>Maintained 96% of original customer satisfaction scores</li>
+                        <li>Reduced average response time by 18%</li>
+                    </ul>
+                </div>
+
+                <h3>Enterprise Knowledge Base: 65% Cost Reduction</h3>
+                <div class="example-box">
+                    <h4>Case Study: Corporate Knowledge Assistant</h4>
+                    <p>A global consulting firm deployed an AI knowledge assistant to provide employees with instant access to company resources, handling approximately 30,000 queries per month.</p>
+                    
+                    <p><strong>Implemented optimizations:</strong></p>
+                    <ul>
+                        <li>Cached frequent queries and implemented semantic similarity search</li>
+                        <li>Pre-computed embeddings for all documents in batch processing</li>
+                        <li>Implemented asynchronous processing for non-urgent requests</li>
+                        <li>Used serverless architecture with auto-scaling for cost efficiency</li>
+                    </ul>
+                    
+                    <p><strong>Results:</strong></p>
+                    <ul>
+                        <li>Reduced monthly API costs from $12,000 to $4,200</li>
+                        <li>Decreased infrastructure costs by 60%</li>
+                        <li>Improved average response time from 4.2s to 1.8s</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h2>Emerging Cost Optimization Techniques</h2>
+                <p>Keep an eye on these cutting-edge approaches to further reduce AI agent operating costs.</p>
+
+                <h3>Quantization and Model Distillation</h3>
+                <p>Newer techniques to reduce model size while preserving performance:</p>
+                <ul>
+                    <li><strong>Quantization:</strong> Reducing parameter precision from 32-bit to 8-bit or 4-bit</li>
+                    <li><strong>Model distillation:</strong> Training smaller models to mimic larger models</li>
+                    <li><strong>Pruning:</strong> Removing redundant parameters from models</li>
+                </ul>
+
+                <h3>Fine-tuning with Synthetic Data</h3>
+                <p>Create custom-tuned smaller models that excel at specific tasks:</p>
+                <ul>
+                    <li>Generate synthetic training data from larger models</li>
+                    <li>Fine-tune smaller models on task-specific data</li>
+                    <li>Deploy specialized smaller models at a fraction of the cost</li>
+                </ul>
+
+                <div class="example-box">
+                    <h4>Open-Source Model Cost Savings</h4>
+                    <p>Recent benchmark of a fine-tuned 7B parameter model against commercial APIs:</p>
+                    <ul>
+                        <li>Commercial API cost: ~$0.02 per 1K tokens</li>
+                        <li>Self-hosted 7B model: ~$0.0015 per 1K tokens</li>
+                        <li>Potential savings: >90% for high-volume applications</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="next-step-box">
+                <h2>Ready to Implement Cost Optimization?</h2>
+                <p>Review your current AI agent architecture and identify opportunities to apply these strategies.</p>
+                <a href="deployment-checklist.html" class="cta-button">Get the Deployment Checklist</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>AI Agent Development Guide | Created to help developers build powerful AI solutions</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
