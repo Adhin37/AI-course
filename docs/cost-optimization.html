@@ -880,10 +880,71 @@ def cost_efficient_search(collection, query_vector, top_k=3):
                 </div>
             </div>
 
-            <div class="next-step-box">
-                <h2>Ready to Implement Cost Optimization?</h2>
-                <p>Review your current AI agent architecture and identify opportunities to apply these strategies.</p>
-                <a href="deployment-checklist.html" class="cta-button">Get the Deployment Checklist</a>
+            <div class="content-box checklist-container">
+                <h2>Cost Optimization Checklist</h2>
+                <p>Use this checklist to ensure you've implemented key cost optimization strategies for your AI agent deployment:</p>
+            
+                <h3>LLM API Cost Optimization</h3>
+                <div class="security-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-prompt" name="cost-check">
+                        <label for="check-prompt"><strong>Prompt optimization:</strong> Reduced unnecessary context and tokens</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-context" name="cost-check">
+                        <label for="check-context"><strong>Context management:</strong> Implemented message summarization</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-caching" name="cost-check">
+                        <label for="check-caching"><strong>Response caching:</strong> Set up tiered caching system</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-models" name="cost-check">
+                        <label for="check-models"><strong>Model cascading:</strong> Using appropriate model tiers for different tasks</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-batch" name="cost-check">
+                        <label for="check-batch"><strong>Batch processing:</strong> Implemented for non-time-sensitive tasks</label>
+                    </div>
+                </div>
+            
+                <h3>Infrastructure Cost Optimization</h3>
+                <div class="security-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-autoscale" name="cost-check">
+                        <label for="check-autoscale"><strong>Auto-scaling:</strong> Resources scale based on actual demand</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-instances" name="cost-check">
+                        <label for="check-instances"><strong>Instance optimization:</strong> Using spot/reserved instances where appropriate</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-deploy" name="cost-check">
+                        <label for="check-deploy"><strong>Deployment model:</strong> Selected optimal serverless/container approach</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-vector" name="cost-check">
+                        <label for="check-vector"><strong>Vector DB optimization:</strong> Implemented dimension reduction and indexing strategies</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-monitoring" name="cost-check">
+                        <label for="check-monitoring"><strong>Cost monitoring:</strong> Set up dashboards and alerts for cost metrics</label>
+                    </div>
+                </div>
+                
+                <div class="checklist-actions">
+                    <button class="action-button primary-button" id="check-all-cost">Check All</button>
+                    <button class="action-button secondary-button" id="uncheck-all-cost">Uncheck All</button>
+                    <button class="action-button highlight-button" id="export-cost-checklist">Export Checklist</button>
+                </div>
+            
+                <div class="checklist-progress">
+                    <div class="progress-label">Optimization Progress:</div>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="cost-progress-bar"></div>
+                    </div>
+                    <div class="progress-percentage" id="cost-percentage">0%</div>
+                </div>
             </div>
         </div>
     </section>
@@ -894,7 +955,80 @@ def cost_efficient_search(collection, query_vector, top_k=3):
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('.security-checklist input[type="checkbox"]');
+            const progressBar = document.getElementById('cost-progress-bar');
+            const percentageDisplay = document.getElementById('cost-percentage');
+            const checkAllButton = document.getElementById('check-all-cost');
+            const uncheckAllButton = document.getElementById('uncheck-all-cost');
+            const exportButton = document.getElementById('export-cost-checklist');
+            
+            // Update progress bar
+            function updateProgress() {
+                const total = checkboxes.length;
+                const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
+                const percentage = Math.round((checked / total) * 100);
+                
+                progressBar.style.width = percentage + '%';
+                percentageDisplay.textContent = percentage + '%';
+            }
+            
+            // Add event listeners to all checkboxes
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updateProgress);
+            });
+            
+            // Check all button
+            checkAllButton.addEventListener('click', function() {
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = true;
+                });
+                updateProgress();
+            });
+            
+            // Uncheck all button
+            uncheckAllButton.addEventListener('click', function() {
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+                updateProgress();
+            });
+            
+            // Export checklist function
+            exportButton.addEventListener('click', function() {
+                let content = "# AI Agent Cost Optimization Checklist\n\n";
+                content += "## LLM API Cost Optimization\n\n";
+                
+                document.querySelectorAll('.security-checklist').forEach((checklist, index) => {
+                    if (index === 1) {
+                        content += "\n## Infrastructure Cost Optimization\n\n";
+                    }
+                    
+                    checklist.querySelectorAll('.checklist-item').forEach(item => {
+                        const checkbox = item.querySelector('input[type="checkbox"]');
+                        const label = item.querySelector('label').textContent;
+                        const status = checkbox.checked ? "✅" : "⬜";
+                        content += `${status} ${label}\n`;
+                    });
+                });
+                
+                // Create file and download
+                const blob = new Blob([content], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'cost_optimization_checklist.md';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+            
+            // Initialize progress bar
+            updateProgress();
+        });
+    </script>
 </body>
 
 </html>
