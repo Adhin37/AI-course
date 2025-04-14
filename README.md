@@ -47,6 +47,17 @@ The project is organized as follows:
     - Multi-agent systems
     - Performance optimization
   - `style.css`: Shared CSS stylesheet for all pages
+  - `img/`: Directory containing images used throughout the documentation
+  - `js/`: JavaScript files for interactive elements
+  - `tutorials/`: Additional tutorial content
+  - `examples/`: Code examples and sample projects
+  - `resources/`: Additional resources and reference materials
+- `.github/`: GitHub-specific files
+  - `workflows/`: GitHub Actions workflow configurations
+    - `deploy.yml`: Workflow for automating deployment to GitHub Pages
+    - `tests.yml`: Workflow for running automated tests
+  - `ISSUE_TEMPLATE/`: Templates for creating new issues
+  - `PULL_REQUEST_TEMPLATE.md`: Template for pull requests
 
 ## Features
 
@@ -54,6 +65,7 @@ The project is organized as follows:
 - **Code Examples**: Practical, ready-to-use code snippets
 - **Responsive Design**: Optimized for both desktop and mobile viewing
 - **Modern UI**: Clean, intuitive interface with syntax highlighting for code
+- **Automated Deployment**: CI/CD pipeline for seamless updates
 
 ## CSS Structure
 
