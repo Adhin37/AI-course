@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="img/icon.svg">
+    <title>Advanced Agent Monitoring Techniques - AI Agent Development Guide</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Prism CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" />
+    <!-- Prism core JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <!-- Additional languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>AI Agent Development Guide</h1>
+            <p>Learn to build powerful AI agents for specific tasks</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#introduction">Introduction</a></li>
+                <li><a href="index.html#features">Key Concepts</a></li>
+                <li><a href="index.html#learning-path">Learning Path</a></li>
+                <li><a href="index.html#resources">Resources</a></li>
+                <li><a href="code-examples.html">Code Examples</a></li>
+                <li><a href="frameworks.html">Frameworks</a></li>
+                <li><a href="tutorials.html">Tutorials</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="breadcrumbs">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="deployment.html">Deployment Guide</a></li>
+                <li class="current">Advanced Monitoring</li>
+            </ul>
+        </div>
+    </div>
+
+    <section class="content-section">
+        <div class="content-container">
+            <div class="section-title">
+                <h1>Advanced Agent Monitoring Techniques</h1>
+                <p>Comprehensive strategies to observe, analyze, and optimize your AI agent's performance</p>
+            </div>
+
+            <div class="content-box">
+                <h2>Introduction to AI Agent Monitoring</h2>
+                <p>Effective monitoring is crucial for maintaining reliable, high-performing AI agents in production environments. While basic monitoring covers uptime and error rates, advanced monitoring techniques provide deeper insights into agent behavior, performance patterns, and potential areas for improvement.</p>
+
+                <h3>Why Advanced Monitoring Matters</h3>
+                <ul>
+                    <li><strong>Performance optimization:</strong> Identify bottlenecks and inefficiencies</li>
+                    <li><strong>Cost management:</strong> Track token usage and optimize expensive operations</li>
+                    <li><strong>Quality assurance:</strong> Ensure responses meet quality benchmarks</li>
+                    <li><strong>Security oversight:</strong> Detect unusual patterns that may indicate misuse</li>
+                    <li><strong>User experience:</strong> Monitor satisfaction metrics and response relevance</li>
+                </ul>
+            </div>
+
+            <div class="content-box">
+                <h2>Building a Comprehensive Monitoring Strategy</h2>
+                <p>An effective monitoring strategy should address multiple aspects of your AI agent's operation, from technical performance to user satisfaction.</p>
+
+                <h3>The Monitoring Pyramid</h3>
+                <ul>
+                    <li><strong>Level 1: Infrastructure Monitoring</strong> - System health, resource utilization</li>
+                    <li><strong>Level 2: Application Monitoring</strong> - API performance, error rates, latency</li>
+                    <li><strong>Level 3: AI-Specific Monitoring</strong> - Token usage, model performance, hallucination detection</li>
+                    <li><strong>Level 4: Business Impact Monitoring</strong> - User satisfaction, task completion rates, ROI</li>
+                </ul>
+
+                <div class="example-box">
+                    <h4>Monitoring Strategy Template</h4>
+                    <pre><code class="language-json">{
+  "monitoring_strategy": {
+    "infrastructure": {
+      "metrics": ["CPU utilization", "memory usage", "disk I/O", "network throughput"],
+      "tools": ["Prometheus", "Grafana", "CloudWatch"],
+      "alert_thresholds": {
+        "cpu_utilization": "> 80% for 5 minutes",
+        "memory_usage": "> 85% for 5 minutes"
+      }
+    },
+    "application": {
+      "metrics": ["request rate", "error rate", "latency", "throughput"],
+      "tools": ["OpenTelemetry", "Datadog", "New Relic"],
+      "alert_thresholds": {
+        "error_rate": "> 1% for 5 minutes",
+        "p95_latency": "> 2000ms for 10 minutes"
+      }
+    },
+    "ai_specific": {
+      "metrics": ["token usage", "prompt engineering effectiveness", "hallucination rate"],
+      "tools": ["Custom dashboards", "LangSmith", "LLM evaluation frameworks"],
+      "alert_thresholds": {
+        "token_cost_per_session": "> $0.05 average over 1 hour",
+        "hallucination_rate": "> 5% of responses"
+      }
+    },
+    "business_impact": {
+      "metrics": ["user satisfaction", "task completion rate", "agent adoption"],
+      "tools": ["Feedback analysis", "A/B testing", "User analytics"],
+      "alert_thresholds": {
+        "user_satisfaction": "< 4.0/5.0 over 24 hours",
+        "task_completion": "< 80% over 24 hours"
+      }
+    }
+  }
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h2>Technical Performance Monitoring</h2>
+                <p>Tracking the technical aspects of your AI agent ensures it operates efficiently and reliably.</p>
+
+                <h3>Key Technical Metrics</h3>
+                <ul>
+                    <li><strong>Latency:</strong> Response time from request to completion</li>
+                    <li><strong>Throughput:</strong> Number of requests processed per unit time</li>
+                    <li><strong>Error rates:</strong> Percentage of failed requests</li>
+                    <li><strong>Resource utilization:</strong> CPU, memory, and network usage</li>
+                    <li><strong>Concurrency:</strong> Number of simultaneous requests being handled</li>
+                </ul>
+
+                <h3>Implementing Distributed Tracing</h3>
+                <p>Distributed tracing helps identify performance bottlenecks across your entire AI agent system.</p>
+
+                <div class="code-block">
+                    <pre><code class="language-python"># Using OpenTelemetry for distributed tracing
+from opentelemetry import trace
+from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
+from opentelemetry.sdk.resources import SERVICE_NAME, Resource
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
+
+# Configure the tracer
+resource = Resource(attributes={SERVICE_NAME: "ai-agent-service"})
+tracer_provider = TracerProvider(resource=resource)
+otlp_exporter = OTLPSpanExporter(endpoint="otel-collector:4317", insecure=True)
+span_processor = BatchSpanProcessor(otlp_exporter)
+tracer_provider.add_span_processor(span_processor)
+trace.set_tracer_provider(tracer_provider)
+
+# Get a tracer
+tracer = trace.get_tracer(__name__)
+
+# Example of tracing a function
+def process_user_query(query, user_id):
+    with tracer.start_as_current_span("process_user_query") as span:
+        # Add relevant attributes to the span
+        span.set_attribute("user.id", user_id)
+        span.set_attribute("query.length", len(query))
+        
+        # Trace the preprocessing step
+        with tracer.start_as_current_span("preprocess_query"):
+            processed_query = preprocess(query)
+            
+        # Trace the agent execution
+        with tracer.start_as_current_span("execute_agent"):
+            response = agent.run(processed_query)
+            span.set_attribute("response.length", len(response))
+            
+        # Trace the postprocessing step
+        with tracer.start_as_current_span("postprocess_response"):
+            final_response = postprocess(response)
+            
+        return final_response</code></pre>
+                </div>
+
+                <h3>Real-Time Performance Dashboards</h3>
+                <p>Create comprehensive dashboards to visualize system performance in real-time.</p>
+
+                <div class="example-box">
+                    <h4>Grafana Dashboard Configuration (Prometheus Data Source)</h4>
+                    <pre><code class="language-json">{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "panels": [
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {}
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 2,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "rate(ai_agent_requests_total[5m])",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Request Rate (5m)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    }
+  ],
+  "schemaVersion": 22,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "AI Agent Performance",
+  "uid": "ai-agent-performance",
+  "variables": {
+    "list": []
+  },
+  "version": 1
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h2>LLM-Specific Monitoring</h2>
+                <p>Monitor aspects unique to LLM-based agents, such as token usage, prompt effectiveness, and response quality.</p>
+
+                <h3>Token Usage Tracking</h3>
+                <p>Keep track of token consumption to manage costs and optimize prompts.</p>
+
+                <div class="code-block">
+                    <pre><code class="language-python"># Using a middleware approach to track token usage
+import time
+import tiktoken
+from prometheus_client import Counter, Histogram
+
+# Set up metrics
+TOKENS_COUNTER = Counter('llm_tokens_total', 'Total tokens used', ['model', 'type'])
+TOKENS_COST_COUNTER = Counter('llm_tokens_cost_total', 'Total cost of tokens used', ['model'])
+LATENCY_HISTOGRAM = Histogram('llm_request_duration_seconds', 'Time spent processing LLM requests', ['model'])
+
+# Initialize tokenizer
+encoding = tiktoken.encoding_for_model("gpt-3.5-turbo")
+
+class TokenUsageMiddleware:
+    def __init__(self, llm_client):
+        self.llm_client = llm_client
+        self.price_per_1k_tokens = {
+            "gpt-3.5-turbo": {"input": 0.0015, "output": 0.002},
+            "gpt-4": {"input": 0.03, "output": 0.06},
+            # Add other models as needed
+        }
+    
+    def count_tokens(self, text):
+        """Count the number of tokens in the text"""
+        tokens = encoding.encode(text)
+        return len(tokens)
+    
+    def calculate_cost(self, model, input_tokens, output_tokens):
+        """Calculate the cost based on token usage"""
+        if model not in self.price_per_1k_tokens:
+            return 0
+        
+        input_cost = (input_tokens / 1000) * self.price_per_1k_tokens[model]["input"]
+        output_cost = (output_tokens / 1000) * self.price_per_1k_tokens[model]["output"]
+        return input_cost + output_cost
+    
+    def completion(self, prompt, model="gpt-3.5-turbo", **kwargs):
+        """Wrapper around the LLM completion call with token tracking"""
+        input_tokens = self.count_tokens(prompt)
+        TOKENS_COUNTER.labels(model=model, type="input").inc(input_tokens)
+        
+        start_time = time.time()
+        response = self.llm_client.completion(prompt, model=model, **kwargs)
+        duration = time.time() - start_time
+        LATENCY_HISTOGRAM.labels(model=model).observe(duration)
+        
+        output_tokens = self.count_tokens(response.text)
+        TOKENS_COUNTER.labels(model=model, type="output").inc(output_tokens)
+        
+        cost = self.calculate_cost(model, input_tokens, output_tokens)
+        TOKENS_COST_COUNTER.labels(model=model).inc(cost)
+        
+        # Add metadata to response
+        response.metadata = {
+            "input_tokens": input_tokens,
+            "output_tokens": output_tokens,
+            "total_tokens": input_tokens + output_tokens,
+            "cost": cost,
+            "duration": duration
+        }
+        
+        return response</code></pre>
+                </div>
+
+                <h3>Evaluating Response Quality</h3>
+                <p>Implement automated evaluation of agent response quality using LLM-based judges or heuristic approaches.</p>
+
+                <div class="code-block">
+                    <pre><code class="language-python"># A simple evaluator for response quality
+import json
+from langchain.prompts import PromptTemplate
+from langchain.llms import OpenAI
+
+class ResponseEvaluator:
+    def __init__(self):
+        self.evaluation_llm = OpenAI(model_name="gpt-4", temperature=0)
+        self.evaluation_prompt = PromptTemplate(
+            input_variables=["query", "response", "criteria"],
+            template="""Evaluate the quality of the following AI assistant response based on the given criteria.
+
+USER QUERY: {query}
+
+AI RESPONSE: {response}
+
+EVALUATION CRITERIA:
+{criteria}
+
+Provide a score from 1-10 for each criterion and a brief explanation. Then give an overall score.
+Return your evaluation as a JSON object with the following structure:
+{{
+  "criteria_scores": {{
+    "criterion_name": {{
+      "score": numeric_score,
+      "explanation": "explanation"
+    }},
+    ...
+  }},
+  "overall_score": numeric_score,
+  "summary": "brief summary of strengths and weaknesses"
+}}"""
+        )
+        
+        # Default evaluation criteria
+        self.default_criteria = """
+1. Accuracy: Does the response correctly answer the question or fulfill the request?
+2. Completeness: Does the response address all aspects of the query?
+3. Relevance: Is the response directly related to the query without unnecessary information?
+4. Clarity: Is the response clear, well-organized, and easy to understand?
+5. Helpfulness: Does the response provide practical value to the user?
+"""
+
+    def evaluate(self, query, response, criteria=None):
+        """Evaluate the quality of an agent response"""
+        eval_criteria = criteria if criteria else self.default_criteria
+        
+        prompt = self.evaluation_prompt.format(
+            query=query,
+            response=response,
+            criteria=eval_criteria
+        )
+        
+        result = self.evaluation_llm(prompt)
+        
+        try:
+            evaluation = json.loads(result)
+            return evaluation
+        except json.JSONDecodeError:
+            # Fallback if evaluation LLM doesn't return valid JSON
+            return {
+                "error": "Failed to parse evaluation",
+                "raw_evaluation": result,
+                "overall_score": 0
+            }</code></pre>
+                </div>
+
+                <h3>Detecting Hallucinations</h3>
+                <p>Implement systems to detect when your agent generates incorrect or fabricated information.</p>
+
+                <div class="example-box">
+                    <h4>Hallucination Detection Strategy</h4>
+                    <p>A multi-layered approach to identifying potential hallucinations:</p>
+                    <ol>
+                        <li><strong>Knowledge Grounding:</strong> Compare responses against known facts or trusted data sources</li>
+                        <li><strong>Confidence Scoring:</strong> Have the LLM self-assess confidence in different parts of its response</li>
+                        <li><strong>Consistency Checking:</strong> Test if the same query produces consistent answers over multiple runs</li>
+                        <li><strong>Entity Verification:</strong> Validate that mentioned entities (people, places, dates) actually exist</li>
+                    </ol>
+                    <pre><code class="language-python"># Example implementation of a hallucination detection system
+from typing import List, Dict, Any
+import re
+import numpy as np
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+
+class HallucinationDetector:
+    def __init__(self):
+        # Load verification model (e.g., a model fine-tuned to detect factual consistency)
+        self.tokenizer = AutoTokenizer.from_pretrained("microsoft/deberta-v3-base")
+        self.model = AutoModelForSequenceClassification.from_pretrained("path/to/factual_consistency_model")
+        
+        # Knowledge base connection would be implemented here
+        self.knowledge_base = None
+        
+    def extract_claims(self, text: str) -> List[str]:
+        """Extract factual claims from text"""
+        # This is a simplified implementation
+        # In practice, you would use a more sophisticated approach
+        sentences = re.split(r'(?&lt;=[.!?])\s+', text)
+        return [s for s in sentences if self._is_factual_claim(s)]
+    
+    def _is_factual_claim(self, sentence: str) -> bool:
+        """Determine if a sentence makes a factual claim"""
+        # Simple heuristic - could be replaced with a classifier
+        factual_indicators = ["is", "was", "are", "were", "has", "have", "had"]
+        return any(indicator in sentence.lower().split() for indicator in factual_indicators)
+    
+    def verify_claim(self, claim: str) -> Dict[str, Any]:
+        """Verify a single claim against knowledge sources"""
+        # Check against knowledge base
+        # This would typically involve semantic search or other verification
+        
+        # Use the model to assess factual consistency
+        inputs = self.tokenizer(claim, return_tensors="pt")
+        outputs = self.model(**inputs)
+        score = outputs.logits.softmax(dim=1)[0, 1].item()  # Assuming binary classification
+        
+        return {
+            "claim": claim,
+            "confidence_score": score,
+            "verified": score > 0.7  # Threshold can be adjusted
+        }
+    
+    def evaluate_response(self, response: str) -> Dict[str, Any]:
+        """Evaluate an entire response for potential hallucinations"""
+        claims = self.extract_claims(response)
+        verifications = [self.verify_claim(claim) for claim in claims]
+        
+        # Calculate overall hallucination score
+        if verifications:
+            overall_score = np.mean([v["confidence_score"] for v in verifications])
+        else:
+            overall_score = 1.0  # No claims to verify
+            
+        return {
+            "hallucination_score": 1 - overall_score,  # Higher means more likely to contain hallucinations
+            "verified_claims": sum(1 for v in verifications if v["verified"]),
+            "total_claims": len(verifications),
+            "claim_details": verifications
+        }</code></pre>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h2>User Interaction Monitoring</h2>
+                <p>Track and analyze how users interact with your agent to improve user experience and agent effectiveness.</p>
+
+                <h3>Key User Interaction Metrics</h3>
+                <ul>
+                    <li><strong>Task completion rate:</strong> Percentage of user queries successfully resolved</li>
+                    <li><strong>Conversation length:</strong> Number of turns required to complete a task</li>
+                    <li><strong>Clarification requests:</strong> How often the agent needs to ask for clarification</li>
+                    <li><strong>User satisfaction:</strong> Explicit feedback ratings or implicit satisfaction signals</li>
+                    <li><strong>User retention:</strong> How frequently users return to use the agent</li>
+                </ul>
+
+                <h3>Implementing User Feedback Collection</h3>
+                <div class="code-block">
+                    <pre><code class="language-javascript">// Frontend implementation of user feedback collection
+const FeedbackComponent = () => {
+  const [feedback, setFeedback] = useState(null);
+  const [comment, setComment] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [conversationId, setConversationId] = useState(props.conversationId);
+
+  const submitFeedback = async () => {
+    try {
+      const response = await fetch('/api/feedback', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          conversationId,
+          rating: feedback,
+          comment,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+      
+      if (response.ok) {
+        setSubmitted(true);
+      }
+    } catch (error) {
+      console.error('Error submitting feedback:', error);
+    }
+  };
+
+  if (submitted) {
+    return <div className="feedback-thanks">Thank you for your feedback!</div>;
+  }
+
+  return (
+    &lt;div className="feedback-container"&gt;
+      &lt;h4&gt;Was this response helpful?&lt;/h4&gt;
+      &lt;div className="rating-buttons"&gt;
+        &lt;button 
+          className={`rating-button ${feedback === 'positive' ? 'active' : ''}`}
+          onClick={() =&gt; setFeedback('positive')}
+        &gt;
+          👍 Yes
+        &lt;/button&gt;
+        &lt;button 
+          className={`rating-button ${feedback === 'negative' ? 'active' : ''}`}
+          onClick={() =&gt; setFeedback('negative')}
+        &gt;
+          👎 No
+        &lt;/button&gt;
+      &lt;/div&gt;
+      
+      {feedback && (
+        &lt;&gt;
+          &lt;textarea 
+            placeholder="Tell us more about your experience (optional)"
+            value={comment}
+            onChange={(e) =&gt; setComment(e.target.value)}
+            rows={3}
+          /&gt;
+          &lt;button className="submit-button" onClick={submitFeedback}&gt;
+            Submit Feedback
+          &lt;/button&gt;
+        &lt;/&gt;
+      )}
+    &lt;/div&gt;
+  );
+};</code></pre>
+                </div>
+
+                <h3>Conversation Flow Analysis</h3>
+                <p>Track and analyze conversation patterns to identify common user journeys and pain points.</p>
+
+                <div class="example-box">
+                    <h4>Conversation Flow Tracking Schema</h4>
+                    <pre><code class="language-json">{
+  "conversation_analytics": {
+    "conversation_id": "conv_123456789",
+    "user_id": "usr_987654321",
+    "start_time": "2023-11-10T14:30:05Z",
+    "end_time": "2023-11-10T14:35:22Z",
+    "duration_seconds": 317,
+    "total_turns": 7,
+    "user_turns": 4,
+    "agent_turns": 3,
+    "initial_intent": "technical_support",
+    "final_intent": "technical_support",
+    "intent_shifts": 0,
+    "task_completed": true,
+    "completion_confidence": 0.92,
+    "user_satisfaction": 4.5,
+    "interactions": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "intent": "technical_support",
+        "content_length": 145,
+        "sentiment": "frustrated",
+        "timestamp": "2023-11-10T14:30:05Z"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "agent",
+        "response_type": "clarification",
+        "content_length": 89,
+        "response_time_ms": 450,
+        "timestamp": "2023-11-10T14:30:12Z"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "intent": "technical_support",
+        "content_length": 56,
+        "sentiment": "neutral",
+        "timestamp": "2023-11-10T14:31:05Z"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "agent",
+        "response_type": "solution_proposal",
+        "content_length": 302,
+        "response_time_ms": 1250,
+        "timestamp": "2023-11-10T14:31:25Z"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "intent": "clarification",
+        "content_length": 28,
+        "sentiment": "neutral",
+        "timestamp": "2023-11-10T14:32:45Z"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "agent",
+        "response_type": "clarification",
+        "content_length": 215,
+        "response_time_ms": 875,
+        "timestamp": "2023-11-10T14:33:05Z"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "intent": "confirmation",
+        "content_length": 15,
+        "sentiment": "positive",
+        "timestamp": "2023-11-10T14:35:22Z"
+      }
+    ]
+  }
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h2>Setting Up Alerting Systems</h2>
+                <p>Establish proactive alerting to quickly identify and respond to issues with your AI agent.</p>
+
+                <h3>Multi-tiered Alert Structure</h3>
+                <ul>
+                    <li><strong>Info alerts:</strong> Informational notices that don't require immediate action</li>
+                    <li><strong>Warning alerts:</strong> Potential issues that should be investigated soon</li>
+                    <li><strong>Critical alerts:</strong> Serious problems requiring immediate attention</li>
+                </ul>
+
+                <h3>Implementing Alert Rules</h3>
+                <div class="code-block">
+                    <pre><code class="language-yaml"># Prometheus Alerting Rules Example
+groups:
+- name: ai_agent_alerts
+  rules:
+  - alert: HighErrorRate
+    expr: rate(ai_agent_errors_total[5m]) / rate(ai_agent_requests_total[5m]) > 0.05
+    for: 2m
+    labels:
+      severity: critical
+    annotations:
+      summary: "High error rate detected"
+      description: "Error rate is above 5% for the past 2 minutes"
+      
+  - alert: SlowResponseTime
+    expr: histogram_quantile(0.95, rate(ai_agent_response_time_seconds_bucket[5m])) > 5
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Slow response times detected"
+      description: "95th percentile response time is above 5 seconds for the past 5 minutes"
+      
+  - alert: HighTokenUsage
+    expr: increase(ai_agent_token_usage_total[1h]) > 1000000
+    labels:
+      severity: warning
+    annotations:
+      summary: "High token usage detected"
+      description: "More than 1M tokens used in the past hour"
+      
+  - alert: LowUserSatisfaction
+    expr: avg_over_time(ai_agent_user_satisfaction[1d]) < 3.5
+    for: 6h
+    labels:
+      severity: warning
+    annotations:
+      summary: "Low user satisfaction scores"
+      description: "Average user satisfaction below 3.5/5 for the past 6 hours"
+      
+  - alert: HighHallucinationRate
+      expr: avg(ai_agent_hallucination_rate) > 0.08
+      for: 30m
+      labels:
+        severity: critical
+      annotations:
+        summary: "High hallucination rate detected"
+        description: "Agent hallucination rate above 8% for the past 30 minutes"</code></pre>
+                </div>
+
+                <h3>Alert Routing and Escalation</h3>
+                <p>Define clear paths for alerts to reach the right team members and escalate when necessary.</p>
+
+                <div class="example-box">
+                    <h4>Alert Routing Configuration</h4>
+                    <pre><code class="language-yaml"># PagerDuty-style alert routing configuration
+routing_rules:
+  # Infrastructure alerts
+  - match:
+      service: ai-agent-infra
+      severity: critical
+    target:
+      team: infrastructure
+      escalation_policy: infra-critical
+      
+  # Application alerts
+  - match:
+      service: ai-agent-app
+      severity: critical
+    target:
+      team: engineering
+      escalation_policy: eng-critical
+      
+  # AI-specific alerts
+  - match:
+      service: ai-agent-model
+    target:
+      team: ai-research
+      escalation_policy: ai-standard
+      
+  # Business impact alerts
+  - match:
+      service: ai-agent-business
+    target:
+      team: product
+      escalation_policy: product-standard
+
+escalation_policies:
+  - name: infra-critical
+    steps:
+      - wait: 5m
+        notify: [primary-on-call]
+      - wait: 15m
+        notify: [secondary-on-call]
+      - wait: 30m
+        notify: [engineering-manager]
+        
+  - name: eng-critical
+    steps:
+      - wait: 10m
+        notify: [engineering-on-call]
+      - wait: 20m
+        notify: [engineering-manager]
+      - wait: 60m
+        notify: [cto]</code></pre>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h2>Building an LLM Evaluation Framework</h2>
+                <p>Develop a systematic approach to evaluate your agent's performance against benchmarks and business goals.</p>
+
+                <h3>Evaluation Categories</h3>
+                <ul>
+                    <li><strong>Technical performance:</strong> How efficiently the agent processes requests</li>
+                    <li><strong>Task completion:</strong> How successfully the agent achieves its assigned tasks</li>
+                    <li><strong>Output quality:</strong> How accurate, relevant, and coherent the agent's responses are</li>
+                    <li><strong>Safety compliance:</strong> How well the agent adheres to safety guidelines</li>
+                    <li><strong>Business impact:</strong> How effectively the agent contributes to business goals</li>
+                </ul>
+
+                <h3>Implementing an Evaluation Pipeline</h3>
+                <div class="code-block">
+                    <pre><code class="language-python"># Comprehensive agent evaluation framework
+import json
+import pandas as pd
+from typing import List, Dict, Any, Optional
+from dataclasses import dataclass
+
+@dataclass
+class EvaluationResult:
+    category: str
+    metric_name: str
+    score: float
+    benchmark: float
+    pass_fail: bool
+    details: Optional[Dict[str, Any]] = None
+
+class AgentEvaluator:
+    def __init__(self, benchmarks_path: str):
+        # Load benchmarks from configuration
+        with open(benchmarks_path, 'r') as f:
+            self.benchmarks = json.load(f)
+        
+        # Initialize evaluators for different categories
+        self.evaluators = {
+            "technical": self._evaluate_technical_performance,
+            "task_completion": self._evaluate_task_completion,
+            "output_quality": self._evaluate_output_quality,
+            "safety": self._evaluate_safety_compliance,
+            "business_impact": self._evaluate_business_impact
+        }
+    
+    def evaluate_agent(self, agent_id: str, evaluation_data: Dict[str, Any]) -> List[EvaluationResult]:
+        """Run comprehensive evaluation of an agent"""
+        results = []
+        
+        # Run evaluations for each category
+        for category, evaluator_func in self.evaluators.items():
+            category_results = evaluator_func(evaluation_data)
+            results.extend(category_results)
+        
+        return results
+    
+    def _evaluate_technical_performance(self, data: Dict[str, Any]) -> List[EvaluationResult]:
+        """Evaluate technical performance metrics"""
+        results = []
+        tech_metrics = self.benchmarks["technical"]
+        
+        # Latency evaluation
+        avg_latency = data["technical"]["average_latency"]
+        latency_benchmark = tech_metrics["latency"]["threshold"]
+        results.append(EvaluationResult(
+            category="technical",
+            metric_name="average_latency",
+            score=avg_latency,
+            benchmark=latency_benchmark,
+            pass_fail=avg_latency <= latency_benchmark,
+            details={"unit": "seconds", "samples": data["technical"]["latency_samples"]}
+        ))
+        
+        # Error rate evaluation
+        error_rate = data["technical"]["error_rate"]
+        error_benchmark = tech_metrics["error_rate"]["threshold"]
+        results.append(EvaluationResult(
+            category="technical",
+            metric_name="error_rate",
+            score=error_rate,
+            benchmark=error_benchmark,
+            pass_fail=error_rate <= error_benchmark,
+            details={"total_requests": data["technical"]["total_requests"]}
+        ))
+        
+        # Token efficiency
+        tokens_per_task = data["technical"]["average_tokens_per_task"]
+        token_benchmark = tech_metrics["tokens_per_task"]["threshold"]
+        results.append(EvaluationResult(
+            category="technical",
+            metric_name="tokens_per_task",
+            score=tokens_per_task,
+            benchmark=token_benchmark,
+            pass_fail=tokens_per_task <= token_benchmark
+        ))
+        
+        return results
+    
+    def _evaluate_task_completion(self, data: Dict[str, Any]) -> List[EvaluationResult]:
+        """Evaluate task completion metrics"""
+        # Implementation would be similar to technical performance
+        # but focused on task completion metrics
+        return []
+    
+    def _evaluate_output_quality(self, data: Dict[str, Any]) -> List[EvaluationResult]:
+        """Evaluate output quality metrics"""
+        # Implementation for output quality metrics
+        return []
+    
+    def _evaluate_safety_compliance(self, data: Dict[str, Any]) -> List[EvaluationResult]:
+        """Evaluate safety compliance metrics"""
+        # Implementation for safety metrics
+        return []
+    
+    def _evaluate_business_impact(self, data: Dict[str, Any]) -> List[EvaluationResult]:
+        """Evaluate business impact metrics"""
+        # Implementation for business impact metrics
+        return []
+    
+    def generate_evaluation_report(self, results: List[EvaluationResult]) -> Dict[str, Any]:
+        """Generate a comprehensive evaluation report"""
+        df = pd.DataFrame([
+            {
+                "category": r.category,
+                "metric": r.metric_name,
+                "score": r.score,
+                "benchmark": r.benchmark,
+                "status": "PASS" if r.pass_fail else "FAIL"
+            }
+            for r in results
+        ])
+        
+        # Calculate summary statistics
+        summary = {
+            "total_metrics": len(results),
+            "passed_metrics": sum(1 for r in results if r.pass_fail),
+            "failed_metrics": sum(1 for r in results if not r.pass_fail),
+            "pass_rate": sum(1 for r in results if r.pass_fail) / len(results) if results else 0,
+            "categories": {
+                category: {
+                    "pass_rate": df[df["category"] == category]["status"].value_counts().get("PASS", 0) / len(df[df["category"] == category]) if len(df[df["category"] == category]) > 0 else 0
+                }
+                for category in df["category"].unique()
+            }
+        }
+        
+        return {
+            "summary": summary,
+            "details": [
+                {
+                    "category": r.category,
+                    "metric": r.metric_name,
+                    "score": r.score,
+                    "benchmark": r.benchmark,
+                    "status": "PASS" if r.pass_fail else "FAIL",
+                    "details": r.details
+                }
+                for r in results
+            ]
+        }</code></pre>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h2>Continuous Improvement Process</h2>
+                <p>Establish a systematic approach to use monitoring data for ongoing agent improvements.</p>
+
+                <h3>The Improvement Cycle</h3>
+                <ol>
+                    <li><strong>Data Collection:</strong> Gather comprehensive monitoring data</li>
+                    <li><strong>Analysis:</strong> Identify patterns, bottlenecks, and opportunities</li>
+                    <li><strong>Prioritization:</strong> Determine highest-impact improvements</li>
+                    <li><strong>Implementation:</strong> Make targeted changes to the agent</li>
+                    <li><strong>Validation:</strong> Measure the impact of changes</li>
+                </ol>
+
+                <h3>A/B Testing Framework</h3>
+                <p>Use controlled experiments to validate improvements before full deployment.</p>
+
+                <div class="example-box">
+                    <h4>A/B Test Configuration</h4>
+                    <pre><code class="language-json">{
+  "experiment": {
+    "id": "prompt-optimization-test-001",
+    "description": "Testing improved prompt engineering for customer service queries",
+    "start_date": "2023-11-01T00:00:00Z",
+    "end_date": "2023-11-15T23:59:59Z",
+    "variants": [
+      {
+        "id": "control",
+        "description": "Current production prompt",
+        "traffic_allocation": 0.5,
+        "configuration": {
+          "prompt_template": "You are a helpful customer service agent...",
+          "temperature": 0.7,
+          "max_tokens": 500
+        }
+      },
+      {
+        "id": "test",
+        "description": "Optimized prompt with better context",
+        "traffic_allocation": 0.5,
+        "configuration": {
+          "prompt_template": "You are a customer service agent for ACME Corp...",
+          "temperature": 0.7,
+          "max_tokens": 500
+        }
+      }
+    ],
+    "metrics": {
+      "primary": [
+        {
+          "name": "task_completion_rate",
+          "description": "Percentage of customer issues resolved without escalation",
+          "minimum_detectable_effect": 0.05
+        }
+      ],
+      "secondary": [
+        {
+          "name": "user_satisfaction",
+          "description": "Average user satisfaction score (1-5)"
+        },
+        {
+          "name": "conversation_turns",
+          "description": "Average number of turns to resolution"
+        },
+        {
+          "name": "token_usage",
+          "description": "Average tokens used per conversation"
+        }
+      ]
+    },
+    "segmentation": [
+      "user_type",
+      "issue_category",
+      "platform"
+    ]
+  }
+}</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 AI Agent Development Guide. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for tab functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons and content
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked button and corresponding content
+                    button.classList.add('active');
+                    const tabId = button.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
