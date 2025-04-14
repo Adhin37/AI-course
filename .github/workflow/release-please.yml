@@ -1,0 +1,21 @@
+name: Release Please
+
+on:
+  push:
+    tags:
+      - 'v*'  # Trigger on tags like v1.0.0, v2.3.1 etc
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run release-please
+        uses: googleapis/release-please-action@v4
+        with:
+          release-type: simple
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
