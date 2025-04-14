@@ -1274,37 +1274,45 @@ if __name__ == "__main__":
 
             <div class="content-box checklist-container">
                 <h2>Deployment Security Checklist</h2>
-                <p>Before deploying your AI agent to production, ensure you've addressed these key security considerations:</p>
-            
+                <p>Before deploying your AI agent to production, ensure you've addressed these key security
+                    considerations:</p>
+
                 <h3>Pre-Deployment Security Checklist</h3>
-                <div class="security-checklist">
+                <div class="checklist-component">
                     <div class="checklist-item">
                         <input type="checkbox" id="check-auth" name="security-check">
-                        <label for="check-auth"><strong>Authentication and authorization:</strong> Proper mechanisms are in place</label>
+                        <label for="check-auth"><strong>Authentication and authorization:</strong> Proper mechanisms are
+                            in place</label>
                     </div>
                     <div class="checklist-item">
                         <input type="checkbox" id="check-input" name="security-check">
-                        <label for="check-input"><strong>Input validation:</strong> All inputs are validated and sanitized</label>
+                        <label for="check-input"><strong>Input validation:</strong> All inputs are validated and
+                            sanitized</label>
                     </div>
                     <div class="checklist-item">
                         <input type="checkbox" id="check-output" name="security-check">
-                        <label for="check-output"><strong>Output filtering:</strong> Response filtering is implemented</label>
+                        <label for="check-output"><strong>Output filtering:</strong> Response filtering is
+                            implemented</label>
                     </div>
                     <div class="checklist-item">
                         <input type="checkbox" id="check-rate" name="security-check">
-                        <label for="check-rate"><strong>Rate limiting:</strong> Protection against abuse is in place</label>
+                        <label for="check-rate"><strong>Rate limiting:</strong> Protection against abuse is in
+                            place</label>
                     </div>
                     <div class="checklist-item">
                         <input type="checkbox" id="check-logging" name="security-check">
-                        <label for="check-logging"><strong>Logging and monitoring:</strong> Comprehensive visibility is ensured</label>
+                        <label for="check-logging"><strong>Logging and monitoring:</strong> Comprehensive visibility is
+                            ensured</label>
                     </div>
                     <div class="checklist-item">
                         <input type="checkbox" id="check-data" name="security-check">
-                        <label for="check-data"><strong>Data protection:</strong> Sensitive data is properly handled</label>
+                        <label for="check-data"><strong>Data protection:</strong> Sensitive data is properly
+                            handled</label>
                     </div>
                     <div class="checklist-item">
                         <input type="checkbox" id="check-dependency" name="security-check">
-                        <label for="check-dependency"><strong>Dependency security:</strong> No known vulnerabilities in dependencies</label>
+                        <label for="check-dependency"><strong>Dependency security:</strong> No known vulnerabilities in
+                            dependencies</label>
                     </div>
                     <div class="checklist-item">
                         <input type="checkbox" id="check-testing" name="security-check">
@@ -1312,44 +1320,50 @@ if __name__ == "__main__":
                     </div>
                     <div class="checklist-item">
                         <input type="checkbox" id="check-error" name="security-check">
-                        <label for="check-error"><strong>Error handling:</strong> Errors are handled without leaking information</label>
+                        <label for="check-error"><strong>Error handling:</strong> Errors are handled without leaking
+                            information</label>
                     </div>
                     <div class="checklist-item">
                         <input type="checkbox" id="check-docs" name="security-check">
                         <label for="check-docs"><strong>Documentation:</strong> Security features are documented</label>
                     </div>
                 </div>
-            
+
                 <h3>Post-Deployment Security Measures</h3>
-                <div class="security-checklist">
+                <div class="checklist-component">
                     <div class="checklist-item">
                         <input type="checkbox" id="check-audits" name="security-check">
-                        <label for="check-audits"><strong>Regular security audits:</strong> Scheduled reviews of security posture</label>
+                        <label for="check-audits"><strong>Regular security audits:</strong> Scheduled reviews of
+                            security posture</label>
                     </div>
                     <div class="checklist-item">
                         <input type="checkbox" id="check-scanning" name="security-check">
-                        <label for="check-scanning"><strong>Vulnerability scanning:</strong> Ongoing checks for new vulnerabilities</label>
+                        <label for="check-scanning"><strong>Vulnerability scanning:</strong> Ongoing checks for new
+                            vulnerabilities</label>
                     </div>
                     <div class="checklist-item">
                         <input type="checkbox" id="check-pentesting" name="security-check">
-                        <label for="check-pentesting"><strong>Penetration testing:</strong> Regular third-party security assessments</label>
+                        <label for="check-pentesting"><strong>Penetration testing:</strong> Regular third-party security
+                            assessments</label>
                     </div>
                     <div class="checklist-item">
                         <input type="checkbox" id="check-incident" name="security-check">
-                        <label for="check-incident"><strong>Security incident response plan:</strong> Prepared procedures for incidents</label>
+                        <label for="check-incident"><strong>Security incident response plan:</strong> Prepared
+                            procedures for incidents</label>
                     </div>
                     <div class="checklist-item">
                         <input type="checkbox" id="check-feedback" name="security-check">
-                        <label for="check-feedback"><strong>User feedback monitoring:</strong> Tracking user reports of security issues</label>
+                        <label for="check-feedback"><strong>User feedback monitoring:</strong> Tracking user reports of
+                            security issues</label>
                     </div>
                 </div>
-                
+
                 <div class="checklist-actions">
                     <button class="action-button primary-button" id="check-all">Check All</button>
                     <button class="action-button secondary-button" id="uncheck-all">Uncheck All</button>
                     <button class="action-button highlight-button" id="export-checklist">Export Checklist</button>
                 </div>
-            
+
                 <div class="checklist-progress">
                     <div class="progress-label">Completion Progress:</div>
                     <div class="progress-container">
@@ -1372,80 +1386,23 @@ if __name__ == "__main__":
             <p>AI Agent Development Guide | Created to help developers build powerful AI solutions</p>
         </div>
     </footer>
+    <script src="js/checklist.js"></script>
+
+    <!-- Then define the configuration specific to this page -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const checkboxes = document.querySelectorAll('.security-checklist input[type="checkbox"]');
-            const progressBar = document.getElementById('checklist-progress-bar');
-            const percentageDisplay = document.getElementById('checklist-percentage');
-            const checkAllButton = document.getElementById('check-all');
-            const uncheckAllButton = document.getElementById('uncheck-all');
-            const exportButton = document.getElementById('export-checklist');
-            
-            // Update progress bar
-            function updateProgress() {
-                const total = checkboxes.length;
-                const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
-                const percentage = Math.round((checked / total) * 100);
-                
-                progressBar.style.width = percentage + '%';
-                percentageDisplay.textContent = percentage + '%';
+        window.CHECKLIST_CONFIGS = window.CHECKLIST_CONFIGS || [];
+        window.CHECKLIST_CONFIGS.push({
+            // Export configuration
+            exportFilename: 'security_checklist.md',
+            exportTitle: '# Security Deployment Checklist',
+
+            // Section titles for the export
+            sectionTitles: {
+                0: 'Pre-Deployment',
+                1: 'Post-Deployment'
             }
-            
-            // Add event listeners to all checkboxes
-            checkboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', updateProgress);
-            });
-            
-            // Check all button
-            checkAllButton.addEventListener('click', function() {
-                checkboxes.forEach(checkbox => {
-                    checkbox.checked = true;
-                });
-                updateProgress();
-            });
-            
-            // Uncheck all button
-            uncheckAllButton.addEventListener('click', function() {
-                checkboxes.forEach(checkbox => {
-                    checkbox.checked = false;
-                });
-                updateProgress();
-            });
-            
-            // Export checklist function
-            exportButton.addEventListener('click', function() {
-                let content = "# Security Deployment Checklist\n\n";
-                content += "## Pre-Deployment\n\n";
-                
-                document.querySelectorAll('.security-checklist').forEach((checklist, index) => {
-                    if (index === 1) {
-                        content += "\n## Post-Deployment\n\n";
-                    }
-                    
-                    checklist.querySelectorAll('.checklist-item').forEach(item => {
-                        const checkbox = item.querySelector('input[type="checkbox"]');
-                        const label = item.querySelector('label').textContent;
-                        const status = checkbox.checked ? "✅" : "⬜";
-                        content += `${status} ${label}\n`;
-                    });
-                });
-                
-                // Create file and download
-                const blob = new Blob([content], { type: 'text/plain' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'security_checklist.md';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-            });
-            
-            // Initialize progress bar
-            updateProgress();
         });
-        </script>
+    </script>
 </body>
 
 </html>

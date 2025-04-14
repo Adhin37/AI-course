@@ -60,9 +60,10 @@
 
             <div class="content-box">
                 <h2>Understanding AI Agent Costs</h2>
-                <p>Deploying AI agents can be expensive, particularly when using commercial large language models (LLMs) 
-                   and other AI services. This guide will help you identify cost drivers and implement proven strategies 
-                   to optimize your expenses without compromising quality.</p>
+                <p>Deploying AI agents can be expensive, particularly when using commercial large language models (LLMs)
+                    and other AI services. This guide will help you identify cost drivers and implement proven
+                    strategies
+                    to optimize your expenses without compromising quality.</p>
 
                 <h3>Primary Cost Components</h3>
                 <ul>
@@ -72,7 +73,7 @@
                     <li><strong>Vector database usage:</strong> Storage and query costs for embedding databases</li>
                     <li><strong>Additional services:</strong> Image generation, speech recognition, etc.</li>
                 </ul>
-                
+
                 <div class="example-box">
                     <h4>Example Cost Breakdown</h4>
                     <p>For a customer support AI agent handling 10,000 queries per day:</p>
@@ -87,14 +88,15 @@
 
             <div class="content-box">
                 <h2>LLM Token Optimization</h2>
-                <p>Since many commercial LLMs charge by token count, optimizing token usage is one of the most effective 
-                   ways to reduce costs.</p>
+                <p>Since many commercial LLMs charge by token count, optimizing token usage is one of the most effective
+                    ways to reduce costs.</p>
 
                 <h3>Prompt Engineering for Cost Efficiency</h3>
                 <ul>
                     <li><strong>Concise prompts:</strong> Reduce unnecessary context in system and user prompts</li>
                     <li><strong>Context windowing:</strong> Only include relevant portions of documents</li>
-                    <li><strong>Dynamic temperature:</strong> Use higher temperatures for creative tasks, lower for factual ones</li>
+                    <li><strong>Dynamic temperature:</strong> Use higher temperatures for creative tasks, lower for
+                        factual ones</li>
                     <li><strong>Task-specific models:</strong> Use smaller, specialized models when appropriate</li>
                 </ul>
 
@@ -132,8 +134,10 @@ def query_llm(prompt, task_type):
                 <h3>Context Management Techniques</h3>
                 <p>Efficiently managing context is crucial for reducing token usage:</p>
                 <ul>
-                    <li><strong>Message summarization:</strong> Condense chat history instead of sending full transcripts</li>
-                    <li><strong>Key information extraction:</strong> Only retain essential information from previous interactions</li>
+                    <li><strong>Message summarization:</strong> Condense chat history instead of sending full
+                        transcripts</li>
+                    <li><strong>Key information extraction:</strong> Only retain essential information from previous
+                        interactions</li>
                     <li><strong>Semantic chunking:</strong> Break documents into meaningful chunks before retrieval</li>
                 </ul>
 
@@ -179,7 +183,8 @@ def summarize_conversation(conversation_history):
 
             <div class="content-box">
                 <h2>Caching and Memoization</h2>
-                <p>Implementing caching strategies can significantly reduce API calls for common queries and scenarios.</p>
+                <p>Implementing caching strategies can significantly reduce API calls for common queries and scenarios.
+                </p>
 
                 <h3>Response Caching</h3>
                 <p>Store responses to common queries to avoid redundant API calls:</p>
@@ -284,8 +289,8 @@ class SemanticCache:
 
             <div class="content-box">
                 <h2>Model Selection and Cascading</h2>
-                <p>Not every query requires your most powerful and expensive model. Implementing model cascading can 
-                   significantly reduce costs.</p>
+                <p>Not every query requires your most powerful and expensive model. Implementing model cascading can
+                    significantly reduce costs.</p>
 
                 <h3>Model Cascading Approach</h3>
                 <p>Start with smaller, cheaper models and only escalate to more expensive ones when necessary:</p>
@@ -348,8 +353,10 @@ def cascading_query(query, system_prompt="You are a helpful assistant"):
 
                 <ul>
                     <li><strong>Embedding models:</strong> Use local models for embeddings and similarity search</li>
-                    <li><strong>Classification tasks:</strong> Fine-tuned smaller models can handle specific classifications</li>
-                    <li><strong>Hybrid approaches:</strong> Combine local models with cloud APIs for optimal performance</li>
+                    <li><strong>Classification tasks:</strong> Fine-tuned smaller models can handle specific
+                        classifications</li>
+                    <li><strong>Hybrid approaches:</strong> Combine local models with cloud APIs for optimal performance
+                    </li>
                 </ul>
 
                 <div class="example-box">
@@ -376,13 +383,14 @@ top_doc_indices = np.argsort(similarities)[-3:][::-1]  # Top 3 matches</code></p
 
             <div class="content-box">
                 <h2>Infrastructure Optimization</h2>
-                <p>Beyond API costs, infrastructure expenses can be significant. Here are strategies to optimize your 
-                   cloud and hardware costs.</p>
+                <p>Beyond API costs, infrastructure expenses can be significant. Here are strategies to optimize your
+                    cloud and hardware costs.</p>
 
                 <h3>Cloud Resource Management</h3>
                 <ul>
                     <li><strong>Auto-scaling:</strong> Scale resources based on actual demand patterns</li>
-                    <li><strong>Spot instances:</strong> Use discounted compute resources for non-critical workloads</li>
+                    <li><strong>Spot instances:</strong> Use discounted compute resources for non-critical workloads
+                    </li>
                     <li><strong>Reserved instances:</strong> Pre-purchase capacity for predictable workloads</li>
                     <li><strong>Right-sizing:</strong> Match instance types to actual workload requirements</li>
                 </ul>
@@ -471,13 +479,15 @@ top_doc_indices = np.argsort(similarities)[-3:][::-1]  # Top 3 matches</code></p
                             <td style="padding: 12px;">$2,000-3,000/month</td>
                         </tr>
                     </table>
-                    <p><em>Note: These are approximate costs that can vary based on cloud provider, region, and specific implementation details.</em></p>
+                    <p><em>Note: These are approximate costs that can vary based on cloud provider, region, and specific
+                            implementation details.</em></p>
                 </div>
             </div>
 
             <div class="content-box">
                 <h2>Batch Processing and Asynchronous Patterns</h2>
-                <p>Batch processing requests can lead to significant cost reductions and better resource utilization.</p>
+                <p>Batch processing requests can lead to significant cost reductions and better resource utilization.
+                </p>
 
                 <h3>Batch Processing Implementation</h3>
                 <div class="code-block">
@@ -612,8 +622,10 @@ async def main():
 
                 <div class="example-box">
                     <h4>Cost Dashboard Example</h4>
-                    <img src="img/cost-monitoring-dashboard.png" alt="Cost monitoring dashboard" style="max-width:100%; border:1px solid #e5e7eb; border-radius:4px;" />
-                    <p><em>A comprehensive cost dashboard should track API usage, model distribution, and historical trends.</em></p>
+                    <img src="img/cost-monitoring-dashboard.png" alt="Cost monitoring dashboard"
+                        style="max-width:100%; border:1px solid #e5e7eb; border-radius:4px;" />
+                    <p><em>A comprehensive cost dashboard should track API usage, model distribution, and historical
+                            trends.</em></p>
                 </div>
 
                 <h3>Budget Alerts and Throttling</h3>
@@ -705,13 +717,15 @@ async def query_with_budget_control(query, budget_controller):
 
             <div class="content-box">
                 <h2>Optimization for Vector Databases</h2>
-                <p>Vector databases used for retrieval-augmented generation (RAG) can be a significant cost driver. Here are strategies to optimize these costs.</p>
+                <p>Vector databases used for retrieval-augmented generation (RAG) can be a significant cost driver. Here
+                    are strategies to optimize these costs.</p>
 
                 <h3>Vector Database Cost Factors</h3>
                 <ul>
                     <li><strong>Storage costs:</strong> Cost of storing embeddings and metadata</li>
                     <li><strong>Query costs:</strong> Cost per vector similarity search</li>
-                    <li><strong>Indexing costs:</strong> Computational expenses for building and maintaining indexes</li>
+                    <li><strong>Indexing costs:</strong> Computational expenses for building and maintaining indexes
+                    </li>
                     <li><strong>Data transfer:</strong> Costs for moving data in and out of the database</li>
                 </ul>
 
@@ -809,16 +823,18 @@ def cost_efficient_search(collection, query_vector, top_k=3):
                 <h3>E-commerce Assistant: 70% Cost Reduction</h3>
                 <div class="example-box">
                     <h4>Case Study: Online Retailer</h4>
-                    <p>An e-commerce platform deployed an AI shopping assistant handling 50,000 customer interactions daily. Initial costs were approximately $15,000/month.</p>
-                    
+                    <p>An e-commerce platform deployed an AI shopping assistant handling 50,000 customer interactions
+                        daily. Initial costs were approximately $15,000/month.</p>
+
                     <p><strong>Implemented optimizations:</strong></p>
                     <ul>
-                        <li>Created a tiered model approach using GPT-3.5 Turbo for 85% of queries and GPT-4 only for complex cases</li>
+                        <li>Created a tiered model approach using GPT-3.5 Turbo for 85% of queries and GPT-4 only for
+                            complex cases</li>
                         <li>Implemented semantic caching with a 42% hit rate</li>
                         <li>Reduced prompt sizes through careful engineering and context summarization</li>
                         <li>Used vector database dimension reduction and query optimization</li>
                     </ul>
-                    
+
                     <p><strong>Results:</strong></p>
                     <ul>
                         <li>Reduced monthly costs to $4,500 (70% reduction)</li>
@@ -830,8 +846,9 @@ def cost_efficient_search(collection, query_vector, top_k=3):
                 <h3>Enterprise Knowledge Base: 65% Cost Reduction</h3>
                 <div class="example-box">
                     <h4>Case Study: Corporate Knowledge Assistant</h4>
-                    <p>A global consulting firm deployed an AI knowledge assistant to provide employees with instant access to company resources, handling approximately 30,000 queries per month.</p>
-                    
+                    <p>A global consulting firm deployed an AI knowledge assistant to provide employees with instant
+                        access to company resources, handling approximately 30,000 queries per month.</p>
+
                     <p><strong>Implemented optimizations:</strong></p>
                     <ul>
                         <li>Cached frequent queries and implemented semantic similarity search</li>
@@ -839,7 +856,7 @@ def cost_efficient_search(collection, query_vector, top_k=3):
                         <li>Implemented asynchronous processing for non-urgent requests</li>
                         <li>Used serverless architecture with auto-scaling for cost efficiency</li>
                     </ul>
-                    
+
                     <p><strong>Results:</strong></p>
                     <ul>
                         <li>Reduced monthly API costs from $12,000 to $4,200</li>
@@ -883,9 +900,9 @@ def cost_efficient_search(collection, query_vector, top_k=3):
             <div class="content-box checklist-container">
                 <h2>Cost Optimization Checklist</h2>
                 <p>Use this checklist to ensure you've implemented key cost optimization strategies for your AI agent deployment:</p>
-            
+
                 <h3>LLM API Cost Optimization</h3>
-                <div class="security-checklist">
+                <div class="checklist-component">
                     <div class="checklist-item">
                         <input type="checkbox" id="check-prompt" name="cost-check">
                         <label for="check-prompt"><strong>Prompt optimization:</strong> Reduced unnecessary context and tokens</label>
@@ -907,9 +924,9 @@ def cost_efficient_search(collection, query_vector, top_k=3):
                         <label for="check-batch"><strong>Batch processing:</strong> Implemented for non-time-sensitive tasks</label>
                     </div>
                 </div>
-            
+
                 <h3>Infrastructure Cost Optimization</h3>
-                <div class="security-checklist">
+                <div class="checklist-component">
                     <div class="checklist-item">
                         <input type="checkbox" id="check-autoscale" name="cost-check">
                         <label for="check-autoscale"><strong>Auto-scaling:</strong> Resources scale based on actual demand</label>
@@ -931,13 +948,13 @@ def cost_efficient_search(collection, query_vector, top_k=3):
                         <label for="check-monitoring"><strong>Cost monitoring:</strong> Set up dashboards and alerts for cost metrics</label>
                     </div>
                 </div>
-                
+
                 <div class="checklist-actions">
                     <button class="action-button primary-button" id="check-all-cost">Check All</button>
                     <button class="action-button secondary-button" id="uncheck-all-cost">Uncheck All</button>
                     <button class="action-button highlight-button" id="export-cost-checklist">Export Checklist</button>
                 </div>
-            
+
                 <div class="checklist-progress">
                     <div class="progress-label">Optimization Progress:</div>
                     <div class="progress-container">
@@ -955,78 +972,21 @@ def cost_efficient_search(collection, query_vector, top_k=3):
         </div>
     </footer>
 
+    <script src="js/checklist.js"></script>
+
+    <!-- Then define the configuration specific to this page -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const checkboxes = document.querySelectorAll('.security-checklist input[type="checkbox"]');
-            const progressBar = document.getElementById('cost-progress-bar');
-            const percentageDisplay = document.getElementById('cost-percentage');
-            const checkAllButton = document.getElementById('check-all-cost');
-            const uncheckAllButton = document.getElementById('uncheck-all-cost');
-            const exportButton = document.getElementById('export-cost-checklist');
-            
-            // Update progress bar
-            function updateProgress() {
-                const total = checkboxes.length;
-                const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
-                const percentage = Math.round((checked / total) * 100);
-                
-                progressBar.style.width = percentage + '%';
-                percentageDisplay.textContent = percentage + '%';
+        window.CHECKLIST_CONFIGS = window.CHECKLIST_CONFIGS || [];
+        window.CHECKLIST_CONFIGS.push({
+            // Export configuration
+            exportFilename: 'cost_optimization_checklist.md',
+            exportTitle: '# AI Agent Cost Optimization Checklist',
+
+            // Section titles for the export
+            sectionTitles: {
+                0: 'LLM API Cost Optimization',
+                1: 'Infrastructure Cost Optimization'
             }
-            
-            // Add event listeners to all checkboxes
-            checkboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', updateProgress);
-            });
-            
-            // Check all button
-            checkAllButton.addEventListener('click', function() {
-                checkboxes.forEach(checkbox => {
-                    checkbox.checked = true;
-                });
-                updateProgress();
-            });
-            
-            // Uncheck all button
-            uncheckAllButton.addEventListener('click', function() {
-                checkboxes.forEach(checkbox => {
-                    checkbox.checked = false;
-                });
-                updateProgress();
-            });
-            
-            // Export checklist function
-            exportButton.addEventListener('click', function() {
-                let content = "# AI Agent Cost Optimization Checklist\n\n";
-                content += "## LLM API Cost Optimization\n\n";
-                
-                document.querySelectorAll('.security-checklist').forEach((checklist, index) => {
-                    if (index === 1) {
-                        content += "\n## Infrastructure Cost Optimization\n\n";
-                    }
-                    
-                    checklist.querySelectorAll('.checklist-item').forEach(item => {
-                        const checkbox = item.querySelector('input[type="checkbox"]');
-                        const label = item.querySelector('label').textContent;
-                        const status = checkbox.checked ? "✅" : "⬜";
-                        content += `${status} ${label}\n`;
-                    });
-                });
-                
-                // Create file and download
-                const blob = new Blob([content], { type: 'text/plain' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'cost_optimization_checklist.md';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-            });
-            
-            // Initialize progress bar
-            updateProgress();
         });
     </script>
 </body>
