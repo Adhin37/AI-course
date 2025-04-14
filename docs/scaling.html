@@ -655,7 +655,7 @@ class AgentRouter:
                 <p>Follow this comprehensive checklist to ensure you've addressed all critical scaling considerations for your enterprise AI agent deployment:</p>
             
                 <h3>Infrastructure and Performance</h3>
-                <div class="security-checklist">
+                <div class="checklist-component">
                     <div class="checklist-item">
                         <input type="checkbox" id="infra-1" name="scaling-check">
                         <label for="infra-1"><strong>Scaling Strategy:</strong> Choose appropriate scaling approach (horizontal vs. vertical)</label>
@@ -679,7 +679,7 @@ class AgentRouter:
                 </div>
             
                 <h3>Reliability and Resilience</h3>
-                <div class="security-checklist">
+                <div class="checklist-component">
                     <div class="checklist-item">
                         <input type="checkbox" id="rel-1" name="scaling-check">
                         <label for="rel-1"><strong>Multi-region:</strong> Deploy across multiple regions/availability zones</label>
@@ -703,7 +703,7 @@ class AgentRouter:
                 </div>
             
                 <h3>Security and Compliance</h3>
-                <div class="security-checklist">
+                <div class="checklist-component">
                     <div class="checklist-item">
                         <input type="checkbox" id="sec-1" name="scaling-check">
                         <label for="sec-1"><strong>Authentication:</strong> Integrate with enterprise authentication systems</label>
@@ -727,7 +727,7 @@ class AgentRouter:
                 </div>
             
                 <h3>Cost Management</h3>
-                <div class="security-checklist">
+                <div class="checklist-component">
                     <div class="checklist-item">
                         <input type="checkbox" id="cost-1" name="scaling-check">
                         <label for="cost-1"><strong>Tiered Models:</strong> Implement tiered model selection strategy</label>
@@ -931,95 +931,26 @@ class AgentRouter:
             if (tabButtons.length > 0) {
                 tabButtons[0].click();
             }
-            const checkboxes = document.querySelectorAll('.security-checklist input[type="checkbox"]');
-            const progressBar = document.getElementById('checklist-progress-bar');
-            const percentageDisplay = document.getElementById('checklist-percentage');
-            const checkAllButton = document.getElementById('check-all');
-            const uncheckAllButton = document.getElementById('uncheck-all');
-            const exportButton = document.getElementById('export-checklist');
-            
-            // Update progress bar
-            function updateProgress() {
-                const total = checkboxes.length;
-                const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
-                const percentage = Math.round((checked / total) * 100);
-                
-                progressBar.style.width = percentage + '%';
-                percentageDisplay.textContent = percentage + '%';
-            }
-            
-            // Add event listeners to all checkboxes
-            checkboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', updateProgress);
-            });
-            
-            // Check all button
-            checkAllButton.addEventListener('click', function() {
-                checkboxes.forEach(checkbox => {
-                    checkbox.checked = true;
-                });
-                updateProgress();
-            });
-            
-            // Uncheck all button
-            uncheckAllButton.addEventListener('click', function() {
-                checkboxes.forEach(checkbox => {
-                    checkbox.checked = false;
-                });
-                updateProgress();
-            });
-            
-            // Export checklist function
-            exportButton.addEventListener('click', function() {
-                let content = "# Scaling Implementation Checklist\n\n";
-                
-                // Infrastructure and Performance
-                content += "## Infrastructure and Performance\n\n";
-                document.querySelectorAll('#infra-1, #infra-2, #infra-3, #infra-4, #infra-5').forEach(checkbox => {
-                    const label = document.querySelector(`label[for="${checkbox.id}"]`).textContent;
-                    const status = checkbox.checked ? "✅" : "⬜";
-                    content += `${status} ${label}\n`;
-                });
-                
-                // Reliability and Resilience
-                content += "\n## Reliability and Resilience\n\n";
-                document.querySelectorAll('#rel-1, #rel-2, #rel-3, #rel-4, #rel-5').forEach(checkbox => {
-                    const label = document.querySelector(`label[for="${checkbox.id}"]`).textContent;
-                    const status = checkbox.checked ? "✅" : "⬜";
-                    content += `${status} ${label}\n`;
-                });
-                
-                // Security and Compliance
-                content += "\n## Security and Compliance\n\n";
-                document.querySelectorAll('#sec-1, #sec-2, #sec-3, #sec-4, #sec-5').forEach(checkbox => {
-                    const label = document.querySelector(`label[for="${checkbox.id}"]`).textContent;
-                    const status = checkbox.checked ? "✅" : "⬜";
-                    content += `${status} ${label}\n`;
-                });
-                
-                // Cost Management
-                content += "\n## Cost Management\n\n";
-                document.querySelectorAll('#cost-1, #cost-2, #cost-3, #cost-4, #cost-5').forEach(checkbox => {
-                    const label = document.querySelector(`label[for="${checkbox.id}"]`).textContent;
-                    const status = checkbox.checked ? "✅" : "⬜";
-                    content += `${status} ${label}\n`;
-                });
-                
-                // Create file and download
-                const blob = new Blob([content], { type: 'text/plain' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'scaling_checklist.md';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-            });
-            
-            // Initialize progress bar
-            updateProgress();
         });
+    </script>
+    <script src="js/checklist.js"></script>
+
+    <!-- Then define the configuration specific to this page -->
+    <script>
+      window.CHECKLIST_CONFIGS = window.CHECKLIST_CONFIGS || [];
+      window.CHECKLIST_CONFIGS.push({
+        // Export configuration
+        exportFilename: 'scaling_checklist.md',
+        exportTitle: '# Scaling Implementation Checklist',
+  
+        // Section titles for the export
+        sectionTitles: {
+          0: 'Infrastructure and Performance',
+          1: 'Reliability and Resilience',
+          2: 'Security and Compliance',
+          3: 'Cost Management'
+        }
+      });
     </script>
 
 </body>
