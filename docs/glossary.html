@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,34 +12,34 @@
             max-width: 900px;
             margin: 0 auto;
         }
-        
+
         .glossary-list {
             list-style: none;
             padding: 0;
         }
-        
+
         .glossary-term {
             margin-bottom: 2rem;
             border-bottom: 1px solid var(--light-gray);
             padding-bottom: 1rem;
         }
-        
+
         .glossary-term:last-child {
             border-bottom: none;
         }
-        
+
         .term-header {
             display: flex;
             align-items: baseline;
         }
-        
+
         .term-name {
             color: var(--primary);
             font-size: 1.4rem;
             margin: 0;
             margin-right: 1rem;
         }
-        
+
         .term-category {
             background-color: var(--secondary);
             color: white;
@@ -47,12 +48,12 @@
             font-size: 0.8rem;
             font-weight: 500;
         }
-        
+
         .term-definition {
             margin-top: 0.5rem;
             color: var(--dark);
         }
-        
+
         .term-example {
             background-color: var(--light);
             padding: 1rem;
@@ -60,29 +61,29 @@
             border-radius: 4px;
             border-left: 3px solid var(--secondary);
         }
-        
+
         .term-example h4 {
             margin-top: 0;
             color: var(--secondary);
             font-size: 1rem;
         }
-        
+
         .term-related {
             margin-top: 1rem;
             font-size: 0.9rem;
         }
-        
+
         .term-related span {
             font-weight: 500;
             color: var(--gray);
         }
-        
+
         .term-related a {
             color: var(--primary);
             text-decoration: none;
             margin-right: 0.5rem;
         }
-        
+
         .term-related a:hover {
             text-decoration: underline;
         }
@@ -96,7 +97,7 @@
             padding: 1rem;
             border-radius: 8px;
         }
-        
+
         .alphabet-nav a {
             display: inline-block;
             width: 2rem;
@@ -110,17 +111,17 @@
             font-weight: 500;
             transition: all 0.2s;
         }
-        
+
         .alphabet-nav a:hover {
             background-color: var(--primary);
             color: white;
         }
-        
+
         .alphabet-nav .disabled {
             color: var(--light-gray);
             cursor: not-allowed;
         }
-        
+
         .alphabet-heading {
             background-color: var(--primary-dark);
             color: white;
@@ -130,6 +131,7 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="container">
@@ -137,7 +139,7 @@
             <p>Learn to build powerful AI agents for specific tasks</p>
         </div>
     </header>
-    
+
     <nav>
         <div class="container">
             <ul>
@@ -151,7 +153,7 @@
             </ul>
         </div>
     </nav>
-    
+
     <div class="breadcrumbs">
         <div class="container">
             <ul>
@@ -160,14 +162,14 @@
             </ul>
         </div>
     </div>
-    
+
     <section class="content-section">
         <div class="container">
             <div class="section-title">
                 <h1>AI Agent Glossary</h1>
                 <p>A comprehensive reference of terminology used in AI agent development</p>
             </div>
-            
+
             <div class="glossary-container">
                 <div class="alphabet-nav">
                     <a href="#A">A</a>
@@ -197,7 +199,7 @@
                     <a href="#Y">Y</a>
                     <a href="#Z">Z</a>
                 </div>
-                
+
                 <div id="A" class="alphabet-heading">A</div>
                 <ul class="glossary-list">
                     <li class="glossary-term">
@@ -205,10 +207,14 @@
                             <h3 class="term-name">Agent</h3>
                             <span class="term-category">Core Concept</span>
                         </div>
-                        <p class="term-definition">An AI agent is a system that perceives its environment through inputs, makes decisions based on those inputs, and acts to achieve specific goals. In the context of modern AI development, agents often utilize large language models (LLMs) or other AI components to process information and determine actions.</p>
+                        <p class="term-definition">An AI agent is a system that perceives its environment through
+                            inputs, makes decisions based on those inputs, and acts to achieve specific goals. In the
+                            context of modern AI development, agents often utilize large language models (LLMs) or other
+                            AI components to process information and determine actions.</p>
                         <div class="term-example">
                             <h4>Example</h4>
-                            <p>A customer service agent that can access product databases, interpret customer inquiries, and provide relevant responses while following company policies.</p>
+                            <p>A customer service agent that can access product databases, interpret customer inquiries,
+                                and provide relevant responses while following company policies.</p>
                         </div>
                         <p class="term-related">
                             <span>Related terms:</span>
@@ -217,16 +223,19 @@
                             <a href="#R">ReAct</a>
                         </p>
                     </li>
-                    
+
                     <li class="glossary-term">
                         <div class="term-header">
                             <h3 class="term-name">Action Space</h3>
                             <span class="term-category">Architecture</span>
                         </div>
-                        <p class="term-definition">The set of all possible actions an agent can take within its environment. In AI agent development, this typically refers to the range of functions, API calls, or outputs that an agent can produce.</p>
+                        <p class="term-definition">The set of all possible actions an agent can take within its
+                            environment. In AI agent development, this typically refers to the range of functions, API
+                            calls, or outputs that an agent can produce.</p>
                         <div class="term-example">
                             <h4>Example</h4>
-                            <p>A research agent might have an action space that includes: searching web APIs, querying databases, summarizing documents, and generating reports.</p>
+                            <p>A research agent might have an action space that includes: searching web APIs, querying
+                                databases, summarizing documents, and generating reports.</p>
                         </div>
                         <p class="term-related">
                             <span>Related terms:</span>
@@ -234,16 +243,21 @@
                             <a href="#T">Tool Use</a>
                         </p>
                     </li>
-                    
+
                     <li class="glossary-term">
                         <div class="term-header">
                             <h3 class="term-name">AutoGPT</h3>
                             <span class="term-category">Framework</span>
                         </div>
-                        <p class="term-definition">An open-source framework for building autonomous AI agents that can break down complex goals into subtasks and execute them using language models. AutoGPT implements recursive self-improvement mechanisms to refine its approach based on results.</p>
+                        <p class="term-definition">An open-source framework for building autonomous AI agents that can
+                            break down complex goals into subtasks and execute them using language models. AutoGPT
+                            implements recursive self-improvement mechanisms to refine its approach based on results.
+                        </p>
                         <div class="term-example">
                             <h4>Example</h4>
-                            <p>Using AutoGPT to create a market research agent that can gather information from multiple sources, analyze trends, and generate comprehensive reports with minimal human supervision.</p>
+                            <p>Using AutoGPT to create a market research agent that can gather information from multiple
+                                sources, analyze trends, and generate comprehensive reports with minimal human
+                                supervision.</p>
                         </div>
                         <p class="term-related">
                             <span>Related terms:</span>
@@ -251,16 +265,20 @@
                             <a href="#A">Autonomous Agent</a>
                         </p>
                     </li>
-                    
+
                     <li class="glossary-term">
                         <div class="term-header">
                             <h3 class="term-name">Autonomous Agent</h3>
                             <span class="term-category">Architecture</span>
                         </div>
-                        <p class="term-definition">An AI agent capable of operating independently without continuous human intervention, making decisions and taking actions to achieve its goals. Autonomous agents typically incorporate planning, memory, and self-evaluation components.</p>
+                        <p class="term-definition">An AI agent capable of operating independently without continuous
+                            human intervention, making decisions and taking actions to achieve its goals. Autonomous
+                            agents typically incorporate planning, memory, and self-evaluation components.</p>
                         <div class="term-example">
                             <h4>Example</h4>
-                            <p>A social media management agent that schedules posts, responds to comments, analyzes engagement metrics, and adjusts strategy without requiring human approval for each action.</p>
+                            <p>A social media management agent that schedules posts, responds to comments, analyzes
+                                engagement metrics, and adjusts strategy without requiring human approval for each
+                                action.</p>
                         </div>
                         <p class="term-related">
                             <span>Related terms:</span>
@@ -270,7 +288,7 @@
                         </p>
                     </li>
                 </ul>
-                
+
                 <div id="B" class="alphabet-heading">B</div>
                 <ul class="glossary-list">
                     <li class="glossary-term">
@@ -278,10 +296,13 @@
                             <h3 class="term-name">BabyAGI</h3>
                             <span class="term-category">Framework</span>
                         </div>
-                        <p class="term-definition">An open-source task management system that uses language models to create, prioritize, and execute tasks based on the outcomes of previous tasks. BabyAGI implements a simple but effective task-driven autonomous agent architecture.</p>
+                        <p class="term-definition">An open-source task management system that uses language models to
+                            create, prioritize, and execute tasks based on the outcomes of previous tasks. BabyAGI
+                            implements a simple but effective task-driven autonomous agent architecture.</p>
                         <div class="term-example">
                             <h4>Example</h4>
-                            <p>Using BabyAGI to manage a research project where it progressively explores a topic, identifies knowledge gaps, and creates new research tasks to fill those gaps.</p>
+                            <p>Using BabyAGI to manage a research project where it progressively explores a topic,
+                                identifies knowledge gaps, and creates new research tasks to fill those gaps.</p>
                         </div>
                         <p class="term-related">
                             <span>Related terms:</span>
@@ -290,7 +311,7 @@
                         </p>
                     </li>
                 </ul>
-                
+
                 <div id="C" class="alphabet-heading">C</div>
                 <ul class="glossary-list">
                     <li class="glossary-term">
@@ -298,10 +319,16 @@
                             <h3 class="term-name">Chain of Thought (CoT)</h3>
                             <span class="term-category">Technique</span>
                         </div>
-                        <p class="term-definition">A prompting technique that encourages language models to break down complex reasoning tasks into step-by-step thought processes before providing a final answer. CoT significantly improves performance on tasks requiring logical reasoning, multi-step computation, or careful analysis.</p>
+                        <p class="term-definition">A prompting technique that encourages language models to break down
+                            complex reasoning tasks into step-by-step thought processes before providing a final answer.
+                            CoT significantly improves performance on tasks requiring logical reasoning, multi-step
+                            computation, or careful analysis.</p>
                         <div class="term-example">
                             <h4>Example</h4>
-                            <p>Instead of directly asking "What's the sum of the squares of 13 and 14?", a CoT prompt would guide the model: "Let's calculate this step by step. First, I'll find the square of 13, which is 13×13 = 169. Then I'll find the square of 14, which is 14×14 = 196. Finally, I'll add these results: 169 + 196 = 365."</p>
+                            <p>Instead of directly asking "What's the sum of the squares of 13 and 14?", a CoT prompt
+                                would guide the model: "Let's calculate this step by step. First, I'll find the square
+                                of 13, which is 13×13 = 169. Then I'll find the square of 14, which is 14×14 = 196.
+                                Finally, I'll add these results: 169 + 196 = 365."</p>
                         </div>
                         <p class="term-related">
                             <span>Related terms:</span>
@@ -310,16 +337,22 @@
                             <a href="#T">Tree of Thought</a>
                         </p>
                     </li>
-                    
+
                     <li class="glossary-term">
                         <div class="term-header">
                             <h3 class="term-name">Context Window</h3>
                             <span class="term-category">Technical</span>
                         </div>
-                        <p class="term-definition">The maximum amount of text (measured in tokens) that a language model can process at once. This includes both the input prompt and the generated output. The context window represents a fundamental limitation of current language models and influences agent design.</p>
+                        <p class="term-definition">The maximum amount of text (measured in tokens) that a language model
+                            can process at once. This includes both the input prompt and the generated output. The
+                            context window represents a fundamental limitation of current language models and influences
+                            agent design.</p>
                         <div class="term-example">
                             <h4>Example</h4>
-                            <p>GPT-4 has a context window of 32,000 tokens (approximately 24,000 words), while Claude 3 Opus has a context window of about 200,000 tokens. When building an agent to analyze long documents, these limitations determine how much text can be processed in a single operation.</p>
+                            <p>GPT-4 has a context window of 32,000 tokens (approximately 24,000 words), while Claude 3
+                                Opus has a context window of about 200,000 tokens. When building an agent to analyze
+                                long documents, these limitations determine how much text can be processed in a single
+                                operation.</p>
                         </div>
                         <p class="term-related">
                             <span>Related terms:</span>
@@ -328,16 +361,20 @@
                             <a href="#R">RAG</a>
                         </p>
                     </li>
-                    
+
                     <li class="glossary-term">
                         <div class="term-header">
                             <h3 class="term-name">CrewAI</h3>
                             <span class="term-category">Framework</span>
                         </div>
-                        <p class="term-definition">A framework for building sophisticated multi-agent systems where each agent has a specialized role, and the agents collaborate to accomplish complex tasks. CrewAI facilitates structured communication between agents and manages workflow organization.</p>
+                        <p class="term-definition">A framework for building sophisticated multi-agent systems where each
+                            agent has a specialized role, and the agents collaborate to accomplish complex tasks. CrewAI
+                            facilitates structured communication between agents and manages workflow organization.</p>
                         <div class="term-example">
                             <h4>Example</h4>
-                            <p>Creating a content production system with a researcher agent that gathers information, a writer agent that drafts content, an editor agent that refines the writing, and a publisher agent that formats and distributes the final content.</p>
+                            <p>Creating a content production system with a researcher agent that gathers information, a
+                                writer agent that drafts content, an editor agent that refines the writing, and a
+                                publisher agent that formats and distributes the final content.</p>
                         </div>
                         <p class="term-related">
                             <span>Related terms:</span>
@@ -346,7 +383,7 @@
                         </p>
                     </li>
                 </ul>
-                
+
                 <div id="D" class="alphabet-heading">D</div>
                 <ul class="glossary-list">
                     <li class="glossary-term">
@@ -354,10 +391,15 @@
                             <h3 class="term-name">Decision Making</h3>
                             <span class="term-category">Capability</span>
                         </div>
-                        <p class="term-definition">The process by which an AI agent selects an action or response based on available information, goals, and constraints. Effective decision making is central to agent performance and typically involves evaluating options, predicting outcomes, and selecting the most promising approach.</p>
+                        <p class="term-definition">The process by which an AI agent selects an action or response based
+                            on available information, goals, and constraints. Effective decision making is central to
+                            agent performance and typically involves evaluating options, predicting outcomes, and
+                            selecting the most promising approach.</p>
                         <div class="term-example">
                             <h4>Example</h4>
-                            <p>A customer service agent deciding whether to offer a refund, replacement, or alternative solution based on the customer's history, the nature of the issue, and company policies.</p>
+                            <p>A customer service agent deciding whether to offer a refund, replacement, or alternative
+                                solution based on the customer's history, the nature of the issue, and company policies.
+                            </p>
                         </div>
                         <p class="term-related">
                             <span>Related terms:</span>
@@ -367,7 +409,7 @@
                         </p>
                     </li>
                 </ul>
-                
+
                 <div id="E" class="alphabet-heading">E</div>
                 <ul class="glossary-list">
                     <li class="glossary-term">
@@ -375,10 +417,15 @@
                             <h3 class="term-name">Embeddings</h3>
                             <span class="term-category">Technical</span>
                         </div>
-                        <p class="term-definition">Dense vector representations of text, images, or other data that capture semantic meaning in a way that allows for efficient search, comparison, and retrieval. Embeddings are fundamental to many advanced agent capabilities, especially knowledge retrieval systems.</p>
+                        <p class="term-definition">Dense vector representations of text, images, or other data that
+                            capture semantic meaning in a way that allows for efficient search, comparison, and
+                            retrieval. Embeddings are fundamental to many advanced agent capabilities, especially
+                            knowledge retrieval systems.</p>
                         <div class="term-example">
                             <h4>Example</h4>
-                            <p>A document retrieval system converts all documents into embeddings, then finds the most relevant documents by calculating the similarity between the query embedding and the document embeddings.</p>
+                            <p>A document retrieval system converts all documents into embeddings, then finds the most
+                                relevant documents by calculating the similarity between the query embedding and the
+                                document embeddings.</p>
                         </div>
                         <p class="term-related">
                             <span>Related terms:</span>
@@ -388,7 +435,7 @@
                         </p>
                     </li>
                 </ul>
-                
+
                 <div id="F" class="alphabet-heading">F</div>
                 <ul class="glossary-list">
                     <li class="glossary-term">
@@ -396,10 +443,14 @@
                             <h3 class="term-name">Few-Shot Learning</h3>
                             <span class="term-category">Technique</span>
                         </div>
-                        <p class="term-definition">A technique where a model is given a few examples of a task before being asked to perform similar tasks. In agent development, few-shot learning is often implemented as in-context examples that guide the model's outputs to match a desired format or approach.</p>
+                        <p class="term-definition">A technique where a model is given a few examples of a task before
+                            being asked to perform similar tasks. In agent development, few-shot learning is often
+                            implemented as in-context examples that guide the model's outputs to match a desired format
+                            or approach.</p>
                         <div class="term-example">
                             <h4>Example</h4>
-                            <p>Providing a language model with three examples of properly formatted customer service responses before asking it to handle a new customer inquiry in the same style.</p>
+                            <p>Providing a language model with three examples of properly formatted customer service
+                                responses before asking it to handle a new customer inquiry in the same style.</p>
                         </div>
                         <p class="term-related">
                             <span>Related terms:</span>
@@ -408,16 +459,21 @@
                             <a href="#Z">Zero-shot Learning</a>
                         </p>
                     </li>
-                    
+
                     <li class="glossary-term">
                         <div class="term-header">
                             <h3 class="term-name">Function Calling</h3>
                             <span class="term-category">Capability</span>
                         </div>
-                        <p class="term-definition">A capability of advanced language models that allows them to generate structured outputs suitable for calling external functions or APIs. Function calling enables more reliable tool use by providing a clear interface between natural language processing and programmatic actions.</p>
+                        <p class="term-definition">A capability of advanced language models that allows them to generate
+                            structured outputs suitable for calling external functions or APIs. Function calling enables
+                            more reliable tool use by providing a clear interface between natural language processing
+                            and programmatic actions.</p>
                         <div class="term-example">
                             <h4>Example</h4>
-                            <p>An agent analyzing weather data might use function calling to generate a properly formatted query to a weather API: {"location": "San Francisco", "date": "2025-04-11", "metrics": ["temperature", "precipitation", "wind_speed"]}</p>
+                            <p>An agent analyzing weather data might use function calling to generate a properly
+                                formatted query to a weather API: {"location": "San Francisco", "date": "2025-04-11",
+                                "metrics": ["temperature", "precipitation", "wind_speed"]}</p>
                         </div>
                         <p class="term-related">
                             <span>Related terms:</span>
@@ -427,7 +483,7 @@
                         </p>
                     </li>
                 </ul>
-                
+
                 <div id="G" class="alphabet-heading">G</div>
                 <ul class="glossary-list">
                     <li class="glossary-term">
@@ -435,10 +491,15 @@
                             <h3 class="term-name">Guardrails</h3>
                             <span class="term-category">Safety</span>
                         </div>
-                        <p class="term-definition">Mechanisms implemented to ensure AI agents operate within defined boundaries, preventing harmful, unethical, or undesired behaviors. Guardrails may include content filtering, input validation, output verification, and safety-oriented prompt engineering.</p>
+                        <p class="term-definition">Mechanisms implemented to ensure AI agents operate within defined
+                            boundaries, preventing harmful, unethical, or undesired behaviors. Guardrails may include
+                            content filtering, input validation, output verification, and safety-oriented prompt
+                            engineering.</p>
                         <div class="term-example">
                             <h4>Example</h4>
-                            <p>A content generation agent might have guardrails that prevent it from creating violent content, verify factual claims against a trusted database, and limit the types of files it can access.</p>
+                            <p>A content generation agent might have guardrails that prevent it from creating violent
+                                content, verify factual claims against a trusted database, and limit the types of files
+                                it can access.</p>
                         </div>
                         <p class="term-related">
                             <span>Related terms:</span>
@@ -448,7 +509,7 @@
                         </p>
                     </li>
                 </ul>
-                
+
                 <div id="H" class="alphabet-heading">H</div>
                 <ul class="glossary-list">
                     <li class="glossary-term">
@@ -456,10 +517,15 @@
                             <h3 class="term-name">Hallucination</h3>
                             <span class="term-category">Challenge</span>
                         </div>
-                        <p class="term-definition">The tendency of language models to generate content that is factually incorrect, made-up, or ungrounded in the provided context. Hallucinations are a significant challenge in AI agent development, particularly for applications requiring factual accuracy.</p>
+                        <p class="term-definition">The tendency of language models to generate content that is factually
+                            incorrect, made-up, or ungrounded in the provided context. Hallucinations are a significant
+                            challenge in AI agent development, particularly for applications requiring factual accuracy.
+                        </p>
                         <div class="term-example">
                             <h4>Example</h4>
-                            <p>A research agent might hallucinate by citing non-existent papers, inventing statistics, or creating plausible but incorrect explanations when it doesn't know the answer to a question.</p>
+                            <p>A research agent might hallucinate by citing non-existent papers, inventing statistics,
+                                or creating plausible but incorrect explanations when it doesn't know the answer to a
+                                question.</p>
                         </div>
                         <p class="term-related">
                             <span>Related terms:</span>
@@ -469,7 +535,7 @@
                         </p>
                     </li>
                 </ul>
-                
+
                 <div id="I" class="alphabet-heading">I</div>
                 <ul class="glossary-list">
                     <li class="glossary-term">
@@ -477,10 +543,14 @@
                             <h3 class="term-name">In-context Learning</h3>
                             <span class="term-category">Technique</span>
                         </div>
-                        <p class="term-definition">The ability of language models to adapt to new tasks based on examples or instructions provided in the prompt, without updating model weights. In-context learning is a key technique for tailoring agent behavior without fine-tuning.</p>
+                        <p class="term-definition">The ability of language models to adapt to new tasks based on
+                            examples or instructions provided in the prompt, without updating model weights. In-context
+                            learning is a key technique for tailoring agent behavior without fine-tuning.</p>
                         <div class="term-example">
                             <h4>Example</h4>
-                            <p>Teaching an agent to classify customer feedback into categories by showing it several examples of properly classified feedback in the prompt, then asking it to classify new examples.</p>
+                            <p>Teaching an agent to classify customer feedback into categories by showing it several
+                                examples of properly classified feedback in the prompt, then asking it to classify new
+                                examples.</p>
                         </div>
                         <p class="term-related">
                             <span>Related terms:</span>
@@ -490,7 +560,7 @@
                         </p>
                     </li>
                 </ul>
-                
+
                 <div id="J" class="alphabet-heading">J</div>
                 <ul class="glossary-list">
                     <li class="glossary-term">
@@ -498,10 +568,17 @@
                             <h3 class="term-name">JSON Mode</h3>
                             <span class="term-category">Technical</span>
                         </div>
-                        <p class="term-definition">A specialized output format available in some language models that ensures responses are formatted as valid JSON objects. JSON mode is particularly useful for agent development as it allows for structured, parseable outputs that can be directly used by other systems.</p>
+                        <p class="term-definition">A specialized output format available in some language models that
+                            ensures responses are formatted as valid JSON objects. JSON mode is particularly useful for
+                            agent development as it allows for structured, parseable outputs that can be directly used
+                            by other systems.</p>
                         <div class="term-example">
                             <h4>Example</h4>
-                            <p>Enabling JSON mode when asking an agent to analyze sentiment in customer reviews, resulting in a structured output like {"overall_sentiment": "positive", "specific_aspects": {"product_quality": "positive", "shipping_speed": "negative", "customer_service": "neutral"}, "key_points": ["Product exceeded expectations", "Shipping took longer than promised"]}</p>
+                            <p>Enabling JSON mode when asking an agent to analyze sentiment in customer reviews,
+                                resulting in a structured output like {"overall_sentiment": "positive",
+                                "specific_aspects": {"product_quality": "positive", "shipping_speed": "negative",
+                                "customer_service": "neutral"}, "key_points": ["Product exceeded expectations",
+                                "Shipping took longer than promised"]}</p>
                         </div>
                         <p class="term-related">
                             <span>Related terms:</span>
@@ -510,7 +587,7 @@
                         </p>
                     </li>
                 </ul>
-                
+
                 <div id="K" class="alphabet-heading">K</div>
                 <ul class="glossary-list">
                     <li class="glossary-term">
@@ -518,10 +595,15 @@
                             <h3 class="term-name">Knowledge Retrieval</h3>
                             <span class="term-category">Capability</span>
                         </div>
-                        <p class="term-definition">The process by which an AI agent accesses specific information relevant to a task or query. Knowledge retrieval systems typically involve vector databases, search algorithms, and relevance ranking to identify and extract the most useful information.</p>
+                        <p class="term-definition">The process by which an AI agent accesses specific information
+                            relevant to a task or query. Knowledge retrieval systems typically involve vector databases,
+                            search algorithms, and relevance ranking to identify and extract the most useful
+                            information.</p>
                         <div class="term-example">
                             <h4>Example</h4>
-                            <p>A technical support agent using knowledge retrieval to find relevant documentation, previous similar issues, and potential solutions when presented with a customer's problem.</p>
+                            <p>A technical support agent using knowledge retrieval to find relevant documentation,
+                                previous similar issues, and potential solutions when presented with a customer's
+                                problem.</p>
                         </div>
                         <p class="term-related">
                             <span>Related terms:</span>
@@ -531,7 +613,7 @@
                         </p>
                     </li>
                 </ul>
-                
+
                 <div id="L" class="alphabet-heading">L</div>
                 <ul class="glossary-list">
                     <li class="glossary-term">
@@ -539,10 +621,15 @@
                             <h3 class="term-name">LangChain</h3>
                             <span class="term-category">Framework</span>
                         </div>
-                        <p class="term-definition">A popular open-source framework for developing applications powered by language models. LangChain provides components for working with language models, embedding models, document processing, memories, agents, and various tools. It emphasizes composability and standardized interfaces.</p>
+                        <p class="term-definition">A popular open-source framework for developing applications powered
+                            by language models. LangChain provides components for working with language models,
+                            embedding models, document processing, memories, agents, and various tools. It emphasizes
+                            composability and standardized interfaces.</p>
                         <div class="term-example">
                             <h4>Example</h4>
-                            <p>Using LangChain to build a research agent that can retrieve information from multiple sources, process documents, maintain conversation history, and produce comprehensive reports.</p>
+                            <p>Using LangChain to build a research agent that can retrieve information from multiple
+                                sources, process documents, maintain conversation history, and produce comprehensive
+                                reports.</p>
                         </div>
                         <p class="term-related">
                             <span>Related terms:</span>
@@ -551,16 +638,20 @@
                             <a href="#C">Chain</a>
                         </p>
                     </li>
-                    
+
                     <li class="glossary-term">
                         <div class="term-header">
                             <h3 class="term-name">LLM (Large Language Model)</h3>
                             <span class="term-category">Core Concept</span>
                         </div>
-                        <p class="term-definition">A type of AI model trained on vast amounts of text data that can generate human-like text, understand context, follow instructions, and perform various language-based tasks. LLMs serve as the foundation for most modern AI agents, providing capabilities such as reasoning, generation, and comprehension.</p>
+                        <p class="term-definition">A type of AI model trained on vast amounts of text data that can
+                            generate human-like text, understand context, follow instructions, and perform various
+                            language-based tasks. LLMs serve as the foundation for most modern AI agents, providing
+                            capabilities such as reasoning, generation, and comprehension.</p>
                         <div class="term-example">
                             <h4>Example</h4>
-                            <p>GPT-4, Claude, Gemini, and Llama are examples of large language models that can be used as the core of AI agent systems.</p>
+                            <p>GPT-4, Claude, Gemini, and Llama are examples of large language models that can be used
+                                as the core of AI agent systems.</p>
                         </div>
                         <p class="term-related">
                             <span>Related terms:</span>
@@ -569,350 +660,423 @@
                             <a href="#P">Parameter</a>
                         </p>
                     </li>
-                    
+
                     <li class="glossary-term">
                         <div class="term-header">
                             <h3 class="term-name">LlamaIndex</h3>
                             <span class="term-category">Framework</span>
                         </div>
-                        <p class="term-definition">A data framework designed to connect custom data sources to large language models. LlamaIndex (formerly GPT Index) specializes in creating, maintaining, and querying indexes of structured and unstructured data, making it particularly well-suited for knowledge-intensive applications.</p>
+                        <p class="term-definition">A data framework designed to connect custom data sources to large
+                            language models. LlamaIndex (formerly GPT Index) specializes in creating, maintaining, and
+                            querying indexes of structured and unstructured data, making it particularly well-suited for
+                            knowledge-intensive applications.</p>
                         <div class="term-example">
                             <h4>Example
-            <p>Using LlamaIndex to build a legal research agent that can ingest, index, and query large collections of case law, contracts, and legal opinions to provide relevant information for legal questions.</p>
-        </div>
-        <p class="term-related">
-            <span>Related terms:</span>
-            <a href="#R">RAG</a>
-            <a href="#L">LangChain</a>
-            <a href="#V">Vector Database</a>
-        </p>
-    </li>
-</ul>
+                                <p>Using LlamaIndex to build a legal research agent that can ingest, index, and query
+                                    large collections of case law, contracts, and legal opinions to provide relevant
+                                    information for legal questions.</p>
+                        </div>
+                        <p class="term-related">
+                            <span>Related terms:</span>
+                            <a href="#R">RAG</a>
+                            <a href="#L">LangChain</a>
+                            <a href="#V">Vector Database</a>
+                        </p>
+                    </li>
+                </ul>
 
-<div id="M" class="alphabet-heading">M</div>
-<ul class="glossary-list">
-    <li class="glossary-term">
-        <div class="term-header">
-            <h3 class="term-name">Memory</h3>
-            <span class="term-category">Component</span>
-        </div>
-        <p class="term-definition">A system that allows AI agents to store and retrieve information across multiple interactions or processing steps. Memory components can include conversation history, key facts, user preferences, and intermediate results.</p>
-        <div class="term-example">
-            <h4>Example</h4>
-            <p>A customer service agent using memory to recall that a customer previously mentioned having a premium subscription, allowing it to offer appropriate service options without requiring the customer to repeat this information.</p>
-        </div>
-        <p class="term-related">
-            <span>Related terms:</span>
-            <a href="#C">Context Window</a>
-            <a href="#V">Vector Database</a>
-            <a href="#S">Session State</a>
-        </p>
-    </li>
-    
-    <li class="glossary-term">
-        <div class="term-header">
-            <h3 class="term-name">Multi-agent System</h3>
-            <span class="term-category">Architecture</span>
-        </div>
-        <p class="term-definition">A system where multiple AI agents work together, often with specialized roles, to accomplish complex tasks. Multi-agent systems typically involve structured communication protocols, role assignments, and coordination mechanisms.</p>
-        <div class="term-example">
-            <h4>Example</h4>
-            <p>A content creation system with specialized agents for research, outlining, writing, editing, fact-checking, and publishing, each performing its role and passing results to the next agent in the workflow.</p>
-        </div>
-        <p class="term-related">
-            <span>Related terms:</span>
-            <a href="#C">CrewAI</a>
-            <a href="#R">Role</a>
-            <a href="#T">Task Decomposition</a>
-        </p>
-    </li>
-</ul>
+                <div id="M" class="alphabet-heading">M</div>
+                <ul class="glossary-list">
+                    <li class="glossary-term">
+                        <div class="term-header">
+                            <h3 class="term-name">Memory</h3>
+                            <span class="term-category">Component</span>
+                        </div>
+                        <p class="term-definition">A system that allows AI agents to store and retrieve information
+                            across multiple interactions or processing steps. Memory components can include conversation
+                            history, key facts, user preferences, and intermediate results.</p>
+                        <div class="term-example">
+                            <h4>Example</h4>
+                            <p>A customer service agent using memory to recall that a customer previously mentioned
+                                having a premium subscription, allowing it to offer appropriate service options without
+                                requiring the customer to repeat this information.</p>
+                        </div>
+                        <p class="term-related">
+                            <span>Related terms:</span>
+                            <a href="#C">Context Window</a>
+                            <a href="#V">Vector Database</a>
+                            <a href="#S">Session State</a>
+                        </p>
+                    </li>
 
-<div id="O" class="alphabet-heading">O</div>
-<ul class="glossary-list">
-    <li class="glossary-term">
-        <div class="term-header">
-            <h3 class="term-name">Orchestration</h3>
-            <span class="term-category">Architecture</span>
-        </div>
-        <p class="term-definition">The process of coordinating multiple components, agents, or services to work together effectively. Orchestration typically involves managing workflows, handling errors, scheduling tasks, and ensuring proper communication between components.</p>
-        <div class="term-example">
-            <h4>Example</h4>
-            <p>An e-commerce assistant that orchestrates interactions between a product search service, inventory checking system, recommendation engine, and order processing service to help customers find and purchase products.</p>
-        </div>
-        <p class="term-related">
-            <span>Related terms:</span>
-            <a href="#M">Multi-agent System</a>
-            <a href="#W">Workflow</a>
-            <a href="#P">Pipeline</a>
-        </p>
-    </li>
-</ul>
+                    <li class="glossary-term">
+                        <div class="term-header">
+                            <h3 class="term-name">Multi-agent System</h3>
+                            <span class="term-category">Architecture</span>
+                        </div>
+                        <p class="term-definition">A system where multiple AI agents work together, often with
+                            specialized roles, to accomplish complex tasks. Multi-agent systems typically involve
+                            structured communication protocols, role assignments, and coordination mechanisms.</p>
+                        <div class="term-example">
+                            <h4>Example</h4>
+                            <p>A content creation system with specialized agents for research, outlining, writing,
+                                editing, fact-checking, and publishing, each performing its role and passing results to
+                                the next agent in the workflow.</p>
+                        </div>
+                        <p class="term-related">
+                            <span>Related terms:</span>
+                            <a href="#C">CrewAI</a>
+                            <a href="#R">Role</a>
+                            <a href="#T">Task Decomposition</a>
+                        </p>
+                    </li>
+                </ul>
 
-<div id="P" class="alphabet-heading">P</div>
-<ul class="glossary-list">
-    <li class="glossary-term">
-        <div class="term-header">
-            <h3 class="term-name">Planning</h3>
-            <span class="term-category">Capability</span>
-        </div>
-        <p class="term-definition">The process by which an AI agent formulates a sequence of actions to achieve a goal. Planning typically involves breaking down complex tasks into subtasks, considering dependencies, and establishing an execution order.</p>
-        <div class="term-example">
-            <h4>Example</h4>
-            <p>A research agent creating a plan to investigate a topic by first defining key questions, then identifying information sources, gathering relevant data, analyzing findings, and finally synthesizing results into a comprehensive report.</p>
-        </div>
-        <p class="term-related">
-            <span>Related terms:</span>
-            <a href="#T">Task Decomposition</a>
-            <a href="#R">ReAct</a>
-            <a href="#D">Decision Making</a>
-        </p>
-    </li>
-    
-    <li class="glossary-term">
-        <div class="term-header">
-            <h3 class="term-name">Prompt Engineering</h3>
-            <span class="term-category">Technique</span>
-        </div>
-        <p class="term-definition">The practice of designing, refining, and optimizing inputs to language models to guide them toward desired outputs. Prompt engineering is a key skill in AI agent development, encompassing techniques such as few-shot learning, chain-of-thought prompting, and system role definition.</p>
-        <div class="term-example">
-            <h4>Example</h4>
-            <p>Creating a carefully structured prompt for a customer service agent that includes the company's tone guidelines, specific product information, examples of good responses, and instructions for handling difficult situations.</p>
-        </div>
-        <p class="term-related">
-            <span>Related terms:</span>
-            <a href="#C">Chain of Thought</a>
-            <a href="#F">Few-shot Learning</a>
-            <a href="#S">System Prompt</a>
-        </p>
-    </li>
-</ul>
+                <div id="O" class="alphabet-heading">O</div>
+                <ul class="glossary-list">
+                    <li class="glossary-term">
+                        <div class="term-header">
+                            <h3 class="term-name">Orchestration</h3>
+                            <span class="term-category">Architecture</span>
+                        </div>
+                        <p class="term-definition">The process of coordinating multiple components, agents, or services
+                            to work together effectively. Orchestration typically involves managing workflows, handling
+                            errors, scheduling tasks, and ensuring proper communication between components.</p>
+                        <div class="term-example">
+                            <h4>Example</h4>
+                            <p>An e-commerce assistant that orchestrates interactions between a product search service,
+                                inventory checking system, recommendation engine, and order processing service to help
+                                customers find and purchase products.</p>
+                        </div>
+                        <p class="term-related">
+                            <span>Related terms:</span>
+                            <a href="#M">Multi-agent System</a>
+                            <a href="#W">Workflow</a>
+                            <a href="#P">Pipeline</a>
+                        </p>
+                    </li>
+                </ul>
 
-<div id="R" class="alphabet-heading">R</div>
-<ul class="glossary-list">
-    <li class="glossary-term">
-        <div class="term-header">
-            <h3 class="term-name">RAG (Retrieval-Augmented Generation)</h3>
-            <span class="term-category">Technique</span>
-        </div>
-        <p class="term-definition">An approach that enhances language model outputs by first retrieving relevant information from external knowledge sources, then using that information to generate more accurate, informed responses. RAG combines the strengths of retrieval-based and generative approaches.</p>
-        <div class="term-example">
-            <h4>Example</h4>
-            <p>A technical support agent using RAG to retrieve relevant sections from product manuals and troubleshooting guides before generating a specific, accurate solution to a customer's technical problem.</p>
-        </div>
-        <p class="term-related">
-            <span>Related terms:</span>
-            <a href="#E">Embeddings</a>
-            <a href="#V">Vector Database</a>
-            <a href="#K">Knowledge Retrieval</a>
-        </p>
-    </li>
-    
-    <li class="glossary-term">
-        <div class="term-header">
-            <h3 class="term-name">ReAct (Reasoning and Acting)</h3>
-            <span class="term-category">Framework</span>
-        </div>
-        <p class="term-definition">A framework that interleaves reasoning and action steps, allowing agents to plan, execute, observe, and refine their approach. ReAct prompts typically follow a "Thought, Action, Observation" cycle that makes decision-making explicit and verifiable.</p>
-        <div class="term-example">
-            <h4>Example</h4>
-            <p>A research agent using ReAct to solve a complex problem: "Thought: I need to find recent climate data. Action: Search for 'latest IPCC climate report'. Observation: Found the IPCC Sixth Assessment Report. Thought: Now I need specific information on sea level rise..."</p>
-        </div>
-        <p class="term-related">
-            <span>Related terms:</span>
-            <a href="#C">Chain of Thought</a>
-            <a href="#T">Tool Use</a>
-            <a href="#S">Self-reflection</a>
-        </p>
-    </li>
-</ul>
+                <div id="P" class="alphabet-heading">P</div>
+                <ul class="glossary-list">
+                    <li class="glossary-term">
+                        <div class="term-header">
+                            <h3 class="term-name">Planning</h3>
+                            <span class="term-category">Capability</span>
+                        </div>
+                        <p class="term-definition">The process by which an AI agent formulates a sequence of actions to
+                            achieve a goal. Planning typically involves breaking down complex tasks into subtasks,
+                            considering dependencies, and establishing an execution order.</p>
+                        <div class="term-example">
+                            <h4>Example</h4>
+                            <p>A research agent creating a plan to investigate a topic by first defining key questions,
+                                then identifying information sources, gathering relevant data, analyzing findings, and
+                                finally synthesizing results into a comprehensive report.</p>
+                        </div>
+                        <p class="term-related">
+                            <span>Related terms:</span>
+                            <a href="#T">Task Decomposition</a>
+                            <a href="#R">ReAct</a>
+                            <a href="#D">Decision Making</a>
+                        </p>
+                    </li>
 
-<div id="S" class="alphabet-heading">S</div>
-<ul class="glossary-list">
-    <li class="glossary-term">
-        <div class="term-header">
-            <h3 class="term-name">Self-reflection</h3>
-            <span class="term-category">Capability</span>
-        </div>
-        <p class="term-definition">The ability of an AI agent to evaluate its own outputs, decisions, or reasoning processes, and make improvements based on this evaluation. Self-reflection enables agents to catch errors, refine strategies, and improve performance over time.</p>
-        <div class="term-example">
-            <h4>Example</h4>
-            <p>A writing assistant that generates a draft, then critically reviews its own work by evaluating clarity, coherence, accuracy, and style before producing an improved version based on its self-critique.</p>
-        </div>
-        <p class="term-related">
-            <span>Related terms:</span>
-            <a href="#V">Verification</a>
-            <a href="#I">Iteration</a>
-            <a href="#T">Tree of Thought</a>
-        </p>
-    </li>
-    
-    <li class="glossary-term">
-        <div class="term-header">
-            <h3 class="term-name">System Prompt</h3>
-            <span class="term-category">Technique</span>
-        </div>
-        <p class="term-definition">A set of instructions or context provided to a language model that persists across the entire interaction, establishing the model's role, constraints, and capabilities. The system prompt serves as a foundation for the agent's behavior and is typically not visible to end users.</p>
-        <div class="term-example">
-            <h4>Example</h4>
-            <p>A system prompt for a financial advisor agent might include instructions to follow regulatory guidelines, avoid making specific investment recommendations, explain concepts clearly, and maintain a professional tone throughout the conversation.</p>
-        </div>
-        <p class="term-related">
-            <span>Related terms:</span>
-            <a href="#P">Prompt Engineering</a>
-            <a href="#R">Role</a>
-            <a href="#G">Guardrails</a>
-        </p>
-    </li>
-</ul>
+                    <li class="glossary-term">
+                        <div class="term-header">
+                            <h3 class="term-name">Prompt Engineering</h3>
+                            <span class="term-category">Technique</span>
+                        </div>
+                        <p class="term-definition">The practice of designing, refining, and optimizing inputs to
+                            language models to guide them toward desired outputs. Prompt engineering is a key skill in
+                            AI agent development, encompassing techniques such as few-shot learning, chain-of-thought
+                            prompting, and system role definition.</p>
+                        <div class="term-example">
+                            <h4>Example</h4>
+                            <p>Creating a carefully structured prompt for a customer service agent that includes the
+                                company's tone guidelines, specific product information, examples of good responses, and
+                                instructions for handling difficult situations.</p>
+                        </div>
+                        <p class="term-related">
+                            <span>Related terms:</span>
+                            <a href="#C">Chain of Thought</a>
+                            <a href="#F">Few-shot Learning</a>
+                            <a href="#S">System Prompt</a>
+                        </p>
+                    </li>
+                </ul>
 
-<div id="T" class="alphabet-heading">T</div>
-<ul class="glossary-list">
-    <li class="glossary-term">
-        <div class="term-header">
-            <h3 class="term-name">Task Decomposition</h3>
-            <span class="term-category">Technique</span>
-        </div>
-        <p class="term-definition">The process of breaking down complex tasks into simpler, manageable subtasks that can be addressed individually. Task decomposition is essential for planning and tackling problems that are too large or complex to solve in a single step.</p>
-        <div class="term-example">
-            <h4>Example</h4>
-            <p>An agent decomposing the task "create a market analysis report" into subtasks like "identify key competitors," "gather market size data," "analyze pricing trends," "identify customer segments," and "summarize findings and recommendations."</p>
-        </div>
-        <p class="term-related">
-            <span>Related terms:</span>
-            <a href="#P">Planning</a>
-            <a href="#B">BabyAGI</a>
-            <a href="#W">Workflow</a>
-        </p>
-    </li>
-    
-    <li class="glossary-term">
-        <div class="term-header">
-            <h3 class="term-name">Tool Use</h3>
-            <span class="term-category">Capability</span>
-        </div>
-        <p class="term-definition">The ability of an AI agent to interact with and utilize external functions, APIs, or services to accomplish tasks beyond its native capabilities. Tool use significantly expands what an agent can do by connecting it to specialized systems and data sources.</p>
-        <div class="term-example">
-            <h4>Example</h4>
-            <p>A travel planning agent using tools to search flight databases, check hotel availability, look up weather forecasts, and access mapping services to create a comprehensive travel itinerary.</p>
-        </div>
-        <p class="term-related">
-            <span>Related terms:</span>
-            <a href="#F">Function Calling</a>
-            <a href="#A">API</a>
-            <a href="#R">ReAct</a>
-        </p>
-    </li>
-</ul>
+                <div id="R" class="alphabet-heading">R</div>
+                <ul class="glossary-list">
+                    <li class="glossary-term">
+                        <div class="term-header">
+                            <h3 class="term-name">RAG (Retrieval-Augmented Generation)</h3>
+                            <span class="term-category">Technique</span>
+                        </div>
+                        <p class="term-definition">An approach that enhances language model outputs by first retrieving
+                            relevant information from external knowledge sources, then using that information to
+                            generate more accurate, informed responses. RAG combines the strengths of retrieval-based
+                            and generative approaches.</p>
+                        <div class="term-example">
+                            <h4>Example</h4>
+                            <p>A technical support agent using RAG to retrieve relevant sections from product manuals
+                                and troubleshooting guides before generating a specific, accurate solution to a
+                                customer's technical problem.</p>
+                        </div>
+                        <p class="term-related">
+                            <span>Related terms:</span>
+                            <a href="#E">Embeddings</a>
+                            <a href="#V">Vector Database</a>
+                            <a href="#K">Knowledge Retrieval</a>
+                        </p>
+                    </li>
 
-<div id="V" class="alphabet-heading">V</div>
-<ul class="glossary-list">
-    <li class="glossary-term">
-        <div class="term-header">
-            <h3 class="term-name">Vector Database</h3>
-            <span class="term-category">Tool</span>
-        </div>
-        <p class="term-definition">A specialized database designed to store and efficiently query vector embeddings. Vector databases enable semantic search by finding entries that are conceptually similar rather than just matching keywords, making them essential components for knowledge retrieval in AI agents.</p>
-        <div class="term-example">
-            <h4>Example</h4>
-            <p>Storing thousands of product description embeddings in a vector database to allow a shopping assistant to find semantically similar products when a customer describes what they're looking for in natural language.</p>
-        </div>
-        <p class="term-related">
-            <span>Related terms:</span>
-            <a href="#E">Embeddings</a>
-            <a href="#R">RAG</a>
-            <a href="#S">Semantic Search</a>
-        </p>
-    </li>
-</ul>
+                    <li class="glossary-term">
+                        <div class="term-header">
+                            <h3 class="term-name">ReAct (Reasoning and Acting)</h3>
+                            <span class="term-category">Framework</span>
+                        </div>
+                        <p class="term-definition">A framework that interleaves reasoning and action steps, allowing
+                            agents to plan, execute, observe, and refine their approach. ReAct prompts typically follow
+                            a "Thought, Action, Observation" cycle that makes decision-making explicit and verifiable.
+                        </p>
+                        <div class="term-example">
+                            <h4>Example</h4>
+                            <p>A research agent using ReAct to solve a complex problem: "Thought: I need to find recent
+                                climate data. Action: Search for 'latest IPCC climate report'. Observation: Found the
+                                IPCC Sixth Assessment Report. Thought: Now I need specific information on sea level
+                                rise..."</p>
+                        </div>
+                        <p class="term-related">
+                            <span>Related terms:</span>
+                            <a href="#C">Chain of Thought</a>
+                            <a href="#T">Tool Use</a>
+                            <a href="#S">Self-reflection</a>
+                        </p>
+                    </li>
+                </ul>
 
-<div id="W" class="alphabet-heading">W</div>
-<ul class="glossary-list">
-    <li class="glossary-term">
-        <div class="term-header">
-            <h3 class="term-name">Workflow</h3>
-            <span class="term-category">Architecture</span>
-        </div>
-        <p class="term-definition">A defined sequence of steps, processes, or operations that an agent follows to complete a task. Workflows provide structure to agent behavior and can incorporate decision points, loops, and parallel processes.</p>
-        <div class="term-example">
-            <h4>Example</h4>
-            <p>A content moderation agent using a workflow that first classifies content type, then applies specific moderation rules based on the classification, flags potential violations, reviews edge cases, and finally takes appropriate action.</p>
-        </div>
-        <p class="term-related">
-            <span>Related terms:</span>
-            <a href="#O">Orchestration</a>
-            <a href="#P">Pipeline</a>
-            <a href="#P">Planning</a>
-        </p>
-    </li>
-</ul>
+                <div id="S" class="alphabet-heading">S</div>
+                <ul class="glossary-list">
+                    <li class="glossary-term">
+                        <div class="term-header">
+                            <h3 class="term-name">Self-reflection</h3>
+                            <span class="term-category">Capability</span>
+                        </div>
+                        <p class="term-definition">The ability of an AI agent to evaluate its own outputs, decisions, or
+                            reasoning processes, and make improvements based on this evaluation. Self-reflection enables
+                            agents to catch errors, refine strategies, and improve performance over time.</p>
+                        <div class="term-example">
+                            <h4>Example</h4>
+                            <p>A writing assistant that generates a draft, then critically reviews its own work by
+                                evaluating clarity, coherence, accuracy, and style before producing an improved version
+                                based on its self-critique.</p>
+                        </div>
+                        <p class="term-related">
+                            <span>Related terms:</span>
+                            <a href="#V">Verification</a>
+                            <a href="#I">Iteration</a>
+                            <a href="#T">Tree of Thought</a>
+                        </p>
+                    </li>
 
-<div id="Y" class="alphabet-heading">Y</div>
-<ul class="glossary-list">
-    <li class="glossary-term">
-        <div class="term-header">
-            <h3 class="term-name">YAML Configuration</h3>
-            <span class="term-category">Technical</span>
-        </div>
-        <p class="term-definition">A human-readable data serialization format often used to configure AI agent behaviors, tool sets, workflows, and other aspects of agent systems. YAML configuration allows for easy modification of agent parameters without changing code.</p>
-        <div class="term-example">
-            <h4>Example</h4>
-            <p>Using a YAML file to define a research agent's tools, API keys, memory configuration, maximum token usage, and response formatting preferences.</p>
-        </div>
-        <p class="term-related">
-            <span>Related terms:</span>
-            <a href="#C">Configuration</a>
-            <a href="#J">JSON</a>
-        </p>
-    </li>
-</ul>
+                    <li class="glossary-term">
+                        <div class="term-header">
+                            <h3 class="term-name">System Prompt</h3>
+                            <span class="term-category">Technique</span>
+                        </div>
+                        <p class="term-definition">A set of instructions or context provided to a language model that
+                            persists across the entire interaction, establishing the model's role, constraints, and
+                            capabilities. The system prompt serves as a foundation for the agent's behavior and is
+                            typically not visible to end users.</p>
+                        <div class="term-example">
+                            <h4>Example</h4>
+                            <p>A system prompt for a financial advisor agent might include instructions to follow
+                                regulatory guidelines, avoid making specific investment recommendations, explain
+                                concepts clearly, and maintain a professional tone throughout the conversation.</p>
+                        </div>
+                        <p class="term-related">
+                            <span>Related terms:</span>
+                            <a href="#P">Prompt Engineering</a>
+                            <a href="#R">Role</a>
+                            <a href="#G">Guardrails</a>
+                        </p>
+                    </li>
+                </ul>
 
-<div id="Z" class="alphabet-heading">Z</div>
-<ul class="glossary-list">
-    <li class="glossary-term">
-        <div class="term-header">
-            <h3 class="term-name">Zero-shot Learning</h3>
-            <span class="term-category">Technique</span>
+                <div id="T" class="alphabet-heading">T</div>
+                <ul class="glossary-list">
+                    <li class="glossary-term">
+                        <div class="term-header">
+                            <h3 class="term-name">Task Decomposition</h3>
+                            <span class="term-category">Technique</span>
+                        </div>
+                        <p class="term-definition">The process of breaking down complex tasks into simpler, manageable
+                            subtasks that can be addressed individually. Task decomposition is essential for planning
+                            and tackling problems that are too large or complex to solve in a single step.</p>
+                        <div class="term-example">
+                            <h4>Example</h4>
+                            <p>An agent decomposing the task "create a market analysis report" into subtasks like
+                                "identify key competitors," "gather market size data," "analyze pricing trends,"
+                                "identify customer segments," and "summarize findings and recommendations."</p>
+                        </div>
+                        <p class="term-related">
+                            <span>Related terms:</span>
+                            <a href="#P">Planning</a>
+                            <a href="#B">BabyAGI</a>
+                            <a href="#W">Workflow</a>
+                        </p>
+                    </li>
+
+                    <li class="glossary-term">
+                        <div class="term-header">
+                            <h3 class="term-name">Tool Use</h3>
+                            <span class="term-category">Capability</span>
+                        </div>
+                        <p class="term-definition">The ability of an AI agent to interact with and utilize external
+                            functions, APIs, or services to accomplish tasks beyond its native capabilities. Tool use
+                            significantly expands what an agent can do by connecting it to specialized systems and data
+                            sources.</p>
+                        <div class="term-example">
+                            <h4>Example</h4>
+                            <p>A travel planning agent using tools to search flight databases, check hotel availability,
+                                look up weather forecasts, and access mapping services to create a comprehensive travel
+                                itinerary.</p>
+                        </div>
+                        <p class="term-related">
+                            <span>Related terms:</span>
+                            <a href="#F">Function Calling</a>
+                            <a href="#A">API</a>
+                            <a href="#R">ReAct</a>
+                        </p>
+                    </li>
+                </ul>
+
+                <div id="V" class="alphabet-heading">V</div>
+                <ul class="glossary-list">
+                    <li class="glossary-term">
+                        <div class="term-header">
+                            <h3 class="term-name">Vector Database</h3>
+                            <span class="term-category">Tool</span>
+                        </div>
+                        <p class="term-definition">A specialized database designed to store and efficiently query vector
+                            embeddings. Vector databases enable semantic search by finding entries that are conceptually
+                            similar rather than just matching keywords, making them essential components for knowledge
+                            retrieval in AI agents.</p>
+                        <div class="term-example">
+                            <h4>Example</h4>
+                            <p>Storing thousands of product description embeddings in a vector database to allow a
+                                shopping assistant to find semantically similar products when a customer describes what
+                                they're looking for in natural language.</p>
+                        </div>
+                        <p class="term-related">
+                            <span>Related terms:</span>
+                            <a href="#E">Embeddings</a>
+                            <a href="#R">RAG</a>
+                            <a href="#S">Semantic Search</a>
+                        </p>
+                    </li>
+                </ul>
+
+                <div id="W" class="alphabet-heading">W</div>
+                <ul class="glossary-list">
+                    <li class="glossary-term">
+                        <div class="term-header">
+                            <h3 class="term-name">Workflow</h3>
+                            <span class="term-category">Architecture</span>
+                        </div>
+                        <p class="term-definition">A defined sequence of steps, processes, or operations that an agent
+                            follows to complete a task. Workflows provide structure to agent behavior and can
+                            incorporate decision points, loops, and parallel processes.</p>
+                        <div class="term-example">
+                            <h4>Example</h4>
+                            <p>A content moderation agent using a workflow that first classifies content type, then
+                                applies specific moderation rules based on the classification, flags potential
+                                violations, reviews edge cases, and finally takes appropriate action.</p>
+                        </div>
+                        <p class="term-related">
+                            <span>Related terms:</span>
+                            <a href="#O">Orchestration</a>
+                            <a href="#P">Pipeline</a>
+                            <a href="#P">Planning</a>
+                        </p>
+                    </li>
+                </ul>
+
+                <div id="Y" class="alphabet-heading">Y</div>
+                <ul class="glossary-list">
+                    <li class="glossary-term">
+                        <div class="term-header">
+                            <h3 class="term-name">YAML Configuration</h3>
+                            <span class="term-category">Technical</span>
+                        </div>
+                        <p class="term-definition">A human-readable data serialization format often used to configure AI
+                            agent behaviors, tool sets, workflows, and other aspects of agent systems. YAML
+                            configuration allows for easy modification of agent parameters without changing code.</p>
+                        <div class="term-example">
+                            <h4>Example</h4>
+                            <p>Using a YAML file to define a research agent's tools, API keys, memory configuration,
+                                maximum token usage, and response formatting preferences.</p>
+                        </div>
+                        <p class="term-related">
+                            <span>Related terms:</span>
+                            <a href="#C">Configuration</a>
+                            <a href="#J">JSON</a>
+                        </p>
+                    </li>
+                </ul>
+
+                <div id="Z" class="alphabet-heading">Z</div>
+                <ul class="glossary-list">
+                    <li class="glossary-term">
+                        <div class="term-header">
+                            <h3 class="term-name">Zero-shot Learning</h3>
+                            <span class="term-category">Technique</span>
+                        </div>
+                        <p class="term-definition">The ability of language models to perform tasks without being given
+                            specific examples first. In agent development, zero-shot learning refers to providing
+                            instructions for a new task without accompanying examples, relying on the model's
+                            pre-trained capabilities to understand and execute the task.</p>
+                        <div class="term-example">
+                            <h4>Example</h4>
+                            <p>Asking an agent to "Analyze this customer feedback and categorize the sentiment as
+                                positive, negative, or neutral" without providing examples of how to categorize
+                                sentiment, relying on the model's pre-existing understanding of sentiment analysis.</p>
+                        </div>
+                        <p class="term-related">
+                            <span>Related terms:</span>
+                            <a href="#F">Few-shot Learning</a>
+                            <a href="#I">In-context Learning</a>
+                            <a href="#P">Prompt Engineering</a>
+                        </p>
+                    </li>
+                </ul>
+
+            </div>
         </div>
-        <p class="term-definition">The ability of language models to perform tasks without being given specific examples first. In agent development, zero-shot learning refers to providing instructions for a new task without accompanying examples, relying on the model's pre-trained capabilities to understand and execute the task.</p>
-        <div class="term-example">
-            <h4>Example</h4>
-            <p>Asking an agent to "Analyze this customer feedback and categorize the sentiment as positive, negative, or neutral" without providing examples of how to categorize sentiment, relying on the model's pre-existing understanding of sentiment analysis.</p>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>AI Agent Development Guide | Created to help developers build powerful AI solutions</p>
         </div>
-        <p class="term-related">
-            <span>Related terms:</span>
-            <a href="#F">Few-shot Learning</a>
-            <a href="#I">In-context Learning</a>
-            <a href="#P">Prompt Engineering</a>
-        </p>
-    </li>
-</ul>
+    </footer>
 
-</div>
-</div>
-</section>
+    <script>
+        // Smooth scrolling for alphabet navigation
+        document.querySelectorAll('.alphabet-nav a:not(.disabled)').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
 
-<footer>
-    <div class="container">
-        <p>AI Agent Development Guide | Created to help developers build powerful AI solutions</p>
-    </div>
-</footer>
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
 
-<script>
-    // Smooth scrolling for alphabet navigation
-    document.querySelectorAll('.alphabet-nav a:not(.disabled)').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href').substring(1);
-            const targetElement = document.getElementById(targetId);
-            
-            window.scrollTo({
-                top: targetElement.offsetTop - 100,
-                behavior: 'smooth'
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
             });
         });
-    });
-</script>
+    </script>
 </body>
+
 </html>

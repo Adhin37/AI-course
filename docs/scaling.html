@@ -9,13 +9,6 @@
     <link rel="stylesheet" href="style.css">
     <!-- Prism CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" />
-    <!-- Prism core JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <!-- Additional languages -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
 </head>
 
 <body>
@@ -901,58 +894,32 @@ class AgentRouter:
             <p>AI Agent Development Guide | Created to help developers build powerful AI solutions</p>
         </div>
     </footer>
-
-    <script>
-        // Add any JavaScript needed for the page functionality
-        document.addEventListener('DOMContentLoaded', function () {
-            // Highlight the current page in navigation
-            const navLinks = document.querySelectorAll('nav a');
-            navLinks.forEach(link => {
-                if (link.href === window.location.href) {
-                    link.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
-                }
-            });
-
-            // Initialize tab functionality if present
-            const tabButtons = document.querySelectorAll('.tab-button');
-            tabButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    // Remove active class from all buttons and content
-                    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-                    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-
-                    // Add active class to clicked button and corresponding content
-                    this.classList.add('active');
-                    document.getElementById(this.dataset.tab).classList.add('active');
-                });
-            });
-
-            // If there are tabs, activate the first one by default
-            if (tabButtons.length > 0) {
-                tabButtons[0].click();
-            }
+    
+    <!-- Prism core JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <!-- Additional languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="js/tab-manager.js"></script>
+    <script src="js/checklist.js"></script>
+    <script>      
+        window.CHECKLIST_CONFIGS = window.CHECKLIST_CONFIGS || [];
+        window.CHECKLIST_CONFIGS.push({
+          // Export configuration
+          exportFilename: 'scaling_checklist.md',
+          exportTitle: '# Scaling Implementation Checklist',
+    
+          // Section titles for the export
+          sectionTitles: {
+            0: 'Infrastructure and Performance',
+            1: 'Reliability and Resilience',
+            2: 'Security and Compliance',
+            3: 'Cost Management'
+          }
         });
     </script>
-    <script src="js/checklist.js"></script>
-
-    <!-- Then define the configuration specific to this page -->
-    <script>
-      window.CHECKLIST_CONFIGS = window.CHECKLIST_CONFIGS || [];
-      window.CHECKLIST_CONFIGS.push({
-        // Export configuration
-        exportFilename: 'scaling_checklist.md',
-        exportTitle: '# Scaling Implementation Checklist',
-  
-        // Section titles for the export
-        sectionTitles: {
-          0: 'Infrastructure and Performance',
-          1: 'Reliability and Resilience',
-          2: 'Security and Compliance',
-          3: 'Cost Management'
-        }
-      });
-    </script>
-
 </body>
 
 </html>
