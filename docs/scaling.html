@@ -650,138 +650,118 @@ class AgentRouter:
                 </div>
             </div>
 
-            <div class="content-box">
+            <div class="content-box checklist-container">
                 <h2>Scaling Implementation Checklist</h2>
                 <p>Follow this comprehensive checklist to ensure you've addressed all critical scaling considerations for your enterprise AI agent deployment:</p>
             
-                <div class="tab-container">
-                    <div class="tab-buttons">
-                        <button class="tab-button active" data-tab="tab-infrastructure">Infrastructure</button>
-                        <button class="tab-button" data-tab="tab-reliability">Reliability</button>
-                        <button class="tab-button" data-tab="tab-security">Security</button>
-                        <button class="tab-button" data-tab="tab-cost">Cost Management</button>
+                <h3>Infrastructure and Performance</h3>
+                <div class="security-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" id="infra-1" name="scaling-check">
+                        <label for="infra-1"><strong>Scaling Strategy:</strong> Choose appropriate scaling approach (horizontal vs. vertical)</label>
                     </div>
-            
-                    <div id="tab-infrastructure" class="tab-content active">
-                        <h3>Infrastructure and Performance</h3>
-                        <div class="example-box">
-                            <ul>
-                                <li>
-                                    <input type="checkbox" id="infra-1">
-                                    <label for="infra-1"><strong>Scaling Strategy:</strong> Choose appropriate scaling approach (horizontal vs. vertical)</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="infra-2">
-                                    <label for="infra-2"><strong>Load Balancing:</strong> Implement load balancing across multiple instances</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="infra-3">
-                                    <label for="infra-3"><strong>Auto-scaling:</strong> Set up auto-scaling based on demand patterns</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="infra-4">
-                                    <label for="infra-4"><strong>Model Optimization:</strong> Optimize models for inference performance</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="infra-5">
-                                    <label for="infra-5"><strong>Caching:</strong> Implement caching strategies for common queries</label>
-                                </li>
-                            </ul>
-                        </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="infra-2" name="scaling-check">
+                        <label for="infra-2"><strong>Load Balancing:</strong> Implement load balancing across multiple instances</label>
                     </div>
-            
-                    <div id="tab-reliability" class="tab-content">
-                        <h3>Reliability and Resilience</h3>
-                        <div class="example-box">
-                            <ul>
-                                <li>
-                                    <input type="checkbox" id="rel-1">
-                                    <label for="rel-1"><strong>Multi-region:</strong> Deploy across multiple regions/availability zones</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="rel-2">
-                                    <label for="rel-2"><strong>Circuit Breakers:</strong> Implement circuit breakers for dependent services</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="rel-3">
-                                    <label for="rel-3"><strong>Graceful Degradation:</strong> Design capabilities for reduced functionality</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="rel-4">
-                                    <label for="rel-4"><strong>Monitoring:</strong> Create comprehensive monitoring and alerting</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="rel-5">
-                                    <label for="rel-5"><strong>Disaster Recovery:</strong> Establish disaster recovery procedures</label>
-                                </li>
-                            </ul>
-                        </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="infra-3" name="scaling-check">
+                        <label for="infra-3"><strong>Auto-scaling:</strong> Set up auto-scaling based on demand patterns</label>
                     </div>
-            
-                    <div id="tab-security" class="tab-content">
-                        <h3>Security and Compliance</h3>
-                        <div class="example-box">
-                            <ul>
-                                <li>
-                                    <input type="checkbox" id="sec-1">
-                                    <label for="sec-1"><strong>Authentication:</strong> Integrate with enterprise authentication systems</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="sec-2">
-                                    <label for="sec-2"><strong>Access Control:</strong> Implement role-based access controls</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="sec-3">
-                                    <label for="sec-3"><strong>Data Residency:</strong> Address data residency requirements</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="sec-4">
-                                    <label for="sec-4"><strong>Audit Logging:</strong> Create audit logging for compliance</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="sec-5">
-                                    <label for="sec-5"><strong>PII Handling:</strong> Implement PII detection and handling</label>
-                                </li>
-                            </ul>
-                        </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="infra-4" name="scaling-check">
+                        <label for="infra-4"><strong>Model Optimization:</strong> Optimize models for inference performance</label>
                     </div>
-            
-                    <div id="tab-cost" class="tab-content">
-                        <h3>Cost Management</h3>
-                        <div class="example-box">
-                            <ul>
-                                <li>
-                                    <input type="checkbox" id="cost-1">
-                                    <label for="cost-1"><strong>Tiered Models:</strong> Implement tiered model selection strategy</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="cost-2">
-                                    <label for="cost-2"><strong>Usage Monitoring:</strong> Set up usage monitoring and alerting</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="cost-3">
-                                    <label for="cost-3"><strong>Prompt Optimization:</strong> Optimize prompt design for token efficiency</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="cost-4">
-                                    <label for="cost-4"><strong>Resource Limits:</strong> Configure appropriate resource limits</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="cost-5">
-                                    <label for="cost-5"><strong>Cost Tracking:</strong> Create cost allocation tracking</label>
-                                </li>
-                            </ul>
-                        </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="infra-5" name="scaling-check">
+                        <label for="infra-5"><strong>Caching:</strong> Implement caching strategies for common queries</label>
                     </div>
                 </div>
             
-                <div class="next-step-box" style="margin-top: 2rem;">
-                    <h3>Track Your Progress</h3>
-                    <p>Use this checklist to track your scaling implementation progress. Once complete, your AI agent will be ready for enterprise-scale deployment.</p>
-                    <div id="progress-indicator" style="margin: 1rem 0; height: 8px; background-color: var(--light-gray); border-radius: 4px;">
-                        <div id="progress-bar" style="width: 0%; height: 100%; background-color: var(--secondary); border-radius: 4px; transition: width 0.5s ease;"></div>
+                <h3>Reliability and Resilience</h3>
+                <div class="security-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" id="rel-1" name="scaling-check">
+                        <label for="rel-1"><strong>Multi-region:</strong> Deploy across multiple regions/availability zones</label>
                     </div>
-                    <p id="progress-text">0% Complete</p>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="rel-2" name="scaling-check">
+                        <label for="rel-2"><strong>Circuit Breakers:</strong> Implement circuit breakers for dependent services</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="rel-3" name="scaling-check">
+                        <label for="rel-3"><strong>Graceful Degradation:</strong> Design capabilities for reduced functionality</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="rel-4" name="scaling-check">
+                        <label for="rel-4"><strong>Monitoring:</strong> Create comprehensive monitoring and alerting</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="rel-5" name="scaling-check">
+                        <label for="rel-5"><strong>Disaster Recovery:</strong> Establish disaster recovery procedures</label>
+                    </div>
+                </div>
+            
+                <h3>Security and Compliance</h3>
+                <div class="security-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" id="sec-1" name="scaling-check">
+                        <label for="sec-1"><strong>Authentication:</strong> Integrate with enterprise authentication systems</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="sec-2" name="scaling-check">
+                        <label for="sec-2"><strong>Access Control:</strong> Implement role-based access controls</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="sec-3" name="scaling-check">
+                        <label for="sec-3"><strong>Data Residency:</strong> Address data residency requirements</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="sec-4" name="scaling-check">
+                        <label for="sec-4"><strong>Audit Logging:</strong> Create audit logging for compliance</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="sec-5" name="scaling-check">
+                        <label for="sec-5"><strong>PII Handling:</strong> Implement PII detection and handling</label>
+                    </div>
+                </div>
+            
+                <h3>Cost Management</h3>
+                <div class="security-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" id="cost-1" name="scaling-check">
+                        <label for="cost-1"><strong>Tiered Models:</strong> Implement tiered model selection strategy</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="cost-2" name="scaling-check">
+                        <label for="cost-2"><strong>Usage Monitoring:</strong> Set up usage monitoring and alerting</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="cost-3" name="scaling-check">
+                        <label for="cost-3"><strong>Prompt Optimization:</strong> Optimize prompt design for token efficiency</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="cost-4" name="scaling-check">
+                        <label for="cost-4"><strong>Resource Limits:</strong> Configure appropriate resource limits</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="cost-5" name="scaling-check">
+                        <label for="cost-5"><strong>Cost Tracking:</strong> Create cost allocation tracking</label>
+                    </div>
+                </div>
+                
+                <div class="checklist-actions">
+                    <button class="action-button primary-button" id="check-all">Check All</button>
+                    <button class="action-button secondary-button" id="uncheck-all">Uncheck All</button>
+                    <button class="action-button highlight-button" id="export-checklist">Export Checklist</button>
+                </div>
+            
+                <div class="checklist-progress">
+                    <div class="progress-label">Completion Progress:</div>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="checklist-progress-bar"></div>
+                    </div>
+                    <div class="progress-percentage" id="checklist-percentage">0%</div>
                 </div>
             </div>
         </div>
@@ -913,19 +893,12 @@ class AgentRouter:
                     </div>
                 </div>
             </div>
-
-            <div class="next-step-box">
-                <h2>Need personalized scaling guidance?</h2>
-                <p>Our experts can help you develop a tailored scaling strategy for your AI agent deployment.</p>
-                <a href="consultation.html" class="cta-button">Schedule a Consultation</a>
-            </div>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 AI Agent Development Guide. All rights reserved.</p>
-            <p>A comprehensive resource for developers building AI agents for specific tasks.</p>
+            <p>AI Agent Development Guide | Created to help developers build powerful AI solutions</p>
         </div>
     </footer>
 
@@ -958,23 +931,94 @@ class AgentRouter:
             if (tabButtons.length > 0) {
                 tabButtons[0].click();
             }
-            // Checkbox progress tracking
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            const progressBar = document.getElementById('progress-bar');
-            const progressText = document.getElementById('progress-text');
+            const checkboxes = document.querySelectorAll('.security-checklist input[type="checkbox"]');
+            const progressBar = document.getElementById('checklist-progress-bar');
+            const percentageDisplay = document.getElementById('checklist-percentage');
+            const checkAllButton = document.getElementById('check-all');
+            const uncheckAllButton = document.getElementById('uncheck-all');
+            const exportButton = document.getElementById('export-checklist');
             
+            // Update progress bar
+            function updateProgress() {
+                const total = checkboxes.length;
+                const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
+                const percentage = Math.round((checked / total) * 100);
+                
+                progressBar.style.width = percentage + '%';
+                percentageDisplay.textContent = percentage + '%';
+            }
+            
+            // Add event listeners to all checkboxes
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', updateProgress);
             });
             
-            function updateProgress() {
-                const total = checkboxes.length;
-                const checked = Array.from(checkboxes).filter(box => box.checked).length;
-                const percentage = Math.round((checked / total) * 100);
+            // Check all button
+            checkAllButton.addEventListener('click', function() {
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = true;
+                });
+                updateProgress();
+            });
+            
+            // Uncheck all button
+            uncheckAllButton.addEventListener('click', function() {
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+                updateProgress();
+            });
+            
+            // Export checklist function
+            exportButton.addEventListener('click', function() {
+                let content = "# Scaling Implementation Checklist\n\n";
                 
-                progressBar.style.width = percentage + '%';
-                progressText.textContent = percentage + '% Complete';
-            }
+                // Infrastructure and Performance
+                content += "## Infrastructure and Performance\n\n";
+                document.querySelectorAll('#infra-1, #infra-2, #infra-3, #infra-4, #infra-5').forEach(checkbox => {
+                    const label = document.querySelector(`label[for="${checkbox.id}"]`).textContent;
+                    const status = checkbox.checked ? "✅" : "⬜";
+                    content += `${status} ${label}\n`;
+                });
+                
+                // Reliability and Resilience
+                content += "\n## Reliability and Resilience\n\n";
+                document.querySelectorAll('#rel-1, #rel-2, #rel-3, #rel-4, #rel-5').forEach(checkbox => {
+                    const label = document.querySelector(`label[for="${checkbox.id}"]`).textContent;
+                    const status = checkbox.checked ? "✅" : "⬜";
+                    content += `${status} ${label}\n`;
+                });
+                
+                // Security and Compliance
+                content += "\n## Security and Compliance\n\n";
+                document.querySelectorAll('#sec-1, #sec-2, #sec-3, #sec-4, #sec-5').forEach(checkbox => {
+                    const label = document.querySelector(`label[for="${checkbox.id}"]`).textContent;
+                    const status = checkbox.checked ? "✅" : "⬜";
+                    content += `${status} ${label}\n`;
+                });
+                
+                // Cost Management
+                content += "\n## Cost Management\n\n";
+                document.querySelectorAll('#cost-1, #cost-2, #cost-3, #cost-4, #cost-5').forEach(checkbox => {
+                    const label = document.querySelector(`label[for="${checkbox.id}"]`).textContent;
+                    const status = checkbox.checked ? "✅" : "⬜";
+                    content += `${status} ${label}\n`;
+                });
+                
+                // Create file and download
+                const blob = new Blob([content], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'scaling_checklist.md';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+            
+            // Initialize progress bar
+            updateProgress();
         });
     </script>
 
