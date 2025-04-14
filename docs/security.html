@@ -7,6 +7,145 @@
     <link rel="icon" type="image/svg+xml" href="img/icon.svg">
     <title>Security Best Practices for AI Agents - AI Agent Development Guide</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Security Checklist Styling */
+        .checklist-container {
+            background-color: #f8fafc;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .security-checklist {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .checklist-item {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+            transition: background-color 0.2s;
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+
+        .checklist-item:hover {
+            background-color: rgba(79, 70, 229, 0.05);
+        }
+
+        .checklist-item input[type="checkbox"] {
+            margin-right: 1rem;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        .checklist-item label {
+            cursor: pointer;
+            flex: 1;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .checklist-actions {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .action-button {
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .primary-button {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .primary-button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .secondary-button {
+            background-color: white;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .secondary-button:hover {
+            background-color: rgba(79, 70, 229, 0.05);
+        }
+
+        .highlight-button {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .highlight-button:hover {
+            background-color: #0ea271;
+        }
+
+        .checklist-progress {
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .progress-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .progress-container {
+            height: 12px;
+            background-color: var(--light-gray);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--primary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-percentage {
+            text-align: right;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .checklist-actions {
+                flex-direction: column;
+            }
+
+            .action-button {
+                width: 100%;
+            }
+        }
+    </style>
     <!-- Prism CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" />
     <!-- Prism core JS -->
@@ -61,27 +200,36 @@
 
             <div class="content-box">
                 <h2>Understanding AI Security Risks</h2>
-                <p>AI agents present unique security challenges beyond traditional application security concerns. These systems often handle sensitive data, make consequential decisions, and interact with users in ways that can be exploited if not properly secured.</p>
+                <p>AI agents present unique security challenges beyond traditional application security concerns. These
+                    systems often handle sensitive data, make consequential decisions, and interact with users in ways
+                    that can be exploited if not properly secured.</p>
 
                 <h3>Key Security Challenges for AI Agents</h3>
                 <ul>
-                    <li><strong>Prompt injection attacks:</strong> Malicious inputs designed to manipulate the AI's behavior or extract sensitive information</li>
-                    <li><strong>Data leakage:</strong> Inadvertent disclosure of sensitive information through model responses</li>
+                    <li><strong>Prompt injection attacks:</strong> Malicious inputs designed to manipulate the AI's
+                        behavior or extract sensitive information</li>
+                    <li><strong>Data leakage:</strong> Inadvertent disclosure of sensitive information through model
+                        responses</li>
                     <li><strong>Privacy concerns:</strong> Handling user data properly in training and inference</li>
-                    <li><strong>Authentication vulnerabilities:</strong> Ensuring only authorized users can access the AI system</li>
+                    <li><strong>Authentication vulnerabilities:</strong> Ensuring only authorized users can access the
+                        AI system</li>
                     <li><strong>API security:</strong> Protecting endpoints that serve AI functionality</li>
-                    <li><strong>Poisoning attacks:</strong> Manipulation of training data or fine-tuning to create backdoors</li>
+                    <li><strong>Poisoning attacks:</strong> Manipulation of training data or fine-tuning to create
+                        backdoors</li>
                 </ul>
             </div>
 
             <div class="content-box">
                 <h2>Prompt Injection Mitigation</h2>
-                <p>Prompt injection attacks attempt to override or bypass an AI agent's intended behavior through carefully crafted inputs. These attacks can lead to data leakage, harmful outputs, or system manipulation.</p>
+                <p>Prompt injection attacks attempt to override or bypass an AI agent's intended behavior through
+                    carefully crafted inputs. These attacks can lead to data leakage, harmful outputs, or system
+                    manipulation.</p>
 
                 <h3>Types of Prompt Injection Attacks</h3>
                 <ul>
                     <li><strong>Direct prompt injection:</strong> Attempting to override system instructions</li>
-                    <li><strong>Indirect prompt injection:</strong> Hiding malicious instructions in data the model processes</li>
+                    <li><strong>Indirect prompt injection:</strong> Hiding malicious instructions in data the model
+                        processes</li>
                     <li><strong>Prompt leaking:</strong> Tricking the model into revealing its system prompt</li>
                     <li><strong>Jailbreaking:</strong> Bypassing content restrictions through creative prompting</li>
                 </ul>
@@ -123,8 +271,10 @@ def sanitize_user_input(user_input):
                 <h3>Additional Protection Measures</h3>
                 <ul>
                     <li><strong>Input validation:</strong> Enforce strict validation rules for user inputs</li>
-                    <li><strong>Context boundaries:</strong> Maintain clear separation between system instructions and user input</li>
-                    <li><strong>Output filtering:</strong> Scan responses for indicators of successful prompt injection</li>
+                    <li><strong>Context boundaries:</strong> Maintain clear separation between system instructions and
+                        user input</li>
+                    <li><strong>Output filtering:</strong> Scan responses for indicators of successful prompt injection
+                    </li>
                     <li><strong>Monitoring:</strong> Implement logging to detect potential injection attempts</li>
                     <li><strong>Rate limiting:</strong> Reduce the ability to perform trial-and-error attacks</li>
                 </ul>
@@ -220,14 +370,17 @@ class SecurePromptManager:
 
             <div class="content-box">
                 <h2>Authentication and Authorization</h2>
-                <p>Proper authentication and authorization ensure that only legitimate users can access your AI agent and that they can only perform actions they're permitted to do.</p>
+                <p>Proper authentication and authorization ensure that only legitimate users can access your AI agent
+                    and that they can only perform actions they're permitted to do.</p>
 
                 <h3>Authentication Methods</h3>
                 <ul>
                     <li><strong>API keys:</strong> Simple but effective for machine-to-machine communication</li>
                     <li><strong>OAuth 2.0:</strong> Industry standard for delegated authorization</li>
-                    <li><strong>JWT (JSON Web Tokens):</strong> Compact, self-contained tokens for secure information transmission</li>
-                    <li><strong>Multi-factor authentication:</strong> Additional security layer for sensitive applications</li>
+                    <li><strong>JWT (JSON Web Tokens):</strong> Compact, self-contained tokens for secure information
+                        transmission</li>
+                    <li><strong>Multi-factor authentication:</strong> Additional security layer for sensitive
+                        applications</li>
                 </ul>
 
                 <h3>Implementing JWT Authentication</h3>
@@ -322,19 +475,22 @@ if __name__ == '__main__':
                     <li><strong>Role-based access control (RBAC):</strong> Assign permissions based on user roles</li>
                     <li><strong>Principle of least privilege:</strong> Grant only the minimum necessary permissions</li>
                     <li><strong>Regular permission audits:</strong> Review and update access rights periodically</li>
-                    <li><strong>Attribute-based access control (ABAC):</strong> Dynamic permissions based on user attributes and context</li>
+                    <li><strong>Attribute-based access control (ABAC):</strong> Dynamic permissions based on user
+                        attributes and context</li>
                 </ul>
             </div>
 
             <div class="content-box">
                 <h2>Data Protection and Privacy</h2>
-                <p>AI agents often process sensitive data that requires proper protection to maintain privacy and comply with regulations.</p>
+                <p>AI agents often process sensitive data that requires proper protection to maintain privacy and comply
+                    with regulations.</p>
 
                 <h3>Data Minimization</h3>
                 <p>Collect and process only the data necessary for your agent to function effectively:</p>
                 <ul>
                     <li><strong>Input filtering:</strong> Remove unnecessary sensitive data before processing</li>
-                    <li><strong>Ephemeral processing:</strong> Process data in memory without persistent storage when possible</li>
+                    <li><strong>Ephemeral processing:</strong> Process data in memory without persistent storage when
+                        possible</li>
                     <li><strong>Data expiration:</strong> Implement automated data deletion policies</li>
                 </ul>
 
@@ -416,26 +572,32 @@ print(redacted_query)</code></pre>
                     <li><strong>GDPR:</strong> Data processing principles, user rights, and transparency</li>
                     <li><strong>CCPA/CPRA:</strong> California's privacy regulations for consumer data</li>
                     <li><strong>HIPAA:</strong> Healthcare data protection requirements</li>
-                    <li><strong>Industry-specific regulations:</strong> Financial, educational, and other sector-specific requirements</li>
+                    <li><strong>Industry-specific regulations:</strong> Financial, educational, and other
+                        sector-specific requirements</li>
                 </ul>
 
                 <div class="example-box">
                     <h4>Privacy by Design Principles for AI Systems</h4>
                     <ul>
                         <li><strong>Proactive not reactive:</strong> Anticipate privacy issues before they occur</li>
-                        <li><strong>Privacy as the default setting:</strong> No action required from the user to protect their privacy</li>
-                        <li><strong>Privacy embedded into design:</strong> Privacy is an essential component, not an add-on</li>
-                        <li><strong>Full functionality:</strong> Avoid false dichotomies between privacy and functionality</li>
+                        <li><strong>Privacy as the default setting:</strong> No action required from the user to protect
+                            their privacy</li>
+                        <li><strong>Privacy embedded into design:</strong> Privacy is an essential component, not an
+                            add-on</li>
+                        <li><strong>Full functionality:</strong> Avoid false dichotomies between privacy and
+                            functionality</li>
                         <li><strong>End-to-end security:</strong> Protect data throughout its lifecycle</li>
                         <li><strong>Visibility and transparency:</strong> Keep practices open to verification</li>
-                        <li><strong>Respect for user privacy:</strong> Keep user-centric with appropriate defaults and controls</li>
+                        <li><strong>Respect for user privacy:</strong> Keep user-centric with appropriate defaults and
+                            controls</li>
                     </ul>
                 </div>
             </div>
 
             <div class="content-box">
                 <h2>Secure API Design</h2>
-                <p>Most AI agents are exposed through APIs, making API security a critical component of your overall security strategy.</p>
+                <p>Most AI agents are exposed through APIs, making API security a critical component of your overall
+                    security strategy.</p>
 
                 <h3>API Security Checklist</h3>
                 <ul>
@@ -638,10 +800,12 @@ if __name__ == '__main__':
 
             <div class="content-box">
                 <h2>Model Security</h2>
-                <p>The AI models themselves require specific security considerations to prevent exploitation and ensure reliable operation.</p>
+                <p>The AI models themselves require specific security considerations to prevent exploitation and ensure
+                    reliable operation.</p>
 
                 <h3>Model Poisoning Prevention</h3>
-                <p>Model poisoning occurs when an attacker manipulates the training data or fine-tuning process to introduce vulnerabilities or backdoors:</p>
+                <p>Model poisoning occurs when an attacker manipulates the training data or fine-tuning process to
+                    introduce vulnerabilities or backdoors:</p>
                 <ul>
                     <li><strong>Data validation:</strong> Carefully vet training and fine-tuning data</li>
                     <li><strong>Adversarial training:</strong> Include adversarial examples in training</li>
@@ -653,7 +817,8 @@ if __name__ == '__main__':
                 <ul>
                     <li><strong>Input sanitization:</strong> Validate and cleanse inputs before processing</li>
                     <li><strong>Output filtering:</strong> Review responses for potentially harmful content</li>
-                    <li><strong>Resource limits:</strong> Set timeout and token limits to prevent resource exhaustion</li>
+                    <li><strong>Resource limits:</strong> Set timeout and token limits to prevent resource exhaustion
+                    </li>
                     <li><strong>Output randomization:</strong> Add controlled randomness to reduce predictability</li>
                 </ul>
 
@@ -1006,7 +1171,8 @@ logger.log_security_event(
                     <li><strong>Unusual request patterns:</strong> Sudden increases in request volume or frequency</li>
                     <li><strong>Suspicious input patterns:</strong> Inputs matching known attack patterns</li>
                     <li><strong>Unusual output patterns:</strong> Responses that deviate from expected behavior</li>
-                    <li><strong>Authentication anomalies:</strong> Multiple failed login attempts or unusual access patterns</li>
+                    <li><strong>Authentication anomalies:</strong> Multiple failed login attempts or unusual access
+                        patterns</li>
                 </ul>
             </div>
 
@@ -1018,14 +1184,17 @@ logger.log_security_event(
                 <ul>
                     <li><strong>Static analysis:</strong> Analyze code for security vulnerabilities</li>
                     <li><strong>Dependency scanning:</strong> Check for vulnerabilities in dependencies</li>
-                    <li><strong>Dynamic application security testing (DAST):</strong> Test running applications for vulnerabilities</li>
+                    <li><strong>Dynamic application security testing (DAST):</strong> Test running applications for
+                        vulnerabilities</li>
                     <li><strong>API security testing:</strong> Test API endpoints for security issues</li>
                 </ul>
 
                 <h3>AI-Specific Testing</h3>
                 <ul>
-                    <li><strong>Prompt injection testing:</strong> Attempt to manipulate the AI with malicious prompts</li>
-                    <li><strong>Data leakage testing:</strong> Verify that sensitive data is not leaked in responses</li>
+                    <li><strong>Prompt injection testing:</strong> Attempt to manipulate the AI with malicious prompts
+                    </li>
+                    <li><strong>Data leakage testing:</strong> Verify that sensitive data is not leaked in responses
+                    </li>
                     <li><strong>Adversarial testing:</strong> Test the AI's resilience to adversarial inputs</li>
                     <li><strong>Red teaming:</strong> Simulate attacks from multiple angles</li>
                 </ul>
@@ -1242,37 +1411,96 @@ if __name__ == "__main__":
                 </div>
             </div>
 
-            <div class="content-box">
+            <div class="content-box checklist-container">
                 <h2>Deployment Security Checklist</h2>
                 <p>Before deploying your AI agent to production, ensure you've addressed these key security considerations:</p>
-
+            
                 <h3>Pre-Deployment Security Checklist</h3>
-                <ul>
-                    <li><strong>Authentication and authorization:</strong> Proper mechanisms are in place</li>
-                    <li><strong>Input validation:</strong> All inputs are validated and sanitized</li>
-                    <li><strong>Output filtering:</strong> Response filtering is implemented</li>
-                    <li><strong>Rate limiting:</strong> Protection against abuse is in place</li>
-                    <li><strong>Logging and monitoring:</strong> Comprehensive visibility is ensured</li>
-                    <li><strong>Data protection:</strong> Sensitive data is properly handled</li>
-                    <li><strong>Dependency security:</strong> No known vulnerabilities in dependencies</li>
-                    <li><strong>Security testing:</strong> All tests pass</li>
-                    <li><strong>Error handling:</strong> Errors are handled without leaking information</li>
-                    <li><strong>Documentation:</strong> Security features are documented</li>
-                </ul>
-
+                <div class="security-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-auth" name="security-check">
+                        <label for="check-auth"><strong>Authentication and authorization:</strong> Proper mechanisms are in place</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-input" name="security-check">
+                        <label for="check-input"><strong>Input validation:</strong> All inputs are validated and sanitized</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-output" name="security-check">
+                        <label for="check-output"><strong>Output filtering:</strong> Response filtering is implemented</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-rate" name="security-check">
+                        <label for="check-rate"><strong>Rate limiting:</strong> Protection against abuse is in place</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-logging" name="security-check">
+                        <label for="check-logging"><strong>Logging and monitoring:</strong> Comprehensive visibility is ensured</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-data" name="security-check">
+                        <label for="check-data"><strong>Data protection:</strong> Sensitive data is properly handled</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-dependency" name="security-check">
+                        <label for="check-dependency"><strong>Dependency security:</strong> No known vulnerabilities in dependencies</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-testing" name="security-check">
+                        <label for="check-testing"><strong>Security testing:</strong> All tests pass</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-error" name="security-check">
+                        <label for="check-error"><strong>Error handling:</strong> Errors are handled without leaking information</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-docs" name="security-check">
+                        <label for="check-docs"><strong>Documentation:</strong> Security features are documented</label>
+                    </div>
+                </div>
+            
                 <h3>Post-Deployment Security Measures</h3>
-                <ul>
-                    <li><strong>Regular security audits:</strong> Scheduled reviews of security posture</li>
-                    <li><strong>Vulnerability scanning:</strong> Ongoing checks for new vulnerabilities</li>
-                    <li><strong>Penetration testing:</strong> Regular third-party security assessments</li>
-                    <li><strong>Security incident response plan:</strong> Prepared procedures for incidents</li>
-                    <li><strong>User feedback monitoring:</strong> Tracking user reports of security issues</li>
-                </ul>
+                <div class="security-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-audits" name="security-check">
+                        <label for="check-audits"><strong>Regular security audits:</strong> Scheduled reviews of security posture</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-scanning" name="security-check">
+                        <label for="check-scanning"><strong>Vulnerability scanning:</strong> Ongoing checks for new vulnerabilities</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-pentesting" name="security-check">
+                        <label for="check-pentesting"><strong>Penetration testing:</strong> Regular third-party security assessments</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-incident" name="security-check">
+                        <label for="check-incident"><strong>Security incident response plan:</strong> Prepared procedures for incidents</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-feedback" name="security-check">
+                        <label for="check-feedback"><strong>User feedback monitoring:</strong> Tracking user reports of security issues</label>
+                    </div>
+                </div>
+                
+                <div class="checklist-actions">
+                    <button class="action-button primary-button" id="check-all">Check All</button>
+                    <button class="action-button secondary-button" id="uncheck-all">Uncheck All</button>
+                    <button class="action-button highlight-button" id="export-checklist">Export Checklist</button>
+                </div>
+            
+                <div class="checklist-progress">
+                    <div class="progress-label">Completion Progress:</div>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="checklist-progress-bar"></div>
+                    </div>
+                    <div class="progress-percentage" id="checklist-percentage">0%</div>
+                </div>
             </div>
-
             <div class="next-step-box">
                 <h2>Ready to Implement Secure AI Systems?</h2>
-                <p>Apply these best practices to your own AI agent projects and ensure you're building secure, robust AI solutions.</p>
+                <p>Apply these best practices to your own AI agent projects and ensure you're building secure, robust AI
+                    solutions.</p>
                 <a href="tutorials.html" class="cta-button">View Step-by-Step Tutorials</a>
             </div>
         </div>
@@ -1283,6 +1511,80 @@ if __name__ == "__main__":
             <p>AI Agent Development Guide | Created to help developers build powerful AI solutions</p>
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('.security-checklist input[type="checkbox"]');
+            const progressBar = document.getElementById('checklist-progress-bar');
+            const percentageDisplay = document.getElementById('checklist-percentage');
+            const checkAllButton = document.getElementById('check-all');
+            const uncheckAllButton = document.getElementById('uncheck-all');
+            const exportButton = document.getElementById('export-checklist');
+            
+            // Update progress bar
+            function updateProgress() {
+                const total = checkboxes.length;
+                const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
+                const percentage = Math.round((checked / total) * 100);
+                
+                progressBar.style.width = percentage + '%';
+                percentageDisplay.textContent = percentage + '%';
+            }
+            
+            // Add event listeners to all checkboxes
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updateProgress);
+            });
+            
+            // Check all button
+            checkAllButton.addEventListener('click', function() {
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = true;
+                });
+                updateProgress();
+            });
+            
+            // Uncheck all button
+            uncheckAllButton.addEventListener('click', function() {
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+                updateProgress();
+            });
+            
+            // Export checklist function
+            exportButton.addEventListener('click', function() {
+                let content = "# Security Deployment Checklist\n\n";
+                content += "## Pre-Deployment\n\n";
+                
+                document.querySelectorAll('.security-checklist').forEach((checklist, index) => {
+                    if (index === 1) {
+                        content += "\n## Post-Deployment\n\n";
+                    }
+                    
+                    checklist.querySelectorAll('.checklist-item').forEach(item => {
+                        const checkbox = item.querySelector('input[type="checkbox"]');
+                        const label = item.querySelector('label').textContent;
+                        const status = checkbox.checked ? "✅" : "⬜";
+                        content += `${status} ${label}\n`;
+                    });
+                });
+                
+                // Create file and download
+                const blob = new Blob([content], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'security_checklist.md';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+            
+            // Initialize progress bar
+            updateProgress();
+        });
+        </script>
 </body>
 
 </html>
