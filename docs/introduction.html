@@ -135,24 +135,6 @@
             margin-bottom: 0;
         }
         
-        .next-step-box {
-            background-color: var(--light);
-            border: 2px solid var(--secondary);
-            padding: 2rem;
-            border-radius: 8px;
-            text-align: center;
-            margin: 3rem 0;
-        }
-        
-        .next-step-box h2 {
-            color: var(--secondary);
-            margin-top: 0;
-        }
-        
-        .next-step-box .cta-button {
-            margin-top: 1rem;
-        }
-        
         @media (max-width: 768px) {
             .timeline::before {
                 left: 15px;
@@ -425,9 +407,7 @@
                 
                 <div class="example-box">
                     <h4>Code Example: Simple AI Agent Structure</h4>
-                    <pre>
-<code class="language-python">
-from langchain import LLMChain, PromptTemplate
+                    <pre><code class="language-python">from langchain import LLMChain, PromptTemplate
 from langchain.agents import Tool, initialize_agent
 from langchain.llms import OpenAI
 
@@ -461,22 +441,23 @@ agent = initialize_agent(
 # Use the agent to perform a task
 result = agent.run(
     "Create a report on the latest research about climate change mitigation strategies."
-)
-</code>
-                    </pre>
+)</code></pre>
                 </div>
                 
                 <p>This simplified example illustrates the core components of an AI agent: understanding user instructions, planning, using tools to gather information, processing that information, and generating a response that fulfills the user's request.</p>
             </div>
-            
+        </div>
+    </section>
+    <section class="content-section">
+        <div class="container content-container">
             <div class="next-step-box">
-                <h2>Ready to Build Your First AI Agent?</h2>
-                <p>Now that you understand the basics of AI agents, it's time to start building your own. Explore our step-by-step guides to get started with practical implementation.</p>
-                <a href="frameworks.html" class="cta-button">Explore AI Agent Frameworks</a>
-                <a href="first-agent.html" class="cta-button">Build Your First Agent</a>
+                <h2>Find the Right Tech Stack</h2>
+                <p>From LangChain to AutoGen, the tools you choose shape your AI agent's capabilities. Let us help you find the best match for your goals.</p>
+                <a href="frameworks.html" class="cta-button">Explore Frameworks</a>
             </div>
         </div>
     </section>
+    
     
     <footer>
         <div class="container">
