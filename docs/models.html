@@ -61,28 +61,6 @@
             padding: 1.5rem;
         }
         
-        .model-tabs {
-            display: flex;
-            border-bottom: 1px solid var(--light-gray);
-            margin-bottom: 1.5rem;
-            overflow-x: auto;
-            padding-bottom: 1px;
-        }
-        
-        .model-tab {
-            padding: 0.75rem 1.5rem;
-            cursor: pointer;
-            border-bottom: 3px solid transparent;
-            color: var(--gray);
-            font-weight: 500;
-            white-space: nowrap;
-        }
-        
-        .model-tab.active {
-            border-bottom-color: var(--primary);
-            color: var(--primary);
-        }
-        
         .model-details {
             margin-bottom: 1.5rem;
         }
@@ -142,32 +120,6 @@
         .api-key-info h4 {
             margin-top: 0;
             color: #B45309;
-        }
-        
-        .comparison-section {
-            margin-top: 3rem;
-        }
-        
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1.5rem;
-        }
-        
-        .comparison-table th, 
-        .comparison-table td {
-            padding: 0.75rem;
-            border: 1px solid var(--light-gray);
-            text-align: left;
-        }
-        
-        .comparison-table th {
-            background-color: var(--light);
-            font-weight: 600;
-        }
-        
-        .comparison-table tr:nth-child(even) {
-            background-color: #FAFAFA;
         }
         
         .model-badge {
@@ -259,13 +211,6 @@
     </style>
     <!-- Prism CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" />
-    <!-- Prism core JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <!-- Additional languages -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
 </head>
 <body>
     <header>
@@ -330,37 +275,65 @@
                 <div class="provider-body">
                     <p>OpenAI offers a range of powerful language models through their API, including the GPT series. These models excel at natural language understanding, code generation, and complex reasoning tasks, making them suitable for a wide range of agent applications.</p>
                     
-                    <div class="model-tabs">
-                        <div class="model-tab active">GPT-4o</div>
-                        <div class="model-tab">GPT-4</div>
-                        <div class="model-tab">GPT-3.5 Turbo</div>
-                    </div>
-                    
-                    <div class="model-details">
-                        <h3>Available Models</h3>
-                        
-                        <div class="model-row model-header-row">
-                            <div class="model-cell">Model Name</div>
-                            <div class="model-cell">Context Window</div>
-                            <div class="model-cell">Best For</div>
+                    <div class="tab-container">
+                        <div class="tab-buttons">
+                            <button class="tab-button" data-tab="openai-gpt4o">GPT-4o</button>
+                            <button class="tab-button" data-tab="openai-gpt4">GPT-4</button>
+                            <button class="tab-button" data-tab="openai-gpt35">GPT-3.5 Turbo</button>
                         </div>
                         
-                        <div class="model-row">
-                            <div class="model-cell">gpt-4o</div>
-                            <div class="model-cell">128K tokens</div>
-                            <div class="model-cell">General purpose, multimodal capabilities</div>
+                        <div id="openai-gpt4o" class="tab-content">
+                            <div class="model-details">
+                                <h3>Available Models</h3>
+                                
+                                <div class="model-row model-header-row">
+                                    <div class="model-cell">Model Name</div>
+                                    <div class="model-cell">Context Window</div>
+                                    <div class="model-cell">Best For</div>
+                                </div>
+                                
+                                <div class="model-row">
+                                    <div class="model-cell">gpt-4o</div>
+                                    <div class="model-cell">128K tokens</div>
+                                    <div class="model-cell">General purpose, multimodal capabilities</div>
+                                </div>
+                            </div>
                         </div>
                         
-                        <div class="model-row">
-                            <div class="model-cell">gpt-4-turbo</div>
-                            <div class="model-cell">128K tokens</div>
-                            <div class="model-cell">Complex reasoning, planning, creative tasks</div>
+                        <div id="openai-gpt4" class="tab-content">
+                            <div class="model-details">
+                                <h3>Available Models</h3>
+                                
+                                <div class="model-row model-header-row">
+                                    <div class="model-cell">Model Name</div>
+                                    <div class="model-cell">Context Window</div>
+                                    <div class="model-cell">Best For</div>
+                                </div>
+                                
+                                <div class="model-row">
+                                    <div class="model-cell">gpt-4-turbo</div>
+                                    <div class="model-cell">128K tokens</div>
+                                    <div class="model-cell">Complex reasoning, planning, creative tasks</div>
+                                </div>
+                            </div>
                         </div>
                         
-                        <div class="model-row">
-                            <div class="model-cell">gpt-3.5-turbo</div>
-                            <div class="model-cell">16K tokens</div>
-                            <div class="model-cell">Cost-effective, faster responses</div>
+                        <div id="openai-gpt35" class="tab-content">
+                            <div class="model-details">
+                                <h3>Available Models</h3>
+                                
+                                <div class="model-row model-header-row">
+                                    <div class="model-cell">Model Name</div>
+                                    <div class="model-cell">Context Window</div>
+                                    <div class="model-cell">Best For</div>
+                                </div>
+                                
+                                <div class="model-row">
+                                    <div class="model-cell">gpt-3.5-turbo</div>
+                                    <div class="model-cell">16K tokens</div>
+                                    <div class="model-cell">Cost-effective, faster responses</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     
@@ -437,37 +410,65 @@ print(result)</code></pre>
                 <div class="provider-body">
                     <p>Anthropic's Claude models are designed with a focus on helpfulness, harmlessness, and honesty. They excel at nuanced reasoning, content generation, and understanding complex instructions, making them excellent for building safe and responsible AI agents.</p>
                     
-                    <div class="model-tabs">
-                        <div class="model-tab active">Claude 3 Opus</div>
-                        <div class="model-tab">Claude 3 Sonnet</div>
-                        <div class="model-tab">Claude 3 Haiku</div>
-                    </div>
-                    
-                    <div class="model-details">
-                        <h3>Available Models</h3>
-                        
-                        <div class="model-row model-header-row">
-                            <div class="model-cell">Model Name</div>
-                            <div class="model-cell">Context Window</div>
-                            <div class="model-cell">Best For</div>
+                    <div class="tab-container">
+                        <div class="tab-buttons">
+                            <button class="tab-button" data-tab="anthropic-opus">Claude 3 Opus</button>
+                            <button class="tab-button" data-tab="anthropic-sonnet">Claude 3 Sonnet</button>
+                            <button class="tab-button" data-tab="anthropic-haiku">Claude 3 Haiku</button>
                         </div>
                         
-                        <div class="model-row">
-                            <div class="model-cell">claude-3-opus-20240229</div>
-                            <div class="model-cell">200K tokens</div>
-                            <div class="model-cell">High-complexity reasoning, sophisticated agents</div>
+                        <div id="anthropic-opus" class="tab-content">
+                            <div class="model-details">
+                                <h3>Available Models</h3>
+                                
+                                <div class="model-row model-header-row">
+                                    <div class="model-cell">Model Name</div>
+                                    <div class="model-cell">Context Window</div>
+                                    <div class="model-cell">Best For</div>
+                                </div>
+                                
+                                <div class="model-row">
+                                    <div class="model-cell">claude-3-opus-20240229</div>
+                                    <div class="model-cell">200K tokens</div>
+                                    <div class="model-cell">High-complexity reasoning, sophisticated agents</div>
+                                </div>
+                            </div>
                         </div>
                         
-                        <div class="model-row">
-                            <div class="model-cell">claude-3-sonnet-20240229</div>
-                            <div class="model-cell">200K tokens</div>
-                            <div class="model-cell">Balance of quality and cost</div>
+                        <div id="anthropic-sonnet" class="tab-content">
+                            <div class="model-details">
+                                <h3>Available Models</h3>
+                                
+                                <div class="model-row model-header-row">
+                                    <div class="model-cell">Model Name</div>
+                                    <div class="model-cell">Context Window</div>
+                                    <div class="model-cell">Best For</div>
+                                </div>
+                                
+                                <div class="model-row">
+                                    <div class="model-cell">claude-3-sonnet-20240229</div>
+                                    <div class="model-cell">200K tokens</div>
+                                    <div class="model-cell">Balance of quality and cost</div>
+                                </div>
+                            </div>
                         </div>
                         
-                        <div class="model-row">
-                            <div class="model-cell">claude-3-haiku-20240307</div>
-                            <div class="model-cell">200K tokens</div>
-                            <div class="model-cell">Faster responses, lower cost</div>
+                        <div id="anthropic-haiku" class="tab-content">
+                            <div class="model-details">
+                                <h3>Available Models</h3>
+                                
+                                <div class="model-row model-header-row">
+                                    <div class="model-cell">Model Name</div>
+                                    <div class="model-cell">Context Window</div>
+                                    <div class="model-cell">Best For</div>
+                                </div>
+                                
+                                <div class="model-row">
+                                    <div class="model-cell">claude-3-haiku-20240307</div>
+                                    <div class="model-cell">200K tokens</div>
+                                    <div class="model-cell">Faster responses, lower cost</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     
@@ -542,43 +543,65 @@ print(result)</code></pre>
                 <div class="provider-body">
                     <p>Mistral AI offers high-performance language models that strike a good balance between capabilities and efficiency. Their models work well for a wide range of agent tasks and are available both through their cloud API and for local deployment.</p>
                     
-                    <div class="model-tabs">
-                        <div class="model-tab active">Mixtral</div>
-                        <div class="model-tab">Mistral Large</div>
-                        <div class="model-tab">Mistral Small</div>
-                    </div>
-                    
-                    <div class="model-details">
-                        <h3>Available Models</h3>
-                        
-                        <div class="model-row model-header-row">
-                            <div class="model-cell">Model Name</div>
-                            <div class="model-cell">Context Window</div>
-                            <div class="model-cell">Best For</div>
+                    <div class="tab-container">
+                        <div class="tab-buttons">
+                            <button class="tab-button" data-tab="mistral-mixtral">Mixtral</button>
+                            <button class="tab-button" data-tab="mistral-large">Mistral Large</button>
+                            <button class="tab-button" data-tab="mistral-small">Mistral Small</button>
                         </div>
                         
-                        <div class="model-row">
-                            <div class="model-cell">mistral-large-latest</div>
-                            <div class="model-cell">32K tokens</div>
-                            <div class="model-cell">Complex reasoning, high performance tasks</div>
+                        <div id="mistral-mixtral" class="tab-content">
+                            <div class="model-details">
+                                <h3>Available Models</h3>
+                                
+                                <div class="model-row model-header-row">
+                                    <div class="model-cell">Model Name</div>
+                                    <div class="model-cell">Context Window</div>
+                                    <div class="model-cell">Best For</div>
+                                </div>
+                                
+                                <div class="model-row">
+                                    <div class="model-cell">open-mixtral-8x7b</div>
+                                    <div class="model-cell">32K tokens</div>
+                                    <div class="model-cell">Open weight model, local deployment</div>
+                                </div>
+                            </div>
                         </div>
                         
-                        <div class="model-row">
-                            <div class="model-cell">mistral-medium-latest</div>
-                            <div class="model-cell">32K tokens</div>
-                            <div class="model-cell">Balance of quality and cost</div>
+                        <div id="mistral-large" class="tab-content">
+                            <div class="model-details">
+                                <h3>Available Models</h3>
+                                
+                                <div class="model-row model-header-row">
+                                    <div class="model-cell">Model Name</div>
+                                    <div class="model-cell">Context Window</div>
+                                    <div class="model-cell">Best For</div>
+                                </div>
+                                
+                                <div class="model-row">
+                                    <div class="model-cell">mistral-large-latest</div>
+                                    <div class="model-cell">32K tokens</div>
+                                    <div class="model-cell">Complex reasoning, high performance tasks</div>
+                                </div>
+                            </div>
                         </div>
                         
-                        <div class="model-row">
-                            <div class="model-cell">mistral-small-latest</div>
-                            <div class="model-cell">32K tokens</div>
-                            <div class="model-cell">Cost-effective, everyday tasks</div>
-                        </div>
-                        
-                        <div class="model-row">
-                            <div class="model-cell">open-mixtral-8x7b</div>
-                            <div class="model-cell">32K tokens</div>
-                            <div class="model-cell">Open weight model, local deployment</div>
+                        <div id="mistral-small" class="tab-content">
+                            <div class="model-details">
+                                <h3>Available Models</h3>
+                                
+                                <div class="model-row model-header-row">
+                                    <div class="model-cell">Model Name</div>
+                                    <div class="model-cell">Context Window</div>
+                                    <div class="model-cell">Best For</div>
+                                </div>
+                                
+                                <div class="model-row">
+                                    <div class="model-cell">mistral-small-latest</div>
+                                    <div class="model-cell">32K tokens</div>
+                                    <div class="model-cell">Cost-effective, everyday tasks</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     
@@ -901,31 +924,14 @@ print(result)</code></pre>
             <p>AI Agent Development Guide | Created to help developers build powerful AI solutions</p>
         </div>
     </footer>
-    
-    <script>
-        // Simple tab functionality for model tabs
-        document.addEventListener('DOMContentLoaded', function() {
-            const tabContainers = document.querySelectorAll('.model-tabs');
-            
-            tabContainers.forEach(container => {
-                const tabs = container.querySelectorAll('.model-tab');
-                
-                tabs.forEach(tab => {
-                    tab.addEventListener('click', function() {
-                        // Remove active class from all tabs in this container
-                        container.querySelectorAll('.model-tab').forEach(t => {
-                            t.classList.remove('active');
-                        });
-                        
-                        // Add active class to clicked tab
-                        this.classList.add('active');
-                        
-                        // Here you would typically show/hide related content
-                        // This is a simplified version just for demo purposes
-                    });
-                });
-            });
-        });
-    </script>
+
+    <!-- Prism core JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <!-- Additional languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="js/tab-manager.js"></script>
 </body>
 </html>

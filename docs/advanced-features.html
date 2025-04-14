@@ -102,28 +102,6 @@
             margin-top: 0;
         }
 
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-        }
-
-        .comparison-table th {
-            background-color: var(--primary);
-            color: white;
-            text-align: left;
-            padding: 1rem;
-        }
-
-        .comparison-table td {
-            padding: 1rem;
-            border-bottom: 1px solid var(--light-gray);
-        }
-
-        .comparison-table tr:nth-child(even) {
-            background-color: var(--light);
-        }
-
         .content-demo {
             background-color: var(--light);
             border-radius: 8px;
@@ -145,54 +123,6 @@
     </style>
     <!-- Prism CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" />
-    <!-- Prism core JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <!-- Additional languages -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Find all tab containers
-            const tabContainers = document.querySelectorAll('.tab-container');
-
-            // Process each container individually
-            tabContainers.forEach(container => {
-                const tabButtons = container.querySelectorAll('.tab-button');
-
-                tabButtons.forEach(button => {
-                    button.addEventListener('click', () => {
-                        // Get only the tabs in this container
-                        const containerButtons = container.querySelectorAll('.tab-button');
-                        const tabId = button.getAttribute('data-tab');
-                        const tabContent = document.getElementById(tabId);
-
-                        // Remove active class from buttons in this container
-                        containerButtons.forEach(btn => btn.classList.remove('active'));
-
-                        // Remove active class from all related tab contents
-                        const tabContents = document.querySelectorAll('.tab-content');
-                        tabContents.forEach(content => {
-                            if (containerButtons.length > 0 &&
-                                Array.from(containerButtons).some(btn => btn.getAttribute('data-tab') === content.id)) {
-                                content.classList.remove('active');
-                            }
-                        });
-
-                        // Add active class to clicked button and corresponding content
-                        button.classList.add('active');
-                        tabContent.classList.add('active');
-                    });
-                });
-
-                // Activate first tab by default for this container
-                if (tabButtons.length > 0) {
-                    tabButtons[0].click();
-                }
-            });
-        });
-    </script>
 </head>
 
 <body>
@@ -1500,7 +1430,7 @@ class TokenOptimizer:
 
                 <h3>Scaling Considerations</h3>
 
-                <div class="comparison-table">
+                <table class="comparison-table">
                     <thead>
                         <tr>
                             <th>Consideration</th>
@@ -1530,91 +1460,91 @@ class TokenOptimizer:
                             <td>Graceful handling of failures</td>
                         </tr>
                     </tbody>
-                    </table>
+                </table>
 
-                    <div class="warning-box">
-                        <h4>Performance Monitoring</h4>
-                        <p>Implement comprehensive monitoring to identify bottlenecks:</p>
+                <div class="warning-box">
+                    <h4>Performance Monitoring</h4>
+                    <p>Implement comprehensive monitoring to identify bottlenecks:</p>
+                    <ul>
+                        <li><strong>Response times:</strong> Track latency at each stage of processing</li>
+                        <li><strong>Token usage:</strong> Monitor input and output tokens to control costs</li>
+                        <li><strong>Error rates:</strong> Track failures and categorize error types</li>
+                        <li><strong>Cache efficiency:</strong> Measure hit rates and optimization opportunities</li>
+                        <li><strong>User satisfaction:</strong> Collect feedback on agent responses</li>
+                    </ul>
+                </div>
+
+                <h3>Advanced Optimization Patterns</h3>
+
+                <div class="component-grid">
+                    <div class="component-card">
+                        <div class="component-icon">💡</div>
+                        <h3 class="component-title">Progressive Enhancement</h3>
+                        <p>Deliver a basic response quickly, then enhance it with additional details as they become
+                            available.</p>
                         <ul>
-                            <li><strong>Response times:</strong> Track latency at each stage of processing</li>
-                            <li><strong>Token usage:</strong> Monitor input and output tokens to control costs</li>
-                            <li><strong>Error rates:</strong> Track failures and categorize error types</li>
-                            <li><strong>Cache efficiency:</strong> Measure hit rates and optimization opportunities</li>
-                            <li><strong>User satisfaction:</strong> Collect feedback on agent responses</li>
+                            <li>Prioritize critical information delivery</li>
+                            <li>Stream responses when possible</li>
+                            <li>Use background processing for enrichment</li>
                         </ul>
                     </div>
 
-                    <h3>Advanced Optimization Patterns</h3>
-
-                    <div class="component-grid">
-                        <div class="component-card">
-                            <div class="component-icon">💡</div>
-                            <h3 class="component-title">Progressive Enhancement</h3>
-                            <p>Deliver a basic response quickly, then enhance it with additional details as they become
-                                available.</p>
-                            <ul>
-                                <li>Prioritize critical information delivery</li>
-                                <li>Stream responses when possible</li>
-                                <li>Use background processing for enrichment</li>
-                            </ul>
-                        </div>
-
-                        <div class="component-card">
-                            <div class="component-icon">🔄</div>
-                            <h3 class="component-title">Precomputation</h3>
-                            <p>Compute expensive operations in advance and store results for quick retrieval.</p>
-                            <ul>
-                                <li>Generate embeddings for common queries</li>
-                                <li>Preprocess documents for retrieval</li>
-                                <li>Build knowledge graphs offline</li>
-                            </ul>
-                        </div>
-
-                        <div class="component-card">
-                            <div class="component-icon">📱</div>
-                            <h3 class="component-title">Client-Side Optimization</h3>
-                            <p>Offload suitable tasks to the client to reduce server load and improve responsiveness.
-                            </p>
-                            <ul>
-                                <li>Implement request debouncing</li>
-                                <li>Cache responses locally</li>
-                                <li>Compress data transmissions</li>
-                            </ul>
-                        </div>
+                    <div class="component-card">
+                        <div class="component-icon">🔄</div>
+                        <h3 class="component-title">Precomputation</h3>
+                        <p>Compute expensive operations in advance and store results for quick retrieval.</p>
+                        <ul>
+                            <li>Generate embeddings for common queries</li>
+                            <li>Preprocess documents for retrieval</li>
+                            <li>Build knowledge graphs offline</li>
+                        </ul>
                     </div>
 
-                    <div class="action-box">
-                        <h3>Optimization Action Plan</h3>
-                        <p>Follow these steps to implement a comprehensive optimization strategy for your AI agent:</p>
-
-                        <ol class="numbered-steps">
-                            <li>
-                                <h4>Establish Performance Baselines</h4>
-                                <p>Measure current performance metrics to identify optimization opportunities and track
-                                    improvements.</p>
-                            </li>
-                            <li>
-                                <h4>Identify Bottlenecks</h4>
-                                <p>Use profiling tools to find the slowest components and highest cost operations in
-                                    your agent system.</p>
-                            </li>
-                            <li>
-                                <h4>Implement Core Optimizations</h4>
-                                <p>Apply the techniques described above, starting with those that address your biggest
-                                    bottlenecks.</p>
-                            </li>
-                            <li>
-                                <h4>Monitor and Iterate</h4>
-                                <p>Continuously track performance metrics and adjust your optimization strategy as usage
-                                    patterns evolve.</p>
-                            </li>
-                        </ol>
-
-                        <p>Remember that optimization is an ongoing process, not a one-time effort. As your agent
-                            evolves and usage patterns change, regularly revisit your optimization strategy.</p>
+                    <div class="component-card">
+                        <div class="component-icon">📱</div>
+                        <h3 class="component-title">Client-Side Optimization</h3>
+                        <p>Offload suitable tasks to the client to reduce server load and improve responsiveness.
+                        </p>
+                        <ul>
+                            <li>Implement request debouncing</li>
+                            <li>Cache responses locally</li>
+                            <li>Compress data transmissions</li>
+                        </ul>
                     </div>
                 </div>
+
+                <div class="action-box">
+                    <h3>Optimization Action Plan</h3>
+                    <p>Follow these steps to implement a comprehensive optimization strategy for your AI agent:</p>
+
+                    <ol class="numbered-steps">
+                        <li>
+                            <h4>Establish Performance Baselines</h4>
+                            <p>Measure current performance metrics to identify optimization opportunities and track
+                                improvements.</p>
+                        </li>
+                        <li>
+                            <h4>Identify Bottlenecks</h4>
+                            <p>Use profiling tools to find the slowest components and highest cost operations in
+                                your agent system.</p>
+                        </li>
+                        <li>
+                            <h4>Implement Core Optimizations</h4>
+                            <p>Apply the techniques described above, starting with those that address your biggest
+                                bottlenecks.</p>
+                        </li>
+                        <li>
+                            <h4>Monitor and Iterate</h4>
+                            <p>Continuously track performance metrics and adjust your optimization strategy as usage
+                                patterns evolve.</p>
+                        </li>
+                    </ol>
+
+                    <p>Remember that optimization is an ongoing process, not a one-time effort. As your agent
+                        evolves and usage patterns change, regularly revisit your optimization strategy.</p>
+                </div>
             </div>
+        </div>
         </div>
     </section>
 
@@ -1622,7 +1552,8 @@ class TokenOptimizer:
         <div class="container content-container">
             <div class="next-step-box">
                 <h2>Go Live with Your Agent</h2>
-                <p>Your agent is ready—now make it available to the world. Learn how to deploy it to the cloud, as an API, or in your app.</p>
+                <p>Your agent is ready—now make it available to the world. Learn how to deploy it to the cloud, as an
+                    API, or in your app.</p>
                 <a href="deployment.html" class="cta-button">Deploy Agent</a>
             </div>
         </div>
@@ -1633,6 +1564,15 @@ class TokenOptimizer:
             <p>AI Agent Development Guide | Created to help developers build powerful AI solutions</p>
         </div>
     </footer>
+    
+    <!-- Prism core JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <!-- Additional languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="js/tab-manager.js"></script>
 </body>
 
 </html>

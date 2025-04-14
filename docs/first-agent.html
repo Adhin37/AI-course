@@ -290,54 +290,6 @@
     </style>
     <!-- Prism CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" />
-    <!-- Prism core JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <!-- Additional languages -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Find all tab containers
-            const tabContainers = document.querySelectorAll('.tab-container');
-
-            // Process each container individually
-            tabContainers.forEach(container => {
-                const tabButtons = container.querySelectorAll('.tab-button');
-
-                tabButtons.forEach(button => {
-                    button.addEventListener('click', () => {
-                        // Get only the tabs in this container
-                        const containerButtons = container.querySelectorAll('.tab-button');
-                        const tabId = button.getAttribute('data-tab');
-                        const tabContent = document.getElementById(tabId);
-
-                        // Remove active class from buttons in this container
-                        containerButtons.forEach(btn => btn.classList.remove('active'));
-
-                        // Remove active class from all related tab contents
-                        const tabContents = document.querySelectorAll('.tab-content');
-                        tabContents.forEach(content => {
-                            if (containerButtons.length > 0 &&
-                                Array.from(containerButtons).some(btn => btn.getAttribute('data-tab') === content.id)) {
-                                content.classList.remove('active');
-                            }
-                        });
-
-                        // Add active class to clicked button and corresponding content
-                        button.classList.add('active');
-                        tabContent.classList.add('active');
-                    });
-                });
-
-                // Activate first tab by default for this container
-                if (tabButtons.length > 0) {
-                    tabButtons[0].click();
-                }
-            });
-        });
-    </script>
 </head>
 
 <body>
@@ -1402,6 +1354,15 @@ if __name__ == "__main__":
             <p>AI Agent Development Guide | Created to help developers build powerful AI solutions</p>
         </div>
     </footer>
+
+    <!-- Prism core JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <!-- Additional languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="js/tab-manager.js"></script>
 </body>
 
 </html>
