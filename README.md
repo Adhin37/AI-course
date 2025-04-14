@@ -31,33 +31,35 @@ Your site will be available at `https://[username].github.io/[repository-name]/`
 ## Project Structure
 
 The project is organized as follows:
-
+- `.github/`: GitHub-specific files
+  - `workflows/`: GitHub Actions workflow configurations
+  - `ISSUE_TEMPLATE/`: Templates for creating new issues
+  - `PULL_REQUEST_TEMPLATE.md`: Template for pull requests
 - `docs/`: Contains all HTML and CSS files for the documentation
-  - `index.html`: Main landing page
-  - `introduction.html`: Introduction to AI agents
+  - `img/`: Directory containing images used throughout the documentation
+  - `js/`: JavaScript files for interactive elements
+  - `advanced-features.html`: Advanced features for AI agents
+  - `best-practices.html`: Best practices for AI agent development
+  - `code-examples.html`: Code examples for common agent patterns
+  - `cost-optimization.html`: Strategies for optimizing costs
+  - `deployment.html`: Guide for deploying AI agents
   - `environment-setup.html`: Guide for setting up a development environment
   - `first-agent.html`: Tutorial for building your first AI agent
   - `frameworks.html`: Overview of AI agent frameworks
-  - `code-examples.html`: Code examples for common agent patterns
-  - `advanced-features.html`: Advanced features for AI agents including:
-    - Memory systems
-    - Chain-of-thought reasoning
-    - Tool integration
-    - Retrieval-augmented generation (RAG)
-    - Multi-agent systems
-    - Performance optimization
+  - `getting-started.html`: Getting started guide
+  - `glossary.html`: Definitions of key terms
+  - `index.html`: Main landing page
+  - `introduction.html`: Introduction to AI agents
+  - `models.html`: Information about different AI models
+  - `monitoring.html`: Monitoring and observability for AI agents
+  - `research-papers.html`: Relevant research papers and academic resources
+  - `scaling.html`: Scaling strategies for AI agents
+  - `security.html`: Security considerations and best practices
+  - `tutorials.html`: Collection of tutorials
   - `style.css`: Shared CSS stylesheet for all pages
-  - `img/`: Directory containing images used throughout the documentation
-  - `js/`: JavaScript files for interactive elements
-  - `tutorials/`: Additional tutorial content
-  - `examples/`: Code examples and sample projects
-  - `resources/`: Additional resources and reference materials
-- `.github/`: GitHub-specific files
-  - `workflows/`: GitHub Actions workflow configurations
-    - `deploy.yml`: Workflow for automating deployment to GitHub Pages
-    - `tests.yml`: Workflow for running automated tests
-  - `ISSUE_TEMPLATE/`: Templates for creating new issues
-  - `PULL_REQUEST_TEMPLATE.md`: Template for pull requests
+- `.gitignore`: Specifies files to be ignored by Git
+- `LICENSE`: Apache 2.0 license
+- `README.md`: This file, providing project overview and documentation
 
 ## Features
 
