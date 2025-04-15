@@ -130,6 +130,8 @@
             margin: 2rem 0 1rem;
         }
     </style>
+    <!-- Prism CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" />
 </head>
 
 <body>
@@ -575,10 +577,23 @@
                         <div class="term-example">
                             <h4>Example</h4>
                             <p>Enabling JSON mode when asking an agent to analyze sentiment in customer reviews,
-                                resulting in a structured output like {"overall_sentiment": "positive",
-                                "specific_aspects": {"product_quality": "positive", "shipping_speed": "negative",
-                                "customer_service": "neutral"}, "key_points": ["Product exceeded expectations",
-                                "Shipping took longer than promised"]}</p>
+                                resulting in a structured output like </p>
+                                <div class="code-block">
+                                    <pre>
+<code class="language-json">{
+    "overall_sentiment": "positive",
+    "specific_aspects": {
+        "product_quality": "positive",
+        "shipping_speed": "negative",
+        "customer_service": "neutral"
+    }, 
+    "key_points": [
+        "Product exceeded expectations",
+        "Shipping took longer than promised"
+    ]
+}</code>
+                                </pre>
+                            </div>
                         </div>
                         <p class="term-related">
                             <span>Related terms:</span>
@@ -671,7 +686,7 @@
                             querying indexes of structured and unstructured data, making it particularly well-suited for
                             knowledge-intensive applications.</p>
                         <div class="term-example">
-                            <h4>Example
+                            <h4>Example</h4>
                                 <p>Using LlamaIndex to build a legal research agent that can ingest, index, and query
                                     large collections of case law, contracts, and legal opinions to provide relevant
                                     information for legal questions.</p>
@@ -1061,6 +1076,10 @@
         </div>
     </footer>
 
+    <!-- Prism core JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <!-- Additional languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
     <script>
         // Smooth scrolling for alphabet navigation
         document.querySelectorAll('.alphabet-nav a:not(.disabled)').forEach(anchor => {

@@ -1,4 +1,4 @@
-# .github/workflows/release-tag.yml
+# .github/workflows/create-release.yml
 name: Create GitHub Release
 
 on:

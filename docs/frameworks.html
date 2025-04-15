@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml" href="img/icon.svg">
     <title>AI Agent Frameworks Comparison</title>
     <link rel="stylesheet" href="css/style.css">
-    <style>        
+    <style>
         .rating {
             display: flex;
         }
-        
+
         .rating-dot {
             width: 12px;
             height: 12px;
@@ -18,11 +19,11 @@
             margin-right: 4px;
             background-color: var(--light-gray);
         }
-        
+
         .rating-dot.filled {
             background-color: var(--secondary);
         }
-        
+
         .component-card {
             background-color: white;
             border-radius: 8px;
@@ -30,7 +31,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             overflow: hidden;
         }
-        
+
         .component-header {
             background-color: var(--primary);
             color: white;
@@ -41,19 +42,21 @@
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .component-header h3 {
             margin: 0;
         }
-        
+
         .component-content {
             padding: 1.5rem;
         }
-        
+
         .component-footer {
             background-color: #F3F4F6;
             padding: 1rem 1.5rem;
             border-top: 1px solid #E5E7EB;
+            margin-top: auto;
+            /* This pushes it to the bottom */
         }
 
         .tag {
@@ -69,57 +72,57 @@
             gap: 1.5rem;
             margin-top: 1.5rem;
         }
-        
-        .pros, 
+
+        .pros,
         .cons {
             flex: 1;
             padding: 1rem;
             border-radius: 8px;
         }
-        
+
         .pros {
             background-color: rgba(16, 185, 129, 0.1);
             border-left: 4px solid var(--secondary);
         }
-        
+
         .cons {
             background-color: rgba(239, 68, 68, 0.1);
             border-left: 4px solid #EF4444;
         }
-        
-        .pros h4, 
+
+        .pros h4,
         .cons h4 {
             margin-top: 0;
         }
-        
+
         .pros h4 {
             color: var(--secondary);
         }
-        
+
         .cons h4 {
             color: #EF4444;
         }
-        
-        .pros ul, 
+
+        .pros ul,
         .cons ul {
             margin-bottom: 0;
         }
-        
+
         .use-cases-section {
             margin-top: 1.5rem;
         }
-        
+
         .use-cases {
             background-color: #F3F4F6;
             padding: 1rem;
             border-radius: 8px;
         }
-        
+
         .use-cases h4 {
             margin-top: 0;
             color: var(--primary);
         }
-        
+
         .selection-guide {
             margin-top: 3rem;
             padding: 2rem;
@@ -127,35 +130,161 @@
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        
+
         .selection-flow {
             margin-top: 2rem;
             padding: 1.5rem;
             background-color: #F3F4F6;
             border-radius: 8px;
         }
-        
+
         .selection-flow h4 {
             margin-top: 0;
             color: var(--primary);
         }
-        
+
         .selection-step {
             margin-bottom: 1.5rem;
             padding-left: 1.5rem;
             border-left: 3px solid var(--primary);
         }
-        
+
         .selection-step:last-child {
             margin-bottom: 0;
         }
-        
+
         .selection-step h5 {
             margin-top: 0;
             color: var(--primary);
         }
+
+        .resource-card {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: border-color 0.3s, box-shadow 0.2s;
+            position: relative;
+            height: 92%;
+        }
+
+        .resource-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-footer {
+            background-color: #F3F4F6;
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--light-gray);
+            margin-top: auto;
+            margin-left: -1.5rem;
+            margin-right: -1.5rem;
+            margin-bottom: -1.5rem;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        .component-footer h4 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .resource-tile {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--dark);
+            transition: all 0.2s ease;
+            border: 1px solid var(--light-gray);
+        }
+
+        .resource-tile:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .resource-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background-color: rgba(79, 70, 229, 0.1);
+            margin-right: 1rem;
+            color: var(--primary);
+        }
+
+        .resource-info {
+            flex: 1;
+        }
+
+        .resource-info h5 {
+            margin: 0 0 0.25rem 0;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .resource-type {
+            font-size: 0.8rem;
+            color: var(--gray);
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .resource-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .explore-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            border-radius: 6px;
+            padding: 0.6rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            gap: 0.5rem;
+        }
+
+        .explore-button:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(79, 70, 229, 0.2);
+        }
+
+        .explore-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .explore-button:hover .explore-icon svg {
+            stroke: white;
+        }
     </style>
 </head>
+
 <body>
     <header>
         <div class="container">
@@ -163,7 +292,7 @@
             <p>Learn to build powerful AI agents for specific tasks</p>
         </div>
     </header>
-    
+
     <nav>
         <div class="container">
             <ul>
@@ -187,18 +316,18 @@
             </ul>
         </div>
     </div>
-    
+
     <div class="page-title">
         <div class="container">
             <h1>AI Agent Frameworks Comparison</h1>
             <p>Choose the right framework for your AI agent development needs</p>
         </div>
     </div>
-    
+
     <section class="content-section">
         <div class="container">
             <h2 class="section-title">Frameworks at a Glance</h2>
-            
+
             <table class="comparison-table">
                 <thead>
                     <tr>
@@ -507,22 +636,25 @@
             </table>
         </div>
     </section>
-    
+
     <section class="content-section">
         <div class="container">
             <h2 class="section-title" id="langchain">LangChain</h2>
-            
+
             <div class="component-card">
                 <div class="component-header">
                     <h3>LangChain Framework</h3>
                     <span class="tag">Most Popular</span>
                 </div>
-                
+
                 <div class="component-content">
                     <p>
-                        LangChain is a comprehensive framework designed to build applications powered by language models. It provides an extensive collection of components for working with LLMs, including chains, agents, memory systems, and tool integration, making it one of the most flexible and widely-used frameworks for AI agent development.
+                        LangChain is a comprehensive framework designed to build applications powered by language
+                        models. It provides an extensive collection of components for working with LLMs, including
+                        chains, agents, memory systems, and tool integration, making it one of the most flexible and
+                        widely-used frameworks for AI agent development.
                     </p>
-                    
+
                     <div class="pros-cons">
                         <div class="pros">
                             <h4>Strengths</h4>
@@ -535,7 +667,7 @@
                                 <li>Advanced RAG capabilities</li>
                             </ul>
                         </div>
-                        
+
                         <div class="cons">
                             <h4>Limitations</h4>
                             <ul>
@@ -547,7 +679,7 @@
                             </ul>
                         </div>
                     </div>
-                    
+
                     <div class="use-cases-section">
                         <div class="use-cases">
                             <h4>Ideal Use Cases</h4>
@@ -561,35 +693,92 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="component-footer">
                     <h4>Resources</h4>
-                    <ul class="resources-list">
-                        <li><a href="code-examples.html#basic">Basic LangChain Agent Example</a></li>
-                        <li><a href="code-examples.html#tools">Tool-Using Agent with LangChain</a></li>
-                        <li><a href="code-examples.html#rag">RAG Implementation with LangChain</a></li>
-                        <li><a href="https://python.langchain.com/docs/get_started/introduction" target="_blank">Official LangChain Documentation</a></li>
-                    </ul>
+                    <div class="resource-grid">
+                        <a href="code-examples.html#basic" class="resource-tile">
+                            <div class="resource-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" />
+                                </svg>
+                            </div>
+                            <div class="resource-info">
+                                <h5>Basic LangChain Agent Example</h5>
+                                <span class="resource-type">Example Code</span>
+                            </div>
+                        </a>
+                        <a href="code-examples.html#tools" class="resource-tile">
+                            <div class="resource-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path
+                                        d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+                                </svg>
+                            </div>
+                            <div class="resource-info">
+                                <h5>Tool-Using Agent with LangChain</h5>
+                                <span class="resource-type">Example Code</span>
+                            </div>
+                        </a>
+                        <a href="code-examples.html#rag" class="resource-tile">
+                            <div class="resource-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                                    <line x1="3" y1="9" x2="21" y2="9" />
+                                    <line x1="9" y1="21" x2="9" y2="9" />
+                                </svg>
+                            </div>
+                            <div class="resource-info">
+                                <h5>RAG Implementation with LangChain</h5>
+                                <span class="resource-type">Example Code</span>
+                            </div>
+                        </a>
+                        <a href="https://python.langchain.com/docs/get_started/introduction" target="_blank"
+                            class="resource-tile">
+                            <div class="resource-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                            </div>
+                            <div class="resource-info">
+                                <h5>Official LangChain Documentation</h5>
+                                <span class="resource-type">External Resource</span>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    
+
     <section class="content-section">
         <div class="container">
             <h2 class="section-title" id="autogen">AutoGen</h2>
-            
+
             <div class="component-card">
                 <div class="component-header">
                     <h3>AutoGen Framework</h3>
                     <span class="tag">Multi-Agent Focused</span>
                 </div>
-                
+
                 <div class="component-content">
                     <p>
-                        AutoGen is a framework developed by Microsoft Research that specializes in building conversational multi-agent systems. It enables the creation of customizable, conversational agents that can work together to solve complex tasks through dynamic conversation flows and collaborative problem-solving.
+                        AutoGen is a framework developed by Microsoft Research that specializes in building
+                        conversational multi-agent systems. It enables the creation of customizable, conversational
+                        agents that can work together to solve complex tasks through dynamic conversation flows and
+                        collaborative problem-solving.
                     </p>
-                    
+
                     <div class="pros-cons">
                         <div class="pros">
                             <h4>Strengths</h4>
@@ -602,7 +791,7 @@
                                 <li>Backed by Microsoft Research</li>
                             </ul>
                         </div>
-                        
+
                         <div class="cons">
                             <h4>Limitations</h4>
                             <ul>
@@ -614,7 +803,7 @@
                             </ul>
                         </div>
                     </div>
-                    
+
                     <div class="use-cases-section">
                         <div class="use-cases">
                             <h4>Ideal Use Cases</h4>
@@ -628,33 +817,65 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="component-footer">
                     <h4>Resources</h4>
-                    <ul class="resources-list">
-                        <li><a href="code-examples.html#multi-agent">AutoGen Multi-Agent Conversation Example</a></li>
-                        <li><a href="https://microsoft.github.io/autogen/" target="_blank">Official AutoGen Documentation</a></li>
-                    </ul>
+                    <div class="resource-grid">
+                        <a href="code-examples.html#multi-agent" class="resource-tile">
+                            <div class="resource-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </div>
+                            <div class="resource-info">
+                                <h5>AutoGen Multi-Agent Conversation Example</h5>
+                                <span class="resource-type">Example Code</span>
+                            </div>
+                        </a>
+                        <a href="https://microsoft.github.io/autogen/" target="_blank" class="resource-tile">
+                            <div class="resource-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                            </div>
+                            <div class="resource-info">
+                                <h5>Official AutoGen Documentation</h5>
+                                <span class="resource-type">External Resource</span>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    
+
     <section class="content-section">
         <div class="container">
             <h2 class="section-title" id="llamaindex">LlamaIndex</h2>
-            
+
             <div class="component-card">
                 <div class="component-header">
                     <h3>LlamaIndex Framework</h3>
                     <span class="tag">RAG Specialist</span>
                 </div>
-                
+
                 <div class="component-content">
                     <p>
-                        LlamaIndex (formerly GPT Index) is a data framework for LLM applications to ingest, structure, and access private or domain-specific data. It specializes in retrieval-augmented generation (RAG) use cases, making it an excellent choice for applications that need to ground LLM responses in specific data sources.
+                        LlamaIndex (formerly GPT Index) is a data framework for LLM applications to ingest, structure,
+                        and access private or domain-specific data. It specializes in retrieval-augmented generation
+                        (RAG) use cases, making it an excellent choice for applications that need to ground LLM
+                        responses in specific data sources.
                     </p>
-                    
+
                     <div class="pros-cons">
                         <div class="pros">
                             <h4>Strengths</h4>
@@ -667,7 +888,7 @@
                                 <li>Relatively simple API for common RAG patterns</li>
                             </ul>
                         </div>
-                        
+
                         <div class="cons">
                             <h4>Limitations</h4>
                             <ul>
@@ -679,7 +900,7 @@
                             </ul>
                         </div>
                     </div>
-                    
+
                     <div class="use-cases-section">
                         <div class="use-cases">
                             <h4>Ideal Use Cases</h4>
@@ -688,39 +909,82 @@
                                 <li>Knowledge bases and information retrieval</li>
                                 <li>Applications requiring complex document processing</li>
                                 <li>Semantic search implementations</li>
-								<li>Data-intensive applications needing advanced RAG capabilities</li>
+                                <li>Data-intensive applications needing advanced RAG capabilities</li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="component-footer">
                     <h4>Resources</h4>
-                    <ul class="resources-list">
-                        <li><a href="code-examples.html#llamaindex-rag">LlamaIndex RAG Example</a></li>
-                        <li><a href="code-examples.html#advanced-rag">Advanced RAG with LlamaIndex</a></li>
-                        <li><a href="https://docs.llamaindex.ai/" target="_blank">Official LlamaIndex Documentation</a></li>
-                    </ul>
+                    <div class="resource-grid">
+                        <a href="code-examples.html#llamaindex-rag" class="resource-tile">
+                            <div class="resource-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+                                </svg>
+                            </div>
+                            <div class="resource-info">
+                                <h5>LlamaIndex RAG Example</h5>
+                                <span class="resource-type">Example Code</span>
+                            </div>
+                        </a>
+                        <a href="code-examples.html#advanced-rag" class="resource-tile">
+                            <div class="resource-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path
+                                        d="M12 3h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7m0-18H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7m0-18v18">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="resource-info">
+                                <h5>Advanced RAG with LlamaIndex</h5>
+                                <span class="resource-type">Example Code</span>
+                            </div>
+                        </a>
+                        <a href="https://docs.llamaindex.ai/" target="_blank" class="resource-tile">
+                            <div class="resource-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                            </div>
+                            <div class="resource-info">
+                                <h5>Official LlamaIndex Documentation</h5>
+                                <span class="resource-type">External Resource</span>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    
+
     <section class="content-section">
         <div class="container">
             <h2 class="section-title" id="crewai">CrewAI</h2>
-            
+
             <div class="component-card">
                 <div class="component-header">
                     <h3>CrewAI Framework</h3>
                     <span class="tag">Role-Based Collaboration</span>
                 </div>
-                
+
                 <div class="component-content">
                     <p>
-                        CrewAI is a framework specifically designed for orchestrating role-based autonomous AI agents. It provides a structured approach to creating multi-agent systems where each agent has a specific role, goal, and capabilities, allowing them to collaborate effectively on complex tasks.
+                        CrewAI is a framework specifically designed for orchestrating role-based autonomous AI agents.
+                        It provides a structured approach to creating multi-agent systems where each agent has a
+                        specific role, goal, and capabilities, allowing them to collaborate effectively on complex
+                        tasks.
                     </p>
-                    
+
                     <div class="pros-cons">
                         <div class="pros">
                             <h4>Strengths</h4>
@@ -733,7 +997,7 @@
                                 <li>Clean execution traces for debugging</li>
                             </ul>
                         </div>
-                        
+
                         <div class="cons">
                             <h4>Limitations</h4>
                             <ul>
@@ -745,7 +1009,7 @@
                             </ul>
                         </div>
                     </div>
-                    
+
                     <div class="use-cases-section">
                         <div class="use-cases">
                             <h4>Ideal Use Cases</h4>
@@ -759,34 +1023,79 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="component-footer">
                     <h4>Resources</h4>
-                    <ul class="resources-list">
-                        <li><a href="code-examples.html#crewai">CrewAI Collaborative Agents Example</a></li>
-                        <li><a href="code-examples.html#role-based">Role-Based Task Solving with CrewAI</a></li>
-                        <li><a href="https://github.com/joaomdmoura/crewAI" target="_blank">CrewAI GitHub Repository</a></li>
-                    </ul>
+                    <div class="resource-grid">
+                        <a href="code-examples.html#crewai" class="resource-tile">
+                            <div class="resource-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <rect x="3" y="3" width="7" height="7"></rect>
+                                    <rect x="14" y="3" width="7" height="7"></rect>
+                                    <rect x="14" y="14" width="7" height="7"></rect>
+                                    <rect x="3" y="14" width="7" height="7"></rect>
+                                </svg>
+                            </div>
+                            <div class="resource-info">
+                                <h5>CrewAI Collaborative Agents Example</h5>
+                                <span class="resource-type">Example Code</span>
+                            </div>
+                        </a>
+                        <a href="code-examples.html#role-based" class="resource-tile">
+                            <div class="resource-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M16 12l-4 4-4-4M12 8v7"></path>
+                                </svg>
+                            </div>
+                            <div class="resource-info">
+                                <h5>Role-Based Task Solving with CrewAI</h5>
+                                <span class="resource-type">Example Code</span>
+                            </div>
+                        </a>
+                        <a href="https://github.com/joaomdmoura/crewAI" target="_blank" class="resource-tile">
+                            <div class="resource-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path
+                                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="resource-info">
+                                <h5>CrewAI GitHub Repository</h5>
+                                <span class="resource-type">External Resource</span>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    
+
     <section class="content-section">
         <div class="container">
             <h2 class="section-title" id="direct-api">Direct API Use</h2>
-            
+
             <div class="component-card">
                 <div class="component-header">
                     <h3>Direct LLM API Integration</h3>
                     <span class="tag">Maximum Control</span>
                 </div>
-                
+
                 <div class="component-content">
                     <p>
-                        Building AI agents by directly integrating with LLM provider APIs (like OpenAI, Anthropic, or others) without using a specialized framework gives you maximum control and flexibility. This approach involves implementing your own agent architecture, tool integration, and reasoning patterns from scratch.
+                        Building AI agents by directly integrating with LLM provider APIs (like OpenAI, Anthropic, or
+                        others) without using a specialized framework gives you maximum control and flexibility. This
+                        approach involves implementing your own agent architecture, tool integration, and reasoning
+                        patterns from scratch.
                     </p>
-                    
+
                     <div class="pros-cons">
                         <div class="pros">
                             <h4>Strengths</h4>
@@ -799,7 +1108,7 @@
                                 <li>Directly leverage LLM provider's latest features</li>
                             </ul>
                         </div>
-                        
+
                         <div class="cons">
                             <h4>Limitations</h4>
                             <ul>
@@ -812,7 +1121,7 @@
                             </ul>
                         </div>
                     </div>
-                    
+
                     <div class="use-cases-section">
                         <div class="use-cases">
                             <h4>Ideal Use Cases</h4>
@@ -826,133 +1135,253 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="component-footer">
                     <h4>Resources</h4>
-                    <ul class="resources-list">
-                        <li><a href="code-examples.html#direct-api">Basic Agent with Direct API Integration</a></li>
-                        <li><a href="code-examples.html#custom-agent">Custom Agent Architecture Example</a></li>
-                        <li><a href="https://platform.openai.com/docs/api-reference" target="_blank">OpenAI API Documentation</a></li>
-                        <li><a href="https://docs.anthropic.com/claude/reference" target="_blank">Anthropic Claude API Documentation</a></li>
-                    </ul>
+                    <div class="resource-grid">
+                        <a href="code-examples.html#direct-api" class="resource-tile">
+                            <div class="resource-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" />
+                                </svg>
+                            </div>
+                            <div class="resource-info">
+                                <h5>Basic Agent with Direct API</h5>
+                                <span class="resource-type">Example Code</span>
+                            </div>
+                        </a>
+                        <a href="code-examples.html#custom-agent" class="resource-tile">
+                            <div class="resource-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="9" y1="9" x2="15" y2="15"></line>
+                                    <line x1="15" y1="9" x2="9" y2="15"></line>
+                                </svg>
+                            </div>
+                            <div class="resource-info">
+                                <h5>Custom Agent Architecture</h5>
+                                <span class="resource-type">Advanced Example</span>
+                            </div>
+                        </a>
+                        <a href="https://platform.openai.com/docs/api-reference" target="_blank" class="resource-tile">
+                            <div class="resource-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                            </div>
+                            <div class="resource-info">
+                                <h5>OpenAI API Documentation</h5>
+                                <span class="resource-type">External Resource</span>
+                            </div>
+                        </a>
+                        <a href="https://docs.anthropic.com/claude/reference" target="_blank" class="resource-tile">
+                            <div class="resource-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                            </div>
+                            <div class="resource-info">
+                                <h5>Anthropic Claude API</h5>
+                                <span class="resource-type">External Resource</span>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    
+
     <section class="content-section">
         <div class="container">
             <h2 class="section-title" id="selection-guide">Framework Selection Guide</h2>
-            
+
             <div class="selection-guide">
-                <p>Choosing the right framework for your AI agent project depends on several factors, including your specific requirements, use case, development experience, and project complexity. The guide below will help you navigate the decision process.</p>
-                
+                <p>Choosing the right framework for your AI agent project depends on several factors, including your
+                    specific requirements, use case, development experience, and project complexity. The guide below
+                    will help you navigate the decision process.</p>
+
                 <div class="selection-flow">
                     <h4>Decision Flow for Framework Selection</h4>
-                    
+
                     <div class="selection-step">
                         <h5>Step 1: Define Your Primary Use Case</h5>
                         <p>Start by clearly defining what your AI agent needs to accomplish:</p>
                         <ul>
-                            <li><strong>Document interaction and knowledge retrieval:</strong> LlamaIndex excels at RAG applications.</li>
-                            <li><strong>Complex multi-agent collaboration:</strong> AutoGen or CrewAI would be most suitable.</li>
-                            <li><strong>Role-based agent teams:</strong> CrewAI offers specialized support for this pattern.</li>
-                            <li><strong>General-purpose agent with tools:</strong> LangChain provides comprehensive capabilities.</li>
-                            <li><strong>Simple, focused application:</strong> Direct API integration might be sufficient.</li>
+                            <li><strong>Document interaction and knowledge retrieval:</strong> LlamaIndex excels at RAG
+                                applications.</li>
+                            <li><strong>Complex multi-agent collaboration:</strong> AutoGen or CrewAI would be most
+                                suitable.</li>
+                            <li><strong>Role-based agent teams:</strong> CrewAI offers specialized support for this
+                                pattern.</li>
+                            <li><strong>General-purpose agent with tools:</strong> LangChain provides comprehensive
+                                capabilities.</li>
+                            <li><strong>Simple, focused application:</strong> Direct API integration might be
+                                sufficient.</li>
                         </ul>
                     </div>
-                    
+
                     <div class="selection-step">
                         <h5>Step 2: Consider Your Development Constraints</h5>
                         <p>Evaluate your team's expertise and project timelines:</p>
                         <ul>
-                            <li><strong>Need for rapid development:</strong> LangChain or LlamaIndex offer many pre-built components.</li>
-                            <li><strong>Learning curve tolerance:</strong> Direct API is simplest to understand but requires more code; AutoGen has a steeper initial learning curve.</li>
-                            <li><strong>Maintenance requirements:</strong> Frameworks provide long-term benefits for complex applications.</li>
-                            <li><strong>Team expertise:</strong> Match the framework to your team's existing knowledge.</li>
+                            <li><strong>Need for rapid development:</strong> LangChain or LlamaIndex offer many
+                                pre-built components.</li>
+                            <li><strong>Learning curve tolerance:</strong> Direct API is simplest to understand but
+                                requires more code; AutoGen has a steeper initial learning curve.</li>
+                            <li><strong>Maintenance requirements:</strong> Frameworks provide long-term benefits for
+                                complex applications.</li>
+                            <li><strong>Team expertise:</strong> Match the framework to your team's existing knowledge.
+                            </li>
                         </ul>
                     </div>
-                    
+
                     <div class="selection-step">
                         <h5>Step 3: Evaluate Technical Requirements</h5>
                         <p>Consider the technical aspects of your project:</p>
                         <ul>
-                            <li><strong>Need for advanced RAG:</strong> LlamaIndex or LangChain provide sophisticated retrieval capabilities.</li>
-                            <li><strong>Complex tool integration:</strong> LangChain offers the most extensive tool ecosystem.</li>
-                            <li><strong>Multiple LLM providers:</strong> All frameworks support multiple providers, but with varying levels of integration.</li>
-                            <li><strong>Performance considerations:</strong> Direct API gives you maximum control over optimization.</li>
-                            <li><strong>Scalability needs:</strong> Consider how the framework handles increasing complexity and load.</li>
+                            <li><strong>Need for advanced RAG:</strong> LlamaIndex or LangChain provide sophisticated
+                                retrieval capabilities.</li>
+                            <li><strong>Complex tool integration:</strong> LangChain offers the most extensive tool
+                                ecosystem.</li>
+                            <li><strong>Multiple LLM providers:</strong> All frameworks support multiple providers, but
+                                with varying levels of integration.</li>
+                            <li><strong>Performance considerations:</strong> Direct API gives you maximum control over
+                                optimization.</li>
+                            <li><strong>Scalability needs:</strong> Consider how the framework handles increasing
+                                complexity and load.</li>
                         </ul>
                     </div>
-                    
+
                     <div class="selection-step">
                         <h5>Step 4: Consider Future Expansion</h5>
                         <p>Think about how your application might evolve:</p>
                         <ul>
-                            <li><strong>Expanding feature set:</strong> More comprehensive frameworks like LangChain may better support growth.</li>
-                            <li><strong>Changing requirements:</strong> Evaluate how flexible each framework is for pivoting.</li>
-                            <li><strong>Community support:</strong> Larger communities (LangChain, LlamaIndex) provide more resources as you scale.</li>
-                            <li><strong>Integration with existing systems:</strong> Consider which framework best aligns with your infrastructure.</li>
+                            <li><strong>Expanding feature set:</strong> More comprehensive frameworks like LangChain may
+                                better support growth.</li>
+                            <li><strong>Changing requirements:</strong> Evaluate how flexible each framework is for
+                                pivoting.</li>
+                            <li><strong>Community support:</strong> Larger communities (LangChain, LlamaIndex) provide
+                                more resources as you scale.</li>
+                            <li><strong>Integration with existing systems:</strong> Consider which framework best aligns
+                                with your infrastructure.</li>
                         </ul>
                     </div>
                 </div>
-                
+
                 <div class="content-section">
                     <div class="container">
                         <h2 class="section-title" id="recommendations">Framework Selection Recommendations</h2>
-                        
+
                         <div class="selection-guide">
-                            <p>Choose the right framework based on your specific needs and use cases. Each framework has unique strengths that make it ideal for particular scenarios.</p>
-                            
+                            <p>Choose the right framework based on your specific needs and use cases. Each framework has
+                                unique strengths that make it ideal for particular scenarios.</p>
+
                             <div class="resource-list" style="margin-top: 2rem;">
                                 <div class="resource-card">
                                     <h3>LangChain</h3>
-                                    <p><span class="tag" style="background-color: var(--primary); color: white;">Most Popular</span></p>
-                                    <p>Perfect for developers seeking a comprehensive, flexible framework with extensive tool integrations.</p>
+                                    <p><span class="tag" style="background-color: var(--primary); color: white;">Most
+                                            Popular</span></p>
+                                    <p>Perfect for developers seeking a comprehensive, flexible framework with extensive
+                                        tool integrations.</p>
                                     <ul>
                                         <li>General-purpose applications with diverse requirements</li>
                                         <li>Projects needing many external tool integrations</li>
                                         <li>Applications that will evolve and scale over time</li>
                                         <li>Teams valuing community support and ecosystem</li>
                                     </ul>
-                                    <div class="component-footer" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--light-gray);">
-                                        <a href="code-examples.html#langchain" class="cta-button">Explore LangChain Examples</a>
+                                    <div class="card-footer"
+                                        style="padding-top: 1rem; border-top: 1px solid var(--light-gray);">
+                                        <a href="code-examples.html#langchain" class="explore-button">
+                                            <span class="explore-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <circle cx="12" cy="12" r="10"></circle>
+                                                    <line x1="12" y1="8" x2="12" y2="16"></line>
+                                                    <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                </svg>
+                                            </span>
+                                            <span>Explore LangChain Examples</span>
+                                        </a>
                                     </div>
                                 </div>
-                                
+
                                 <div class="resource-card">
                                     <h3>AutoGen</h3>
-                                    <p><span class="tag" style="background-color: var(--primary); color: white;">Multi-Agent Focused</span></p>
-                                    <p>Specialized for creating sophisticated multi-agent conversations and collaborations.</p>
+                                    <p><span class="tag"
+                                            style="background-color: var(--primary); color: white;">Multi-Agent
+                                            Focused</span></p>
+                                    <p>Specialized for creating sophisticated multi-agent conversations and
+                                        collaborations.</p>
                                     <ul>
                                         <li>Complex multi-agent conversation systems</li>
                                         <li>Agent-to-agent communication patterns</li>
                                         <li>Collaborative problem-solving through dialogue</li>
                                         <li>Systems where agents critique each other's work</li>
                                     </ul>
-                                    <div class="component-footer" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--light-gray);">
-                                        <a href="code-examples.html#autogen" class="cta-button">Explore AutoGen Examples</a>
+                                    <div class="card-footer"
+                                        style="padding-top: 1rem; border-top: 1px solid var(--light-gray);">
+                                        <a href="code-examples.html#autogen" class="explore-button">
+                                            <span class="explore-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <circle cx="12" cy="12" r="10"></circle>
+                                                    <line x1="12" y1="8" x2="12" y2="16"></line>
+                                                    <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                </svg>
+                                            </span>
+                                            <span>Explore AutoGen Examples</span>
+                                        </a>
                                     </div>
                                 </div>
-                                
+
                                 <div class="resource-card">
                                     <h3>LlamaIndex</h3>
-                                    <p><span class="tag" style="background-color: var(--primary); color: white;">RAG Specialist</span></p>
-                                    <p>Excels at data retrieval, document processing, and knowledge-base applications.</p>
+                                    <p><span class="tag" style="background-color: var(--primary); color: white;">RAG
+                                            Specialist</span></p>
+                                    <p>Excels at data retrieval, document processing, and knowledge-base applications.
+                                    </p>
                                     <ul>
                                         <li>Document-based question answering systems</li>
                                         <li>Advanced retrieval-augmented generation (RAG)</li>
                                         <li>Knowledge bases and information retrieval</li>
                                         <li>Applications with complex document processing</li>
                                     </ul>
-                                    <div class="component-footer" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--light-gray);">
-                                        <a href="code-examples.html#llamaindex" class="cta-button">Explore LlamaIndex Examples</a>
+                                    <div class="card-footer"
+                                        style="padding-top: 1rem; border-top: 1px solid var(--light-gray);">
+                                        <a href="code-examples.html#llamaindex" class="explore-button">
+                                            <span class="explore-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <circle cx="12" cy="12" r="10"></circle>
+                                                    <line x1="12" y1="8" x2="12" y2="16"></line>
+                                                    <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                </svg>
+                                            </span>
+                                            <span>Explore LlamaIndex Examples</span>
+                                        </a>
                                     </div>
                                 </div>
-                                
+
                                 <div class="resource-card">
                                     <h3>CrewAI</h3>
-                                    <p><span class="tag" style="background-color: var(--primary); color: white;">Role-Based Collaboration</span></p>
+                                    <p><span class="tag"
+                                            style="background-color: var(--primary); color: white;">Role-Based
+                                            Collaboration</span></p>
                                     <p>Designed for creating role-based agent teams with clear responsibilities.</p>
                                     <ul>
                                         <li>Systems with defined agent roles and responsibilities</li>
@@ -960,31 +1389,61 @@
                                         <li>Complex task decomposition and delegation</li>
                                         <li>Projects requiring intuitive multi-agent orchestration</li>
                                     </ul>
-                                    <div class="component-footer" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--light-gray);">
-                                        <a href="code-examples.html#crewai" class="cta-button">Explore CrewAI Examples</a>
+                                    <div class="card-footer"
+                                        style="padding-top: 1rem; border-top: 1px solid var(--light-gray);">
+                                        <a href="code-examples.html#crewai" class="explore-button">
+                                            <span class="explore-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <circle cx="12" cy="12" r="10"></circle>
+                                                    <line x1="12" y1="8" x2="12" y2="16"></line>
+                                                    <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                </svg>
+                                            </span>
+                                            <span>Explore CrewAI Examples</span>
+                                        </a>
                                     </div>
                                 </div>
-                                
+
                                 <div class="resource-card">
                                     <h3>Direct API Integration</h3>
-                                    <p><span class="tag" style="background-color: var(--primary); color: white;">Maximum Control</span></p>
-                                    <p>Provides complete control and flexibility by directly integrating with LLM provider APIs.</p>
+                                    <p><span class="tag" style="background-color: var(--primary); color: white;">Maximum
+                                            Control</span></p>
+                                    <p>Provides complete control and flexibility by directly integrating with LLM
+                                        provider APIs.</p>
                                     <ul>
                                         <li>Simple or highly specialized applications</li>
                                         <li>Projects requiring full control over implementation</li>
                                         <li>Applications with minimal third-party dependencies</li>
                                         <li>Learning projects to understand agent fundamentals</li>
                                     </ul>
-                                    <div class="component-footer" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--light-gray);">
-                                        <a href="code-examples.html#direct-api" class="cta-button">Explore Direct API Examples</a>
+                                    <div class="card-footer"
+                                        style="padding-top: 1rem; border-top: 1px solid var(--light-gray);">
+                                        <a href="code-examples.html#direct-api" class="explore-button">
+                                            <span class="explore-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <circle cx="12" cy="12" r="10"></circle>
+                                                    <line x1="12" y1="8" x2="12" y2="16"></line>
+                                                    <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                </svg>
+                                            </span>
+                                            <span>Explore Direct API Examples</span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="example-notes" style="margin-top: 3rem;">
                                 <h4>Making Your Decision</h4>
-                                <p>When selecting a framework, consider your specific use case, team expertise, development timeline, and long-term maintenance needs. For complex projects, you may even combine multiple frameworks to leverage their respective strengths.</p>
-                                <p>Remember that the best framework is the one that aligns with your project goals and constraints while providing the right balance of functionality and development efficiency.</p>
+                                <p>When selecting a framework, consider your specific use case, team expertise,
+                                    development timeline, and long-term maintenance needs. For complex projects, you may
+                                    even combine multiple frameworks to leverage their respective strengths.</p>
+                                <p>Remember that the best framework is the one that aligns with your project goals and
+                                    constraints while providing the right balance of functionality and development
+                                    efficiency.</p>
                             </div>
                         </div>
                     </div>
@@ -997,17 +1456,34 @@
         <div class="container content-container">
             <div class="next-step-box">
                 <h2>Prepare Your Workspace</h2>
-                <p>Get your system ready for building. Set up libraries, APIs, and tools that bring your AI agent to life in minutes.</p>
+                <p>Get your system ready for building. Set up libraries, APIs, and tools that bring your AI agent to
+                    life in minutes.</p>
                 <a href="environment-setup.html" class="cta-button">Set Up Now</a>
             </div>
         </div>
     </section>
-    
-    
+
+
     <footer>
         <div class="container">
             <p>AI Agent Development Guide | Created to help developers build powerful AI solutions</p>
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const resourceTiles = document.querySelectorAll('.resource-tile');
+
+            resourceTiles.forEach(tile => {
+                tile.addEventListener('mouseenter', function () {
+                    this.querySelector('.resource-icon').style.backgroundColor = 'rgba(79, 70, 229, 0.2)';
+                });
+
+                tile.addEventListener('mouseleave', function () {
+                    this.querySelector('.resource-icon').style.backgroundColor = 'rgba(79, 70, 229, 0.1)';
+                });
+            });
+        });
+    </script>
 </body>
+
 </html>
