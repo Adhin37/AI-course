@@ -1,3 +1,4 @@
+# .github/workflows/release-please.yml
 name: Release Please
 
 on:
@@ -6,11 +7,14 @@ on:
 jobs:
   release-please:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - uses: google-github-actions/release-please-action@v3
         with:
-          release-type: simple  # Better for static projects without package managers
-          package-name: AI-course
+          release-type: simple
+          package-name: your-project-name
           token: ${{ secrets.GITHUB_TOKEN }}
           changelog-types: >
             [
@@ -28,18 +32,3 @@ jobs:
             ]
           # This creates a PR but only releases when tag is pushed
           releases-only: true
-
-  # This job will run when a tag is pushed to create the actual release
-  create-release:
-    runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v')
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          generate_release_notes: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
