@@ -120,7 +120,8 @@ if __name__ == '__main__':
                 <div class="example-box">
                     <h4>Deploying to Google Cloud Run Example</h4>
                     <p>1. Create a Dockerfile in your project directory:</p>
-                    <pre><code class="language-docker">FROM python:3.9-slim
+                    <div class="code-block">
+                        <pre><code class="language-docker">FROM python:3.9-slim
 
 WORKDIR /app
 COPY requirements.txt .
@@ -129,9 +130,12 @@ COPY . .
 
 ENV PORT=8080
 CMD exec gunicorn --bind :$PORT app:app</code></pre>
+                    </div>
                     <p>2. Build and deploy with Google Cloud CLI:</p>
-                    <pre>gcloud builds submit --tag gcr.io/PROJECT_ID/ai-agent
-gcloud run deploy ai-agent --image gcr.io/PROJECT_ID/ai-agent --platform managed</pre>
+                    <div class="code-block">
+                        <pre><code class="language-bash">builds submit --tag gcr.io/PROJECT_ID/ai-agent
+gcloud run deploy ai-agent --image gcr.io/PROJECT_ID/ai-agent --platform managed</code></pre>
+                    </div>
                 </div>
             </div>
 
@@ -164,7 +168,8 @@ gcloud run deploy ai-agent --image gcr.io/PROJECT_ID/ai-agent --platform managed
                     <h4>OpenAPI Specification Example</h4>
                     <p>Documenting your API with OpenAPI (formerly Swagger) helps users understand how to interact with
                         your agent:</p>
-                    <pre><code class="language-json">{
+                    <div class="code-block">
+                        <pre><code class="language-json">{
   "openapi": "3.0.0",
   "info": {
     "title": "AI Agent API",
@@ -220,6 +225,7 @@ gcloud run deploy ai-agent --image gcr.io/PROJECT_ID/ai-agent --platform managed
     }
   }
 }</code></pre>
+                    </div>
                 </div>
             </div>
 
@@ -355,6 +361,391 @@ return (
             </div>
 
             <div class="content-box">
+                <h2>Front-End Integration</h2>
+                <p>Integrating your AI agent into a web application front-end allows users to interact with it through a
+                    familiar interface. This approach works well for customer-facing applications.</p>
+
+                <h3>React Component Integration</h3>
+                <p>For React applications, you can create a reusable AI agent component:</p>
+
+                <div class="code-block">
+                    <pre><code class="language-javascript">// AIAgentChat.jsx - A React component for interacting with your AI agent
+import React, { useState, useEffect, useRef } from 'react';
+import './AIAgentChat.css';
+
+const AIAgentChat = ({ apiEndpoint, apiKey, initialContext = {} }) =&gt; {
+    const [messages, setMessages] = useState([]);
+    const [input, setInput] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const messagesEndRef = useRef(null);
+
+    // Auto-scroll to bottom of chat
+    useEffect(() =&gt; {
+        scrollToBottom();
+    }, [messages]);
+
+    const scrollToBottom = () =&gt; {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    const handleSubmit = async (e) =&gt; {
+        e.preventDefault();
+        if (!input.trim()) return;
+
+        // Add user message to chat
+        const userMessage = { role: 'user', content: input };
+        setMessages(prev =&gt; [...prev, userMessage]);
+        setInput('');
+        setIsLoading(true);
+
+        try {
+            // Send request to AI agent API
+            const response = await fetch(apiEndpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${apiKey}`
+                },
+                body: JSON.stringify({
+                    messages: [...messages, userMessage],
+                    context: initialContext
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('API request failed');
+            }
+
+            const data = await response.json();
+            
+            // Add agent response to chat
+            setMessages(prev =&gt; [...prev, { role: 'assistant', content: data.response }]);
+        } catch (error) {
+            console.error('Error querying AI agent:', error);
+            setMessages(prev =&gt; [...prev, { 
+                role: 'system', 
+                content: 'Sorry, I encountered an error. Please try again later.' 
+            }]);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    return (
+        &lt;div className="ai-agent-chat"&gt;
+            &lt;div className="chat-messages"&gt;
+                {messages.length === 0 ? (
+                    &lt;div className="empty-state"&gt;
+                        &lt;p&gt;How can I help you today?&lt;/p&gt;
+                    &lt;/div&gt;
+                ) : (
+                    messages.map((msg, index) =&gt; (
+                        &lt;div key={index} className={`message ${msg.role}`}&gt;
+                            &lt;div className="message-content"&gt;{msg.content}&lt;/div&gt;
+                        &lt;/div&gt;
+                    ))
+                )}
+                {isLoading && (
+                    &lt;div className="message assistant loading"&gt;
+                        &lt;div className="typing-indicator"&gt;
+                            &lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                )}
+                &lt;div ref={messagesEndRef} /&gt;
+            &lt;/div&gt;
+            
+            &lt;form className="chat-input" onSubmit={handleSubmit}&gt;
+                &lt;input
+                    type="text"
+                    value={input}
+                    onChange={(e) =&gt; setInput(e.target.value)}
+                    placeholder="Type your message..."
+                    disabled={isLoading}
+                /&gt;
+                &lt;button type="submit" disabled={isLoading || !input.trim()}&gt;
+                    Send
+                &lt;/button&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+    );
+};
+
+export default AIAgentChat;</code></pre>
+                </div>
+
+
+                <h3>Vue.js Integration Example</h3>
+                <div class="code-block">
+                    <pre><code class="language-javascript">// AIAgent.vue - A Vue.js component for AI agent integration
+&lt;template&gt;
+    &lt;div class="ai-agent-container"&gt;
+    &lt;div class="agent-header"&gt;
+        &lt;h3&gt;AI Assistant&lt;/h3&gt;
+        &lt;button @click="toggleChat" class="toggle-btn"&gt;
+        {{ isOpen ? 'Close' : 'Open' }}
+        &lt;/button&gt;
+    &lt;/div&gt;
+    
+    &lt;div v-if="isOpen" class="agent-body"&gt;
+        &lt;div class="messages" ref="messagesContainer"&gt;
+        &lt;div v-for="(message, index) in messages" :key="index"
+                :class="['message', message.sender]"&gt;
+            &lt;div class="message-content"&gt;{{ message.text }}&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div v-if="isProcessing" class="message agent processing"&gt;
+            &lt;div class="dots"&gt;
+            &lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;/div&gt;
+        
+        &lt;div class="input-area"&gt;
+        &lt;input 
+            v-model="userInput" 
+            @keyup.enter="sendMessage"
+            placeholder="Ask me anything..."
+            :disabled="isProcessing"
+        /&gt;
+        &lt;button @click="sendMessage" :disabled="isProcessing || !userInput.trim()"&gt;
+            Send
+        &lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    name: 'AIAgent',
+    props: {
+    apiUrl: {
+        type: String,
+        required: true
+    },
+    apiKey: {
+        type: String,
+        required: true
+    }
+    },
+    data() {
+    return {
+        isOpen: false,
+        messages: [],
+        userInput: '',
+        isProcessing: false
+    }
+    },
+    methods: {
+    toggleChat() {
+        this.isOpen = !this.isOpen;
+        if (this.isOpen &amp;&amp; this.messages.length === 0) {
+        this.messages.push({
+            sender: 'agent',
+            text: 'Hello! How can I assist you today?'
+        });
+        }
+    },
+    async sendMessage() {
+        if (!this.userInput.trim() || this.isProcessing) return;
+        
+        // Add user message
+        this.messages.push({
+        sender: 'user',
+        text: this.userInput
+        });
+        
+        const query = this.userInput;
+        this.userInput = '';
+        this.isProcessing = true;
+        
+        // Scroll to bottom
+        this.$nextTick(() =&gt; {
+        this.scrollToBottom();
+        });
+        
+        try {
+        const response = await fetch(this.apiUrl, {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${this.apiKey}`
+            },
+            body: JSON.stringify({ query })
+        });
+        
+        if (!response.ok) {
+            throw new Error('Failed to get response');
+        }
+        
+        const data = await response.json();
+        
+        // Add agent response
+        this.messages.push({
+            sender: 'agent',
+            text: data.response
+        });
+        } catch (error) {
+        console.error('Error:', error);
+        this.messages.push({
+            sender: 'agent',
+            text: 'Sorry, I encountered an error. Please try again later.'
+        });
+        } finally {
+        this.isProcessing = false;
+        this.$nextTick(() =&gt; {
+            this.scrollToBottom();
+        });
+        }
+    },
+    scrollToBottom() {
+        const container = this.$refs.messagesContainer;
+        container.scrollTop = container.scrollHeight;
+    }
+    }
+}
+&lt;/script&gt;</code></pre>
+                </div>
+
+                <h3>Embedding Your Agent in Any Website</h3>
+                <p>For simple integration into any website, you can create an embeddable script that loads your AI agent
+                    as a chat widget:</p>
+
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;!-- AI Agent Embed Script --&gt;
+&lt;script&gt;
+(function(window, document) {
+    // Configuration
+    const config = {
+        apiEndpoint: 'https://your-agent-api.com/api/agent',
+        apiKey: 'YOUR_PUBLIC_API_KEY',
+        position: 'bottom-right', // bottom-right, bottom-left, top-right, top-left
+        initialMessage: 'Hi there! How can I help you today?',
+        widgetTitle: 'AI Assistant',
+        primaryColor: '#4F46E5'
+    };
+    
+    // Create widget container
+    const createWidget = () =&gt; {
+        const widget = document.createElement('div');
+        widget.id = 'ai-assistant-widget';
+        widget.innerHTML = `
+            &lt;div class="ai-widget-container" style="position: fixed; ${config.position.includes('bottom') ? 'bottom: 20px;' : 'top: 20px;'} ${config.position.includes('right') ? 'right: 20px;' : 'left: 20px;'} z-index: 9999;"&gt;
+                &lt;div class="ai-widget-chat" style="display: none; width: 350px; height: 450px; background: white; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); overflow: hidden; flex-direction: column;"&gt;
+                    &lt;div class="ai-widget-header" style="padding: 15px; background: ${config.primaryColor}; color: white;"&gt;
+                        &lt;div style="font-weight: bold;"&gt;${config.widgetTitle}&lt;/div&gt;
+                        &lt;button class="ai-widget-close" style="background: none; border: none; color: white; cursor: pointer;"&gt;×&lt;/button&gt;
+                    &lt;/div&gt;
+                    &lt;div class="ai-widget-messages" style="flex: 1; overflow-y: auto; padding: 15px;"&gt;&lt;/div&gt;
+                    &lt;div class="ai-widget-input" style="padding: 10px; border-top: 1px solid #eee; display: flex;"&gt;
+                        &lt;input type="text" placeholder="Type your message..." style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px;"&gt;
+                        &lt;button style="margin-left: 8px; background: ${config.primaryColor}; color: white; border: none; border-radius: 4px; padding: 8px 12px; cursor: pointer;"&gt;Send&lt;/button&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;button class="ai-widget-button" style="width: 60px; height: 60px; border-radius: 50%; background: ${config.primaryColor}; color: white; border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.15); cursor: pointer; display: flex; align-items: center; justify-content: center;"&gt;
+                    &lt;svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"&gt;
+                        &lt;path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z" fill="white"/&gt;
+                    &lt;/svg&gt;
+                &lt;/button&gt;
+            &lt;/div&gt;
+        `;
+        document.body.appendChild(widget);
+        
+        // Initialize widget behavior
+        initWidgetBehavior(widget);
+    };
+    
+    // Initialize widget behavior
+    const initWidgetBehavior = (widget) =&gt; {
+        const chatButton = widget.querySelector('.ai-widget-button');
+        const chatWindow = widget.querySelector('.ai-widget-chat');
+        const closeButton = widget.querySelector('.ai-widget-close');
+        const messagesContainer = widget.querySelector('.ai-widget-messages');
+        const inputField = widget.querySelector('input');
+        const sendButton = widget.querySelector('.ai-widget-input button');
+        
+        // Toggle chat window
+        chatButton.addEventListener('click', () =&gt; {
+            chatWindow.style.display = 'flex';
+            chatButton.style.display = 'none';
+            
+            // Add initial message if chat is empty
+            if (messagesContainer.children.length === 0) {
+                addMessage('assistant', config.initialMessage);
+            }
+        });
+        
+        // Close chat window
+        closeButton.addEventListener('click', () =&gt; {
+            chatWindow.style.display = 'none';
+            chatButton.style.display = 'flex';
+        });
+        
+        // Send message
+        const sendMessage = () =&gt; {
+            const message = inputField.value.trim();
+            if (!message) return;
+            
+            addMessage('user', message);
+            inputField.value = '';
+            
+            // Call API with message
+            fetch(config.apiEndpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${config.apiKey}`
+                },
+                body: JSON.stringify({ query: message })
+            })
+            .then(response =&gt; response.json())
+            .then(data =&gt; {
+                addMessage('assistant', data.response);
+            })
+            .catch(error =&gt; {
+                console.error('Error:', error);
+                addMessage('assistant', 'Sorry, I encountered an error. Please try again.');
+            });
+        };
+        
+        // Add message to chat
+        const addMessage = (role, text) =&gt; {
+            const messageEl = document.createElement('div');
+            messageEl.className = `ai-message ${role}`;
+            messageEl.style.marginBottom = '10px';
+            messageEl.style.padding = '8px 12px';
+            messageEl.style.borderRadius = '18px';
+            messageEl.style.maxWidth = '80%';
+            messageEl.style.alignSelf = role === 'user' ? 'flex-end' : 'flex-start';
+            messageEl.style.background = role === 'user' ? config.primaryColor : '#f1f1f1';
+            messageEl.style.color = role === 'user' ? 'white' : 'black';
+            messageEl.textContent = text;
+            
+            messagesContainer.appendChild(messageEl);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        };
+        
+        // Event listeners for sending messages
+        sendButton.addEventListener('click', sendMessage);
+        inputField.addEventListener('keypress', (e) =&gt; {
+            if (e.key === 'Enter') sendMessage();
+        });
+    };
+    
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', createWidget);
+    } else {
+        createWidget();
+    }
+})(window, document);
+&lt;/script&gt;</code></pre>
+                </div>
+
+            </div>
+
+
+            <div class="content-box">
                 <h2>Containerization with Docker</h2>
                 <p>Docker containers provide a consistent environment for deploying your AI agent across different
                     platforms and infrastructures.</p>
@@ -401,6 +792,268 @@ CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]</code></p
                     <li><strong>Amazon ECS:</strong> AWS-native container management</li>
                     <li><strong>Google Kubernetes Engine (GKE):</strong> Managed Kubernetes service</li>
                 </ul>
+            </div>
+
+            <div class="content-box">
+                <h2>Backend Architecture Options</h2>
+                <p>When deploying AI agents, the backend architecture significantly impacts scalability, performance,
+                    and maintenance. Here are some common architectural patterns suitable for AI agent deployments.</p>
+
+                <h3>Microservices Architecture</h3>
+                <p>Breaking down your AI agent system into independent microservices can improve scalability and
+                    maintenance:</p>
+                <ul>
+                    <li><strong>Query processing service:</strong> Handles incoming requests and manages sessions</li>
+                    <li><strong>LLM interface service:</strong> Manages connections to language model APIs</li>
+                    <li><strong>Tool orchestration service:</strong> Coordinates external tool usage</li>
+                    <li><strong>Memory service:</strong> Manages conversation history and persistent data</li>
+                    <li><strong>Analytics service:</strong> Collects usage metrics and performance data</li>
+                </ul>
+
+                <div class="example-box">
+                    <h4>Microservices Communication with RabbitMQ</h4>
+                    <div class="code-block">
+                        <pre><code class="language-python"># message_broker.py - Example RabbitMQ integration for microservices
+import pika
+import json
+import threading
+import uuid
+
+class RabbitMQClient:
+    """Client for handling async communication between microservices"""
+    
+    def __init__(self, host='localhost'):
+        self.connection = pika.BlockingConnection(pika.ConnectionParameters(host=host))
+        self.channel = self.connection.channel()
+        
+        # Set up response queue
+        result = self.channel.queue_declare(queue='', exclusive=True)
+        self.callback_queue = result.method.queue
+        
+        self.channel.basic_consume(
+            queue=self.callback_queue,
+            on_message_callback=self._on_response,
+            auto_ack=True
+        )
+        
+        self.responses = {}
+        self._start_consuming()
+    
+    def _start_consuming(self):
+        """Start consuming messages in a separate thread"""
+        self.thread = threading.Thread(target=self._consume)
+        self.thread.daemon = True
+        self.thread.start()
+    
+    def _consume(self):
+        """Consume messages from RabbitMQ"""
+        self.channel.start_consuming()
+    
+    def _on_response(self, ch, method, props, body):
+        """Handle incoming responses"""
+        if props.correlation_id in self.responses:
+            self.responses[props.correlation_id] = body
+    
+    def call_service(self, service_queue, message, timeout=30):
+        """Call a microservice and wait for the response"""
+        correlation_id = str(uuid.uuid4())
+        self.responses[correlation_id] = None
+        
+        self.channel.basic_publish(
+            exchange='',
+            routing_key=service_queue,
+            properties=pika.BasicProperties(
+                reply_to=self.callback_queue,
+                correlation_id=correlation_id,
+            ),
+            body=json.dumps(message)
+        )
+        
+        # Wait for response with timeout
+        start_time = time.time()
+        while self.responses[correlation_id] is None:
+            if time.time() - start_time > timeout:
+                del self.responses[correlation_id]
+                raise TimeoutError(f"Service {service_queue} timed out")
+            time.sleep(0.1)
+        
+        response = self.responses[correlation_id]
+        del self.responses[correlation_id]
+        return json.loads(response)</code></pre>
+                    </div>
+                </div>
+
+                <h3>Event-Driven Architecture</h3>
+                <p>Event-driven architectures are well-suited for AI agents that need to process and respond to
+                    asynchronous events:</p>
+                <ul>
+                    <li><strong>Event producers:</strong> User interfaces, webhooks, scheduled tasks</li>
+                    <li><strong>Event bus:</strong> Manages message routing (e.g., Kafka, RabbitMQ)</li>
+                    <li><strong>Event consumers:</strong> Specialized processors for different types of events</li>
+                    <li><strong>State store:</strong> Maintains agent state between events</li>
+                </ul>
+            </div>
+
+            <!-- New content-box for Database Integration -->
+            <div class="content-box">
+                <h2>Database Integration for AI Agents</h2>
+                <p>Choosing the right database strategy is crucial for maintaining agent state, storing conversation
+                    history, and implementing caching strategies.</p>
+
+                <h3>Database Options for Different Use Cases</h3>
+                <ul>
+                    <li><strong>Vector databases (Pinecone, Chroma):</strong> For semantic search and
+                        retrieval-augmented generation</li>
+                    <li><strong>Document databases (MongoDB):</strong> For flexible schema storage of conversation
+                        contexts</li>
+                    <li><strong>Key-value stores (Redis):</strong> For caching and temporary state management</li>
+                    <li><strong>Relational databases:</strong> For structured data with complex relationships</li>
+                </ul>
+
+                <div class="code-block">
+                    <pre><code class="language-python"># conversation_store.py - MongoDB integration for conversation history
+from pymongo import MongoClient
+from datetime import datetime, timedelta
+
+class ConversationStore:
+    """Manages conversation history for AI agents using MongoDB"""
+    
+    def __init__(self, connection_string):
+        self.client = MongoClient(connection_string)
+        self.db = self.client.agent_database
+        self.conversations = self.db.conversations
+        
+        # Create TTL index for automatic cleanup of old conversations
+        self.conversations.create_index("last_updated", expireAfterSeconds=604800)  # 7 days
+    
+    def create_conversation(self, user_id):
+        """Create a new conversation"""
+        conversation_id = str(uuid.uuid4())
+        conversation = {
+            "_id": conversation_id,
+            "user_id": user_id,
+            "messages": [],
+            "metadata": {},
+            "created_at": datetime.utcnow(),
+            "last_updated": datetime.utcnow()
+        }
+        self.conversations.insert_one(conversation)
+        return conversation_id
+    
+    def add_message(self, conversation_id, role, content, metadata=None):
+        """Add a message to the conversation history"""
+        message = {
+            "role": role,  # 'user' or 'assistant'
+            "content": content,
+            "timestamp": datetime.utcnow(),
+            "metadata": metadata or {}
+        }
+        
+        result = self.conversations.update_one(
+            {"_id": conversation_id},
+            {
+                "$push": {"messages": message},
+                "$set": {"last_updated": datetime.utcnow()}
+            }
+        )
+        
+        return result.modified_count > 0
+    
+    def get_conversation_history(self, conversation_id, limit=None):
+        """Retrieve conversation history"""
+        conversation = self.conversations.find_one({"_id": conversation_id})
+        if not conversation:
+            return None
+            
+        messages = conversation["messages"]
+        if limit:
+            messages = messages[-limit:]
+            
+        return messages
+        
+    def update_metadata(self, conversation_id, metadata):
+        """Update conversation metadata"""
+        result = self.conversations.update_one(
+            {"_id": conversation_id},
+            {
+                "$set": {
+                    "metadata": metadata,
+                    "last_updated": datetime.utcnow()
+                }
+            }
+        )
+        return result.modified_count > 0</code></pre>
+                </div>
+
+                <h3>Using Vector Databases for RAG</h3>
+                <p>Retrieval-Augmented Generation (RAG) is a common pattern in AI agents that need access to specific
+                    knowledge bases:</p>
+
+                <div class="example-box">
+                    <h4>Integration with Pinecone for Vector Search</h4>
+                    <div class="code-block">
+                        <pre><code class="language-python"># knowledge_base.py - Vector database integration for RAG
+import pinecone
+from sentence_transformers import SentenceTransformer
+import os
+
+class KnowledgeBase:
+    """Vector database integration for RAG using Pinecone"""
+    
+    def __init__(self, api_key, environment, index_name):
+        # Initialize Pinecone
+        pinecone.init(api_key=api_key, environment=environment)
+        
+        # Check if index exists, create if it doesn't
+        if index_name not in pinecone.list_indexes():
+            pinecone.create_index(name=index_name, dimension=384, metric="cosine")
+            
+        self.index = pinecone.Index(index_name)
+        
+        # Initialize embedding model
+        self.embedder = SentenceTransformer('all-MiniLM-L6-v2')
+        
+    def add_document(self, doc_id, text, metadata=None):
+        """Add a document to the knowledge base"""
+        # Create embeddings
+        embedding = self.embedder.encode(text).tolist()
+        
+        # Upsert into Pinecone
+        self.index.upsert(vectors=[(doc_id, embedding, metadata or {})])
+        return doc_id
+        
+    def query(self, question, top_k=3):
+        """Query the knowledge base for relevant documents"""
+        # Create query embedding
+        query_embedding = self.embedder.encode(question).tolist()
+        
+        # Query Pinecone
+        results = self.index.query(
+            vector=query_embedding,
+            top_k=top_k,
+            include_metadata=True
+        )
+        
+        return results["matches"]
+        
+    def batch_add_documents(self, documents):
+        """Add multiple documents at once"""
+        vectors = []
+        
+        for doc in documents:
+            doc_id = doc.get("id", str(uuid.uuid4()))
+            text = doc["text"]
+            metadata = doc.get("metadata", {})
+            
+            # Create embeddings
+            embedding = self.embedder.encode(text).tolist()
+            vectors.append((doc_id, embedding, metadata))
+            
+        # Batch upsert to Pinecone
+        self.index.upsert(vectors=vectors)
+        return len(vectors)</code></pre>
+                    </div>
+                </div>
             </div>
 
             <div class="content-box">
@@ -470,6 +1123,137 @@ def process_query(query, user_id):
             </div>
 
             <div class="content-box">
+                <h2>Scaling AI Agent Backends</h2>
+                <p>As your AI agent usage grows, implementing proper scaling strategies becomes crucial for maintaining
+                    performance and reliability.</p>
+
+                <h3>Horizontal Scaling with Queue-Based Workers</h3>
+                <p>Implement a queue-based architecture to handle increased load by adding more worker instances:</p>
+
+                <div class="code-block">
+                    <pre><code class="language-python"># worker.py - Agent worker implementation
+import redis
+import json
+import os
+import time
+from langchain.agents import initialize_agent, Tool
+from langchain.llms import OpenAI
+
+class AgentWorker:
+    """Worker process that consumes tasks from Redis queue"""
+    
+    def __init__(self, redis_url):
+        self.redis = redis.from_url(redis_url)
+        self.request_queue = "agent:requests"
+        self.response_prefix = "agent:response:"
+        
+        # Initialize your agent
+        llm = OpenAI(temperature=0)
+        tools = [
+            # Your agent's tools here
+        ]
+        self.agent = initialize_agent(tools, llm, agent="zero-shot-react-description", verbose=True)
+    
+    def start(self):
+        """Start the worker process"""
+        print("Agent worker started, waiting for tasks...")
+        while True:
+            # Block until task is available, timeout after 1 second to allow for graceful shutdown
+            task_data = self.redis.blpop(self.request_queue, timeout=1)
+            
+            if task_data is None:
+                continue
+                
+            _, task_json = task_data
+            task = json.loads(task_json)
+            
+            print(f"Processing task {task['task_id']}")
+            
+            try:
+                # Process the task
+                result = self.agent.run(task['query'])
+                
+                # Store the result
+                response = {
+                    "task_id": task["task_id"],
+                    "result": result,
+                    "status": "completed",
+                    "timestamp": time.time()
+                }
+            except Exception as e:
+                # Handle errors
+                response = {
+                    "task_id": task["task_id"],
+                    "error": str(e),
+                    "status": "failed",
+                    "timestamp": time.time()
+                }
+            
+            # Save the response
+            response_key = f"{self.response_prefix}{task['task_id']}"
+            self.redis.set(response_key, json.dumps(response))
+            # Set expiration to avoid memory leaks (24 hours)
+            self.redis.expire(response_key, 86400)
+
+# Run the worker
+if __name__ == "__main__":
+    redis_url = os.environ.get("REDIS_URL", "redis://localhost:6379/0")
+    worker = AgentWorker(redis_url)
+    worker.start()</code></pre>
+                </div>
+
+                <h3>Load Balancing Strategies</h3>
+                <p>Implement proper load balancing to distribute requests efficiently across multiple agent instances:
+                </p>
+                <ul>
+                    <li><strong>Round-robin:</strong> Simple distribution of requests across available instances</li>
+                    <li><strong>Least connections:</strong> Send requests to the least busy instance</li>
+                    <li><strong>IP hash:</strong> Consistent routing for the same clients</li>
+                    <li><strong>Priority-based:</strong> Route high-priority requests to dedicated instances</li>
+                </ul>
+
+                <div class="example-box">
+                    <h4>NGINX Load Balancer Configuration Example</h4>
+                    <div class="code-block">
+                        <pre><code class="language-bash"># Example NGINX configuration for load balancing agent instances
+http {
+    upstream agent_backend {
+        least_conn;  # Use least connections strategy
+        server agent1:8000 max_fails=3 fail_timeout=30s;
+        server agent2:8000 max_fails=3 fail_timeout=30s;
+        server agent3:8000 max_fails=3 fail_timeout=30s;
+    }
+    
+    server {
+        listen 80;
+        server_name ai-agent-api.example.com;
+        
+        location / {
+            proxy_pass http://agent_backend;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            
+            # Timeout settings
+            proxy_connect_timeout 10s;
+            proxy_send_timeout 60s;
+            proxy_read_timeout 60s;
+        }
+        
+        # Health check endpoint
+        location /health {
+            access_log off;
+            add_header Content-Type text/plain;
+            return 200 'OK';
+        }
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-box">
                 <h2>Security Best Practices</h2>
                 <p>Ensuring the security of your AI agent deployment is critical for protecting user data and
                     maintaining trust.</p>
@@ -516,7 +1300,8 @@ def process_query(query, user_id):
 
                 <div class="example-box">
                     <h4>Simple Response Caching Implementation</h4>
-                    <pre><code class="language-python">import hashlib
+                    <div class="code-block">
+                        <pre><code class="language-python">import hashlib
 import json
 import redis
 
@@ -551,6 +1336,7 @@ class CachedAgent:
         )
         
         return response</code></pre>
+                    </div>
                 </div>
             </div>
 
@@ -598,10 +1384,12 @@ class CachedAgent:
             </div>
             <div class="content-box">
                 <h2>Conclusion</h2>
-                <p>Deploying AI agents successfully requires careful planning, appropriate technology selection, and ongoing maintenance. As you've seen throughout this guide, there are multiple deployment options available, each with its own advantages and considerations.</p>
-                
+                <p>Deploying AI agents successfully requires careful planning, appropriate technology selection, and
+                    ongoing maintenance. As you've seen throughout this guide, there are multiple deployment options
+                    available, each with its own advantages and considerations.</p>
+
                 <p>Remember these key takeaways when deploying your AI agent:</p>
-                
+
                 <ul class="checklist">
                     <li>Choose the deployment method that best matches your specific use case and requirements</li>
                     <li>Implement robust security measures to protect sensitive data and prevent misuse</li>
@@ -619,7 +1407,7 @@ class CachedAgent:
                 <h2>Next Steps and Resources</h2>
                 <p>Essential tools and references for AI agent deployment</p>
             </div>
-            
+
             <div class="resource-list">
                 <div class="resource-card">
                     <h3>Further Learning</h3>
@@ -630,18 +1418,22 @@ class CachedAgent:
                         <li><a href="cost-optimization.html">Cost Optimization Strategies</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="resource-card">
                     <h3>Helpful Tools</h3>
                     <ul>
                         <li><a href="https://www.docker.com/" target="_blank">Docker</a> - Container platform</li>
-                        <li><a href="https://kubernetes.io/" target="_blank">Kubernetes</a> - Container orchestration</li>
-                        <li><a href="https://www.terraform.io/" target="_blank">Terraform</a> - Infrastructure as code</li>
-                        <li><a href="https://github.com/features/actions" target="_blank">GitHub Actions</a> - CI/CD pipelines</li>
-                        <li><a href="https://grafana.com/" target="_blank">Grafana</a> - Monitoring and observability</li>
+                        <li><a href="https://kubernetes.io/" target="_blank">Kubernetes</a> - Container orchestration
+                        </li>
+                        <li><a href="https://www.terraform.io/" target="_blank">Terraform</a> - Infrastructure as code
+                        </li>
+                        <li><a href="https://github.com/features/actions" target="_blank">GitHub Actions</a> - CI/CD
+                            pipelines</li>
+                        <li><a href="https://grafana.com/" target="_blank">Grafana</a> - Monitoring and observability
+                        </li>
                     </ul>
                 </div>
-                
+
                 <div class="resource-card">
                     <h3>Sample Repositories</h3>
                     <ul>
@@ -659,7 +1451,7 @@ class CachedAgent:
             <p>AI Agent Development Guide | Created to help developers build powerful AI solutions</p>
         </div>
     </footer>
-    
+
     <!-- Prism core JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <!-- Additional languages -->
@@ -667,6 +1459,9 @@ class CachedAgent:
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-docker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-html.min.js"></script>
 </body>
 
 </html>
