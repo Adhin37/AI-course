@@ -1,21 +1,45 @@
 name: Release Please
 
 on:
-  push:
-    tags:
-      - 'v*'  # Trigger on tags like v1.0.0, v2.3.1 etc
+  workflow_dispatch:
 
 jobs:
-  release:
+  release-please:
     runs-on: ubuntu-latest
+    steps:
+      - uses: google-github-actions/release-please-action@v3
+        with:
+          release-type: simple  # Better for static projects without package managers
+          package-name: AI-course
+          token: ${{ secrets.GITHUB_TOKEN }}
+          changelog-types: >
+            [
+              {"type":"feat","section":"Features","hidden":false},
+              {"type":"fix","section":"Bug Fixes","hidden":false},
+              {"type":"chore","section":"Chores","hidden":true},
+              {"type":"docs","section":"Documentation","hidden":false},
+              {"type":"style","section":"Styles","hidden":true},
+              {"type":"refactor","section":"Code Refactoring","hidden":false},
+              {"type":"perf","section":"Performance","hidden":false},
+              {"type":"test","section":"Tests","hidden":true},
+              {"type":"build","section":"Build System","hidden":true},
+              {"type":"ci","section":"CI/CD","hidden":true},
+              {"type":"revert","section":"Reverts","hidden":false}
+            ]
+          # This creates a PR but only releases when tag is pushed
+          releases-only: true
 
+  # This job will run when a tag is pushed to create the actual release
+  create-release:
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Run release-please
-        uses: googleapis/release-please-action@v4
+        
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
         with:
-          release-type: simple
+          generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
